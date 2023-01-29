@@ -79,6 +79,9 @@ String aberturas(int aux3){
     }
     Serial.println("abertura");
     Serial.println(abertura);
+    if (abertura == ""){
+      return "0";
+    }
     return abertura;
 }
 

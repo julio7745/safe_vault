@@ -93,6 +93,27 @@
     <script>
         function config() {
 
+            var ultabert = window.document.getElementById('ultabertura')
+            var aberturas = %geral-aberturas%
+            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
+            if(aberturas != 0)
+            {
+                ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
+
+            
+                // CONFIGURA TABELA
+                if (aberturas != ""){
+                    var tabela = window.document.getElementById('corpot')
+                    var conteudo = ""
+
+                    for (let pos in aberturas)
+                    {
+                        conteudo += `<tr><td>${aberturas[pos].dia}.${aberturas[pos].mes}.${aberturas[pos].ano}</td><td>${aberturas[pos].hora}:${aberturas[pos].minuto}</td><td>${aberturas[pos].nome} ${aberturas[pos].sobrenome}</td></tr>` 
+                    }
+                    tabela.innerHTML = conteudo
+                }
+            }
+
             var nome = "%geral-nome%"
             var sobrenome = "%geral-sobrenome%"
             const level = "%geral-lv%"
@@ -115,25 +136,8 @@
                     break;
                 case "4":
                     confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
-                    confblimpar.style.display = 'block'
+                    if(aberturas != 0){confblimpar.style.display = 'block'}
                     break;
-            }
-
-            var ultabert = window.document.getElementById('ultabertura')
-            var aberturas = %geral-aberturas%
-            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
-            ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
-
-            // CONFIGURA TABELA
-            if (aberturas != ""){
-                var tabela = window.document.getElementById('corpot')
-                var conteudo = ""
-
-                for (let pos in aberturas)
-                {
-                    conteudo += `<tr><td>${aberturas[pos].dia}.${aberturas[pos].mes}.${aberturas[pos].ano}</td><td>${aberturas[pos].hora}:${aberturas[pos].minuto}</td><td>${aberturas[pos].nome} ${aberturas[pos].sobrenome}</td></tr>` 
-                }
-                tabela.innerHTML = conteudo
             }
         }
         function home(){

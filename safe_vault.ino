@@ -7,10 +7,6 @@
 
 AsyncWebServer server(80);
 
-// INSTANCIANDO OBJETOS
-SoftwareSerial mySerial(D7, D8); // mySerial(Tx, Rx) <-- Pinagens do Sensor;
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
-
 String nome="", sobrenome="", senha="", lv="", id="", idl="", retorno="";
 int processo = 0, fase = 0, erro = 0, aberto = 0;
 
@@ -20,22 +16,9 @@ int debug = 0;
 
 void setup() {
 
-  finger.begin(57600);
-  
   Serial.begin(115200);
   delay(500);
   Serial.println("Serial iniciada");
-
-  if (finger.verifyPassword()) {
-    Serial.println("DY-50 encontrado!");
-    delay(1000);
-  } else {
-    Serial.println("DY-50 não encontrado");
-    delay(3000);
-    while (true) {
-      delay(1);
-    }
-  }
 
   //inicia SPIFFS
   if(!SPIFFS.begin()){

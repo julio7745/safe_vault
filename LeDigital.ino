@@ -16,7 +16,6 @@ void ledigital(){
     return;
   }
   Serial.println("DY-50 encontrado");
-  delay(100); 
   
   Serial.println("Verificou se tem dedo");
   if (p == FINGERPRINT_OK) {

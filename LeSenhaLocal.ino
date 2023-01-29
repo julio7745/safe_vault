@@ -15,6 +15,7 @@ void lesenha(){
     Serial.println("Senha correta");
     fase = 2;
     delay(100);
+    Serial.println("ok");
     return;
   }else{
     retorno = "Senha invalida, tente novamente!";

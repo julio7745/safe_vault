@@ -18,6 +18,7 @@ void ledigital(){
     }else{
       fase = 1;
       debug = 0;
+      return; 
     }
   }
   debug++;

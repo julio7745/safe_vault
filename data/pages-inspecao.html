@@ -7,61 +7,7 @@
     <title>Safe Vault - Inspeção</title>
     <link rel="stylesheet" href="estilos-geral.css">
     <link rel="stylesheet" href="estilos-inspecao.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <script>
-        function config() {
-            var nome = "%geral-nome%"
-            var sobrenome = "%geral-sobrenome%"
-            const level = "%geral-lv%"
-
-            window.document.getElementById('nome').innerText = `${nome} ${sobrenome}`
-            
-            const confstar = window.document.getElementById('star')
-
-            switch (level) {
-                case "1":
-                    confstar.innerHTML = '<span class="material-icons">star_rate</span>' 
-                    break;
-                case "2":
-                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>' 
-                    break;
-                case "3":
-                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
-                    break;
-                case "4":
-                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
-                    break;
-            }
-            var ultabert = window.document.getElementById('ultabertura')
-            var aberturas = %geral-aberturas%
-            ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
-
-            // CONFIGURA TABELA
-            var tabela = window.document.getElementById('corpot')
-            var conteudo = ""
-
-            for (let pos in aberturas)
-            {
-                conteudo += `<tr><td>${aberturas[pos].dia}.${aberturas[pos].mes}.${aberturas[pos].ano}</td><td>${aberturas[pos].hora}:${aberturas[pos].minuto}</td><td>${aberturas[pos].nome} ${aberturas[pos].sobrenome}</td></tr>` 
-            }
-            tabela.innerHTML = conteudo
-        }
-        function home(){
-            window.location.replace("pages-home.html?id=%geral-id%")
-        }
-        function unlog(){
-            var logout = window.document.getElementById('dlogout')
-            if (logout.style.display == 'block') {
-                logout.style.display = 'none'
-            } else {
-                logout.style.display = 'block'
-            }
-        }
-        function logout() {
-            window.location.replace("/");
-        }
-      </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body onload="config()">
     <header>
@@ -107,6 +53,7 @@
                 <tbody id="corpot"></tbody>
             </table>
         </section>
+        <div id="dblimpar"><div id="blimpar" class="b" onclick="chamalimparlog()">Limpar Log de aberturas</div></div>
     </main>
     <footer>
         <p><strong>Projeto Safe Vault</strong></p>
@@ -135,5 +82,85 @@
             <input type="button" value="Não" onclick="unlog()">
         </div>
     </div>
+    <div id="dlimparlog">
+        <div>
+            <h1>Limpar Log de aberturas</h1>
+            <p>Tem certeza que deseja apagar o registro de aberturas existente?</p>
+            <input type="button" value="Sim" onclick="limparlog()">
+            <input type="button" value="Não" onclick="chamalimparlog()">
+        </div>
+    </div>
+    <script>
+        function config() {
+
+            var nome = "%geral-nome%"
+            var sobrenome = "%geral-sobrenome%"
+            const level = "%geral-lv%"
+            //const level = "4";
+
+            window.document.getElementById('nome').innerText = `${nome} ${sobrenome}`
+            
+            const confstar = window.document.getElementById('star')
+            const confblimpar = window.document.getElementById('dblimpar');
+
+            switch (level) {
+                case "1":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span>' 
+                    break;
+                case "2":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>' 
+                    break;
+                case "3":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    break;
+                case "4":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    confblimpar.style.display = 'block'
+                    break;
+            }
+
+            var ultabert = window.document.getElementById('ultabertura')
+            var aberturas = %geral-aberturas%
+            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
+            ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
+
+            // CONFIGURA TABELA
+            if (aberturas != ""){
+                var tabela = window.document.getElementById('corpot')
+                var conteudo = ""
+
+                for (let pos in aberturas)
+                {
+                    conteudo += `<tr><td>${aberturas[pos].dia}.${aberturas[pos].mes}.${aberturas[pos].ano}</td><td>${aberturas[pos].hora}:${aberturas[pos].minuto}</td><td>${aberturas[pos].nome} ${aberturas[pos].sobrenome}</td></tr>` 
+                }
+                tabela.innerHTML = conteudo
+            }
+        }
+        function home(){
+            window.location.replace("pages-home.html?id=%geral-id%")
+        }
+        function chamalimparlog(){
+            var limparlog = window.document.getElementById('dlimparlog')
+            if (limparlog.style.display == 'block') {
+                limparlog.style.display = 'none'
+            } else {
+                limparlog.style.display = 'block'
+            }
+        }
+        function limparlog(){
+            window.location.replace('pages-inspecao.html?id=%geral-id%&p=1')
+        }
+        function unlog(){
+            var logout = window.document.getElementById('dlogout')
+            if (logout.style.display == 'block') {
+                logout.style.display = 'none'
+            } else {
+                logout.style.display = 'block'
+            }
+        }
+        function logout() {
+            window.location.replace("/");
+        }
+      </script>
 </body>
 </html>

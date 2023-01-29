@@ -21,7 +21,7 @@
             const confinspecao = window.document.getElementById('inspecao')
             const confabertura = window.document.getElementById('abertura')
             const confedicao = window.document.getElementById('edicao')
-            const confincricao = window.document.getElementById('incricao')
+            const confinscricao = window.document.getElementById('inscricao')
 
             switch (level) {
                 case "1":
@@ -44,7 +44,7 @@
                     confinspecao.style.display = 'inline-block' 
                     confabertura.style.display = 'inline-block' 
                     confedicao.style.display = 'inline-block' 
-                    confincricao.style.display = 'inline-block' 
+                    confinscricao.style.display = 'inline-block' 
                     break;
             }
             var ultabert = window.document.getElementById('ultabertura')
@@ -52,7 +52,7 @@
             ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
         }
         function inspecao() {
-            window.location.replace("pages-inspecao.html?id=%geral-id%")
+            window.location.replace("pages-inspecao.html?id=%geral-id%&p=0")
         }
         function abertura() {
             window.location.replace("pages-abertura.html?id=%geral-id%")
@@ -147,10 +147,10 @@
                     </div>
                 </section>
             </div>
-            <div id="incricao" class="bodyaling">
+            <div id="inscricao" class="bodyaling">
                 <section class="container">
                     <div class="txt">
-                        <h1>Incrição</h1>
+                        <h1>Inscrição</h1>
                         <p>Aqui você pode adicionar outros usuários.</p>
                     </div>
                     <div class="button">

@@ -14,7 +14,9 @@ Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 String nome="", sobrenome="", senha="", lv="", id="", idl="", retorno="";
 int processo = 0, fase = 0, erro = 0, aberto = 0;
 
-int dia = 1, mes = 2 , ano = 3, hora = 4, minuto = 5;
+String dia = "0", mes = "0", ano = "0", hora = "0", minuto = "0";
+
+int debug = 0;
 
 void setup() {
 
@@ -103,8 +105,13 @@ void setup() {
       while(arq.available()){
         char aux2 = char(arq.read());
         if (aux2 == 'A'){
+          aux = aux2;
           //verificação
+          Serial.println("inicio da verificação");
+          Serial.println("dados");
           Serial.println(String(nome+"."+sobrenome));
+          Serial.println("recebido");
+          Serial.println(userl);
           if( userl == String(nome+"."+sobrenome) ){
             if(senhal==senha){
               Serial.println("loguei!");
@@ -113,7 +120,7 @@ void setup() {
               return;
             }else{
               erro = 2;
-              Serial.println("erro!");
+              Serial.println("erro de senha!");
               request->send(SPIFFS, "/pages-login.html", String(), false, processor);
               arq.close();
               return;
@@ -142,9 +149,9 @@ void setup() {
         if(aux=='E'){
           id += aux2;
         }
-      }   
+      }
       erro = 1;
-      Serial.println("erro!");
+      Serial.println("erro de usuario");
       request->send(SPIFFS, "/pages-login.html", String(), false,  processor);
       arq.close();
       return;
@@ -164,6 +171,11 @@ void setup() {
   server.on("/pages-inspecao.html", HTTP_GET, [](AsyncWebServerRequest *request){
 
       String idl = request->getParam("id")->value();
+      String aux = request->getParam("p")->value();
+      if (aux == "1")
+      {
+        limparlog(); 
+      }
       atualizauser(idl);
       request->send(SPIFFS, "/pages-inspecao.html", String(), false,  processor);
       
@@ -179,8 +191,12 @@ void setup() {
       fase = 0;
       request->send(SPIFFS, "/pages-abertura.html", String(), false,  processor);
   });
-  //Abertura
   server.on("/pages-abertura2.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      dia = request->getParam("dia")->value();
+      mes = request->getParam("mes")->value(); 
+      ano = request->getParam("ano")->value();
+      hora = request->getParam("hora")->value();
+      minuto = request->getParam("minuto")->value();
       request->send(SPIFFS, "/pages-abertura2.html", String(), false,  processor);
   });
   
@@ -190,22 +206,27 @@ void setup() {
 }
 
 void loop() {
-  if ( processo == 1 && fase == 0 ){
-    ledigital();
-  }else
-  if (processo == 1 && fase == 1 ){
-    lesenha(); 
-  }else
-  if (processo == 1 && fase == 2 ){
-      Serial.println("Abre cofre");
-      abrecofre(); 
-  }
 
-  if (millis() > aberto && processo == 1 && fase == 2 ){
-    //fecha cofre
-    fechacofre();
+  if (processo == 1){
+    switch (fase){
+      case 0:
+        ledigital();
+        break;
+      case 1:
+        lesenha();
+        break;
+      case 2:
+        Serial.println("Abre cofre");
+        abrecofre();
+        break;
+    }
   }
   
+  if (millis() >= aberto && processo == 1 && fase == 3 ){
+    //fecha cofre
+    Serial.println("Fecha cofre");
+    fechacofre();
+  }
 }
 
 /*

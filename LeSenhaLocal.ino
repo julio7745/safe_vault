@@ -14,8 +14,7 @@ void lesenha(){
   if(senhalida == senhaaleatoria){
     Serial.println("Senha correta");
     fase = 2;
-    delay(100);
-    Serial.println("ok");
+    Serial.println(fase);
     return;
   }else{
     retorno = "Senha invalida, tente novamente!";

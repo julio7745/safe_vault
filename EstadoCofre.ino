@@ -1,11 +1,11 @@
 void abrecofre(){
     retorno = "Cofre destravado, você tem 15 segundos para realizar a abertura!";
-    Serial.println ("OK");
+    Serial.println ("Cofre destravado, você tem 15 segundos para realizar a abertura!");
     aberturas(1);
     //abre cofre
-    Serial.println("Cofre destravado.");
+    fase = 3;
     aberto = millis() + 15000;
-    return; 
+    return;
 }
 
 void fechacofre(){

@@ -7,6 +7,7 @@ void atualizauser(String aux3){
       while(arq.available()){
         char aux2 = char(arq.read());
         if (aux2 == 'A'){
+          aux = aux2;
           //verificação
           if( aux3 == id ){
               return;

@@ -61,33 +61,6 @@ void setup() {
 
   //Declara envios para cada requisições
 
-  //CSSs
-  //login
-  server.on("/estilos-login.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-login.css", "text/css");
-  });
-  //geral
-  server.on("/estilos-geral.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-geral.css", "text/css");
-  });
-  //home
-  server.on("/estilos-home.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-home.css", "text/css");
-  });
-  //inspecao
-  server.on("/estilos-inspecao.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-inspecao.css", "text/css");
-  });
-  //abertura
-  server.on("/estilos-abertura.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-abertura.css", "text/css");
-  });
-  //abertura
-  server.on("/estilos-abertura2.css", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/estilos-abertura2.css", "text/css");
-  });
-
-  //HTML
   //inicial 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     Serial.println("inicial!");

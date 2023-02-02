@@ -14,11 +14,26 @@ main{
     text-align: center;
 }
 #frame{
-    width: calc(95% - 20px);
+    width: calc(95% - 60px);
     max-width: 500px;
     margin: 15px;
     border-radius: 25px;
     border: 15px solid var(--cor0);
     height: 150px;
-    box-sizing: content-box;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 450px) {
+    #frame{
+        height: 170px;
+    }
+}
+@media screen and (max-width: 350px) {
+    #frame{
+        height: 210px;
+    }
+}
+@media screen and (max-width: 300px) {
+    #frame{
+        height: 250px;
+    }
 }

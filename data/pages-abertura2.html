@@ -29,7 +29,7 @@
             if(minuto<10){
                 minuto = `0${minuto}`
             }
-            window.location.replace(`pages-abertura2.html?ano=${ano}&mes=${mes}&dia=${dia}&hora=${hora}&minuto=${minuto}`);
+            window.document.location.assign(`pages-abertura2.html?ano=${ano}&mes=${mes}&dia=${dia}&hora=${hora}&minuto=${minuto}`);
         }
         setInterval('autoRefresh()', 2000);
     </script>

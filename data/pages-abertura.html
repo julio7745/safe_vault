@@ -77,6 +77,7 @@
         </div>
     </div>
     <script>
+        
         function config() {
 
             var ultabert = window.document.getElementById('ultabertura')
@@ -86,13 +87,13 @@
             {
                 ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
             }
-            
+
             var nome = "%geral-nome%"
             var sobrenome = "%geral-sobrenome%"
             const level = "%geral-lv%"
 
             window.document.getElementById('nome').innerText = `${nome} ${sobrenome}`
-            
+
             const confstar = window.document.getElementById('star')
 
             switch (level) {
@@ -129,7 +130,6 @@
             window.location.replace("/");
         }
 
-        
       </script>
 </body>
 </html>

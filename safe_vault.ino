@@ -19,28 +19,30 @@ String dia = "0", mes = "0", ano = "0", hora = "0", minuto = "0";
 int debug = 0;
 
 void setup() {
-
-  finger.begin(57600 );
   
   Serial.begin(115200);
   delay(500);
   Serial.println("Serial iniciada");
 
+  //inicia SPIFFS
+  if(!SPIFFS.begin()){
+    Serial.println("Erro ao iniciar o SPIFFS");
+    return;
+  }
+
+  finger.begin(57600);
+
+  Serial.println("OK");
   if (finger.verifyPassword()) {
     Serial.println("DY-50 encontrado!");
     delay(1000);
   } else {
     Serial.println("DY-50 não encontrado");
+    retorno = "Sensor não conectado!";
     delay(3000);
     while (true) {
       delay(1);
     }
-  }
-
-  //inicia SPIFFS
-  if(!SPIFFS.begin()){
-    Serial.println("Erro ao iniciar o SPIFFS");
-    return;
   }
 
   //Conecta à um wifi

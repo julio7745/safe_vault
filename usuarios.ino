@@ -41,22 +41,23 @@ void atualizauser(String aux3){
 
 String retornausuarios(){
 
-  Serial.print("Entrou");
+  Serial.println("Entrou");
 
   String total = "";
-  Serial.print("variavel criada");
+  int aux3 = 0;
+  Serial.println("variavel criada");
   
   File arq = SPIFFS.open("/users.txt" , "r");
   if(!arq){Serial.println("file open failed");}
-  Serial.print("abriu arquivo");
+  Serial.println("abriu arquivo");
   
   total = "[{\"nome\":\"";
   Serial.print("[{\"nome\":\"");
 
+  
   while(arq.available()){
 
       char aux2 = char(arq.read());
-      int aux3 = 0;
 
       switch (aux2){
         case 'A':

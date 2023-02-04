@@ -79,9 +79,9 @@
     <script>
         function config() {
 
-            //var ultabert = window.document.getElementById('ultabertura')
+            var ultabert = window.document.getElementById('ultabertura')
             var aberturas = %geral-aberturas%
-            var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
+            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
             if(aberturas != 0)
             {
                 ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
@@ -113,7 +113,7 @@
                     break;
             }
             
-            var usuarios = %usuarios%
+            var usuarios = %perfil-users%
             //var usuarios = [{"nome":"julio","sobrenome":"carvalho","id":"1"},{"nome":"julio2","sobrenome":"carvalho2","id":"2"}]
 
             var list = window.document.getElementById('list');

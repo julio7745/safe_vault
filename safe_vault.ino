@@ -14,7 +14,7 @@ String dia = "0", mes = "0", ano = "0", hora = "0", minuto = "0";
 String novonome="", novosobrenome="", novasenha="", novolv="", novoid="";
 
 void setup() {
-  
+
   Serial.begin(115200);
   delay(500);
   Serial.println("Serial iniciada");
@@ -24,7 +24,7 @@ void setup() {
     Serial.println("Erro ao iniciar o SPIFFS");
     return;
   }
-
+  
   //Conecta à um wifi
   Serial.println("Conectando ao wifi");
   WiFi.begin("index", "ipv432072");
@@ -86,7 +86,7 @@ void setup() {
           //limpeza
           nome = "", sobrenome = "", senha = "", lv = "", id = "";
         }else
-        if(aux2 == 'B' || aux2 == 'C'|| aux2 == 'D' || aux2 == 'E'){
+        if(aux2 == 'B' || aux2 == 'C'|| aux2 == 'D' || aux2 == 'E' || aux2 == 'F'){
           aux = aux2;
         }else
         
@@ -182,16 +182,18 @@ void setup() {
 
   server.on("/pages-perfis.html", HTTP_GET, [](AsyncWebServerRequest *request){
       idl = request->getParam("id")->value();
+      Serial.println("Pegou parametro");
       atualizauser(idl);
+      Serial.println("Atualizou dados");
       request->send(SPIFFS, "/pages-perfis.html", String(), false,  processor);
-
+      Serial.println("Devolveu");
   });
 
   server.on("/pages-perfis2.html", HTTP_GET, [](AsyncWebServerRequest *request){
       idl = request->getParam("id")->value();
       atualizauser(idl);
       request->send(SPIFFS, "/pages-perfis2.html", String(), false,  processor);
-
+      Serial.println("Devolveu");
   });
   
   // Inicia o servidor

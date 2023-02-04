@@ -37,7 +37,8 @@ String  processor(const String& var){
       }else{
         return "none";
       }
-  }else if(var == "usuarios"){
+  }else if(var == "perfil-users"){
+    Serial.println("Fez o pedido");
     return retornausuarios();
   }
   return "erro";  

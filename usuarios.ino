@@ -41,16 +41,17 @@ void atualizauser(String aux3){
 
 String retornausuarios(){
 
-  //[{"nome":"julio","sobrenome":"carvalho","id":"1"},{"nome":"julio2","sobrenome":"carvalho2","id":"2"}]
-  //AjulioBcarvalhoC123D4E1AFAjulio2Bcarvalho2C123D4E2A
+  Serial.print("Entrou");
 
   String total = "";
-
+  Serial.print("variavel criada");
+  
   File arq = SPIFFS.open("/users.txt" , "r");
   if(!arq){Serial.println("file open failed");}
-
+  Serial.print("abriu arquivo");
+  
   total = "[{\"nome\":\"";
-  arq.read();
+  Serial.print("[{\"nome\":\"");
 
   while(arq.available()){
 
@@ -62,6 +63,7 @@ String retornausuarios(){
           break; 
         case 'B':
           total += "\",\"sobrenome\":\"";
+          Serial.print("\",\"sobrenome\":\"");
           break;
         case 'C':
           aux3 = 1;
@@ -72,19 +74,23 @@ String retornausuarios(){
         case 'E':
           aux3 = 0;
           total += "\",\"id\":\"";
+          Serial.print("\",\"id\":\"");
           break;
         case 'F': 
-          total = "\"},{\"nome\":\"";
+          total += "\"},{\"nome\":\"";
+          Serial.print("\"},{\"nome\":\"");
           break;
         default:
           if(aux3 == 0 ){
             total += aux2;
+            Serial.print(aux2);
           }
           break;
       }
   }
 
   total += "\"}]";
+  Serial.println("\"}]");
 
   Serial.println(total);
   return total;

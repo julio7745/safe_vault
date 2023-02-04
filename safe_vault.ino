@@ -1,15 +1,10 @@
 //Bibliotecas
 #include <ESPAsyncWebServer.h>
 #include <FS.h>
-#include <Adafruit_Fingerprint.h>
 #include <SoftwareSerial.h>
 #include <Keypad.h>
 
 AsyncWebServer server(80);
-
-// INSTANCIANDO OBJETOS
-SoftwareSerial mySerial(D7, D8); // mySerial(Tx, Rx) <-- Pinagens do Sensor;
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
 String nome="", sobrenome="", senha="", lv="", id="", idl="", retorno="";
 int processo = 0, fase = 0, erro = 0, aberto = 0;
@@ -17,8 +12,6 @@ int processo = 0, fase = 0, erro = 0, aberto = 0;
 String dia = "0", mes = "0", ano = "0", hora = "0", minuto = "0";
 
 String novonome="", novosobrenome="", novasenha="", novolv="", novoid="";
-
-int debug = 0;
 
 void setup() {
   
@@ -30,21 +23,6 @@ void setup() {
   if(!SPIFFS.begin()){
     Serial.println("Erro ao iniciar o SPIFFS");
     return;
-  }
-
-  finger.begin(57600);
-
-  Serial.println("OK");
-  if (finger.verifyPassword()) {
-    Serial.println("DY-50 encontrado!");
-    delay(1000);
-  } else {
-    Serial.println("DY-50 não encontrado");
-    retorno = "Sensor não conectado!";
-    delay(3000);
-    while (true) {
-      delay(1);
-    }
   }
 
   //Conecta à um wifi
@@ -140,9 +118,11 @@ void setup() {
   server.on("/pages-home.html", HTTP_GET, [](AsyncWebServerRequest *request){
 
       String idl = request->getParam("id")->value();
+      
       atualizauser(idl);
       processo = 0;
       fase = 0;
+      erro = 0;
       retorno = "";
       request->send(SPIFFS, "/pages-home.html", String(), false,  processor);
 
@@ -164,11 +144,10 @@ void setup() {
   
   //Abertura
   server.on("/pages-abertura.html", HTTP_GET, [](AsyncWebServerRequest *request){
-
       idl = request->getParam("id")->value();
       atualizauser(idl);
       processo = 1;
-      fase = 0;
+      fase = 1;
       request->send(SPIFFS, "/pages-abertura.html", String(), false,  processor);
   });
   server.on("/pages-abertura2.html", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -186,14 +165,10 @@ void setup() {
       Serial.println("Pegou parametro");
       atualizauser(idl);
       Serial.println("Atualizou dados");
-      processo = 2;
       request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
       Serial.println("Devolveu");
   });
    server.on("/pages-inscricao1.html", HTTP_GET, [](AsyncWebServerRequest *request){
-     
-      erro = 1;
-      
       novonome = request->getParam("novonome")->value();
       Serial.print(novonome);
       Serial.print(".");
@@ -201,11 +176,22 @@ void setup() {
       Serial.println(novosobrenome);
       novasenha = request->getParam("novasenha")->value();
       novolv = request->getParam("novolv")->value();
-
-      inscrevedigital();
       increveusuario();
-      
       request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
+  });
+
+  server.on("/pages-perfis.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      idl = request->getParam("id")->value();
+      atualizauser(idl);
+      request->send(SPIFFS, "/pages-perfis.html", String(), false,  processor);
+
+  });
+
+  server.on("/pages-perfis2.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      idl = request->getParam("id")->value();
+      atualizauser(idl);
+      request->send(SPIFFS, "/pages-perfis2.html", String(), false,  processor);
+
   });
   
   // Inicia o servidor
@@ -216,9 +202,6 @@ void setup() {
 void loop() {
   if (processo == 1){
     switch (fase){
-      case 0:
-        ledigital(0);
-        break;
       case 1:
         lesenha();
         break;

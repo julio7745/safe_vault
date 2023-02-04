@@ -37,7 +37,8 @@ String  processor(const String& var){
       }else{
         return "none";
       }
+  }else if(var == "usuarios"){
+    return retornausuarios();
   }
-  
   return "erro";  
 }

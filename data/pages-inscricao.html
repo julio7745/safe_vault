@@ -49,21 +49,24 @@
     </header>
     <main>
         <form style="display: %inscrição-form%" action="/pages-inscricao1.html">
+            
+            <!-- Não editavel 'ID' -->
+            <input type="number" value="%geral-id%" name="id" style="display: none;">
 
             <label for="inome">Nome do novo usuario:</label>
-            <input type="text" name="novonome" id="inome">
+            <input type="text" name="novonome" id="inome" required>
 
             <label for="isobrenome">Sobrenome do novo usuario:</label>
-            <input type="text" name="novosobrenome" id="isobrenome">
+            <input type="text" name="novosobrenome" id="isobrenome" required>
 
             <label for="isenha">Senha do novo usuario:</label>
-            <input type="text" name="novasenha" id="isenha">
+            <input type="text" name="novasenha" id="isenha" required>
 
             <label for="ilv">Nivel de segurança do novo usuario:</label>
-            <input type="text" name="novolv" id="ilv">
+            <input type="number" name="novolv" id="ilv" required min="1" max="4" value="1">
             
             <label for="isubmit" class="b"></label>
-            <input style="display: none;" type="submit" value="" id="isubmit">
+            <input style="display: none;" type="submit" value="" id="isubmit" required>
 
         </form>
         <iframe style="display: %inscrição-frame%" src="pages-inscricao2.html?ano=0&mes=0&dia=0&hora=0&minuto=0" id="frame" frameborder="0"></iframe>

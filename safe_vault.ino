@@ -16,6 +16,8 @@ int processo = 0, fase = 0, erro = 0, aberto = 0;
 
 String dia = "0", mes = "0", ano = "0", hora = "0", minuto = "0";
 
+String novonome="", novosobrenome="", novasenha="", novolv="", novoid="";
+
 int debug = 0;
 
 void setup() {
@@ -182,7 +184,22 @@ void setup() {
       idl = request->getParam("id")->value();
       atualizauser(idl);
       processo = 2;
-      fase = 0;
+      fase = 1;
+      request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
+  });
+   server.on("/pages-inscricao1.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      atualizauser(idl);
+      processo = 2;
+      fase = 2;
+      
+      novonome = request->getParam("novonome")->value();
+      novosobrenome = request->getParam("novosobrenome")->value();
+      novasenha = request->getParam("novasenha")->value();
+      novolv = request->getParam("novolv")->value();
+
+      inscrevedigital();
+      increveusuario();
+      
       request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
   });
   server.on("/pages-inscricao2.html", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -208,21 +225,7 @@ void loop() {
         abrecofre();
         break;
     }
-  }else if (processo == 2){
-      switch (fase){
-      case 0:
-        ledigital(1);
-        break;
-      case 1:
-        inscrevedigital();
-        break;
-      case 2:
-        Serial.println("Abre cofre");
-        abrecofre();
-        break;
-    }
   }
-  
   if (millis() >= aberto && processo == 1 && fase == 3 ){
     //fecha cofre
     Serial.println("Fecha cofre");

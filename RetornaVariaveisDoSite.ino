@@ -31,14 +31,8 @@ String  processor(const String& var){
     return aberturas(0);
   }else if (var == "retorno"){
     return retorno;
-  }else if (var == "inscrição-form"){
-    if (fase == 1){
-        return "block";
-      }else{
-        return "none";
-      }
-  }else if (var == "inscrição-frame"){
-    if (fase == 2){
+  }else if (var == "incricao-confirm"){
+    if (erro == 1){
         return "block";
       }else{
         return "none";

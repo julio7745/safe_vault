@@ -143,6 +143,7 @@ void setup() {
       atualizauser(idl);
       processo = 0;
       fase = 0;
+      retorno = "";
       request->send(SPIFFS, "/pages-home.html", String(), false,  processor);
 
   });
@@ -182,18 +183,22 @@ void setup() {
   //Inscrição
   server.on("/pages-inscricao.html", HTTP_GET, [](AsyncWebServerRequest *request){
       idl = request->getParam("id")->value();
+      Serial.println("Pegou parametro");
       atualizauser(idl);
+      Serial.println("Atualizou dados");
       processo = 2;
-      fase = 1;
       request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
+      Serial.println("Devolveu");
   });
    server.on("/pages-inscricao1.html", HTTP_GET, [](AsyncWebServerRequest *request){
-      atualizauser(idl);
-      processo = 2;
-      fase = 2;
+     
+      erro = 1;
       
       novonome = request->getParam("novonome")->value();
+      Serial.print(novonome);
+      Serial.print(".");
       novosobrenome = request->getParam("novosobrenome")->value();
+      Serial.println(novosobrenome);
       novasenha = request->getParam("novasenha")->value();
       novolv = request->getParam("novolv")->value();
 
@@ -201,9 +206,6 @@ void setup() {
       increveusuario();
       
       request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
-  });
-  server.on("/pages-inscricao2.html", HTTP_GET, [](AsyncWebServerRequest *request){
-      request->send(SPIFFS, "/pages-inscricao2.html", String(), false,  processor);
   });
   
   // Inicia o servidor
@@ -231,6 +233,7 @@ void loop() {
     Serial.println("Fecha cofre");
     fechacofre();
   }
+  delay(500);
 }
 
 /*

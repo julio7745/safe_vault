@@ -1,8 +1,8 @@
  void inscrevedigital(){
 
-  Serial.println("Novo usuario: coloque seu dedo no sensor de digitais!");
+  /*Serial.println("Novo usuario: coloque seu dedo no sensor de digitais!");
   retorno = "Novo usuario: coloque seu dedo no sensor de digitais!";
-  delay(5000);/*
+  delay(5000);
   
   debug++;
   Serial.println(debug);
@@ -18,16 +18,16 @@
   if (p != FINGERPRINT_OK){
     Serial.println("finger.image2Tz(1)");
     return;
-  }*/
+  }
 
   Serial.println("retire o dedo");
   retorno = "Por favor, retire o dedo do sensor biometrico.";
-  delay(5000);/*
+  delay(5000);
   
   p = 0;
   while (p != FINGERPRINT_NOFINGER) {
     p = finger.getImage();
-  }*/
+  }
 
   Serial.println("coloque o dedo novamente");
   retorno = "Por favor ,coloque o dedo novamente.";
@@ -57,7 +57,7 @@
 
   int IDgravar = pegaid();
   novoid = IDgravar;
-  Serial.print(String("novo id: " + IDgravar));
+  Serial.println(String("novo id: " + IDgravar));
   /*p = finger.storeModel(IDgravar);
   if (p == FINGERPRINT_OK) {
     Serial.println("Armazenado!");
@@ -75,7 +75,7 @@
     Serial.println("Erro desconhecido");
     return;
   }*/
-  Serial.print("digital salva");
+  Serial.println("digital salva");
   debug = 0;
   return; 
 }
@@ -116,8 +116,8 @@ void increveusuario(){
   
       File arq = SPIFFS.open("/users.txt" , "a");
       if(!arq){Serial.println("file open failed");}
-      Serial.println(String("A"+novonome+"B"+novosobrenome+"C"+novasenha+"D"+novolv+"E"+novoid));
-      arq.print(String("A"+novonome+"B"+novosobrenome+"C"+novasenha+"D"+novolv+"E"+novoid));
+      Serial.println(String("A"+novonome+"B"+novosobrenome+"C"+novasenha+"D"+novolv+"E"+novoid+"A"));
+      arq.print(String("A"+novonome+"B"+novosobrenome+"C"+novasenha+"D"+novolv+"E"+novoid+"A"));
       arq.close();
       Serial.println("Sucess");
       retorno = "Sucesso ao gravar novo usuario";

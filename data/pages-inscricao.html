@@ -8,6 +8,7 @@
     <title>Safe Vault - Inscrição</title>
     <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/estilos/geral.css">
     <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/estilos/abertura.css">
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/estilos/inscricao.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body onload="config()">
@@ -47,13 +48,25 @@
         </section>
     </header>
     <main>
-        <form style="display: block" action="/pages-inscricao1.html">
+        <form style="display: %inscrição-form%" action="/pages-inscricao1.html">
+
             <label for="inome">Nome do novo usuario:</label>
-            <label for="inome">Sobrenome do novo usuario:</label>
-            <label for="inome">Senha do novo usuario:</label>
-            <label for="inome">Nivel de segurança do novo usuario:</label>
+            <input type="text" name="novonome" id="inome">
+
+            <label for="isobrenome">Sobrenome do novo usuario:</label>
+            <input type="text" name="novosobrenome" id="isobrenome">
+
+            <label for="isenha">Senha do novo usuario:</label>
+            <input type="text" name="novasenha" id="isenha">
+
+            <label for="ilv">Nivel de segurança do novo usuario:</label>
+            <input type="text" name="novolv" id="ilv">
+            
+            <label for="isubmit" class="b"></label>
+            <input style="display: none;" type="submit" value="" id="isubmit">
+
         </form>
-        <iframe style="display: none" src="pages-inscricao2.html?ano=0&mes=0&dia=0&hora=0&minuto=0" id="frame" frameborder="0"></iframe>
+        <iframe style="display: %inscrição-frame%" src="pages-inscricao2.html?ano=0&mes=0&dia=0&hora=0&minuto=0" id="frame" frameborder="0"></iframe>
     </main>
     <footer>
         <p><strong>Projeto Safe Vault</strong></p>

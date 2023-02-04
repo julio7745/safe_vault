@@ -142,8 +142,8 @@
             const confstar = window.document.getElementById('star')
             const confinspecao = window.document.getElementById('inspecao')
             const confabertura = window.document.getElementById('abertura')
-            //const confedicao = window.document.getElementById('edicao')
-            //const confinscricao = window.document.getElementById('inscricao')
+            const confedicao = window.document.getElementById('edicao')
+            const confinscricao = window.document.getElementById('inscricao')
 
             switch (level) {
                 case "1":
@@ -159,14 +159,14 @@
                     confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
                     confinspecao.style.display = 'inline-block' 
                     confabertura.style.display = 'inline-block' 
-                    //confedicao.style.display = 'inline-block' 
+                    confedicao.style.display = 'inline-block' 
                     break;
                 case "4":
                     confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
                     confinspecao.style.display = 'inline-block' 
                     confabertura.style.display = 'inline-block' 
-                    //confedicao.style.display = 'inline-block' 
-                    //confinscricao.style.display = 'inline-block' 
+                    confedicao.style.display = 'inline-block' 
+                    confinscricao.style.display = 'inline-block' 
                     break;
             }
         }

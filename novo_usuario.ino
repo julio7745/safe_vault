@@ -57,7 +57,7 @@
 
   int IDgravar = pegaid();
   novoid = IDgravar;
-  Serial.print(String("novo id: " + Idgravar);
+  Serial.print(String("novo id: " + IDgravar));
   /*p = finger.storeModel(IDgravar);
   if (p == FINGERPRINT_OK) {
     Serial.println("Armazenado!");

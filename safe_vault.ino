@@ -70,6 +70,8 @@ void setup() {
 
   //Login
   server.on("/pages-login.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      processo = 0;
+      fase = 0;
       String userl = request->getParam("user")->value();
       String senhal = request->getParam("senha")->value();
       //limpeza
@@ -138,6 +140,7 @@ void setup() {
       String idl = request->getParam("id")->value();
       atualizauser(idl);
       processo = 0;
+      fase = 0;
       request->send(SPIFFS, "/pages-home.html", String(), false,  processor);
 
   });
@@ -162,7 +165,6 @@ void setup() {
       idl = request->getParam("id")->value();
       atualizauser(idl);
       processo = 1;
-      //apos corrigir o erro, preciso atualizar a fase p/ 0
       fase = 0;
       request->send(SPIFFS, "/pages-abertura.html", String(), false,  processor);
   });
@@ -174,6 +176,18 @@ void setup() {
       minuto = request->getParam("minuto")->value();
       request->send(SPIFFS, "/pages-abertura2.html", String(), false,  processor);
   });
+
+  //Inscrição
+  server.on("/pages-inscricao.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      idl = request->getParam("id")->value();
+      atualizauser(idl);
+      processo = 2;
+      fase = 0;
+      request->send(SPIFFS, "/pages-inscricao.html", String(), false,  processor);
+  });
+  server.on("/pages-inscricao2.html", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(SPIFFS, "/pages-inscricao2.html", String(), false,  processor);
+  });
   
   // Inicia o servidor
   server.begin();
@@ -181,14 +195,26 @@ void setup() {
 }
 
 void loop() {
-
   if (processo == 1){
     switch (fase){
       case 0:
-        ledigital();
+        ledigital(0);
         break;
       case 1:
         lesenha();
+        break;
+      case 2:
+        Serial.println("Abre cofre");
+        abrecofre();
+        break;
+    }
+  }else if (processo == 2){
+      switch (fase){
+      case 0:
+        ledigital(1);
+        break;
+      case 1:
+        inscrevedigital();
         break;
       case 2:
         Serial.println("Abre cofre");

@@ -18,6 +18,8 @@ void lesenha(){
     return;
   }else{
     retorno = "Senha invalida, tente novamente!";
+    delay(5000);
     Serial.println ("ERRO");
+    fase = 0;
   }
 }

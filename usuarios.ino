@@ -148,3 +148,54 @@ int  pegaid(){
 
    return idretornado;
 }
+
+void apagarusuario(String idapagar){
+
+    File arq = SPIFFS.open("/users.txt" , "r");  
+    if(!arq){Serial.println("file open failed");}
+
+    String lido = "";
+    String usuario = "";
+    String idd = "";
+    String total = "";
+    int aux = 0;
+     
+    while(arq.available()){
+       lido = char(arq.read());
+       usuario += lido;
+       if (lido == "A") {
+          aux = 0;
+          //verificação
+          Serial.println("inicio da verificação");
+          Serial.println("dados");
+          Serial.println(idd);
+          Serial.println("recebido");
+          Serial.println(idapagar);
+          if(  idd != idapagar ){
+            total += usuario;
+            Serial.println(usuario);
+            Serial.println(total);
+          }else{
+            Serial.println("Usuario apagado!");
+            Serial.println(idd);
+          }
+          idd = "";
+          usuario = ""; 
+        }
+        if(aux == 1){
+          idd = lido;
+        }
+        if (lido == "E"){
+          aux = 1;
+        }
+    }
+
+    arq.close();
+    arq = SPIFFS.open("/user.txt" , "w");
+    if(!arq){Serial.println("file open failed");}
+
+    Serial.println(total);
+    arq.print(total);
+    arq.close();
+
+}

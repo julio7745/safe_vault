@@ -86,8 +86,7 @@ String aberturas(int aux3){
 }
 
 void limparlog(){
-    File abert = SPIFFS.open("/aberturas.txt" , "r");
-    abert = SPIFFS.open("/aberturas.txt" , "w");
+    File abert = SPIFFS.open("/aberturas.txt" , "w");
     if(!abert){Serial.println("file open failed");}
 
     String logabertura = "";

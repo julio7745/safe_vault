@@ -192,6 +192,8 @@ void setup() {
   server.on("/pages-perfis2.html", HTTP_GET, [](AsyncWebServerRequest *request){
       idl = request->getParam("id")->value();
       atualizauser(idl);
+      String idapagar = request->getParam("apagar")->value();
+      apagarusuario(idapagar);
       request->send(SPIFFS, "/pages-perfis2.html", String(), false,  processor);
       Serial.println("Devolveu");
   });

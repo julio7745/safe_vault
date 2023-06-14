@@ -27,7 +27,7 @@ void setup() {
   
   //Conecta à um wifi
   Serial.println("Conectando ao wifi");
-  WiFi.begin("index", "ipv432072");
+  WiFi.begin("LinkSpeed_Index", "ipv432072");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");

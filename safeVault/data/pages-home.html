@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Vault - Home</title>
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/estilos/geral.css">
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/estilos/home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body onload="config()">
+    <header>
+        <section id="navegationcabecalho">
+            <div class="bnavegation" onclick="unlog()">
+                <span class="material-icons">logout</span>
+            </div>
+        </section>
+        <div class="traço"></div>
+        <div id="usercabacalho">
+            <section id="imgcabecalho">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ2G73Genq9OoVGGShZowvBWdVANx2j0d-JKYTk50&s" alt="Foto de perfil">
+            </section>
+            <section id="infcabecalho">
+                <p>
+                    <strong>Nome: </strong><span id="nome"> ... </span>
+                </p>
+                <p>
+                    <strong>Nível de Segurança: </strong><br>
+                    <span id="star"> ... </span>
+                </p>
+            </section>
+        </div>
+        <div class="traço"></div>
+        <section id="abertcabecalho">
+            <p>
+                <strong>Última abertura do cofre: </strong>
+                <div id="ultabertura"> ... </div>
+            </p>
+        </section>
+    </header>
+    <main>
+        <div class="ali">
+            <div id="inspecao" class="bodyaling">
+                <section class="container">
+                    <div class="txt">
+                        <h1>Inspeção</h1>
+                        <p>Aqui você inspecionar as aberturas recentes do cofre.</p>
+                    </div>
+                        <div class="button" onclick="inspecao()">
+                            <div class="b">
+                                <span class="material-icons">arrow_forward</span>
+                            </div>
+                        </div>
+                </section>
+            </div>
+            <div id="abertura" class="bodyaling">
+                <section  class="container">
+                    <div class="txt">
+                        <h1>Abertura</h1>
+                        <p>Aqui você pode abrir o cofre.</p>
+                    </div>
+                    <div class="button" onclick="abertura()">
+                        <div class="b">
+                            <span class="material-icons">arrow_forward</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div id="edicao" class="bodyaling">
+                <section class="container">
+                    <div class="txt">
+                        <h1>Perfis</h1>
+                        <p>Aqui você deletar a existencia de outros usuários.</p>
+                    </div>
+                    <div class="button" onclick="perfis()">
+                        <div class="b">
+                            <span class="material-icons">arrow_forward</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div id="inscricao" class="bodyaling">
+                <section class="container">
+                    <div class="txt">
+                        <h1>Inscrição</h1>
+                        <p>Aqui você pode adicionar novos usuários.</p>
+                    </div>
+                    <div class="button" onclick="inscricao()">
+                        <div class="b">
+                            <span class="material-icons">arrow_forward</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <div id="dlogout">
+        <div>
+            <h1>Logout</h1>
+            <p>Tem certeza que deseja realizar o logout?</p>
+            <input type="button" value="Sim" onclick="logout()">
+            <input type="button" value="Não" onclick="unlog()">
+        </div>
+    </div>
+    <script>
+        function config() {
+
+            var ultabert = window.document.getElementById('ultabertura')
+            var aberturas = %geral-aberturas%
+            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
+            if(aberturas != 0)
+            {
+                ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
+            }
+
+            var nome = "%geral-nome%"
+            var sobrenome = "%geral-sobrenome%"
+            const level = "%geral-lv%"
+
+            window.document.getElementById('nome').innerText = `${nome} ${sobrenome}`
+            
+            const confstar = window.document.getElementById('star')
+            const confinspecao = window.document.getElementById('inspecao')
+            const confabertura = window.document.getElementById('abertura')
+            const confedicao = window.document.getElementById('edicao')
+            const confinscricao = window.document.getElementById('inscricao')
+
+            switch (level) {
+                case "1":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span>'
+                    confinspecao.style.display = 'inline-block' 
+                    break;
+                case "2":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    confinspecao.style.display = 'inline-block' 
+                    confabertura.style.display = 'inline-block' 
+                    break;
+                case "3":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    confinspecao.style.display = 'inline-block' 
+                    confabertura.style.display = 'inline-block' 
+                    confedicao.style.display = 'inline-block' 
+                    break;
+                case "4":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    confinspecao.style.display = 'inline-block' 
+                    confabertura.style.display = 'inline-block' 
+                    confedicao.style.display = 'inline-block' 
+                    confinscricao.style.display = 'inline-block' 
+                    break;
+            }
+        }
+        function inspecao() {
+            window.location.replace("pages-inspecao.html?id=%geral-id%&p=0")
+        }
+        function abertura() {
+            window.location.replace("pages-abertura.html?id=%geral-id%")
+        }
+        function perfis() {
+            window.location.replace("pages-perfis.html?id=%geral-id%")
+        }
+        function inscricao() {
+            window.location.replace("pages-inscricao.html?id=%geral-id%")
+        }
+        function unlog(){
+            var logout = window.document.getElementById('dlogout')
+            if (logout.style.display == 'block') {
+                logout.style.display = 'none'
+            } else {
+                logout.style.display = 'block'
+            }
+        }
+        function logout() {
+            window.location.replace("/");
+        }
+    </script>
+    <footer>
+        <p><strong>Projeto Safe Vault</strong></p>
+        <p>by: Júlio Carvalho</p>
+        <div class="traço"></div>
+        <p>
+            <a href="https://www.instagram.com/julio.qrz/" target="_blank">
+                <img class="logofooter" src="https://github.com/julio7745/safe_vault/blob/main/images/ig-ico.png?raw=true" alt="intagram logo"> julio.qrz
+            </a>
+            <a href="https://twitter.com/julio7745?t=ZywMI2KeE7CJa7q110geCQ&s=08" target="_blank">
+                <img class="logofooter" src="https://github.com/julio7745/safe_vault/blob/main/images/tw-ico.png?raw=true" alt="twitter logo"> julio7745
+            </a>
+            <a href="https://www.linkedin.com/in/j%C3%BAlio-c%C3%A9sar-queiroz-carvalho" target="_blank">
+                <img class="logofooter" src="https://github.com/julio7745/safe_vault/blob/main/images/in-ico.png?raw=true" alt="linkedin logo"> Júlio César Queiroz Carvalho
+            </a>
+            <a href="https://github.com/julio7745" target="_blank">
+                <img class="logofooter" src="https://github.com/julio7745/safe_vault/blob/main/images/gh-ico.png?raw=true" alt="github logo"> julio7745
+            </a>
+        </p>
+    </footer>
+</body>
+</html>

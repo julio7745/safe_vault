@@ -1,0 +1,149 @@
+//Inclui bibliotecas
+#include <Adafruit_Fingerprint.h>
+
+//Define portas da sensor biometrico
+SoftwareSerial SensorBiometrico(2, 3);                                                //(tx, rx)
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&SensorBiometrico);                //Conectar no sensor na serial descrita com a senha descrita
+
+//declara constantes
+#define ledoperacao 4
+#define fechadura 5
+
+//declara variaveis
+uint8_t p = -10;
+int id = -10;
+
+void setup() {
+  //Inicia tela serial
+  Serial.begin(9600);
+  delay (5);
+  //inicia sensor biometrico
+  finger.begin(57600);
+  delay(5);
+  Serial.println("");
+  //declara saidas
+  pinMode(ledoperacao, OUTPUT);
+  digitalWrite(ledoperacao, 0);
+  pinMode(fechadura, OUTPUT);
+  digitalWrite(fechadura, 0);
+}
+
+void loop() {
+  //declara variaveis
+  Serial.println("INICIO");
+  int v1 = 0;
+  v1 = ledigital();
+  if (v1 == 1 && id == 0 ){
+      digitalWrite(ledoperacao, 1);
+      Serial.println("Modo de operação");
+      v1 = ledigital();
+      if (v1 == 1 && id != 0){
+        finger.deleteModel(id);
+        Serial.print("Digital da posição ");Serial.print(id);Serial.print(" apagada com sucesso!");
+        digitalWrite(ledoperacao, 0);
+        v1=0, p =-10, id = -10;
+        return;
+      } else if (v1 == 0){
+        adicionadigital();
+        digitalWrite(ledoperacao, 0);
+        return;
+      }
+  } else 
+  if (v1 == 1 && id > 0 ){
+    digitalWrite(fechadura, 1);
+    delay(5000);
+    digitalWrite(fechadura, 0);
+    return;
+  }
+}
+
+int ledigital(){
+  p = FINGERPRINT_NOFINGER;
+  Serial.println("Coloque o dedo");
+  while (p != FINGERPRINT_OK ){
+    p = finger.getImage();
+  }    
+  Serial.println("Digital lida com sucesso");
+  p = finger.fingerSearch(); 
+  if( p == FINGERPRINT_OK ){
+    id = finger.fingerID;                         
+    Serial.print("Digital encontrada no banco de dados, posição: ");Serial.println(id);
+    return 1;
+  } else { 
+      Serial.println("Digital nao encontrada no banco de dados");
+    return 0;
+  }    
+}
+
+void  adicionadigital(){
+  
+  finger.image2Tz(1);
+  p = FINGERPRINT_NOFINGER;
+  Serial.println("Retire o dedo e coloque o dedo novamente para adiciona-la");
+  while (p != FINGERPRINT_OK ){
+    p = finger.getImage();
+  }
+  finger.image2Tz(2);
+  p = finger.createModel();     
+  if ( p != FINGERPRINT_OK ){
+    Serial.println("Erro 301");
+    return;
+  }
+  p = finger.storeModel(2);
+  if (p != FINGERPRINT_OK ){
+    Serial.println("Erro 302");
+    return;
+  }
+  Serial.println("Salva na posição 2");
+}
+
+/*
+
+  //deletar digital
+  finger.deleteModel(id);
+
+  //limpa base de dados
+  finger.emptyDatabase();
+
+  //Le uma imagem
+  finger.getImage();
+
+  //Converte a imagem na posição 1
+  finger.image2Tz(1);
+
+  //Converte a imagem na posição 2
+  finger.image2Tz(2);
+
+  //Cria modelo de dedo caso 1 e 2 sejam iguais
+  p = finger.createModel();
+
+  //Guarda este modelo na posição id
+  p = finger.storeModel(id);
+  
+  //Conta a quantidade de Digitais (retorna um inteiro)
+  finger.getTemplateCount();
+
+  //Procura uma imagem correspondente no banco de dados (retorna : "FINGERPRINT_OK" se achar, e "FINGERPRINT_NOTFOUND" se não achar)
+  finger.fingerSearch();
+
+  //retorna o id da digital obtida
+  finger.fingerID
+
+  
+
+  
+
+  //voce pode adicionar cada ação a uma variavel para ver se deu certo ou fazer outras operações
+  
+  Ex1
+  p = finger.deleteModel(id);
+  if (p == FINGERPRINT_OK) {
+     Serial.println("Deleted!");
+  }
+     
+  Ex 2
+  while (p != FINGERPRINT_OK) {
+  p = finger.getImage();
+  }
+  
+ */

@@ -1,0 +1,6 @@
+
+Instala biblioteca responsavel pela criação do projeto
+npm install -g react-native-cli
+
+Cria o projeto
+npx react-native init MeuProjetoReactNative

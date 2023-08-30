@@ -1,7 +1,0 @@
-BLUE
- 	#282c34;
-	#61dafb;
-PRETO
-    	#000000
-BRANCO
-	#FFFFFF

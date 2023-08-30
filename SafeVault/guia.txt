@@ -1,6 +1,8 @@
 
-Instala biblioteca responsavel pela criação do projeto
-npm install -g react-native-cli
-
 Cria o projeto
-npx react-native init MeuProjetoReactNative
+npx create-expo-app ProjectName
+
+Já na pasta do projeto:
+npx expo start
+Compila e abre qrcode para expogo
+

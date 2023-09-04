@@ -26,17 +26,12 @@ export default formLogin = ({ setcurrentPage, setId }) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = () => {
-    console.log( user );
-    console.log( password);
-  }
-
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
       <UserField {...{inputRefs, setUser,}}/>
       <PasswordField {...{inputRefs, setPassword,}}/>
-      <SubmitField {...{login, }}/>
+      <SubmitField {...{ user, password,  setcurrentPage, setId }}/>
     </View>
   );
 

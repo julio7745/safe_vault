@@ -1,11 +1,13 @@
 
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
-export default formLogin = ({login}) => {
+import login from '../../../services/login.js'
+
+export default formLogin = ({user, password, setcurrentPage, setId }) => {
   
   return (
     <View style={styles.campBtnLogin}>
-        <TouchableWithoutFeedback onPress={login}>
+        <TouchableWithoutFeedback onPress={() => login( user, password, setcurrentPage, setId)}>
             <Image source={require('../../../assets/icons/login.png')} style={styles.btnLogin}/>
         </TouchableWithoutFeedback>
     </View>

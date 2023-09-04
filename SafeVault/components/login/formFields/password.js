@@ -2,7 +2,7 @@
 import React, { useState, useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, } from 'react-native';
 
-export default LoginScreen = ({inputRefs}) => {
+export default LoginScreen = ({inputRefs, setPassword}) => {
   
   inputRefs.passwordField = useRef(null)
   const selectpasswordField = () => {
@@ -26,6 +26,7 @@ export default LoginScreen = ({inputRefs}) => {
         placeholder="password"
         autoComplete="off"
         ref={inputRefs.passwordField}
+        onChangeText={(text) => setPassword(text)}
       />
       <TouchableWithoutFeedback onPress={handleDisplayPassword}>
         <Image source={require('../../../assets/icons/handleDisplayPassword.png')} style={styles.IconPassword}/>

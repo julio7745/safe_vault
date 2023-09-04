@@ -1,7 +1,8 @@
+
 import React, { useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, } from 'react-native';
 
-export default UserField = ({inputRefs}) => {
+export default UserField = ({inputRefs, setUser}) => {
 
   inputRefs.userField = useRef(null)
   const selectUserField = () => {
@@ -18,6 +19,7 @@ export default UserField = ({inputRefs}) => {
         placeholder="name.surname"
         autoComplete="off"
         ref={inputRefs.userField}
+        onChangeText={(text) => setUser(text)}
       />
     </View>
   );

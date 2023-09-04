@@ -1,14 +1,14 @@
-import React, { useEffect  } from 'react';
+
+import React, { useEffect, useState, } from 'react';
 import { View, Text, StyleSheet, Keyboard , } from 'react-native';
 
 import UserField from './formFields/user'
 import PasswordField from './formFields/password'
 import SubmitField from './formFields/submit'
-import password from './formFields/password';
 
-export default formLogin = ({ setcurrentPage, setUser }) => {
+export default formLogin = ({ setcurrentPage, setId }) => {
 
-  let inputRefs = {refs: []}
+  let inputRefs = {}
 
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
@@ -23,12 +23,20 @@ export default formLogin = ({ setcurrentPage, setUser }) => {
     Keyboard.dismiss();
   };
 
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+
+  const login = () => {
+    console.log( user );
+    console.log( password);
+  }
+
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
-      <UserField inputRefs={inputRefs}/>
-      <PasswordField inputRefs={inputRefs}/>
-      <SubmitField/>
+      <UserField {...{inputRefs, setUser,}}/>
+      <PasswordField {...{inputRefs, setPassword,}}/>
+      <SubmitField {...{login, }}/>
     </View>
   );
 

@@ -6,15 +6,17 @@ import HomeScreen from './screens/HomeScreen';
 const App = () => {
 
   const [currentPage, setcurrentPage] = useState('login');
+  const [user, setUser] = useState(0);
 
   switch (currentPage) {
     case 'login':
-      return <LoginScreen handleScreen={{setcurrentPage}}/>;
+      return <LoginScreen setcurrentPage={setcurrentPage} setUSer={setUser}/>;
     case 'home':
-      return <HomeScreen handleScreen={{setcurrentPage}}/>;
+      return <HomeScreen setcurrentPage={setcurrentPage}/>;
     default:
-      return <LoginScreen handleScreen={{setcurrentPage}}/>;
+      return <LoginScreen setcurrentPage={setcurrentPage}/>;
   }
+  
 };
 
 export default App;

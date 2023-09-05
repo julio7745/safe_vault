@@ -1,8 +1,0 @@
-
-Cria o projeto
-npx create-expo-app ProjectName
-
-Já na pasta do projeto:
-npx expo start
-Compila e abre qrcode para expogo
-

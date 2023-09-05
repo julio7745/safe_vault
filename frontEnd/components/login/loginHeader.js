@@ -21,16 +21,17 @@ const styles = StyleSheet.create({
     width: 170,
     height: 170,
     resizeMode: 'contain',
-    marginTop: 25,
+    alignSelf: 'center',
   },
   title: {
     marginTop: 15,
-    fontSize: 40,
-    fontWeight: 'bold',
+    fontSize: 45,
+    fontWeight: '900',
     color: '#ffffff',
   },
   text: {
-    fontSize: 20,
+    fontSize: 25,
     color: '#ffffff',
+    fontWeight: '700',
   },
 });

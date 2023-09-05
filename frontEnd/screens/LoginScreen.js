@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#53A3B5',
+    backgroundColor: '#1b353b',
     overflow: 'hidden',
   }
 });

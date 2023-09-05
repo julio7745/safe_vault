@@ -1,23 +1,20 @@
 import lodash from 'lodash';
-import { useState } from 'react';
-
-
 
 export default function validateForm(user, password) {
 
-    const state = {}
+    const login = {}
 
     const userErrors = validateUser(user);
     const passwordErrors = validatePassword(password);
 
     if( userErrors.length === 0 && passwordErrors.length === 0 ){
-        state.user = formatUser(user)
-        state.password = password
+        login.user = formatUser(user)
+        login.password = password
     }else{
-        state.err =  [...userErrors, ...passwordErrors];
+        login.err =  [...userErrors, ...passwordErrors];
     }
 
-    return state;
+    return login;
 }
 
 
@@ -52,19 +49,19 @@ function validatePassword(password) {
         err.push(`The password must be between 6 and 15 characters long!`);
     }
 
-    const regexNumeros = /[0-9]/;
-    if (!regexNumeros.test(password)){
-        err.push(`precisa de numeros`);
+    const regexNumbers = /[0-9]/;
+    if (!regexNumbers.test(password)){
+        err.push(`Password must contain numbers!`);
     }
 
-    const regexMaiuscula = /[A-Z]/;
-    if (!regexMaiuscula.test(password)){
-        err.push(`precisa de Maiusculas`);
+    const regexUppercase = /[A-Z]/;
+    if (!regexUppercase.test(password)){
+        err.push(`The password must contain uppercase letters!`);
     }
 
-    const regexMinuscula = /[a-z]/;
-    if (!regexMinuscula.test(password)){
-        err.push(`precisa de Minuscula`);
+    const regexlowercase = /[a-z]/;
+    if (!regexlowercase.test(password)){
+        err.push(`The password must contain lowercase letters!`);
     }
 
     return err;

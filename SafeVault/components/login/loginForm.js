@@ -19,7 +19,8 @@ export default formLogin = ({ setcurrentPage, setId }) => {
   }, []);
 
   const unselectField = () => {
-    Object.values(inputRefs.refs).forEach((inputRef) => inputRef.current.blur());
+    console.log(inputRefs);
+    Object.values(inputRefs).forEach((inputRef) => inputRef.current.blur());
     Keyboard.dismiss();
   };
 

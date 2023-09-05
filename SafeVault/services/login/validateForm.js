@@ -11,7 +11,8 @@ export default function validateForm(user, password) {
         login.user = formatUser(user)
         login.password = password
     }else{
-        login.err =  [...userErrors, ...passwordErrors];
+        login.userErrors =  [...userErrors,]
+        login.passwordErrors =  [...passwordErrors,]
     }
 
     return login;
@@ -24,13 +25,13 @@ function validateUser(user) {
     const err = [];
   
     if (!newUser.includes('.')) {
-        err.push(`The user must have the format: "Firstname.Lastname" !`);
+        err.push(`● Follow the format: "Firstname.Lastname"!`);
         return err;
     }
   
     const index = newUser.indexOf('.');
     if (index === 0 || index === newUser.length - 1) {
-        err.push(`The user must have the format: "Firstname.Lastname" !`);
+        err.push(`● Follow the format: "Firstname.Lastname"!`);
         return err;
     }
   
@@ -46,22 +47,26 @@ function validatePassword(password) {
 
     const err = []
     if (password.length > 15 || password.length < 6) {
-        err.push(`The password must be between 6 and 15 characters long!`);
+        err.push(`● Must be 6 to 15 characters!`);
+        return err
     }
 
     const regexNumbers = /[0-9]/;
     if (!regexNumbers.test(password)){
-        err.push(`Password must contain numbers!`);
+        err.push(`● Need to have numbers!`);
+        return err
     }
 
     const regexUppercase = /[A-Z]/;
     if (!regexUppercase.test(password)){
-        err.push(`The password must contain uppercase letters!`);
+        err.push(`● Must have capital letters!`);
+        return err
     }
 
     const regexlowercase = /[a-z]/;
     if (!regexlowercase.test(password)){
-        err.push(`The password must contain lowercase letters!`);
+        err.push(`● Must have lowercase letters!`);
+        return err
     }
 
     return err;

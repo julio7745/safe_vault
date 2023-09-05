@@ -1,8 +1,8 @@
 
 import { useState, useRef, } from 'react';
-import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, } from 'react-native';
+import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, Text,} from 'react-native';
 
-export default LoginScreen = ({inputRefs, setPassword}) => {
+export default LoginScreen = ({inputRefs, setPassword, passwordErrors}) => {
   
   inputRefs.passwordField = useRef(null)
   const selectpasswordField = () => {
@@ -16,22 +16,31 @@ export default LoginScreen = ({inputRefs, setPassword}) => {
   }
 
   return (
-    <View style={styles.field}>
-      <TouchableWithoutFeedback onPress={selectpasswordField}>
-        <Image source={require('../../../assets/icons/password.png')} style={styles.icon} />
-      </TouchableWithoutFeedback>
-      <TextInput
-        style={styles.input}
-        secureTextEntry={displayPassword}
-        placeholder="Password"
-        autoComplete="off"
-        ref={inputRefs.passwordField}
-        onChangeText={(text) => setPassword(text)}
-        maxLength={15}
-      />
-      <TouchableWithoutFeedback onPress={handleDisplayPassword}>
-        <Image source={require('../../../assets/icons/handleDisplayPassword.png')} style={styles.IconPassword}/>
-      </TouchableWithoutFeedback>
+    <View>
+      <View style={styles.field}>
+        <TouchableWithoutFeedback onPress={selectpasswordField}>
+          <Image source={require('../../../assets/icons/password.png')} style={styles.icon} />
+        </TouchableWithoutFeedback>
+        <TextInput
+          style={styles.input}
+          secureTextEntry={displayPassword}
+          placeholder="Password"
+          autoComplete="off"
+          ref={inputRefs.passwordField}
+          onChangeText={(text) => setPassword(text)}
+          maxLength={15}
+        />
+        <TouchableWithoutFeedback onPress={handleDisplayPassword}>
+          <Image source={require('../../../assets/icons/handleDisplayPassword.png')} style={styles.IconPassword}/>
+        </TouchableWithoutFeedback>
+      </View>
+      {
+        passwordErrors.map((error, index) => (
+          <View key={`passwordError${index}`} style={styles.err}>
+            {error ? <Text style={styles.errTxt}>{error}</Text> : null}
+          </View>
+        ))
+      }
     </View>
   );
 
@@ -72,5 +81,16 @@ const styles = StyleSheet.create({
     zIndex: 2,
     marginLeft: -37,
     borderRadius: 50,
+  },
+  err:{
+    marginLeft: 5,
+    marginTop: -5, 
+    width: 270,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  errTxt: {
+    color: 'red',
+    fontSize: 13.5,
   },
 });

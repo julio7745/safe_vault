@@ -2,16 +2,16 @@
 
 import validateForm from './validateForm'
 
-export default login = (user, password, setcurrentPage, setId, setErros) => {
+export default login = (user, password, setcurrentPage, setId, setUserErrors, setPasswordErrors ) => {
 
-    const login = validateForm(user, password,)
+    const login = validateForm(user, password)
 
-    if( login.err !== undefined && login.err.length > 0  ){
-        setErros = login.err
-    }else{
-        //chama api que verifica login
-        console.log('ok');
-    }
+    setUserErrors(login.userErrors || [])
+    setPasswordErrors(login.passwordErrors || [])
+
+   if (!login.userErrors && !login.passwordErrors){
+    console.log('ok');
+   }
 
     return
 }

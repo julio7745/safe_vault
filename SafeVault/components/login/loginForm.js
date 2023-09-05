@@ -19,21 +19,21 @@ export default formLogin = ({ setcurrentPage, setId }) => {
   }, []);
 
   const unselectField = () => {
-    console.log(inputRefs);
     Object.values(inputRefs).forEach((inputRef) => inputRef.current.blur());
     Keyboard.dismiss();
   };
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [erros, setErros] = useState([]);
+  const [userErrors, setUserErrors] = useState([]);
+  const [passwordErrors, setPasswordErrors] = useState([]);
 
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
-      <UserField {...{inputRefs, setUser,}}/>
-      <PasswordField {...{inputRefs, setPassword,}}/>
-      <SubmitField {...{ user, password,  setcurrentPage, setId, setErros}}/>
+      <UserField {...{inputRefs, setUser, userErrors}}/>
+      <PasswordField {...{inputRefs, setPassword, passwordErrors}}/>
+      <SubmitField {...{ user, password,  setcurrentPage, setId, setUserErrors, setPasswordErrors}}/>
     </View>
   );
 

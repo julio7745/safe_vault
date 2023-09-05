@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, } from 'react';
+import { useEffect, useState, } from 'react';
 import { View, Text, StyleSheet, Keyboard , } from 'react-native';
 
 import UserField from './formFields/user'
@@ -25,13 +25,14 @@ export default formLogin = ({ setcurrentPage, setId }) => {
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [erros, setErros] = useState([]);
 
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
       <UserField {...{inputRefs, setUser,}}/>
       <PasswordField {...{inputRefs, setPassword,}}/>
-      <SubmitField {...{ user, password,  setcurrentPage, setId }}/>
+      <SubmitField {...{ user, password,  setcurrentPage, setId, setErros}}/>
     </View>
   );
 

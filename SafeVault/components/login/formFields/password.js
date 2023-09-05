@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, } from 'react';
+import { useState, useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, } from 'react-native';
 
 export default LoginScreen = ({inputRefs, setPassword}) => {
@@ -23,10 +23,11 @@ export default LoginScreen = ({inputRefs, setPassword}) => {
       <TextInput
         style={styles.input}
         secureTextEntry={displayPassword}
-        placeholder="password"
+        placeholder="Password"
         autoComplete="off"
         ref={inputRefs.passwordField}
         onChangeText={(text) => setPassword(text)}
+        maxLength={15}
       />
       <TouchableWithoutFeedback onPress={handleDisplayPassword}>
         <Image source={require('../../../assets/icons/handleDisplayPassword.png')} style={styles.IconPassword}/>
@@ -52,14 +53,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   input:{
-    width: 240,
+    width: 260,
     height: 40,
-    marginLeft: -12,
+    marginLeft: -30,
     zIndex: 1,
-    paddingLeft: 20,
+    paddingLeft: 35,
+    paddingRight: 50,
     backgroundColor: '#ffffff',
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
+    borderRadius: 50,
     fontSize: 20,
     color: '#305E69',
     display: 'flex',

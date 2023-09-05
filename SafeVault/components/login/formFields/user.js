@@ -1,5 +1,5 @@
 
-import React, { useRef, } from 'react';
+import { useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, } from 'react-native';
 
 export default UserField = ({inputRefs, setUser}) => {
@@ -16,10 +16,11 @@ export default UserField = ({inputRefs, setUser}) => {
       </TouchableWithoutFeedback>
       <TextInput
         style={styles.input}
-        placeholder="name.surname"
+        placeholder="Name.Lastname"
         autoComplete="off"
         ref={inputRefs.userField}
         onChangeText={(text) => setUser(text)}
+        maxLength={35}
       />
     </View>
   );
@@ -42,14 +43,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   input:{
-    width: 240,
+    width: 260,
     height: 40,
-    marginLeft: -12,
+    marginLeft: -30,
     zIndex: 1,
-    paddingLeft: 20,
+    paddingLeft: 35,
+    paddingRight: 15,
     backgroundColor: '#ffffff',
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
+    borderRadius: 50,
     fontSize: 20,
     color: '#305E69',
     display: 'flex',

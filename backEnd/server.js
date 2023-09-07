@@ -12,8 +12,10 @@ mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology:
 
 app.use(express.urlencoded({extended: true})); 
 
+app.use(express.json());
+
 const routes = require('./routes.js');
 
 app.use(routes) 
 
-app.on('pronto', () => { app.listen(3001, () => { console.log(`http://localhost:3001/login`); })})
+app.on('pronto', () => { app.listen(3001, '0.0.0.0', () => { console.log(`http://192.168.18.154:3001/login`); })})

@@ -8,7 +8,9 @@ export default function validateForm(user, password) {
     const passwordErrors = validatePassword(password);
 
     if( userErrors.length === 0 && passwordErrors.length === 0 ){
-        login.user = formatUser(user)
+        const formattedUser = formatUser(user).split('.')
+        login.name = formattedUser[0]
+        login.lastName = formattedUser[1]
         login.password = password
     }else{
         login.userErrors =  [...userErrors,]

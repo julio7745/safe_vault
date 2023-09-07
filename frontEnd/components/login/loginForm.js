@@ -6,7 +6,7 @@ import UserField from './formFields/user'
 import PasswordField from './formFields/password'
 import SubmitField from './formFields/submit'
 
-export default formLogin = ({ setcurrentPage, setId }) => {
+export default formLogin = ({ setCurrentPage, setUser, }) => {
 
   let inputRefs = {}
 
@@ -23,17 +23,17 @@ export default formLogin = ({ setcurrentPage, setId }) => {
     Keyboard.dismiss();
   };
 
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
+  const [userValue, setUserValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
   const [userErrors, setUserErrors] = useState([]);
   const [passwordErrors, setPasswordErrors] = useState([]);
 
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
-      <UserField {...{inputRefs, setUser, userErrors}}/>
-      <PasswordField {...{inputRefs, setPassword, passwordErrors}}/>
-      <SubmitField {...{ user, password,  setcurrentPage, setId, setUserErrors, setPasswordErrors}}/>
+      <UserField {...{inputRefs, setUserValue, userErrors}}/>
+      <PasswordField {...{inputRefs, setPasswordValue, passwordErrors}}/>
+      <SubmitField {...{ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser,  }}/>
     </View>
   );
 

@@ -6,16 +6,16 @@ import HomeScreen from './screens/HomeScreen';
 
 const App = () => {
 
-  const [currentPage, setcurrentPage] = useState('login');
-  const [id, setId] = useState(0);
+  const [currentPage, setCurrentPage] = useState('login');
+  const [user, setUser] = useState({});
 
   switch (currentPage) {
     case 'login':
-      return <LoginScreen {...{setcurrentPage, setId}}/>;
+      return <LoginScreen {...{setCurrentPage, setUser, }}/>;
     case 'home':
-      return <HomeScreen {...{setcurrentPage, }}/>;
+      return <HomeScreen {...{setCurrentPage, user, }}/>;
     default:
-      return <LoginScreen {...{setcurrentPage, setId}}/>;
+      return <LoginScreen {...{setCurrentPage, setUser, }}/>;
   }
   
 };

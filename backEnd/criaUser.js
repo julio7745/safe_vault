@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv').config()
 
 // Configuração da conexão com o MongoDB
-mongoose.connect('mongodb+srv://JulioCarvalho:O9ujtj132A8iyfNk@safevault.ownalts.mongodb.net/SafeVault', {
+mongoose.connect(process.env.MONGO, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -21,7 +22,7 @@ const User = mongoose.model('User', userSchema);
 
 // Dados do usuário
 const userData = {
-  id: 0,
+  id: 1,
   name: 'julio',
   lastName: 'carvalho',
   password: '123456Aa', // Senha em texto plano

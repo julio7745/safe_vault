@@ -6,27 +6,25 @@ const User = require('../models/user');
 
 const login = async (req, res) => {
 
-  console.log('recebido')
-
   try{
 
     const { name, lastName, password } = req.body;  
     const user = await User.findOne({ name, lastName });
 
     if (!user) {
-      return res.status(401).json({ error: 'Usuário não encontrado.' });
+      const token = jwt.sign({ userErrors: ['User does not exist!'] }, 'secretpassword');
+      return res.json({ token });;
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return res.status(401).json({ error: 'Senha incorreta.' });
+      const token = jwt.sign({ passwordErrors: ['incorrect password!'] }, 'secretpassword');
+      return res.json({ token });
     }
     
     const token = jwt.sign({ id: user.id, name: user.name, lastName: user.lastName }, 'secretpassword');
     res.json({ token });
-
-    console.log('enviado')
 
   } catch (error) {
     console.error(error);

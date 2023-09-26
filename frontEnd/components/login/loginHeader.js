@@ -5,9 +5,11 @@ export default HeaderLogin = () => {
 
   return (
     <View style={styles.header}>
-        <Image source={{ uri: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRYpvpf_QxhPhSRQnwHPIoX__UnoVlsvBhZsH6vghi0O7mTsHhLrcTVvzrz55FW4pNlVI-iio_CSvtLSdc2Qlhyjb4MV4kjrGu70u1Yf97QyvYGIkW8O6GC&usqp=CAc' }} style={styles.logo} />
-          <Text style={styles.title}>Safe Vault</Text>
-          <Text style={styles.text}>Welcome back!</Text>
+      <View style={styles.logoContainer}>      
+        <Image source={require('../../assets/imgs/logoClara1.png')} style={styles.logo} />
+      </View>
+      <Text style={styles.title}>Safe Vault</Text>
+      <Text style={styles.text}>Welcome back!</Text>
     </View>
   );
   
@@ -16,10 +18,21 @@ export default HeaderLogin = () => {
 const styles = StyleSheet.create({
   header:{
     marginBottom: 25,
+    alignItems:'center'
+  },
+  logoContainer:{
+    width: 110,
+    height: 110,
+    display: 'flex',
+    justifyContent: 'center',
+    borderColor: '#ffffff',
+    borderWidth: 6,
+    borderRadius: 65,
+    paddingTop: 5,
   },
   logo: {
-    width: 170,
-    height: 170,
+    width: 85,
+    height: 85,
     resizeMode: 'contain',
     alignSelf: 'center',
   },

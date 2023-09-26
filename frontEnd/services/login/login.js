@@ -1,36 +1,49 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import validateForm from './validateForm'
+import validateForm from './validateForm';
 
 export default login = async ({ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser, }) => {
+  
+  const login = validateForm(userValue, passwordValue);
 
-  const login = validateForm(userValue, passwordValue)
+  setUserErrors(login.userErrors || []);
+  setPasswordErrors(login.passwordErrors || []);
 
-  setUserErrors(login.userErrors || [])
-  setPasswordErrors(login.passwordErrors || [])
+  if (!login.userErrors && !login.passwordErrors) {
 
-  if (!login.userErrors && !login.passwordErrors){
+    try {
 
-    await axios.post( 'http://192.168.18.154:3001/login', login )
-    .then(response => {
-      
-      const login = jwtDecode(response.data.token);
+      const response = await axios.post('http://192.168.18.154:3001/login', login);
+      const loginData = jwtDecode(response.data.token);
 
-      if (!login.userErrors && !login.passwordErrors){
+      if (!loginData.userErrors && !loginData.passwordErrors) {
+        
+        await AsyncStorage.setItem('user', JSON.stringify({
+          name: loginData.name,
+          lastName: loginData.lastName,
+          id: loginData.id,
+        }));
+
+        setUser({
+          name: loginData.name,
+          lastName: loginData.lastName,
+          id: loginData.id,
+        });
+        
         setCurrentPage('home');
-        setUser({name: login.name, lastName:login.lastName, id:login.id});
-      }else{
-        setUserErrors(login.userErrors || [])
-        setPasswordErrors(login.passwordErrors || [])
-      }
-      
-    })
-    .catch(error => {
-      console.error('Erro na requisição:', error);
-    });
 
+      } else {
+
+        setUserErrors(loginData.userErrors || []);
+        setPasswordErrors(loginData.passwordErrors || []);
+
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+    }
   }
 
-  return
-}
+  return;
+};

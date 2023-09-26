@@ -5,8 +5,11 @@ exports.load = async ({setCurrentPage, setUser, }) => {
 
     try {
         
-        const user = await AsyncStorage.getItem('user');
+        let user = await AsyncStorage.getItem('user');
+        user = JSON.parse(user);
+        
         if (user){
+            console.log(user);
             setUser(user);
             setCurrentPage('home');
         }

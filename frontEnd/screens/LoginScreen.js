@@ -10,7 +10,7 @@ export default LoginScreen = ({ setCurrentPage, setUser, }) => {
 
   useEffect(() => {
     
-    StorageUser.load(setCurrentPage);
+    StorageUser.load({ setCurrentPage, setUser, });
 
   }, []);
 

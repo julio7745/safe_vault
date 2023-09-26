@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     
-    StorageUser.load(setCurrentPage);
+    StorageUser.load({setCurrentPage, setUser, });
 
   }, []);
 

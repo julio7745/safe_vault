@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import validateForm from './validateForm';
+import StorageUser from './StorageUser';
 
 export default login = async ({ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser, }) => {
   
@@ -20,11 +21,11 @@ export default login = async ({ userValue, passwordValue, setUserErrors, setPass
 
       if (!loginData.userErrors && !loginData.passwordErrors) {
         
-        await AsyncStorage.setItem('user', JSON.stringify({
+        StorageUser.upload(...{
           name: loginData.name,
           lastName: loginData.lastName,
           id: loginData.id,
-        }));
+        });
 
         setUser({
           name: loginData.name,

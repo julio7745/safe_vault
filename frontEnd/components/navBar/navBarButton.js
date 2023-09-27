@@ -6,10 +6,7 @@ export default NavBarButton = ({setCurrentPage, icon, page}) => {
 
   return (
     <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={async()=>{
-          setCurrentPage(page);
-          //await AsyncStorage.removeItem('user')
-          }}>
+        <TouchableWithoutFeedback onPress={ ()=> setCurrentPage(page) }>
             <Image source={icon} style={styles.btnIcon}/>
         </TouchableWithoutFeedback>
     </View>

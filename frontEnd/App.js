@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1b353b',
     overflow: 'hidden',
-    paddingTop: 30,
+    paddingTop: 35,
   }
 });
 

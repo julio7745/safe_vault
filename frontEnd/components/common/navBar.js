@@ -2,17 +2,20 @@
 import { View, StyleSheet, Image, } from 'react-native';
 
 import NavBarButton from '../navBar/navBarButton'
+import MenuIco from '../navBar/menuIco'
 
 // Buttons
 // Home
 import HomeIco from '../../assets/icons/navBar/vault.png'
 import OpeningsIco from '../../assets/icons/navBar/list.png'
 import UserIco from '../../assets/icons/navBar/perfil.png'
-import OptionsIco from '../../assets/icons/navBar/options.png'
+import OpenOptionsIco from '../../assets/icons/navBar/options.png'
+import CloseOptionsIco from '../../assets/icons/navBar/close.png'
 
 const valueToHome = '23.2%'
 const valueToOpenings = '50%'
 const valueToUser = '77.5%'
+const valueToOther = '10000%'
 
 export default NavBar = ({setCurrentPage, currentPage}) => {
 
@@ -20,7 +23,10 @@ export default NavBar = ({setCurrentPage, currentPage}) => {
   currentPage === 'home' ? valueToHome :
   currentPage === 'openings' ? valueToOpenings :
   currentPage === 'user' ? valueToUser :
-  valueToHome;
+  valueToOther;
+
+  const OptionsIco = 
+  currentPage === 'options' ? CloseOptionsIco : OpenOptionsIco;
 
   return (
     <View style={styles.container}>
@@ -34,7 +40,7 @@ export default NavBar = ({setCurrentPage, currentPage}) => {
         />
       </View>
       <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.verticalLine}/>
-      <NavBarButton {...{setCurrentPage, icon: OptionsIco, page: 'home', }}/>
+      <MenuIco {...{setCurrentPage, icon: OptionsIco, currentPage }}/>
     </View>
   );
 };
@@ -70,5 +76,5 @@ const styles = StyleSheet.create({
   verticalLine: {
     height: 80,
     width: 15,
-  },
+  }
 });

@@ -33,7 +33,7 @@ const App = () => {
     default:
       return (
         <View style={styles.container}>
-          <HomeScreen {...{user, currentPage}}/>
+          <HomeScreen {...{user, setCurrentPage, currentPage}}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
         </View>
       );;

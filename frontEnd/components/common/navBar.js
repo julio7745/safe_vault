@@ -20,7 +20,7 @@ export default NavBar = ({setCurrentPage, currentPage}) => {
       <View style={styles.containerBtns}>
         <NavBarButton {...{setCurrentPage, icon: HomeIco, page: 'home', }}/>
         <NavBarButton {...{setCurrentPage, icon: OpeningsIco, page: 'home', }}/>
-        <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'home', }}/>
+        <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'login', }}/>
       </View>
       <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.horizontalLine}/>
       <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.verticalLine}/>

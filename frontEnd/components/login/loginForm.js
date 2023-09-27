@@ -28,11 +28,14 @@ export default formLogin = ({ setCurrentPage, setUser, }) => {
   const [userErrors, setUserErrors] = useState([]);
   const [passwordErrors, setPasswordErrors] = useState([]);
 
+  exports.setUserErrors = setUserErrors
+  exports.setPasswordErrors = setPasswordErrors
+
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
-      <UserField {...{inputRefs, setUserValue, userErrors}}/>
-      <PasswordField {...{inputRefs, setPasswordValue, passwordErrors}}/>
+      <UserField {...{inputRefs, setUserValue, userErrors, }}/>
+      <PasswordField {...{inputRefs, setPasswordValue, passwordErrors, }}/>
       <SubmitField {...{ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser,  }}/>
     </View>
   );

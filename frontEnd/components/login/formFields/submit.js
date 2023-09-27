@@ -7,7 +7,7 @@ export default formLogin = ({ userValue, passwordValue, setUserErrors, setPasswo
   
   return (
     <View style={styles.campBtnLogin}>
-        <TouchableWithoutFeedback onPress={() => login({ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser, })}>
+        <TouchableWithoutFeedback onPress={() => login({ userValue:'julio.carvalho', passwordValue:'123456Aa', setUserErrors, setPasswordErrors, setCurrentPage, setUser, })}>
           <Image source={require('../../../assets/icons/login.png')} style={styles.btnLogin}/>
         </TouchableWithoutFeedback>
     </View>

@@ -7,7 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 
 import NavBar from './components/common/navBar'
 
-//import StorageUser from './services/login/storageUser.js';
+import loadUser from './services/login/loadUser';
 
 const App = () => {
 
@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     
-    //StorageUser.load({setCurrentPage, setUser, });
+    loadUser({setCurrentPage, setUser, });
 
   }, []);
 
@@ -26,7 +26,7 @@ const App = () => {
     case 'home':
       return (
         <View style={styles.container}>
-          <HomeScreen/>
+          <HomeScreen {...{user}}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
         </View>
       );

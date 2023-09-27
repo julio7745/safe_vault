@@ -1,12 +1,15 @@
 
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
 export default NavBarButton = ({setCurrentPage, icon, page}) => {
 
   return (
     <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={()=>setCurrentPage(page)}>
+        <TouchableWithoutFeedback onPress={async()=>{
+          setCurrentPage(page);
+          //await AsyncStorage.removeItem('user')
+          }}>
             <Image source={icon} style={styles.btnIcon}/>
         </TouchableWithoutFeedback>
     </View>

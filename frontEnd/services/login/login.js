@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
 import validateForm from './validateForm';
-import storageUser from './storageUser';
+import uploadUser from './uploadUser';
 
 export default login = async ({ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser, }) => {
   
@@ -20,10 +20,11 @@ export default login = async ({ userValue, passwordValue, setUserErrors, setPass
 
       if (!loginData.userErrors && !loginData.passwordErrors) {
         
-        storageUser.upload(...{
+        uploadUser({
           name: loginData.name,
           lastName: loginData.lastName,
           id: loginData.id,
+          password: passwordValue,
         });
 
         setUser({

@@ -9,7 +9,6 @@ const login = async (req, res) => {
   try{
 
     const { name, lastName, password } = req.body;
-    console.log(name. lastName);
     const user = await User.findOne({ name, lastName });
 
     if (!user) {

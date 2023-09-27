@@ -1,10 +1,13 @@
 
 import { useState, useEffect } from 'react';
+import { View, StyleSheet, } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 
-import StorageUser from './services/login/StorageUser.js';
+import NavBar from './components/common/navBar'
+
+//import StorageUser from './services/login/storageUser.js';
 
 const App = () => {
 
@@ -13,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     
-    StorageUser.load({setCurrentPage, setUser, });
+    //StorageUser.load({setCurrentPage, setUser, });
 
   }, []);
 
@@ -21,11 +24,29 @@ const App = () => {
     case 'login':
       return <LoginScreen {...{setCurrentPage, setUser, }}/>;
     case 'home':
-      return <HomeScreen {...{setCurrentPage, user, }}/>;
+      return (
+        <View style={styles.container}>
+          <HomeScreen/>
+          <NavBar  {...{setCurrentPage, currentPage}}/>
+        </View>
+      );
     default:
       return <LoginScreen {...{setCurrentPage, setUser, }}/>;
   }
   
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%',
+    display: "flex",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1b353b',
+    overflow: 'hidden',
+    paddingTop: 30,
+  }
+});
 
 export default App;

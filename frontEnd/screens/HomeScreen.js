@@ -1,18 +1,23 @@
 
-import { View, Text, TouchableWithoutFeedback, } from 'react-native';
+import { View, StyleSheet, } from 'react-native';
 
 export default HomeScreen = ({ setCurrentPage, user, }) => {
 
   return (
-    <View>
-      <Text>{user.name}</Text>
-      <Text>{user.lastName}</Text>
-      <Text>{user.id}</Text>
-      <TouchableWithoutFeedback onPress={() => setCurrentPage('login')}>
-        <Text>
-          voltar
-        </Text>
-      </TouchableWithoutFeedback>
-    </View>
+    <View style={styles.content}>
+      
+    </View>  
   );
 };
+
+const styles = StyleSheet.create({
+  content: {
+    height: '90%',
+    width: '100%',
+    display: "flex",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    overflow: 'hidden',
+  },
+});

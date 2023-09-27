@@ -8,6 +8,7 @@ exports.upload = async ({ name,  lastName, id, }) =>{
         await AsyncStorage.setItem('user', JSON.stringify({
             name,  lastName, id,
         }));
+        console.log('logou e guardou');
         
     } catch (error) {
         console.error('Erro:', error);
@@ -25,9 +26,9 @@ exports.load = async ({setCurrentPage, setUser, }) => {
         user = JSON.parse(user);
 
         if (user){
+            
             console.log(user);
-            setUser(user);
-            setCurrentPage('home');
+            
         }
         
     } catch (error) {

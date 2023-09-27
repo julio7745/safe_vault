@@ -10,13 +10,17 @@ import OpeningsIco from '../../assets/icons/navBar/list.png'
 import UserIco from '../../assets/icons/navBar/perfil.png'
 import OptionsIco from '../../assets/icons/navBar/options.png'
 
+const valueToHome = '23.2%'
+const valueToOpenings = '50%'
+const valueToUser = '77.5%'
+
 export default NavBar = ({setCurrentPage, currentPage}) => {
 
   const leftOfhorizontalLine = 
-  currentPage === 'home' ? '23.2%' :
-  currentPage === 'openings' ? '50%' :
-  currentPage === 'user' ? '77.5%':
-  '22.5%';
+  currentPage === 'home' ? valueToHome :
+  currentPage === 'openings' ? valueToOpenings :
+  currentPage === 'user' ? valueToUser :
+  valueToHome;
 
   return (
     <View style={styles.container}>

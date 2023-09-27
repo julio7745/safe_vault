@@ -15,8 +15,6 @@ export default async ({setCurrentPage, setUser, }) => {
             await AsyncStorage.removeItem('user')
             user = JSON.parse(user);
             
-            console.log(user);
-            
             login({ userValue: `${user.name||''}.${user.lastName||''}`,
                     passwordValue: user.password||'', 
                     setCurrentPage, 

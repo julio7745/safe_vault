@@ -26,12 +26,17 @@ const App = () => {
     case 'home':
       return (
         <View style={styles.container}>
-          <HomeScreen {...{user}}/>
+          <HomeScreen {...{user, currentPage}}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
         </View>
       );
     default:
-      return <LoginScreen {...{setCurrentPage, setUser, }}/>;
+      return (
+        <View style={styles.container}>
+          <HomeScreen {...{user, currentPage}}/>
+          <NavBar  {...{setCurrentPage, currentPage}}/>
+        </View>
+      );;
   }
   
 };

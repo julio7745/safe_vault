@@ -1,13 +1,14 @@
 
 import { View, StyleSheet, Text, } from 'react-native';
 
-export default HomeScreen = ({ setCurrentPage, user, }) => {
+export default HomeScreen = ({ setCurrentPage, user, currentPage }) => {
 
   return (
     <View style={styles.content}>
       <Text>{user.name}</Text>
       <Text>{user.lastName}</Text>
       <Text>{user.id}</Text>
+      <Text>{currentPage}</Text>
     </View>  
   );
 };

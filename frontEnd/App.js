@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -19,6 +19,9 @@ const App = () => {
     loadUser({setCurrentPage, setUser, });
 
   }, []);
+
+  StatusBar.setBarStyle('light-content');
+  StatusBar.setBackgroundColor('#1b353b');
 
   switch (currentPage) {
     case 'login':
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1b353b',
     overflow: 'hidden',
-    paddingTop: 35,
+    paddingTop: 30,
   }
 });
 

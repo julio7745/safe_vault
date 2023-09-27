@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     width: 70,
     transform: [{ rotate: '90deg'}, { translateY: 36}],
     position: 'absolute',
-    top: 25,
+    top: 20,
     
   },
   verticalLine: {

@@ -13,7 +13,7 @@ const login = async (req, res) => {
 
     if (!user) {
       const token = jwt.sign({ userErrors: ['User does not exist!'] }, 'secretpassword');
-      return res.json({ token });;
+      return res.json({ token });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);

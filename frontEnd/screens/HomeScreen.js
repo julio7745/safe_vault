@@ -6,10 +6,10 @@ export default HomeScreen = ({ setCurrentPage, user, currentPage }) => {
 
   return (
     <View style={styles.content}>
-      <Text>{user.name}</Text>
-      <Text>{user.lastName}</Text>
-      <Text>{user.id}</Text>
-      <Text>{currentPage}</Text>
+      <Text>NOME: {user.name}</Text>
+      <Text>SOBRENOME: {user.lastName}</Text>
+      <Text>ID: {user.id}</Text>
+      <Text>PAGINA ATUAL: {currentPage}</Text>
       <TouchableWithoutFeedback 
         onPress={ ()=> {
           AsyncStorage.removeItem('user');

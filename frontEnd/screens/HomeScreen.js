@@ -1,23 +1,14 @@
 
-import { View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, StyleSheet, Text, } from 'react-native';
 
-export default HomeScreen = ({ setCurrentPage, user, currentPage }) => {
+export default HomeScreen = ({user, }) => {
 
   return (
     <View style={styles.content}>
       <Text>NOME: {user.name}</Text>
       <Text>SOBRENOME: {user.lastName}</Text>
       <Text>ID: {user.id}</Text>
-      <Text>PAGINA ATUAL: {currentPage}</Text>
-      <TouchableWithoutFeedback 
-        onPress={ ()=> {
-          AsyncStorage.removeItem('user');
-          setCurrentPage('login');
-        }}
-      >
-        <Text>LOGOUT</Text>
-      </TouchableWithoutFeedback>
+      <Text>PAGINA ATUAL: home</Text>
     </View>  
   );
 };

@@ -1,14 +1,20 @@
 
+// Packages
 import { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 
+// Screens
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoadingScreen from './screens/LoadingScreen';
+import OpeningsScreen from './screens/OpeningsScreen';
 
+// Components
 import NavBar from './components/common/navBar'
 
+// Services
 import loadUser from './services/login/loadUser';
+
 
 const App = () => {
 
@@ -26,25 +32,37 @@ const App = () => {
   StatusBar.setBackgroundColor('#1b353b');
 
   switch (currentPage) {
+
     case 'login':
       return (
         <View>
           <LoginScreen {...{setCurrentPage, setUser, }}/>
-          {loading && <LoadingScreen />}
+          { loading && <LoadingScreen/> }
         </View>
-      );   
+      );
+
     case 'home':
       return (
         <View style={styles.container}>
-          <HomeScreen {...{user, setCurrentPage, currentPage}}/>
+          <HomeScreen {...{user, }}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
-          {loading && <LoadingScreen />}
+          { loading && <LoadingScreen/> }
         </View>
       );
+
+    case 'openings':
+    return (
+      <View style={styles.container}>
+        <OpeningsScreen {...{user, }}/>
+        <NavBar  {...{setCurrentPage, currentPage}}/>
+        { loading && <LoadingScreen/> }
+      </View>
+    );
+
     default:
       return (
         <View style={styles.container}>
-          <HomeScreen {...{user, setCurrentPage, currentPage}}/>
+          <HomeScreen {...{user, }}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
           {loading && <LoadingScreen />}
         </View>

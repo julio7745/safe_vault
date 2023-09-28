@@ -1,11 +1,20 @@
+
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
 import validateForm from './validateForm';
 import uploadUser from './uploadUser';
 
-export default login = async ({ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser, }) => {
+export default login = async ({ userValue,
+  passwordValue,
+  setUserErrors,
+  setPasswordErrors,
+  setCurrentPage,
+  setUser,
+  setloading }) => {
   
+  setloading(true);
+
   const login = validateForm(userValue, passwordValue);
 
   setUserErrors(login.userErrors || []);
@@ -33,7 +42,7 @@ export default login = async ({ userValue, passwordValue, setUserErrors, setPass
           id: loginData.id,
         });
         
-        setCurrentPage('home');
+        setCurrentPage('openings');
 
       } else {
 
@@ -44,7 +53,10 @@ export default login = async ({ userValue, passwordValue, setUserErrors, setPass
     } catch (error) {
       console.error('Erro:', error);
     }
-  }
 
+  }
+  
+  setloading(false);
+  
   return;
 };

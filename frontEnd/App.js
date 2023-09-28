@@ -36,7 +36,7 @@ const App = () => {
     case 'login':
       return (
         <View>
-          <LoginScreen {...{setCurrentPage, setUser, }}/>
+          <LoginScreen {...{setCurrentPage, setUser, setloading, }}/>
           { loading && <LoadingScreen/> }
         </View>
       );
@@ -53,8 +53,8 @@ const App = () => {
     case 'openings':
     return (
       <View style={styles.container}>
-        <OpeningsScreen {...{user, }}/>
-        <NavBar  {...{setCurrentPage, currentPage}}/>
+        <OpeningsScreen {...{user, setloading, setCurrentPage}}/>
+        <NavBar  {...{setCurrentPage, currentPage, setloading}}/>
         { loading && <LoadingScreen/> }
       </View>
     );

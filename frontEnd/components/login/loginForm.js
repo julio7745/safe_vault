@@ -6,7 +6,7 @@ import UserField from './formFields/user'
 import PasswordField from './formFields/password'
 import SubmitField from './formFields/submit'
 
-export default formLogin = ({ setCurrentPage, setUser, }) => {
+export default formLogin = ({ setCurrentPage, setUser, setloading}) => {
 
   let inputRefs = {}
 
@@ -38,7 +38,17 @@ export default formLogin = ({ setCurrentPage, setUser, }) => {
       <Text style={styles.titleForm}>Login</Text>
       <UserField {...{inputRefs, userValue, setUserValue, userErrors, }}/>
       <PasswordField {...{inputRefs, passwordValue, setPasswordValue, passwordErrors,  }}/>
-      <SubmitField {...{ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser,  }}/>
+      <SubmitField 
+        {...{ 
+          userValue,
+          passwordValue,
+          setUserErrors,
+          setPasswordErrors,
+          setCurrentPage,
+          setUser,
+          setloading,
+          inputRefs,
+        }}/>
     </View>
   );
 

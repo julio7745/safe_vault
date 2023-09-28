@@ -21,15 +21,13 @@ export default async ({setCurrentPage, setUser, setloading, }) => {
             setPasswordValue(user.password||'')
             
             await login({ userValue: `${user.name||''}.${user.lastName||''}`,
-                    passwordValue: user.password||'', 
-                    setCurrentPage, 
-                    setUser,
-                    setUserErrors,
-                    setPasswordErrors, 
+                passwordValue: user.password||'', 
+                setCurrentPage, 
+                setUser,
+                setUserErrors,
+                setPasswordErrors, 
+                setloading,
             })
-
-            setloading(false);
-            
         }
         
     } catch (error) {

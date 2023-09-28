@@ -28,7 +28,7 @@ const login = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao fazer login.' });
+    res.status(500).json({ error: 'Error! Please contact the developer.'});
   }
 }
 

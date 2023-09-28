@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    backgroundColor: '#1b353b',
+    backgroundColor: 'rgba(27, 53, 59, 0.541)',
     overflow: 'hidden',
     display: "flex",
     justifyContent: 'center',

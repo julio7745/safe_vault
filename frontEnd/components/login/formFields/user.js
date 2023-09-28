@@ -2,7 +2,7 @@
 import { useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, Text, } from 'react-native';
 
-export default UserField = ({ inputRefs, setUserValue, userErrors, }) => {
+export default UserField = ({ inputRefs, userValue, setUserValue, userErrors, }) => {
 
   inputRefs.userField = useRef(null)
   const selectUserField = () => {
@@ -22,6 +22,7 @@ export default UserField = ({ inputRefs, setUserValue, userErrors, }) => {
           ref={inputRefs.userField}
           onChangeText={(text) => setUserValue(text)}
           maxLength={35}
+          value={userValue}
         />
       </View>
       {

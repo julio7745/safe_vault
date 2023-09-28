@@ -2,7 +2,7 @@
 import { useState, useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, Text,} from 'react-native';
 
-export default LoginScreen = ({inputRefs, setPasswordValue, passwordErrors}) => {
+export default LoginScreen = ({inputRefs, setPasswordValue, passwordValue, passwordErrors}) => {
   
   inputRefs.passwordField = useRef(null)
   const selectpasswordField = () => {
@@ -27,6 +27,7 @@ export default LoginScreen = ({inputRefs, setPasswordValue, passwordErrors}) => 
           placeholder="Password"
           autoComplete="off"
           ref={inputRefs.passwordField}
+          value={passwordValue}
           onChangeText={(text) => setPasswordValue(text)}
           maxLength={15}
         />

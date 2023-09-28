@@ -4,6 +4,7 @@ import { View, StyleSheet, StatusBar } from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
+import LoadingScreen from './screens/LoadingScreen';
 
 import NavBar from './components/common/navBar'
 
@@ -13,10 +14,11 @@ const App = () => {
 
   const [currentPage, setCurrentPage] = useState('login');
   const [user, setUser] = useState({});
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     
-    loadUser({setCurrentPage, setUser, });
+    loadUser({setCurrentPage, setUser, setloading});
 
   }, []);
 
@@ -25,12 +27,18 @@ const App = () => {
 
   switch (currentPage) {
     case 'login':
-      return <LoginScreen {...{setCurrentPage, setUser, }}/>;
+      return (
+        <View>
+          <LoginScreen {...{setCurrentPage, setUser, }}/>
+          {loading && <LoadingScreen />}
+        </View>
+      );   
     case 'home':
       return (
         <View style={styles.container}>
           <HomeScreen {...{user, setCurrentPage, currentPage}}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
+          {loading && <LoadingScreen />}
         </View>
       );
     default:
@@ -38,8 +46,9 @@ const App = () => {
         <View style={styles.container}>
           <HomeScreen {...{user, setCurrentPage, currentPage}}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
+          {loading && <LoadingScreen />}
         </View>
-      );;
+      );
   }
   
 };
@@ -53,7 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1b353b',
     overflow: 'hidden',
-    paddingTop: 30,
   }
 });
 

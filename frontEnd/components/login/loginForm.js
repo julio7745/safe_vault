@@ -30,12 +30,14 @@ export default formLogin = ({ setCurrentPage, setUser, }) => {
 
   exports.setUserErrors = setUserErrors
   exports.setPasswordErrors = setPasswordErrors
+  exports.setUserValue = setUserValue
+  exports.setPasswordValue = setPasswordValue 
 
   return (
     <View style={styles.loginForm}>
       <Text style={styles.titleForm}>Login</Text>
-      <UserField {...{inputRefs, setUserValue, userErrors, }}/>
-      <PasswordField {...{inputRefs, setPasswordValue, passwordErrors, }}/>
+      <UserField {...{inputRefs, userValue, setUserValue, userErrors, }}/>
+      <PasswordField {...{inputRefs, passwordValue, setPasswordValue, passwordErrors,  }}/>
       <SubmitField {...{ userValue, passwordValue, setUserErrors, setPasswordErrors, setCurrentPage, setUser,  }}/>
     </View>
   );

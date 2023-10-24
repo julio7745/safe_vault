@@ -1,12 +1,12 @@
 
 import { View, StyleSheet, Text, } from 'react-native';
 
-import ClearOpening from './ClearOpening.js'
+import DeleteOpening from './DeleteOpening.js'
 
-export default ({opening, index, user, setCurrentPage, setloading}) => {
+export default ({opening, setDeletion, }) => {
 
   return (
-    <View style={styles.opening} key={index}>
+    <View style={styles.opening}>
         <View style={styles.openingTextContainer}>
           <Text>
             <Text style={styles.strong}>User: </Text>
@@ -18,7 +18,7 @@ export default ({opening, index, user, setCurrentPage, setloading}) => {
             {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
             , {opening.year} at {opening.hour}:{opening.minute}</Text>
         </View>
-        <ClearOpening {...{user, setCurrentPage, setloading}}/>
+        <DeleteOpening {...{ opening, setDeletion, }}/>
     </View>
   );
 };

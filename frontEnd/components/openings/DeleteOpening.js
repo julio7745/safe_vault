@@ -1,16 +1,15 @@
 
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
-export default ({user, setCurrentPage, setloading}) => {
+export default ({ opening, setDeletion,  }) => {
   
   return (
-    <TouchableWithoutFeedback onPress={() => console.log('oi')}>
+    <TouchableWithoutFeedback onPress={() => setDeletion(opening._id) }>
         <View style={styles.campBtnClear}>
             <Image source={require('../../assets/icons/openings/clear.png')} style={styles.btnLogin}/>
         </View>
     </TouchableWithoutFeedback>
   );
-  
 };
 
 const styles = StyleSheet.create({

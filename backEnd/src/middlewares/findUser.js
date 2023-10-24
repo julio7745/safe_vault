@@ -8,7 +8,7 @@ const findUser = async (req, res, next) => {
   try{
 
     const { name, lastName, id } = req.body;
-
+    
     const user = await User.findOne({ name, lastName, _id: id });
 
     if (!user) {

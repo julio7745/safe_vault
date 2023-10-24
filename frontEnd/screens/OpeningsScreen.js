@@ -4,12 +4,14 @@ import { FlatList, StyleSheet, View, } from 'react-native';
 
 import getOpenings from '../services/openings/getOpenings.js'
 
-import ClearOpenings from '../components/openings/clearOpenings.js'
+import ClearOpenings from '../components/openings/ClearOpenings.js'
 import Opening from '../components/openings/Opening.js'
+import ConfirmDeletion from '../components/openings/ConfirmDeletion.js'
 
 export default ({user, setloading, setCurrentPage, }) => {
 
   const [openings, setOpenings] = useState([]);
+  const [deletion, setDeletion] = useState('');
 
   useEffect( () => {
     
@@ -29,11 +31,12 @@ export default ({user, setloading, setCurrentPage, }) => {
           if (item.empty) {
             return <View style={styles.paddingItem} />;
           } else {
-            return <Opening {...{ opening: item, index, user, setCurrentPage, setloading }} />;
+            return <Opening {...{ opening: item, setDeletion, index }} />;
           }
         }}
       />
       <ClearOpenings {...{user, setCurrentPage, setloading}}/>
+      { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }
     </View>
   );
 };

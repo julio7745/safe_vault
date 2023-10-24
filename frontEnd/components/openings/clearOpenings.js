@@ -6,7 +6,7 @@ import clearOpenings from '../../services/openings/clearOpenings.js';
 export default ({user, setCurrentPage, setloading}) => {
   
   return (
-    <TouchableWithoutFeedback onPress={() => clearOpenings({user, setCurrentPage, setloading})}>
+      <TouchableWithoutFeedback onPress={() => clearOpenings({user, setCurrentPage, setloading})}>
         <View style={styles.campBtnClear}>
             <Image source={require('../../assets/icons/openings/clear.png')} style={styles.btnLogin}/>
         </View>

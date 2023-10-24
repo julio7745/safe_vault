@@ -42,7 +42,7 @@ export default login = async ({ userValue,
           id: loginData.id,
         });
         
-        setCurrentPage('home');
+        setCurrentPage('openings');
 
       } else {
 

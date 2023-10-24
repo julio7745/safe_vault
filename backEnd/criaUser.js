@@ -12,7 +12,6 @@ const Schema = mongoose.Schema;
 
 // Definição do modelo de usuário
 const userSchema = new Schema({
-  id: { type: Number, required: true, unique: true },
   name: { type: String, required: true },
   lastName: { type: String, required: true },
   password: { type: String, required: true },
@@ -22,7 +21,6 @@ const User = mongoose.model('User', userSchema);
 
 // Dados do usuário
 const userData = {
-  id: 1,
   name: 'julio',
   lastName: 'carvalho',
   password: '123456Aa',
@@ -36,7 +34,6 @@ const createUser = async () => {
 
     // Criação do usuário com a senha hashada
     const newUser = new User({
-      id: userData.id,
       name: userData.name,
       lastName: userData.lastName,
       password: hashedPassword,

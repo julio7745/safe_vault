@@ -1,12 +1,10 @@
 
-import { View, StyleSheet, Image, Text, TouchableWithoutFeedback, } from 'react-native';
-
-import clearOpenings from '../../services/openings/clearOpenings.js';
+import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
 export default ({user, setCurrentPage, setloading}) => {
   
   return (
-    <TouchableWithoutFeedback onPress={() => clearOpenings({user, setCurrentPage, setloading})}>
+    <TouchableWithoutFeedback onPress={() => console.log('oi')}>
         <View style={styles.campBtnClear}>
             <Image source={require('../../assets/icons/openings/clear.png')} style={styles.btnLogin}/>
         </View>
@@ -17,19 +15,18 @@ export default ({user, setCurrentPage, setloading}) => {
 
 const styles = StyleSheet.create({
   campBtnClear:{
-    position: 'absolute',
-    bottom: 20,
-    height: 80,
-    width: 80,
-    display: 'flex',
+    height: 50,
+    width: 50,
     alignItems: 'center', 
     justifyContent: 'center',
     backgroundColor: '#ffac46',
     borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#ffffff',
   },
   btnLogin:{
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     resizeMode: 'contain',
     borderRadius: 100,
   }

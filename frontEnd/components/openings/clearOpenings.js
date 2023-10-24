@@ -18,7 +18,7 @@ export default ({user, setCurrentPage, setloading}) => {
 const styles = StyleSheet.create({
   campBtnClear:{
     position: 'absolute',
-    bottom: 20,
+    bottom: 10,
     height: 80,
     width: 80,
     display: 'flex',

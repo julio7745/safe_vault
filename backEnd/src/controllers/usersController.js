@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 
 const User = require('../models/user');
 
-const login = async (req, res) => {
+
+module.exports.login = async (req, res) => {
 
   try{
 
@@ -23,13 +24,14 @@ const login = async (req, res) => {
       return res.json({ token });
     }
     
-    const token = jwt.sign({ id: user.id, name: user.name, lastName: user.lastName }, 'secretpassword');
+    const token = jwt.sign({ id: user._id, name: user.name, lastName: user.lastName }, 'secretpassword');
     res.json({ token });
 
   } catch (error) {
+
     console.error(error);
-    res.status(500).json({ error: 'Error! Please contact the developer.'});
+    const token = jwt.sign({ userErrors: error }, 'secretpassword');
+    return res.json({ token });
+
   }
 }
-
-module.exports = login;

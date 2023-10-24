@@ -15,7 +15,7 @@ export default login = async ({ userValue,
   
   setloading(true);
 
-  const login = validateForm(userValue, passwordValue);
+  const login = validateForm(userValue='julio.carvalho', passwordValue='123456Aa');
 
   setUserErrors(login.userErrors || []);
   setPasswordErrors(login.passwordErrors || []);
@@ -26,6 +26,8 @@ export default login = async ({ userValue,
 
       const response = await axios.post('http://192.168.18.154:3024/login', login);
       const loginData = jwtDecode(response.data.token);
+
+      console.log(loginData);
 
       if (!loginData.userErrors && !loginData.passwordErrors) {
         
@@ -42,7 +44,7 @@ export default login = async ({ userValue,
           id: loginData.id,
         });
         
-        setCurrentPage('openings');
+        setCurrentPage('home');
 
       } else {
 

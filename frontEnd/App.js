@@ -10,11 +10,11 @@ import LoadingScreen from './screens/LoadingScreen';
 import OpeningsScreen from './screens/OpeningsScreen';
 
 // Components
-import NavBar from './components/common/navBar'
+import NavBar from './components/common/navBar';
+import Header from './components/common/Header';
 
 // Services
 import loadUser from './services/login/loadUser';
-
 
 const App = () => {
 
@@ -44,8 +44,9 @@ const App = () => {
     case 'home':
       return (
         <View style={styles.container}>
+          <Header {...{currentPage, }}/>
           <HomeScreen {...{user, }}/>
-          <NavBar  {...{setCurrentPage, currentPage}}/>
+          <NavBar  {...{setCurrentPage, currentPage, }}/>
           { loading && <LoadingScreen/> }
         </View>
       );
@@ -53,6 +54,7 @@ const App = () => {
     case 'openings':
     return (
       <View style={styles.container}>
+        <Header {...{currentPage}}/>
         <OpeningsScreen {...{user, setloading, setCurrentPage}}/>
         <NavBar  {...{setCurrentPage, currentPage, setloading}}/>
         { loading && <LoadingScreen/> }
@@ -62,6 +64,7 @@ const App = () => {
     default:
       return (
         <View style={styles.container}>
+          <Header {...{currentPage}}/>
           <HomeScreen {...{user, }}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
           {loading && <LoadingScreen />}
@@ -80,6 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1b353b',
     overflow: 'hidden',
+    paddingTop: 35,
   }
 });
 

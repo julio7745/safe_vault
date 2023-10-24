@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, } from 'react-native';
+import { View, StyleSheet, } from 'react-native';
 
 import getOpenings from '../services/openings/getOpenings.js'
 
 import ClearOpenings from '../components/openings/clearButton.js'
+import Opening from '../components/openings/Opening.js'
 
 export default ({user, setloading, setCurrentPage, }) => {
 
@@ -12,42 +13,30 @@ export default ({user, setloading, setCurrentPage, }) => {
 
   useEffect( () => {
     
-    getOpenings({setloading, user, setOpenings, });
+    getOpenings({setloading, user, setOpenings, setCurrentPage });
 
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containOpening}>
       {
         openings.map((opening, index) => (
-          <View style={styles.opening} key={index}>
-            <Text>User: {opening.name}.{opening.lastname}</Text>
-            <Text>Date: {opening.month} {opening.day}, {opening.year} at {opening.hour}:{opening.minute}</Text>
-          </View>
+         <Opening key={index} {...{opening, index}}/>
         ))
       }
       <ClearOpenings {...{user, setCurrentPage, setloading}}/>
-    </View>  
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: '90%',
+  containOpening: {
+    height: '82%',
     width: '100%',
     display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#ffffff',
+    alignItems: 'center',
     overflow: 'hidden',
     position: 'relative',
-  },
-  opening: {
-    height: 50,
-    width: '90',
-    borderColor: "#ffffff",
-    borderWidth: 1,
-    margin: 2,
-    backgroundColor: 'red',
   },
 });

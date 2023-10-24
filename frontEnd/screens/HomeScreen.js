@@ -15,7 +15,7 @@ export default HomeScreen = ({user, }) => {
 
 const styles = StyleSheet.create({
   content: {
-    height: '90%',
+    height: '82%',
     width: '100%',
     display: "flex",
     justifyContent: 'center',

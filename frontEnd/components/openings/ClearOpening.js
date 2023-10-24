@@ -1,5 +1,5 @@
 
-import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableWithoutFeedback, } from 'react-native';
 
 import clearOpenings from '../../services/openings/clearOpenings.js';
 

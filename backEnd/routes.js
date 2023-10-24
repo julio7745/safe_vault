@@ -3,11 +3,13 @@ const express = require('express')
 
 const router = express.Router();
 
-const usersController =  require('./src/controllers/usersController')
-router.post('/login', usersController)
+const findUser = require('./src/middlewares/findUser.js')
+
+const usersController =  require('./src/controllers/usersController.js')
+router.post('/login', usersController.login)
 
 const openingsController =  require('./src/controllers/openingsController.js')
-router.post('/openings', openingsController.page)
-router.post('/clearOpenings', openingsController.clear)
+router.post('/openings', findUser, openingsController.openings)
+router.post('/clearOpenings', findUser, openingsController.clear)
 
 module.exports = router;

@@ -25,7 +25,7 @@ const userData = {
   id: 1,
   name: 'julio',
   lastName: 'carvalho',
-  password: '123456Aa', // Senha em texto plano
+  password: '123456Aa',
 };
 
 // Função para criar um usuário

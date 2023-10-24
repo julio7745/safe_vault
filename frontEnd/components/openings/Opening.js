@@ -9,11 +9,13 @@ export default ({opening, index, user, setCurrentPage, setloading}) => {
     <View style={styles.opening} key={index}>
         <View style={styles.openingTextContainer}>
           <Text>
-            User: {opening.name.charAt(0).toUpperCase() + opening.name.slice(1)}.
+            <Text style={styles.strong}>User: </Text>
+            {opening.name.charAt(0).toUpperCase() + opening.name.slice(1)}.
             {opening.lastname.charAt(0).toUpperCase() + opening.lastname.slice(1)}
           </Text>
           <Text>
-            Date: {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
+            <Text style={styles.strong}>Date: </Text>
+            {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
             , {opening.year} at {opening.hour}:{opening.minute}</Text>
         </View>
         <ClearOpening {...{user, setCurrentPage, setloading}}/>
@@ -34,4 +36,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#305e695b',
   },
+  strong:{
+    fontWeight: 'bold',
+  }
 });

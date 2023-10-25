@@ -45,7 +45,7 @@ const App = () => {
       return (
         <View style={styles.container}>
           <Header {...{currentPage, }}/>
-          <HomeScreen {...{user, }}/>
+          <HomeScreen {...{user, setCurrentPage, setloading, }}/>
           <NavBar  {...{setCurrentPage, currentPage, }}/>
           { loading && <LoadingScreen/> }
         </View>
@@ -65,7 +65,7 @@ const App = () => {
       return (
         <View style={styles.container}>
           <Header {...{currentPage}}/>
-          <HomeScreen {...{user, }}/>
+          <HomeScreen {...{user, setCurrentPage, setloading, }}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
           {loading && <LoadingScreen />}
         </View>

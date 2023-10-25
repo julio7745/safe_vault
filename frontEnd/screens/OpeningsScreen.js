@@ -35,7 +35,7 @@ export default ({user, setloading, setCurrentPage, }) => {
           }
         }}
       />
-      <ClearOpenings {...{user, setCurrentPage, setloading}}/>
+      <ClearOpenings {...{setDeletion, }}/>
       { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }
     </View>
   );

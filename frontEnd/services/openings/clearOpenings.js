@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 
 import desconecta from '../login/desconecta';
 
-export default async({setloading, user, setCurrentPage, }) => {
+export default async({user, setCurrentPage, setloading, setDeletion}) => {
 
     setloading(true)
 

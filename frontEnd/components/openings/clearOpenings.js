@@ -1,12 +1,11 @@
 
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
-import clearOpenings from '../../services/openings/clearOpenings.js';
 
-export default ({user, setCurrentPage, setloading}) => {
+export default ({setDeletion, }) => {
   
   return (
-      <TouchableWithoutFeedback onPress={() => clearOpenings({user, setCurrentPage, setloading})}>
+      <TouchableWithoutFeedback onPress={() => setDeletion('all')}>
         <View style={styles.campBtnClear}>
             <Image source={require('../../assets/icons/openings/clear.png')} style={styles.btnLogin}/>
         </View>

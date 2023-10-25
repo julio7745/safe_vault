@@ -1,14 +1,18 @@
 
-import { View, StyleSheet, Text, } from 'react-native';
+import { View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
 
-export default HomeScreen = ({user, }) => {
+import createOpening from '../services/openings/createOpening.js';
+
+export default HomeScreen = ({user, setCurrentPage, setloading, }) => {
 
   return (
     <View style={styles.content}>
       <Text>NOME: {user.name}</Text>
       <Text>SOBRENOME: {user.lastName}</Text>
       <Text>ID: {user.id}</Text>
-      <Text>PAGINA ATUAL: home</Text>
+      <TouchableWithoutFeedback onPress={() => createOpening({user, setCurrentPage, setloading, })}>
+        <Text style={styles.test}>PAGINA ATUAL: home</Text>
+      </TouchableWithoutFeedback>
     </View>  
   );
 };
@@ -23,4 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     overflow: 'hidden',
   },
+  test: {
+    backgroundColor: 'red'
+  }
 });

@@ -1,16 +1,30 @@
 
 import { StyleSheet, View, Text, TouchableWithoutFeedback} from 'react-native';
+
 import deleteOpening from '../../services/openings/deleteOpening';
+import clearOpenings from '../../services/openings/clearOpenings.js';
+
 
 export default ({setDeletion, user, setloading, setCurrentPage, deletion}) => {
 
   return (
     <View style={styles.ConfirmDeletionContainer}>
       <View style={styles.ConfirmDeletionDiv}>
-        <Text>Are you sure you want to delete this opening forever? That's a long time!</Text>
+        {
+          deletion !== 'all' && <Text>Are you sure you want to delete this opening forever? That's a long time!</Text>
+        }
+        {
+          deletion === 'all' && <Text>Are you sure you want to delete all opening forever? That's a long time!</Text>
+        }
         <View style={styles.ConfirmDeletionBtnContainer}>
           <TouchableWithoutFeedback
-            onPress={()=>deleteOpening({setDeletion, user, setloading, setCurrentPage, openingId: deletion})}>
+            onPress={()=> {
+              if (deletion === 'all') {
+                clearOpenings({user, setCurrentPage, setloading, setDeletion})
+              } else {
+                deleteOpening({user, setCurrentPage, setloading, setDeletion, openingId: deletion})
+              }
+            }}>
             <Text style={styles.ConfirmDeletionBtn} >CONFIRM</Text>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback 

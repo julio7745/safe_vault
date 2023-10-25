@@ -22,7 +22,7 @@ export default ({user, setloading, setCurrentPage, }) => {
   return (
     <View style={styles.containOpening}>
       <FlatList
-        data={[...openings, { empty: true }]}
+        data={[{ empty: true }, ...openings].reverse()}
         style={styles.listOpening}
         contentContainerStyle={{alignItems: 'center'}}
         showsVerticalScrollIndicator={false}

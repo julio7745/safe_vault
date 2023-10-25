@@ -69,7 +69,7 @@ module.exports.create = async (req, res) => {
       name: req.body.name,
       lastName: req.body.lastName,
       day: date.getDate(),
-      month: date.getMonth()+1,
+      month: date.toLocaleString('en-US', { month: 'long' }),
       year: date.getFullYear(),
       hour: date.getHours(),
       minute: date.getMinutes(),

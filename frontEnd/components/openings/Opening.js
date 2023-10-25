@@ -11,7 +11,7 @@ export default ({opening, setDeletion, }) => {
           <Text>
             <Text style={styles.strong}>User: </Text>
             {opening.name.charAt(0).toUpperCase() + opening.name.slice(1)}.
-            {opening.lastname.charAt(0).toUpperCase() + opening.lastname.slice(1)}
+            {opening.lastName.charAt(0).toUpperCase() + opening.lastName.slice(1)}
           </Text>
           <Text>
             <Text style={styles.strong}>Date: </Text>

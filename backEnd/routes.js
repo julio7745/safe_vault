@@ -12,5 +12,6 @@ const openingsController =  require('./src/controllers/openingsController.js')
 router.post('/openings', findUser, openingsController.openings)
 router.post('/clearOpenings', findUser, openingsController.clear)
 router.post('/deleteOpening', findUser, openingsController.delete)
+router.post('/createOpening', findUser, openingsController.create)
 
 module.exports = router;

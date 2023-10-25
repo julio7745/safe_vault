@@ -1,122 +1,13 @@
 
 const jwt = require('jsonwebtoken');
 
+const Opening = require('../models/opening.js')
+
 module.exports.openings = async (req, res) => {
 
   try{
 
-    // pega aberturas do banco de dados
-    console.log('lidas');
-    openings = [
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-        "month": "january",
-        "year": 2023,
-        "hour": 23,
-        "minute": 13,
-        "name": 'julio',
-        "lastname": 'carvalho',
-        "_id": 1
-      },
-      { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    { "day": 12,
-      "month": "january",
-      "year": 2023,
-      "hour": 23,
-      "minute": 13,
-      "name": 'julio',
-      "lastname": 'carvalho',
-      "_id": 1
-    },
-    ]
+    const openings = await Opening.find();
     
     const token = jwt.sign( { openings }, 'secretpassword');
     res.send({ token });
@@ -135,8 +26,7 @@ module.exports.clear = async (req, res) => {
 
   try{
 
-    //apaga todas aberturas 
-    console.log('limpo')
+    const apagados = await Opening.deleteMany()
     const token = jwt.sign({ message: 'sucess' }, 'secretpassword');
     return res.json({ token });
     
@@ -147,6 +37,7 @@ module.exports.clear = async (req, res) => {
     return res.json({ token });
 
   }
+
 }
 
 module.exports.delete = async (req, res) => {
@@ -154,8 +45,7 @@ module.exports.delete = async (req, res) => {
   try{
 
     const _id = req.body.openingId;
-    //apaga abertura do _id
-    console.log(`apagado ${_id}`)
+    const apagado = await Opening.findOneAndRemove({ _id })
     const token = jwt.sign({ message: 'sucess' }, 'secretpassword');
     return res.json({ token });
     
@@ -168,3 +58,36 @@ module.exports.delete = async (req, res) => {
   }
 }
 
+module.exports.create = async (req, res) => {
+  
+  try {
+    
+    const date = new Date();
+
+    const openingData = {
+
+      name: req.body.name,
+      lastName: req.body.lastName,
+      day: date.getDate(),
+      month: date.getMonth()+1,
+      year: date.getFullYear(),
+      hour: date.getHours(),
+      minute: date.getMinutes(),
+
+    };
+
+    const newOpening = new Opening(openingData);
+
+    await newOpening.save();
+
+    const token = jwt.sign({ message: 'sucess' }, 'secretpassword');
+    return res.json({ token });
+    
+  } catch (error) {
+    
+    console.error(error);
+    const token = jwt.sign({ error }, 'secretpassword');
+    return res.json({ token });
+
+  }
+};

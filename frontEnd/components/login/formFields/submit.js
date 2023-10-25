@@ -30,7 +30,7 @@ export default formLogin = ({
               setloading,
             })}
           }>
-          <Image source={require('../../../assets/icons/login.png')} style={styles.btnLogin}/>
+          <Image source={require('../../../assets/icons/login/login.png')} style={styles.btnLogin}/>
         </TouchableWithoutFeedback>
     </View>
   );

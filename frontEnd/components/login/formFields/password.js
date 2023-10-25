@@ -19,7 +19,7 @@ export default LoginScreen = ({inputRefs, setPasswordValue, passwordValue, passw
     <View>
       <View style={styles.field}>
         <TouchableWithoutFeedback onPress={selectpasswordField}>
-          <Image source={require('../../../assets/icons/password.png')} style={styles.icon} />
+          <Image source={require('../../../assets/icons/login/password.png')} style={styles.icon} />
         </TouchableWithoutFeedback>
         <TextInput
           style={styles.input}
@@ -32,7 +32,7 @@ export default LoginScreen = ({inputRefs, setPasswordValue, passwordValue, passw
           maxLength={15}
         />
         <TouchableWithoutFeedback onPress={handleDisplayPassword}>
-          <Image source={require('../../../assets/icons/handleDisplayPassword.png')} style={styles.IconPassword}/>
+          <Image source={require('../../../assets/icons/login/handleDisplayPassword.png')} style={styles.IconPassword}/>
         </TouchableWithoutFeedback>
       </View>
       {

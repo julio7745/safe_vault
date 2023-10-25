@@ -13,7 +13,7 @@ export default UserField = ({ inputRefs, userValue, setUserValue, userErrors, })
     <View>
       <View style={styles.field}>
         <TouchableWithoutFeedback onPress={selectUserField}>
-          <Image source={require('../../../assets/icons/user.png')} style={styles.icon}/>
+          <Image source={require('../../../assets/icons/login/user.png')} style={styles.icon}/>
         </TouchableWithoutFeedback>
         <TextInput
           style={styles.input}

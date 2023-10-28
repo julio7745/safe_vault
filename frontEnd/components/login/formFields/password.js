@@ -2,7 +2,7 @@
 import { useState, useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, Text,} from 'react-native';
 
-export default LoginScreen = ({inputRefs, setPasswordValue, passwordValue, passwordErrors}) => {
+export default ({inputRefs, setPasswordValue, passwordValue, passwordErrors}) => {
   
   inputRefs.passwordField = useRef(null)
   const selectpasswordField = () => {

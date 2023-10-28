@@ -1,13 +1,12 @@
 
 import { View, StyleSheet, Text, Image } from 'react-native';
 
-import DeleteOpening from './DeleteOpening.js'
+import DeleteOpening from './DeleteOpening'
 
 export default ({opening, setDeletion, }) => {
 
   return (
     <View style={styles.opening}>
-        {/*<Image source={require('../../assets/imgs/logoClara1.png')} style={styles.user}/>*/}
         <View style={styles.openingTextContainer}>
           <Text>
             <Text style={styles.strong}>User: </Text>
@@ -28,23 +27,16 @@ export default ({opening, setDeletion, }) => {
 const styles = StyleSheet.create({
   opening: {
     height: 75,
-    //height: 90,
     width: '95%',
     margin: 2,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    //justifyContent: 'space-around',
     borderColor: '#1b353b',
     borderWidth: 1,
     backgroundColor: '#305e695b',
   },
-  /*user:{
-    height: 75,
-    width: 65,
-    backgroundColor: '#1b353b'
-  },*/
   strong:{
     fontWeight: 'bold',
   }

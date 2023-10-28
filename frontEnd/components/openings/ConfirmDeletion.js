@@ -2,7 +2,7 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback} from 'react-native';
 
 import deleteOpening from '../../services/openings/deleteOpening';
-import clearOpenings from '../../services/openings/clearOpenings.js';
+import clearOpenings from '../../services/openings/clearOpenings';
 
 
 export default ({setDeletion, user, setloading, setCurrentPage, deletion}) => {

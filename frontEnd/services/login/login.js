@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import validateForm from './validateForm';
 import uploadUser from './uploadUser';
 
-export default login = async ({ userValue,
+export default async ({ userValue,
   passwordValue,
   setUserErrors,
   setPasswordErrors,

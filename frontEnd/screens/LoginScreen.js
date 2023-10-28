@@ -2,9 +2,9 @@
 import { View, StyleSheet, } from 'react-native';
 
 import HeaderLogin from '../components/login/loginHeader'
-import FormLogin from '../components/login/loginForm'
+import FormLogin from '../components/login/LoginForm'
 
-export default LoginScreen = ({ setCurrentPage, setUser, setloading, }) => {
+export default ({ setCurrentPage, setUser, setloading, }) => {
 
   return (
     <View style={styles.content}>

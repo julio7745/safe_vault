@@ -2,7 +2,7 @@
 import { useRef, } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableWithoutFeedback, Text, } from 'react-native';
 
-export default UserField = ({ inputRefs, userValue, setUserValue, userErrors, }) => {
+export default  ({ inputRefs, userValue, setUserValue, userErrors, }) => {
 
   inputRefs.userField = useRef(null)
   const selectUserField = () => {

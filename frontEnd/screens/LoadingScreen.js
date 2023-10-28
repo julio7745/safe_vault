@@ -1,7 +1,7 @@
 
 import { View, StyleSheet, Text, } from 'react-native';
 
-export default loading = () => {
+export default () => {
 
   return (
     <View style={styles.loading}>

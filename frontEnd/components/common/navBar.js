@@ -1,11 +1,9 @@
 
 import { View, StyleSheet, Image, } from 'react-native';
 
-import NavBarButton from '../navBar/navBarButton'
-import MenuIco from '../navBar/menuIco'
+import NavBarButton from '../navBar/NavBarButton'
+import MenuIco from '../navBar/MenuIco'
 
-// Buttons
-// Home
 import HomeIco from '../../assets/icons/navBar/vault.png'
 import OpeningsIco from '../../assets/icons/navBar/list.png'
 import UserIco from '../../assets/icons/navBar/perfil.png'
@@ -17,7 +15,7 @@ const valueToOpenings = '50%'
 const valueToUser = '77.5%'
 const valueToOther = '10000%'
 
-export default NavBar = ({setCurrentPage, currentPage}) => {
+export default ({setCurrentPage, currentPage}) => {
 
   const leftOfhorizontalLine = 
   currentPage === 'home' ? valueToHome :
@@ -43,6 +41,7 @@ export default NavBar = ({setCurrentPage, currentPage}) => {
       <MenuIco {...{setCurrentPage, icon: OptionsIco, currentPage }}/>
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({

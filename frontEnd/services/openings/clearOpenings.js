@@ -15,6 +15,7 @@ export default async({user, setCurrentPage, setloading, setDeletion}) => {
 
         if ( message === 'sucess' ){
 
+            setDeletion('')
             setCurrentPage('home')
             setCurrentPage('openings')
 

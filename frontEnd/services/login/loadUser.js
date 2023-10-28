@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import login from './login';
-import {setUserErrors, setPasswordErrors, setUserValue, setPasswordValue} from '../../components/login/loginForm'
+import {setUserErrors, setPasswordErrors, setUserValue, setPasswordValue} from '../../components/login/LoginForm'
 
 export default async ({setCurrentPage, setUser, setloading, }) => {
 

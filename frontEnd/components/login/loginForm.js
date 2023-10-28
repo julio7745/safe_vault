@@ -2,11 +2,11 @@
 import { useEffect, useState, } from 'react';
 import { View, Text, StyleSheet, Keyboard , } from 'react-native';
 
-import UserField from './formFields/user'
-import PasswordField from './formFields/password'
-import SubmitField from './formFields/submit'
+import UserField from './formFields/User'
+import PasswordField from './formFields/Password'
+import SubmitField from './formFields/Submit'
 
-export default formLogin = ({ setCurrentPage, setUser, setloading}) => {
+export default ({ setCurrentPage, setUser, setloading}) => {
 
   let inputRefs = {}
 

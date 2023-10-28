@@ -1,7 +1,7 @@
 
 import { View, Text, StyleSheet, Image, } from 'react-native';
 
-export default HeaderLogin = () => {
+export default () => {
 
   return (
     <View style={styles.header}>

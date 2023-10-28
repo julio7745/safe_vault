@@ -56,6 +56,7 @@ module.exports.delete = async (req, res) => {
     return res.json({ token });
 
   }
+
 }
 
 module.exports.create = async (req, res) => {
@@ -68,11 +69,11 @@ module.exports.create = async (req, res) => {
 
       name: req.body.name,
       lastName: req.body.lastName,
-      day: date.getDate(),
       month: date.toLocaleString('en-US', { month: 'long' }),
+      minute: date.getMinutes(),
       year: date.getFullYear(),
       hour: date.getHours(),
-      minute: date.getMinutes(),
+      day: date.getDate(),
 
     };
 
@@ -90,4 +91,5 @@ module.exports.create = async (req, res) => {
     return res.json({ token });
 
   }
+
 };

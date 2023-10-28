@@ -1,19 +1,15 @@
 
-// Packages
 import { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 
-// Screens
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import OpeningsScreen from './screens/OpeningsScreen';
 
-// Components
 import NavBar from './components/common/navBar';
 import Header from './components/common/Header';
 
-// Services
 import loadUser from './services/login/loadUser';
 
 const App = () => {

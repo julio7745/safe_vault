@@ -1,5 +1,4 @@
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
 export default NavBarButton = ({setCurrentPage, icon, page}) => {

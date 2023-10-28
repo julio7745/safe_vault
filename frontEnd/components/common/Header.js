@@ -1,7 +1,7 @@
 
 import { View, StyleSheet, Text, Image, } from 'react-native';
 
-export default Header = ({currentPage, }) => {
+export default ({currentPage, }) => {
 
   return (
     <View style={styles.header}>

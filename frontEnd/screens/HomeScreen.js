@@ -1,10 +1,10 @@
 
 import { View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
 
-import createOpening from '../services/openings/createOpening.js';
-import logout from '../services/login/logout.js';
+import createOpening from '../services/openings/createOpening';
+import logout from '../services/login/logout';
 
-export default HomeScreen = ({user, setCurrentPage, setloading, }) => {
+export default ({user, setCurrentPage, setloading, }) => {
 
   return (
     <View style={styles.content}>

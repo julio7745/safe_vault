@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native
 
 import login from '../../../services/login/login'
 
-export default formLogin = ({ 
+export default ({ 
   userValue,
   passwordValue,
   setUserErrors,

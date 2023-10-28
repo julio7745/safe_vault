@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
 
-import getOpenings from '../services/openings/getOpenings.js'
+import getOpenings from '../services/openings/getOpenings'
 
-import ClearOpenings from '../components/openings/ClearOpenings.js'
-import Opening from '../components/openings/Opening.js'
-import ConfirmDeletion from '../components/openings/ConfirmDeletion.js'
+import ClearOpenings from '../components/openings/ClearOpenings'
+import Opening from '../components/openings/Opening'
+import ConfirmDeletion from '../components/openings/ConfirmDeletion'
 
 export default ({user, setloading, setCurrentPage, }) => {
 
@@ -39,6 +39,7 @@ export default ({user, setloading, setCurrentPage, }) => {
       { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({

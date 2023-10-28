@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 
-export default function validateForm(user, password) {
+export default function(user, password) {
 
     const login = {}
 

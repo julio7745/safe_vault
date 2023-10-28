@@ -2,7 +2,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-import desconecta from '../login/desconecta';
+import logout from '../login/logout';
 
 export default async({setloading, user, setOpenings, setCurrentPage, }) => {
 
@@ -16,7 +16,7 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
 
         if ( error ){
 
-            desconecta({...{setloading, setCurrentPage, }});
+            logout({...{setloading, setCurrentPage, }});
 
         }else{
 
@@ -27,7 +27,7 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
     } catch (error) {
 
         console.error(error);
-        desconecta({...{setloading, setCurrentPage, }});
+        logout({...{setloading, setCurrentPage, }});
         
     }
 

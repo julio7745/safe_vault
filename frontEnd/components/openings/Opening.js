@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    borderColor: '#1b353b',
+    borderColor: '#ffffff',
     borderBottomWidth: 1,
   },
   strong:{

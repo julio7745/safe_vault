@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   errTxt: {
-    color: 'red',
+    color: '#ff0000',
     fontSize: 13.5,
+    textShadowColor: '#ffffff',
+    textShadowRadius: .05,
   },
 });

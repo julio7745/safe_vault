@@ -17,7 +17,7 @@ export default ({opening, setDeletion, }) => {
             <Text style={styles.strong}>Date: </Text>
             {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
             , {opening.year} at {opening.hour > 12 ? opening.hour-12 : opening.hour}
-            :{opening.minute} {opening.hour > 12 ? 'PM' : 'AM'}</Text>
+            :{opening.minute > 9 ? opening.minute : `0${opening.minute}` } {opening.hour > 12 ? 'PM' : 'AM'}</Text>
         </View>
         <DeleteOpening {...{ opening, setDeletion, }}/>
     </View>

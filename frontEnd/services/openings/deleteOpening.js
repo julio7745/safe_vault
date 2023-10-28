@@ -11,6 +11,8 @@ export default async({user, setCurrentPage, setloading, setDeletion, openingId})
     setloading(true)
 
     try {
+
+        console.log(`${URL_API_BACKEND}/deleteOpening`);
         
         const response = await axios.post(`${URL_API_BACKEND}/deleteOpening`, {...user, ...{openingId}});
         const message = await jwtDecode(response.data.token).message;

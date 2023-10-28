@@ -17,8 +17,8 @@ export default async ({ userValue,
   
   setloading(true);
 
-  //const login = validateForm(userValue='usuario.teste', passwordValue='123456Aa');
-  const login = validateForm(userValue, passwordValue);
+  const login = validateForm(userValue='usuario.teste', passwordValue='123456Aa');
+  //const login = validateForm(userValue, passwordValue);
 
   setUserErrors(login.userErrors || []);
   setPasswordErrors(login.passwordErrors || []);
@@ -26,6 +26,8 @@ export default async ({ userValue,
   if (!login.userErrors && !login.passwordErrors) {
 
     try {
+
+      console.log(`${URL_API_BACKEND}/login`);
 
       const response = await axios.post(`${URL_API_BACKEND}/login`, login);
       const loginData = jwtDecode(response.data.token);

@@ -11,6 +11,8 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
     setloading(true)
 
     try {
+
+        console.log(`${URL_API_BACKEND}/openings`);
         
         const response = await axios.post(`${URL_API_BACKEND}/openings`, user);
         const openings = await jwtDecode(response.data.token).openings;

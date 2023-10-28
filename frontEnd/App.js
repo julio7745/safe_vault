@@ -7,7 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import OpeningsScreen from './screens/OpeningsScreen';
 
-import NavBar from './components/common/navBar';
+import NavBar from './components/common/NavBar';
 import Header from './components/common/Header';
 
 import loadUser from './services/login/loadUser';
@@ -41,7 +41,7 @@ const App = () => {
       return (
         <View style={styles.container}>
           <Header {...{currentPage, }}/>
-          <HomeScreen {...{user, setCurrentPage, setloading, }}/>
+          <HomeScreen {...{user, setCurrentPage, setloading, currentPage }}/>
           <NavBar  {...{setCurrentPage, currentPage, }}/>
           { loading && <LoadingScreen/> }
         </View>
@@ -61,7 +61,7 @@ const App = () => {
       return (
         <View style={styles.container}>
           <Header {...{currentPage}}/>
-          <HomeScreen {...{user, setCurrentPage, setloading, }}/>
+          <HomeScreen {...{user, setCurrentPage, setloading, currentPage }}/>
           <NavBar  {...{setCurrentPage, currentPage}}/>
           {loading && <LoadingScreen />}
         </View>

@@ -4,13 +4,15 @@ import jwtDecode from 'jwt-decode';
 
 import logout from '../login/logout';
 
+import { URL_API_BACKEND } from 'react-native-dotenv';
+
 export default async({setloading, user, setCurrentPage, }) => {
 
     setloading(true)
 
     try {
         
-        const response = await axios.post('http://192.168.18.154:3024/createOpening', user);
+        const response = await axios.post(`${URL_API_BACKEND}/createOpening`, user);
         const message = await jwtDecode(response.data.token).message;
 
         if ( message === 'sucess' ){

@@ -5,6 +5,8 @@ import jwtDecode from 'jwt-decode';
 import validateForm from './validateForm';
 import uploadUser from './uploadUser';
 
+import { URL_API_BACKEND } from 'react-native-dotenv';
+
 export default async ({ userValue,
   passwordValue,
   setUserErrors,
@@ -15,7 +17,7 @@ export default async ({ userValue,
   
   setloading(true);
 
-  //const login = validateForm(userValue='julio.carvalho', passwordValue='123456Aa');
+  //const login = validateForm(userValue='usuario.teste', passwordValue='123456Aa');
   const login = validateForm(userValue, passwordValue);
 
   setUserErrors(login.userErrors || []);
@@ -25,7 +27,7 @@ export default async ({ userValue,
 
     try {
 
-      const response = await axios.post('http://192.168.18.154:3024/login', login);
+      const response = await axios.post(`${URL_API_BACKEND}/login`, login);
       const loginData = jwtDecode(response.data.token);
 
       if (!loginData.userErrors && !loginData.passwordErrors) {

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     height: 55,
     borderColor: '#ffffff',
     borderRadius: 100,
-    borderWidth: 2,
+    borderWidth: 2.5,
     marginRight: 30,
     marginBottom: 5,
     display: 'flex',
@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    marginTop: 2,
     width: 45,
     height: 55,
+    marginTop: 2,
+    marginRight: 2, 
   }
 });

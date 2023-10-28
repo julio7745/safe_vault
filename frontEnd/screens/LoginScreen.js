@@ -1,7 +1,7 @@
 
 import { View, StyleSheet, } from 'react-native';
 
-import HeaderLogin from '../components/login/loginHeader'
+import HeaderLogin from '../components/login/LoginHeader'
 import FormLogin from '../components/login/LoginForm'
 
 export default ({ setCurrentPage, setUser, setloading, }) => {

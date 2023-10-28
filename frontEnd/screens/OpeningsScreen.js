@@ -48,15 +48,16 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#ffffff',
     position: 'relative',
-    paddingTop: 5,
-    paddingBottom: 5,
     display: 'flex',
     alignItems: 'center'
     },
   listOpening: {
     height: '100%',
     width: '100%',
+    backgroundColor: '#305e695b',
+    paddingTop: 5,
+    paddingBottom: 5,
   },paddingItem: {
-    height: 95,
+    height: 105,
   }
 });

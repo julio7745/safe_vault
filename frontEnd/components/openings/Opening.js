@@ -26,16 +26,14 @@ export default ({opening, setDeletion, }) => {
 
 const styles = StyleSheet.create({
   opening: {
-    height: 75,
-    width: '95%',
-    margin: 2,
+    height: 80,
+    width: '90%',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     borderColor: '#1b353b',
-    borderWidth: 1,
-    backgroundColor: '#305e695b',
+    borderBottomWidth: 1,
   },
   strong:{
     fontWeight: 'bold',

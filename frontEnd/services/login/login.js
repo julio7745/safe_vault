@@ -43,6 +43,7 @@ export default async ({ userValue,
           name: loginData.name,
           lastName: loginData.lastName,
           id: loginData.id,
+          profileImage: loginData.profileImage,
         });
         
         setCurrentPage('home');

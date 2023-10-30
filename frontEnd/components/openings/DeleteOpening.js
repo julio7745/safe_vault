@@ -14,8 +14,8 @@ export default ({ opening, setDeletion,  }) => {
 
 const styles = StyleSheet.create({
   campBtnClear:{
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     alignItems: 'center', 
     justifyContent: 'center',
     backgroundColor: '#ffac46',
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     borderColor: '#ffffff',
   },
   btnLogin:{
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     resizeMode: 'contain',
     borderRadius: 100,
   }

@@ -6,14 +6,14 @@ import logout from '../login/logout';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({setloading, user, setOpenings, setCurrentPage, }) => {
+export default async({setloading, user, setUsers, setCurrentPage, }) => {
 
     setloading(true)
 
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/getOpenings`, user);
-        const openings = await jwtDecode(response.data.token).openings;
+        const response = await axios.post(`${URL_API_BACKEND}/getUsers`, user);
+        const users = await jwtDecode(response.data.token).users;
         const error = await jwtDecode(response.data.token).error;
 
         if ( error ){
@@ -21,9 +21,9 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
             logout({...{setloading, setCurrentPage, }});
 
         }else{
-
-            setOpenings(openings);
-
+            
+            setUsers(users);
+            
         }
 
     } catch (error) {
@@ -34,6 +34,6 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
     }
 
     setloading(false)
-    
+        
     return ;
 }

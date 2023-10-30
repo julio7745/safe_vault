@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const Opening = require('../models/opening.js')
 
-module.exports.openings = async (req, res) => {
+module.exports.get = async (req, res) => {
 
   try{
 
@@ -67,8 +67,7 @@ module.exports.create = async (req, res) => {
 
     const openingData = {
 
-      name: req.body.name,
-      lastName: req.body.lastName,
+      userId: req.body.id,
       month: date.toLocaleString('en-US', { month: 'long' }),
       minute: date.getMinutes(),
       year: date.getFullYear(),

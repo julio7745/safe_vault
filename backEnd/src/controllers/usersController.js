@@ -23,7 +23,13 @@ module.exports.login = async (req, res) => {
       return res.json({ token });
     }
     
-    const token = jwt.sign({ id: user._id, name: user.name, lastName: user.lastName }, 'secretpassword');
+    const token = jwt.sign({ 
+      id: user._id, 
+      name: user.name, 
+      lastName: user.lastName,
+      profileImage: user.profileImage,
+    }, 'secretpassword');
+
     res.json({ token });
 
   } catch (error) {
@@ -33,5 +39,27 @@ module.exports.login = async (req, res) => {
     return res.json({ token });
 
   }
+
+}
+
+module.exports.get = async (req, res) => {
+
+  try{
+
+    const users = await User.find();
+    
+    const token = jwt.sign( { users }, 'secretpassword');
+    res.send({ token });
+    console.log(users);
+
+  } catch (error) {
+
+    console.error(error);
+    const token = jwt.sign({ error }, 'secretpassword');
+    return res.json({ token });
+
+  }
+  
+  return;
 
 }

@@ -12,8 +12,6 @@ export default async({user, setCurrentPage, setloading, setDeletion}) => {
 
     try {
 
-        console.log(`${URL_API_BACKEND}/clearOpenings`);
-        
         const response = await axios.post(`${URL_API_BACKEND}/clearOpenings`, user);
         const message = await jwtDecode(response.data.token).message;
 

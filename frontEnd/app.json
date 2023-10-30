@@ -2,7 +2,7 @@
   "expo": {
     "name": "SafeVault",
     "slug": "SafeVault",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.julio7745.SafeVault"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a305948b-6368-43b7-ae5b-1a47bf66fbf2"
+      }
     }
   }
 }

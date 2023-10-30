@@ -27,8 +27,6 @@ export default async ({ userValue,
 
     try {
 
-      console.log(`${URL_API_BACKEND}/login`);
-
       const response = await axios.post(`${URL_API_BACKEND}/login`, login);
       const loginData = jwtDecode(response.data.token);
 

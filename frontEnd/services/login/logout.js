@@ -5,7 +5,7 @@ export default async({setloading, setCurrentPage, }) => {
 
     setloading(true)
 
-    await AsyncStorage.removeItem('user');
+    await AsyncStorage.clear();
     setCurrentPage('login')
 
     setloading(false)

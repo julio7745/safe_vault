@@ -5,13 +5,13 @@ import { View, StyleSheet, Text, Image } from 'react-native';
 import DeleteOpening from './DeleteOpening'
 import ProfileImage from './ProfileImage.js' 
 
-export default ({opening, setDeletion, users }) => {
+export default ({opening, setDeletion, users, }) => {
 
   const [userOfOpening] = useState(users.find(userItem => userItem._id === opening.userId));
 
   return (
     <View style={styles.opening}>
-        <ProfileImage {...{ userOfOpening }}/>
+        <ProfileImage {...{ _id: userOfOpening._id, }}/>
         <View style={styles.openingTextContainer}>            
           <Text>
             <Text style={styles.strong}>User: </Text>

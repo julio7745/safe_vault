@@ -45,8 +45,10 @@ export default async ({ userValue,
           id: loginData.id,
           profileImage: loginData.profileImage,
         });
+
+        //preciso carregar imagem dos usuarios
         
-        setCurrentPage('home');
+        setCurrentPage('profile');
 
       } else {
 

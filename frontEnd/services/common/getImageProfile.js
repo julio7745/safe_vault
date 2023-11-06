@@ -30,7 +30,7 @@ export default async( {setImage, _id} ) => {
 
             const data = {
                 base64Image, 
-                expired: Date.now() + 5 * 10 * 1000,
+                expired: Date.now() + 60 * 10 * 1000,
             };
 
             await AsyncStorage.setItem(`ProfileImage.${_id}`, JSON.stringify(data));

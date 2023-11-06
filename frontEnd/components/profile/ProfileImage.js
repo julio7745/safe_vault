@@ -1,15 +1,16 @@
+
 import { useState, useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
 import getImageProfile from '../../services/common/getImageProfile';
 
-export default ({ _id }) => {
+export default ({ _id, }) => {
   
   const [image, setImage] = useState();
 
   useEffect(() => {
-    
-    getImageProfile({_id, setImage})
+  
+    getImageProfile({_id, setImage});
 
   }, []);
 
@@ -29,11 +30,12 @@ export default ({ _id }) => {
 
 const styles = StyleSheet.create({
   imageUser: {
-    height: 65,
-    width: 65,
-    borderRadius: 65,
+    height: 170,
+    width: 170,
+    borderRadius: 170,
     backgroundColor: '#1b353b',
     borderColor: '#ffffff',
     borderWidth: 1,
+    margin: 'auto',
   }
 });

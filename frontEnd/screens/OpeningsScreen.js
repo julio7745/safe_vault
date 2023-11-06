@@ -36,7 +36,7 @@ export default ({user, setloading, setCurrentPage, }) => {
               if (item.empty) {
                 return <View style={styles.paddingItem} />;
               } else {
-                return <Opening {...{ opening: item, users, setloading, setDeletion, index }} />;
+                return <Opening {...{ opening: item, users, setloading, setDeletion, index, }} />;
               }
             }}
           />

@@ -12,7 +12,7 @@ import CloseOptionsIco from '../../assets/icons/navBar/close.png'
 
 const valueToHome = '23.2%'
 const valueToOpenings = '50%'
-const valueToUser = '77.5%'
+const valueToProfile = '77.5%'
 const valueToOther = '10000%'
 
 export default ({setCurrentPage, currentPage}) => {
@@ -20,7 +20,7 @@ export default ({setCurrentPage, currentPage}) => {
   const leftOfhorizontalLine = 
   currentPage === 'home' ? valueToHome :
   currentPage === 'openings' ? valueToOpenings :
-  currentPage === 'user' ? valueToUser :
+  currentPage === 'profile' ? valueToProfile :
   valueToOther;
 
   const OptionsIco = 
@@ -31,7 +31,7 @@ export default ({setCurrentPage, currentPage}) => {
       <View style={styles.containerBtns}>
         <NavBarButton {...{setCurrentPage, icon: HomeIco, page: 'home', }}/>
         <NavBarButton {...{setCurrentPage, icon: OpeningsIco, page: 'openings', }}/>
-        <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'user', }}/>
+        <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'profile', }}/>
         <Image
           source={require('../../assets/icons/navBar/verticalLine.png')}
           style={{...styles.horizontalLine, left: leftOfhorizontalLine}}

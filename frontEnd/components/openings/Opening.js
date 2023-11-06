@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 
 import DeleteOpening from './DeleteOpening'
+import ProfileImage from './ProfileImage.js' 
 
-export default ({opening, setDeletion, users, setloading}) => {
+export default ({opening, setDeletion, users }) => {
 
-  const [userOfOpening, setUserOfOpening] = useState(users.find(userItem => userItem._id === opening.userId));
+  const [userOfOpening] = useState(users.find(userItem => userItem._id === opening.userId));
 
   return (
     <View style={styles.opening}>
-        <Image style={styles.imageUser}/>
+        <ProfileImage {...{ userOfOpening }}/>
         <View style={styles.openingTextContainer}>            
           <Text>
             <Text style={styles.strong}>User: </Text>
@@ -23,10 +24,9 @@ export default ({opening, setDeletion, users, setloading}) => {
             , {opening.year} at {opening.hour > 12 ? opening.hour-12 : opening.hour}
             :{opening.minute > 9 ? opening.minute : `0${opening.minute}` } {opening.hour > 12 ? 'PM' : 'AM'}</Text>
         </View>
-        <DeleteOpening {...{ opening, setDeletion, }}/>
+        <DeleteOpening {...{ opening, setDeletion }}/>
     </View>
   );
-
 };
 
 const styles = StyleSheet.create({
@@ -37,12 +37,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: '#ffffff',
     borderBottomWidth: 1,
-  },
-  imageUser: {
-    height: 70,
-    width: 70,
-    borderRadius: 45, 
-    backgroundColor: 'red',
   },
   openingTextContainer:{
     margin: 10,

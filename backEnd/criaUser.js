@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv').config()
@@ -15,14 +16,9 @@ const userSchema = new Schema({
   name: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },
-    profileImage: {
-        data: Buffer, 
-    }
 });
 
 const User = mongoose.model('User', userSchema);
-
-const imageBuffer = fs.readFileSync('../frontend/assets/imgs/openings/userDefaut.jpg');
 
 // Dados do usuário
 const userData = {

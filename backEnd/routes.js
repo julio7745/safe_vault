@@ -8,6 +8,7 @@ const findUser = require('./src/middlewares/findUser.js')
 const usersController =  require('./src/controllers/usersController.js')
 router.post('/login', usersController.login)
 router.post('/getUsers', findUser, usersController.get)
+router.get('/getProfileImage/:idOfUser', usersController.getProfileImage)
 
 const openingsController =  require('./src/controllers/openingsController.js')
 router.post('/getOpenings', findUser, openingsController.get)

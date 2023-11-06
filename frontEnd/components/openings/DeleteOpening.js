@@ -1,7 +1,7 @@
 
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
-export default ({ opening, setDeletion,  }) => {
+export default ({ opening, setDeletion }) => {
   
   return (
     <TouchableWithoutFeedback onPress={() => setDeletion(opening._id) }>

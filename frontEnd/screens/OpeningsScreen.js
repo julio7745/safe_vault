@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
 
 import getOpenings from '../services/openings/getOpenings'
-import getUsers from '../services/openings/getUsers'
+import getUsers from '../services/common/getUsers'
 
 import ClearOpenings from '../components/openings/ClearOpenings'
 import Opening from '../components/openings/Opening'

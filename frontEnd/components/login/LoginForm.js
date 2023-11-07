@@ -1,6 +1,6 @@
 
 import { useEffect, useState, } from 'react';
-import { View, Text, StyleSheet, Keyboard , } from 'react-native';
+import { View, Text, StyleSheet, Keyboard, } from 'react-native';
 
 import UserField from './formFields/User'
 import PasswordField from './formFields/Password'

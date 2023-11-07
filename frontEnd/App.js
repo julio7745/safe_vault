@@ -62,7 +62,7 @@ const App = () => {
     return (
       <View style={styles.container}>
         <Header {...{currentPage}}/>
-        <ProfileScreen {...{user, setloading }}/>
+        <ProfileScreen {...{user, setCurrentPage, setloading, }}/>
         <NavBar  {...{setCurrentPage, currentPage, }}/>
         { loading && <LoadingScreen/> }
       </View>

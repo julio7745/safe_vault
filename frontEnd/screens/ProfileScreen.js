@@ -35,7 +35,7 @@ export default ({user, setCurrentPage, setloading, }) => {
         <View style={styles.containerUserData}>
           <Text style={styles.strong}>Delete my Account</Text>
           <View style={styles.containerbtnDeleteAccount}>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => console.log('aqui eu vou apagr o usuario')}>
               <View style={styles.btnDeleteAccount}>
                 <Image source={require('../assets/icons/common/clear.png')} style={styles.icoDeleteAccount}/>
               </View>

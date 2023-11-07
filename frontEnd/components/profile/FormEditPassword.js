@@ -46,7 +46,7 @@ export default ({user, setCurrentPage, setloading, }) => {
           autoComplete="off"
           maxLength={15}
         />
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => console.log('aqui eu vou atualizar a senha')}>
             <Image source={require('../../assets/icons/profile/enviarNovaSenha.png')} style={styles.submit}/>
         </TouchableWithoutFeedback>
       

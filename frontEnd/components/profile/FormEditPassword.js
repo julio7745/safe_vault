@@ -1,12 +1,22 @@
 
-import { useEffect, useRef } from 'react';
-import { View, TextInput, StyleSheet, TouchableWithoutFeedback, Image, Keyboard, } from 'react-native';
+import { useState, useRef, useEffect } from 'react';
+import { View, TextInput, StyleSheet, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
+
+import updatePassword from '../../services/profile/updatePassword';
 
 export default ({user, setCurrentPage, setloading, }) => {
 
   const currentPasswordRef = useRef(null);
   const newPasswordRef = useRef(null);
   const confirmNewPasswordRef = useRef(null);
+
+  const [currentPasswordValue, setCurrentPasswordValue] = useState('');
+  const [newPasswordValue, setNewPasswordValue] = useState('');
+  const [confirmNewPasswordValue, setConfirmNewPasswordValue] = useState('');
+
+  const [currentPasswordErrors, setCurrentPasswordErrors] = useState('');
+  const [newPasswordErrors, setNewPasswordErrors] = useState('');
+  const [confirmNewPasswordErrors, setConfirmNewPasswordErrors] = useState('');
 
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
@@ -31,22 +41,45 @@ export default ({user, setCurrentPage, setloading, }) => {
           placeholder="Currente Password"
           autoComplete="off"
           maxLength={15}
+          value={currentPasswordValue}
+          onChangeText={(text)=>setCurrentPasswordValue(text)}
         />
+        { currentPasswordErrors ? <Text style={styles.error}>{currentPasswordErrors}</Text> : null }
         <TextInput
           style={styles.input}
           ref={newPasswordRef}
           placeholder="New Password"
           autoComplete="off"
           maxLength={15}
+          value={newPasswordValue}
+          onChangeText={(text)=>setNewPasswordValue(text)}
         />
+        {newPasswordErrors ? <Text style={styles.error}>{newPasswordErrors}</Text> : null}
         <TextInput
           style={styles.input}
           ref={confirmNewPasswordRef}
           placeholder="Confirm New Password"
           autoComplete="off"
           maxLength={15}
+          value={confirmNewPasswordValue}
+          onChangeText={(text)=>setConfirmNewPasswordValue(text)}
         />
-        <TouchableWithoutFeedback onPress={() => console.log('aqui eu vou atualizar a senha')}>
+        { confirmNewPasswordErrors ? <Text style={styles.error}>{confirmNewPasswordErrors}</Text> : null }
+        <TouchableWithoutFeedback 
+          onPress={() => {
+            unselectField()
+            updatePassword({
+              currentPasswordValue,
+              newPasswordValue,
+              confirmNewPasswordValue,
+              setCurrentPasswordErrors,
+              setNewPasswordErrors,
+              setConfirmNewPasswordErrors,
+              user,
+              setloading,
+              setCurrentPage,
+            })
+          }}>
             <Image source={require('../../assets/icons/profile/enviarNovaSenha.png')} style={styles.submit}/>
         </TouchableWithoutFeedback>
       
@@ -73,6 +106,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  error:{
+    color: 'red',
+    marginTop: -2,
+    marginBottom:4,
+    width: '80%',
+    fontSize: 12,
   },
   submit:{
     width: 40,

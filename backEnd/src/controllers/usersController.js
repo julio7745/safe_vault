@@ -13,14 +13,14 @@ module.exports.login = async (req, res) => {
     const user = await User.findOne({ name, lastName });
 
     if (!user) {
-      const token = jwt.sign({ userErrors: ['User does not exist!'] }, 'secretpassword');
+      const token = jwt.sign({ userErrors: ['● User does not exist!'] }, 'secretpassword');
       return res.json({ token });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      const token = jwt.sign({ passwordErrors: ['incorrect password!'] }, 'secretpassword');
+      const token = jwt.sign({ passwordErrors: ['● Incorrect password!'] }, 'secretpassword');
       return res.json({ token });
     }
     

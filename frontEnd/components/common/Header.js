@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   logoContainer:{
-    width: 58,
-    height: 58,
+    width: 55,
+    height: 55,
     borderColor: '#ffffff',
     borderRadius: 100,
     borderWidth: 2.5,
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: 45,
-    height: 55,
+    width: 40,
+    height: 50,
     marginTop: 2,
     marginRight: 2, 
   }

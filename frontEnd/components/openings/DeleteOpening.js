@@ -6,7 +6,7 @@ export default ({ opening, setDeletion }) => {
   return (
     <TouchableWithoutFeedback onPress={() => setDeletion(opening._id) }>
         <View style={styles.campBtnClear}>
-            <Image source={require('../../assets/icons/openings/clear.png')} style={styles.btnLogin}/>
+            <Image source={require('../../assets/icons/common/clear.png')} style={styles.btnLogin}/>
         </View>
     </TouchableWithoutFeedback>
   );

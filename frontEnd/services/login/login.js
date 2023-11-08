@@ -46,8 +46,6 @@ export default async ({ userValue,
           profileImage: loginData.profileImage,
         });
 
-        //preciso carregar imagem dos usuarios
-        
         setCurrentPage('profile');
 
       } else {

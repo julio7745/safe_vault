@@ -7,7 +7,8 @@ import uploadUser from './uploadUser';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async ({ userValue,
+export default async ({ 
+  userValue,
   passwordValue,
   setUserErrors,
   setPasswordErrors,

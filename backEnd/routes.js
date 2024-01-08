@@ -16,4 +16,6 @@ router.post('/clearOpenings', findUser, openingsController.clear)
 router.post('/deleteOpening', findUser, openingsController.delete)
 router.post('/createOpening', findUser, openingsController.create)
 
+router.get('/oi', (req, res) => res.send("hello"))
+
 module.exports = router;

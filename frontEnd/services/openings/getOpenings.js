@@ -27,10 +27,8 @@ export default async({setloading, user, setOpenings, setCurrentPage, }) => {
         }
 
     } catch (error) {
-
-        console.error(error);
-        logout({...{setloading, setCurrentPage, }});
-        
+        console.log(error);
+        //logout({...{setloading, setCurrentPage, }}); 
     }
 
     setloading(false)

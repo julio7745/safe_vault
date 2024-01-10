@@ -28,10 +28,8 @@ export default async({user, setCurrentPage, setloading, setDeletion}) => {
         }
 
     } catch (error) {
-
         console.error('Erro:', error);
-        logout({...{setloading, setCurrentPage, }});
-
+        //logout({...{setloading, setCurrentPage, }});
     }
 
     setloading(false)

@@ -57,6 +57,7 @@ export default async ({
       }
     } catch (error) {
       console.error('Erro:', error);
+      //logout({...{setloading, setCurrentPage, }});
     }
 
   }

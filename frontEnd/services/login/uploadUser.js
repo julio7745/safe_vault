@@ -11,6 +11,7 @@ export default async ({ name,  lastName, id, password, }) =>{
         
     } catch (error) {
         console.error('Erro:', error);
+        //logout({...{setloading, setCurrentPage, }});
     }
 
     return;

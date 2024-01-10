@@ -38,7 +38,8 @@ export default async( {setImage, _id} ) => {
         }
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        //logout({...{setloading, setCurrentPage, }});
     }
 
     return ;

@@ -45,7 +45,7 @@ export default async ({
 
         }else{
 
-            //AQUI ENTRA A REQUISIÇÂO PARA TROCAR DE SENHA
+            console.log('aqui vou mudar a senha');
             
         }
 

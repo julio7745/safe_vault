@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 const openingSchema = new Schema({
   
     userId: { type: String, required: true },
-    day: { type: Number, required: true },
     month: { type: String, required: true },
+    minute: { type: Number, required: true },
     year: { type: Number, required: true },
     hour: { type: Number, required: true },
-    minute: { type: Number, required: true },
+    day: { type: Number, required: true },
 
 });
 

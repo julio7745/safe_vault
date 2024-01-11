@@ -3,19 +3,20 @@ const express = require('express')
 
 const router = express.Router();
 
-const findUser = require('./src/middlewares/findUser.js')
+const LoginController = require('./src/controllers/LoginController.js')
+router.post('/login', LoginController.login)
 
-const usersController =  require('./src/controllers/usersController.js')
-router.post('/login', usersController.login)
-router.post('/getUsers', findUser, usersController.get)
-router.get('/getProfileImage/:idOfUser', usersController.getProfileImage)
+const OpeningController = require('./src/controllers/OpeningController.js')
 
-const openingsController =  require('./src/controllers/openingsController.js')
-router.post('/getOpenings', findUser, openingsController.get)
-router.post('/clearOpenings', findUser, openingsController.clear)
-router.post('/deleteOpening', findUser, openingsController.delete)
-router.post('/createOpening', findUser, openingsController.create)
+router.post('/opening/getAll', OpeningController.getAll)
+router.post('/opening/clear', OpeningController.clear)
+router.post('/opening/delete/:_id', OpeningController.delete)
+router.post('/opening/create', OpeningController.create);
 
-router.get('/oi', (req, res) => res.send("hello"))
+const UserController = require('./src/controllers/UserController.js')
+router.post('/user/getAll', UserController.getAll);
+
+const ProfileImageController = require('./src/controllers/ProfileImageController.js')
+router.post('profileImage/get/:_id', ProfileImageController.get)
 
 module.exports = router;

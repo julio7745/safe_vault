@@ -10,9 +10,9 @@ export default ({user, setCurrentPage, setloading, }) => {
   const newPasswordRef = useRef(null);
   const confirmNewPasswordRef = useRef(null);
 
-  const [currentPasswordValue, setCurrentPasswordValue] = useState('');
-  const [newPasswordValue, setNewPasswordValue] = useState('');
-  const [confirmNewPasswordValue, setConfirmNewPasswordValue] = useState('');
+  const [currentPasswordValue, setCurrentPasswordValue] = useState('123456Aa');
+  const [newPasswordValue, setNewPasswordValue] = useState('123456Aa');
+  const [confirmNewPasswordValue, setConfirmNewPasswordValue] = useState('123456Aa');
 
   const [currentPasswordErrors, setCurrentPasswordErrors] = useState('');
   const [newPasswordErrors, setNewPasswordErrors] = useState('');

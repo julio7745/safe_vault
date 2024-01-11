@@ -9,19 +9,22 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async( {setImage, _id} ) => {
 
+    
     try {
-
+        
         const valueInCache = JSON.parse( await AsyncStorage.getItem(`ProfileImage.${_id}`) );
-
+        
         if (valueInCache !== null && valueInCache.expired >= Date.now()) {
-
+            
             setImage(valueInCache.base64Image);
             
         } else {
-
+            
             await AsyncStorage.removeItem(`ProfileImage.${_id}`);
-
+            
             const response = await axios.get(`${URL_API_BACKEND}/getProfileImage/${_id }`);
+            
+            //aqui eu preciso verificar se a imagem veio ou não
         
             const buffer = Buffer.from(response.data.imageBuffer, 'binary');
             const base64Image = buffer.toString('base64');
@@ -38,7 +41,7 @@ export default async( {setImage, _id} ) => {
         }
 
     } catch (error) {
-        console.error(error);
+        console.error(`getImageProfile: ${error}`);
         //logout({...{setloading, setCurrentPage, }});
     }
 

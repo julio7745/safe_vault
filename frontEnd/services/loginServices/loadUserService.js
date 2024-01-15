@@ -1,26 +1,27 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import login from './login';
-import {setUserErrors, setPasswordErrors, setUserValue, setPasswordValue} from '../../components/login/LoginForm'
+import loginService from './loginService.js';
 
-export default async ({setCurrentPage, setUser, setloading, }) => {
+export default async ({ props }) => {
 
-    setloading(true);
+    props.setloading(true);
     
     try {
         
         let user = await AsyncStorage.getItem('user');
+        console.log(user);
 
         if (user){
             
             await AsyncStorage.removeItem('user')
             user = JSON.parse(user);
-
+            
+            props.log
             setUserValue(`${user.name||''}.${user.lastName||''}`)
             setPasswordValue(user.password||'')
             
-            await login({ userValue: `${user.name||''}.${user.lastName||''}`,
+            await loginService({ userValue: `${user.name||''}.${user.lastName||''}`,
                 passwordValue: user.password||'', 
                 setCurrentPage, 
                 setUser,
@@ -32,10 +33,9 @@ export default async ({setCurrentPage, setUser, setloading, }) => {
         
     } catch (error) {
         console.error('Erro:', error);
-        //logout({...{setloading, setCurrentPage, }});
     }
 
-    setloading(false);
+    props.setloading(false);
 
     return;
 }

@@ -1,8 +1,8 @@
 
 import { View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
 
-import createOpening from '../services/openings/createOpening';
-import logout from '../services/login/logout';
+import createOpening from '../../services/openings/createOpening';
+import logout from '../../services/login/logout';
 
 export default ({user, setCurrentPage, setloading, currentPage}) => {
 

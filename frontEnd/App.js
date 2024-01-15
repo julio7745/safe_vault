@@ -1,97 +1,32 @@
 
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
 
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import LoadingScreen from './screens/LoadingScreen';
-import OpeningsScreen from './screens/OpeningsScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import OpeningsScreen from './screens/OpeningsScreen.js';
+import ProfileScreen from './screens/ProfileScreen.js';
+import LoginScreen from './screens/LoginScreen.js';
+import HomeScreen from './screens/HomeScreen.js';
 
-import NavBar from './components/common/NavBar';
-import Header from './components/common/Header';
 
-import loadUser from './services/login/loadUser';
+import loadUserService from './services/loginServices/loadUserService.js';
 
-const App = () => {
+export default () => {
 
   const [currentPage, setCurrentPage] = useState('login');
+  const [loading, setloading] = useState(false);
   const [user, setUser] = useState({});
-  const [loading, setloading] = useState(true);
 
-  useEffect(() => {
-    
-    loadUser({setCurrentPage, setUser, setloading});
-
-  }, []);
-
-  StatusBar.setBarStyle('light-content');
-  StatusBar.setBackgroundColor('#1b353b');
+  const props = {
+    currentPage, setCurrentPage,
+    loading, setloading,
+    user, setUser
+  };
+  
+  //useEffect(() => { loadUserService({...{props}})}, []);
 
   switch (currentPage) {
-
-    case 'login':
-      return (
-        <View>
-          <LoginScreen {...{setCurrentPage, setUser, setloading, }}/>
-          { loading && <LoadingScreen/> }
-        </View>
-      );
-
-    case 'home':
-      return (
-        <View style={styles.container}>
-          <Header {...{currentPage, }}/>
-          <HomeScreen {...{user, setCurrentPage, setloading, currentPage }}/>
-          <NavBar  {...{setCurrentPage, currentPage, }}/>
-          { loading && <LoadingScreen/> }
-        </View>
-      );
-
-    case 'openings':
-    return (
-      <View style={styles.container}>
-        <Header {...{currentPage}}/>
-        <OpeningsScreen {...{user, setloading, setCurrentPage, }}/>
-        <NavBar  {...{setCurrentPage, currentPage, setloading}}/>
-        { loading && <LoadingScreen/> }
-      </View>
-    );
-
-    case 'profile':
-    return (
-      <View style={styles.container}>
-        <Header {...{currentPage}}/>
-        <ProfileScreen {...{user, setCurrentPage, setloading, }}/>
-        <NavBar  {...{setCurrentPage, currentPage, }}/>
-        { loading && <LoadingScreen/> }
-      </View>
-    );
-
-    default:
-      return (
-        <View style={styles.container}>
-          <Header {...{currentPage}}/>
-          <HomeScreen {...{user, setCurrentPage, setloading, currentPage }}/>
-          <NavBar  {...{setCurrentPage, currentPage}}/>
-          {loading && <LoadingScreen />}
-        </View>
-      );
+    case 'login': return <LoginScreen {...{props}} />
+    default: return <LoginScreen {...{props}} />
   }
-  
+
 };
 
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1b353b',
-    overflow: 'hidden',
-    paddingTop: 35,
-  }
-});
-
-export default App;

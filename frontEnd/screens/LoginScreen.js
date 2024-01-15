@@ -1,29 +1,28 @@
 
-import { View, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
-import HeaderLogin from '../components/login/LoginHeader'
-import FormLogin from '../components/login/LoginForm'
+import LoginView from './LoginViews/LoginView.js'
 
-export default ({ setCurrentPage, setUser, setloading, }) => {
+import LoadingComponent from '../components/common/LoadingComponent.js';
 
+export default ({ props }) => {
   return (
-    <KeyboardAvoidingView behavior="height" >
-    <View style={styles.content}>
-      <HeaderLogin/>
-      <FormLogin {...{ setCurrentPage, setUser, setloading, }}/>
-    </View>
-    </KeyboardAvoidingView>
+  <View style={styles.appContainer}>
+    <LoginView {...{props}}/>
+    <LoadingComponent {...{props}}/>
+  </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  content: {
+  appContainer: {
     height: '100%',
     width: '100%',
     display: "flex",
+    backgroundColor: '#1b353b',
+    paddingTop: 35,
+    overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1b353b',
-    overflow: 'hidden',
   }
 });

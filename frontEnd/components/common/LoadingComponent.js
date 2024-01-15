@@ -1,13 +1,14 @@
 
-import { View, StyleSheet, Text, } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
-export default () => {
+export default ({ props }) => {
 
-  return (
+  if (props.loading) return (
     <View style={styles.loading}>
       <Text  style={styles.loadingText}>loading ...</Text>
     </View>  
   );
+  
 };
 
 const styles = StyleSheet.create({

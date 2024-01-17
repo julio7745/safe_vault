@@ -1,11 +1,11 @@
 
 import { View, StyleSheet, Text, Image, } from 'react-native';
 
-export default ({currentPage, }) => {
+export default ({props}) => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}> {currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} </Text>
+      <Text style={styles.headerTitle}> {props.currentPage.charAt(0).toUpperCase() + props.currentPage.slice(1)} </Text>
       <View style={styles.logoContainer}>
         <Image source={require('../../assets/imgs/logoClara3.png')} style={styles.logo}/>
       </View>

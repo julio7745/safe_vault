@@ -6,18 +6,18 @@ import logout from '../loginServices/logoutService';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({setloading, user, setCurrentPage, }) => {
+export default async(props) => {
 
-    setloading(true)
+    props.setloading(true)
 
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/createOpening`, user);
+        const response = await axios.post(`${URL_API_BACKEND}/createOpening`, props.user);
         const message = await jwtDecode(response.data.token).message;
 
         if ( message === 'sucess' ){
 
-            setCurrentPage('openings')
+            props.setCurrentPage('openings')
 
         }else{
 
@@ -27,10 +27,9 @@ export default async({setloading, user, setCurrentPage, }) => {
 
     } catch (error) {
         console.error('Erro:', error);
-        //logout({...{setloading, setCurrentPage, }});
     }
 
-    setloading(false)
+        props.setloading(false)
     
     return ;
 }

@@ -12,16 +12,11 @@ import LoadingComponent from '../components/common/LoadingComponent';
 
 export default ({ props }) => {
 
-  /*
-
-  <Header  {...{props}}/>
-        <NavBar   {...{props}}/>
-
-        */
-
   return (
     <View style={styles.container}>
-        
+        <Header {...{props}}/>
+        <HomeView  {...{props}}/>
+        <NavBar {...{props}}/>
         <LoadingComponent {...{props}}/>
     </View>  
   );

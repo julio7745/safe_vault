@@ -7,15 +7,10 @@ import uploadUserService from './uploadUserService.js';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-import { NON_EXISTENT_USER_ERROR } from 'react-native-dotenv';
-import { INCORRECT_PASSWORD_ERROR } from 'react-native-dotenv';
-import { LOGIN_SUCCESSFUL } from 'react-native-dotenv';
-
-
 export default async ({ props }) => {
 
   props.setloading(true);
-
+  
   const newLogin = validateFormService({...{props}});
 
   if( props.errors.user.length === 0 && props.errors.password.length === 0 ) {
@@ -23,28 +18,33 @@ export default async ({ props }) => {
     try {
 
       const response = await axios.post(`${URL_API_BACKEND}/login`, newLogin);
-      console.log(response);
-
-      if (response.status === NON_EXISTENT_USER_ERROR) return props.setErrors({ user: ['● User does not exist!']});
-      if (response.status === INCORRECT_PASSWORD_ERROR) return props.setErrors({ password: ['● Incorrect password!']});
+      const login = jwtDecode(response.data.token);
       
-      if (response.status === LOGIN_SUCCESSFUL) {
+      if (login.message === 'NON_EXISTENT_USER_ERROR'){
+        props.setErrors({ user: ['● User does not exist!'], password: [] });
+        return props.setloading(false);
+      }
+      
+      if (login.message === 'INCORRECT_PASSWORD_ERROR') {
+        props.setErrors({ user: [], password: ['● Incorrect password!'] });
+        return props.setloading(false);
+      }
+      
+      if (login.message === 'LOGIN_SUCCESSFUL') {
         
-        props.setErrors({ });
-
-        const loginData = jwtDecode(response.data.token);
+        props.setErrors({ user: [], password: [] });
 
         uploadUserService({
-          name: loginData.name,
-          lastName: loginData.lastName,
-          _id: loginData._id,
+          name: login.data.name,
+          lastName: login.data.lastName,
+          _id: login.data._id,
           password: props.login.password,
         });
 
         props.setUser({
-          name: loginData.name,
-          lastName: loginData.lastName,
-          _id: loginData._id,
+          name: login.data.name,
+          lastName: login.data.lastName,
+          _id: login.data._id,
         });
 
         props.setCurrentPage('home');
@@ -56,6 +56,5 @@ export default async ({ props }) => {
   }
 
   props.setloading(false);
-  
   return;
 };

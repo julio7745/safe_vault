@@ -4,8 +4,8 @@ import jwtDecode from 'jwt-decode';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-import validatePassword from '../common/validatePasswordService.js';
-import logout from '../loginServices/logout.js'
+import validatePassword from '../commonServices/validatePasswordService.js';
+import logout from '../loginServices/logoutService.js'
 
 export default async ({
     currentPasswordValue,

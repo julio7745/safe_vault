@@ -6,7 +6,7 @@ import loginService from '../../services/loginServices/loginService.js';
 
 export default ({ props }) => {
 
-  const [login, setLogin] = useState({user: 'julio.carvalho', password: '123456Aa'});
+  const [login, setLogin] = useState({user: 'julio.carvalho', password: '123456aA'});
   const [errors, setErrors] = useState({user: [], password: []});
 
   const newProps = {
@@ -14,6 +14,8 @@ export default ({ props }) => {
     login, setLogin,
     errors, setErrors
   };
+
+  exports.propsOfLoginForm = newProps;
 
   const [displayPassword, setdisplayPassword] = useState(true);
 

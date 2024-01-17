@@ -1,7 +1,7 @@
 
 import lodash from 'lodash';
 
-import validatePasswordService from '../common/validatePasswordService.js'
+import validatePasswordService from '../commonServices/validatePasswordService.js'
 
 export default function({ props }) {
 

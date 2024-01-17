@@ -2,7 +2,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-import logout from '../login/logout';
+import logout from '../loginServices/logoutService';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 

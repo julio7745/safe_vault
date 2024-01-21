@@ -22,10 +22,7 @@ export default async ({
         await AsyncStorage.removeItem('user')
         user = JSON.parse(user);
 
-        console.log(user);
-        
         propsOfLoginForm.setLogin({user: `${user.name||''}.${user.lastName||''}`, password: user.password||''})
-        console.log(propsOfLoginForm.login);
         
         await loginService({...{
           setCurrentPage,

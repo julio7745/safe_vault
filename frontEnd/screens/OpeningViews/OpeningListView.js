@@ -2,14 +2,20 @@
 import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
 
-import getOpenings from '../../services/openings/getOpenings'
-import getUsers from '../../services/common/getUsers'
+//import getOpenings from '../../services/openingsServices/getOpeningsService'
+import getUsers from '../../services/commonServices/getUsersService'
 
+/*
 import ClearOpenings from '../../components/openings/ClearOpenings'
 import Opening from '../../components/openings/Opening'
 import ConfirmDeletion from '../../components/openings/ConfirmDeletion'
+*/
 
-export default ({user, setloading, setCurrentPage, }) => {
+export default ({
+  setCurrentPage,
+  setloading,
+  user
+  }) => {
 
   const [openings, setOpenings] = useState([]);
   const [deletion, setDeletion] = useState('');
@@ -17,14 +23,24 @@ export default ({user, setloading, setCurrentPage, }) => {
 
   useEffect( () => {
     
-    getUsers({setloading, user, setUsers, setCurrentPage })
-    getOpenings({setloading, user, setOpenings, setCurrentPage });
+    getUsers({...{
+      setCurrentPage,
+      setloading,
+      user,
+      setUsers 
+    }})
+
+    //getOpenings({setloading, user, setOpenings, setCurrentPage });
 
   }, []);
 
   return (
     <View style={styles.containOpening}>
-      {
+      
+    </View>
+  );
+
+  /*{
         users && ( 
           <FlatList
             data={[{ empty: true }, ...openings].reverse()}
@@ -43,9 +59,7 @@ export default ({user, setloading, setCurrentPage, }) => {
         )
       }
       <ClearOpenings {...{setDeletion, }}/>
-      { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }
-    </View>
-  );
+      { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }*/
   
 };
 

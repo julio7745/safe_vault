@@ -1,7 +1,4 @@
 
-
-
-
 import { View, StyleSheet } from 'react-native';
 
 import HomeView from './HomeViews/HomeView.js';

@@ -41,6 +41,12 @@ export default () => {
       user, setUser
     }}/>
 
+    case 'openings': return <OpeningsScreen {...{
+      currentPage, setCurrentPage,
+      loading, setloading,
+      user
+    }}/>
+
     default: return (
       <View style={styles.container}>
         <Text>{`Error 404: ${currentPage}`}</Text>

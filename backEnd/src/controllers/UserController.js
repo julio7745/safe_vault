@@ -12,14 +12,23 @@ module.exports.getAll = async (req, res) => {
 
     const users = await User.find();
 
-    users.forEach(user => { delete user.password;});
-    
-    const token = jwt.sign( { users }, process.env.SECRET);
-    return res.status(process.env.USER_GET_ALL_SUCCESSFUL).json({ token });
+    const usersWithoutPassword = users.map(user => {
+      const { password, ...userWithoutPassword } = user.toObject();
+      return userWithoutPassword;
+    });
+
+    const token = jwt.sign({ 
+      message: 'USER_GET_ALL_SUCCESSFUL',
+      data: {
+        users: usersWithoutPassword
+      }
+    }, process.env.SECRET);
+    return res.json({ token });
 
   } catch (error) {
     console.error(`UserController.getAll: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
 };

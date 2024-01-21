@@ -2,33 +2,30 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-import logout from '../login/logout';
-
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({setloading, user, setUsers, setCurrentPage, }) => {
+export default async({
+    setloading,
+    user,
+    setUsers 
+  }) => {
 
     setloading(true)
 
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/getUsers`, user);
-        const users = await jwtDecode(response.data.token).users;
-        const error = await jwtDecode(response.data.token).error;
+      const response = await axios.post(`${URL_API_BACKEND}/user/getAll`, { data: {}, user });
 
-        if ( error ){
+      const message = await jwtDecode(response.data.token).message;
+      const data = await jwtDecode(response.data.token).data;
 
-            logout({...{setloading, setCurrentPage, }});
+      // tratamento para NON_EXISTENT_USER_ERROR 
+      // tratamento para GERAL_ERROR 
 
-        }else{
-            
-            setUsers(users);
-            
-        }
-
+      if ( message === 'USER_GET_ALL_SUCCESSFUL' ) setUsers(data.users);
+  
     } catch (error) {
-        console.error(`getUser: ${error}`);
-        //logout({...{setloading, setCurrentPage, }});
+      console.error(`getUser: ${error}`);
     }
 
     setloading(false)

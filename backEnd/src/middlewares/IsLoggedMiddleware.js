@@ -10,16 +10,20 @@ module.exports = async (req, res, next) => {
 
     if (req.path !== '/login') {
 
-      const { name, lastName, _id } = req.body.login;
+      const { name, lastName, _id } = req.body.user;
       const user = await User.findOne({ name, lastName, _id });
 
-      if (!user) return res.status(process.env.ACCESS_DENIED_ERROR);
+      if (!user) {
+        const token = jwt.sign({ message: 'NON_EXISTENT_USER_ERROR' }, process.env.SECRET);
+        return res.json({ token });
+      }
 
     }
 
   } catch (error) {
     console.error(`IsLoggedMiddleware: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
   next();

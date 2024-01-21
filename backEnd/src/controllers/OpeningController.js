@@ -57,7 +57,7 @@ module.exports.create = async (req, res) => {
     
     const date = new Date();
     const openingData = {
-      userId: req.body._id,
+      userId: req.body.user._id,
       month: date.toLocaleString('en-US', { month: 'long' }),
       minute: date.getMinutes(),
       year: date.getFullYear(),
@@ -69,11 +69,13 @@ module.exports.create = async (req, res) => {
 
     await newOpening.save();
 
-    return res.status(process.env.OPENING_CREATE_SUCCESSFUL);
+    const token = jwt.sign({ message: 'OPENING_CREATE_SUCCESSFUL' }, process.env.SECRET);
+    return res.json({ token });
     
   } catch (error) {
     console.error(`OpeningController.create: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
 };

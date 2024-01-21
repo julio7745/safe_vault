@@ -6,30 +6,29 @@ import logout from '../loginServices/logoutService';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async(props) => {
+export default async({
+  setCurrentPage,
+  setloading,
+  user
+  }) => {
 
-    props.setloading(true)
+    setloading(true);
 
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/createOpening`, props.user);
-        const message = await jwtDecode(response.data.token).message;
+      const response = await axios.post(`${URL_API_BACKEND}/opening/create`, { data: {}, user });
+      const message = await jwtDecode(response.data.token).message;
 
-        if ( message === 'sucess' ){
+      // tratamento para NON_EXISTENT_USER_ERROR 
+      // tratamento para GERAL_ERROR 
 
-            props.setCurrentPage('openings')
-
-        }else{
-
-            logout({...{setloading, setCurrentPage, }});
-            
-        }
+      if ( message === 'OPENING_CREATE_SUCCESSFUL' ) setCurrentPage('openings')
 
     } catch (error) {
-        console.error('Erro:', error);
-    }
-
-        props.setloading(false)
+      console.error('createOpeningService:', error);
+  }
+      setloading(false)
     
     return ;
+
 }

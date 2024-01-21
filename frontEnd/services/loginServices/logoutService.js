@@ -1,14 +1,23 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default async( {props} ) => {
+export default async({
+    setCurrentPage,
+    setloading,
+    setUser
+  }) => {
 
-  props.setloading(true)
+  setloading(true)
 
   await AsyncStorage.clear();
-  props.setCurrentPage('login')
+  setCurrentPage('login')
+  setUser({
+    name: '',
+    lastName: '',
+    _id: '',
+  })
 
-  props.setloading(false)
+  setloading(false)
   
   return ;
   

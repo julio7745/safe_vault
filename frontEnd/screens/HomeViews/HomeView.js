@@ -1,25 +1,38 @@
 
 import { View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
 
-import createOpening from '../../services/openingsServices/createOpeningService'
+import createOpening from '../../services/openingsServices/createOpeningService.js'
 import logout from '../../services/loginServices/logoutService';
 
-export default ({props}) => {
+export default ({
+  currentPage, setCurrentPage,
+  setloading,
+  user, setUser
+  }) => {
 
-  return (
-    <View style={styles.content}>
-      <Text>NOME: {props.user.name}</Text>
-      <Text>SOBRENOME: {props.user.lastName}</Text>
-      <Text>ID: {props.user._id}</Text>
-      <Text>PAGINA ATUAL: {props.currentPage}</Text>
-      <TouchableWithoutFeedback onPress={() => createOpening( {...{props}} )}>
-        <Text style={styles.newColeta}>NewColeta</Text>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => logout( {...{props}} )}>
-        <Text style={styles.logout}>Logout</Text>
-      </TouchableWithoutFeedback>
-    </View>  
-  );
+    return (
+      <View style={styles.content}>
+        <Text>NOME: {user.name}</Text>
+        <Text>SOBRENOME: {user.lastName}</Text>
+        <Text>ID: {user._id}</Text>
+        <Text>PAGINA ATUAL: {currentPage}</Text>
+        <TouchableWithoutFeedback onPress={() => createOpening( {...{
+          setCurrentPage,
+          setloading,
+          user
+        }} )}>
+          <Text style={styles.newColeta}>NewColeta</Text>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => logout( {...{
+          setCurrentPage,
+          setloading,
+          setUser
+        }} )}>
+          <Text style={styles.logout}>Logout</Text>
+        </TouchableWithoutFeedback>
+      </View>  
+    );
+
 };
 
 const styles = StyleSheet.create({

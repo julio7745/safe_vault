@@ -15,32 +15,34 @@ const valueToOpenings = '50%'
 const valueToProfile = '77.5%'
 const valueToOther = '10000%'
 
-export default ({ props }) => {
+export default ({
+  currentPage, setCurrentPage
+  }) => {
 
-  const leftOfhorizontalLine = 
-  props.currentPage === 'home' ? valueToHome :
-  props.currentPage === 'openings' ? valueToOpenings :
-  props.currentPage === 'profile' ? valueToProfile :
-  valueToOther;
+    const leftOfhorizontalLine = 
+    currentPage === 'home' ? valueToHome :
+    currentPage === 'openings' ? valueToOpenings :
+    currentPage === 'profile' ? valueToProfile :
+    valueToOther;
 
-  const OptionsIco = 
-  props.currentPage === 'options' ? CloseOptionsIco : OpenOptionsIco;
+    const OptionsIco = 
+    currentPage === 'options' ? CloseOptionsIco : OpenOptionsIco;
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.containerBtns}>
-        <NavBarButton {...{props, icon: HomeIco, page: 'home', }}/>
-        <NavBarButton {...{props, icon: OpeningsIco, page: 'openings', }}/>
-        <NavBarButton {...{props, icon: UserIco, page: 'profile', }}/>
-        <Image
-          source={require('../../assets/icons/navBar/verticalLine.png')}
-          style={{...styles.horizontalLine, left: leftOfhorizontalLine}}
-        />
+    return (
+      <View style={styles.container}>
+        <View style={styles.containerBtns}>
+          <NavBarButton {...{setCurrentPage, icon: HomeIco, page: 'home', }}/>
+          <NavBarButton {...{setCurrentPage, icon: OpeningsIco, page: 'openings', }}/>
+          <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'profile', }}/>
+          <Image
+            source={require('../../assets/icons/navBar/verticalLine.png')}
+            style={{...styles.horizontalLine, left: leftOfhorizontalLine}}
+          />
+        </View>
+        <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.verticalLine}/>
+        <MenuIco {...{currentPage, setCurrentPage, icon: OptionsIco }}/>
       </View>
-      <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.verticalLine}/>
-      <MenuIco {...{props, icon: OptionsIco }}/>
-    </View>
-  );
+    );
   
 };
 

@@ -28,6 +28,8 @@ export default async ({
 
         const response = await axios.post(`${URL_API_BACKEND}/login`, formatedLogin);
         const newLogin = jwtDecode(response.data.token);
+
+        // tratamento para GERAL_ERROR 
         
         if (newLogin.message === 'NON_EXISTENT_USER_ERROR'){
           setErrors({ user: ['● User does not exist!'], password: [] });

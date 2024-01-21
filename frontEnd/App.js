@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import {Text} from 'react-native';
 
 import OpeningsScreen from './screens/OpeningsScreen.js';
 import ProfileScreen from './screens/ProfileScreen.js';
@@ -32,9 +33,13 @@ export default () => {
       setUser
     }}/>
 
-    case 'home': return <HomeScreen />
+    case 'home': return <HomeScreen {...{
+      currentPage, setCurrentPage,
+      loading, setloading,
+      user, setUser
+    }}/>
 
-    default: return <LoginScreen />
+    default: return <Text>oioi</Text>
   }
 
 };

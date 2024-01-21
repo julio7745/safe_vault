@@ -4,26 +4,35 @@
 
 import { View, StyleSheet, Text} from 'react-native';
 
-import HomeView from './HomeViews/HomeView';
+import HomeView from './HomeViews/HomeView.js';
 
 import NavBar from '../components/common/NavBarComponent';
 import Header from '../components/common/HeaderComponent';
 import LoadingComponent from '../components/common/LoadingComponent';
 
-export default ({ props }) => {
+export default ({
+  currentPage, setCurrentPage,
+  loading, setloading,
+  user, setUser
+  }) => {
 
-  /*
-  <Header {...{props}}/>
-  <HomeView  {...{props}}/>
-  <NavBar {...{props}}/>
-  <LoadingComponent {...{props}}/>
-  */
+    return (
+      <View style={styles.container}>
+        <Header {...{
+          currentPage
+        }}/>
+        <HomeView  {...{
+          currentPage, setCurrentPage,
+          setloading,
+          user, setUser
+        }}/>
+        <NavBar {...{
+          currentPage, setCurrentPage
+        }}/>
+        <LoadingComponent {...{ loading }}/>
+      </View>  
+    );
 
-  return (
-    <View style={styles.container}>
-        <Text>oi</Text>
-    </View>  
-  );
 };
 
 const styles = StyleSheet.create({

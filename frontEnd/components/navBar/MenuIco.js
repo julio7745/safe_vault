@@ -1,13 +1,13 @@
 
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
-export default NavBarButton = ({props, icon }) => {
+export default NavBarButton = ({currentPage, setCurrentPage, icon }) => {
 
-  const page = props.currentPage === 'options' ? 'home' : 'options'
+  const page = currentPage === 'options' ? 'home' : 'options'
 
   return (
     <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={ ()=> props.setCurrentPage(page) }>
+        <TouchableWithoutFeedback onPress={ ()=> setCurrentPage(page) }>
             <Image source={icon} style={styles.btnIcon}/>
         </TouchableWithoutFeedback>
     </View>

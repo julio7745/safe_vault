@@ -4,17 +4,23 @@ import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import HeaderLoginComponent from '../../components/login/HeaderLoginComponent.js';
 import FormLoginComponent from '../../components/login/FormLoginComponent.js';
 
-export default ({ props }) => {
-
-  return (
-    <KeyboardAvoidingView behavior="height" >
-    <View style={styles.content}>
-      <HeaderLoginComponent/>
-      <FormLoginComponent {...{props}}/>
-    </View>
-    </KeyboardAvoidingView>
-  );
-  
+export default ({
+    setCurrentPage,
+    setloading,
+    setUser
+  }) => {
+    return (
+      <KeyboardAvoidingView behavior="height" >
+      <View style={styles.content}>
+        <HeaderLoginComponent />
+        <FormLoginComponent {...{
+          setCurrentPage,
+          setloading,
+          setUser
+        }}/>
+      </View>
+      </KeyboardAvoidingView>
+    );
 };
 
 const styles = StyleSheet.create({

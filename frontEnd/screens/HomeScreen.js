@@ -2,7 +2,7 @@
 
 
 
-import { View, StyleSheet, } from 'react-native';
+import { View, StyleSheet, Text} from 'react-native';
 
 import HomeView from './HomeViews/HomeView';
 
@@ -12,12 +12,16 @@ import LoadingComponent from '../components/common/LoadingComponent';
 
 export default ({ props }) => {
 
+  /*
+  <Header {...{props}}/>
+  <HomeView  {...{props}}/>
+  <NavBar {...{props}}/>
+  <LoadingComponent {...{props}}/>
+  */
+
   return (
     <View style={styles.container}>
-        <Header {...{props}}/>
-        <HomeView  {...{props}}/>
-        <NavBar {...{props}}/>
-        <LoadingComponent {...{props}}/>
+        <Text>oi</Text>
     </View>  
   );
 };

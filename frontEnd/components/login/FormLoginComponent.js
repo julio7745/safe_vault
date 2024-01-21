@@ -4,18 +4,19 @@ import { useState } from 'react';
 
 import loginService from '../../services/loginServices/loginService.js';
 
-export default ({ props }) => {
+export default ({
+    setCurrentPage,
+    setloading,
+    setUser
+  }) => {
 
   const [login, setLogin] = useState({user: 'julio.carvalho', password: '123456aA'});
   const [errors, setErrors] = useState({user: [], password: []});
 
-  const newProps = {
-    ...props,
+  exports.propsOfLoginForm = {
     login, setLogin,
     errors, setErrors
   };
-
-  exports.propsOfLoginForm = newProps;
 
   const [displayPassword, setdisplayPassword] = useState(true);
 
@@ -71,7 +72,13 @@ export default ({ props }) => {
       </View>
       <View style={styles.campBtnLogin}>
         <TouchableWithoutFeedback 
-          onPress={() => loginService({ props: {...newProps} })}>
+          onPress={() => loginService({...{
+            setCurrentPage,
+            setloading,
+            setUser,
+            login,
+            errors, setErrors
+          }})}>
           <Image source={require('../../assets/icons/login/login.png')} style={styles.btnLogin}/>
         </TouchableWithoutFeedback>
       </View>

@@ -7,54 +7,63 @@ import uploadUserService from './uploadUserService.js';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async ({ props }) => {
+export default async ({
+    setCurrentPage,
+    setloading,
+    setUser,
+    login,
+    errors, setErrors
+  }) => {
 
-  props.setloading(true);
-  
-  const newLogin = validateFormService({...{props}});
+    setloading(true);
+    
+    const formatedLogin = validateFormService({...{
+      login,
+      errors, setErrors
+    }});
 
-  if( props.errors.user.length === 0 && props.errors.password.length === 0 ) {
+    if( errors.user.length === 0 && errors.password.length === 0 ) {
 
-    try {
+      try {
 
-      const response = await axios.post(`${URL_API_BACKEND}/login`, newLogin);
-      const login = jwtDecode(response.data.token);
-      
-      if (login.message === 'NON_EXISTENT_USER_ERROR'){
-        props.setErrors({ user: ['● User does not exist!'], password: [] });
-        return props.setloading(false);
-      }
-      
-      if (login.message === 'INCORRECT_PASSWORD_ERROR') {
-        props.setErrors({ user: [], password: ['● Incorrect password!'] });
-        return props.setloading(false);
-      }
-      
-      if (login.message === 'LOGIN_SUCCESSFUL') {
+        const response = await axios.post(`${URL_API_BACKEND}/login`, formatedLogin);
+        const newLogin = jwtDecode(response.data.token);
         
-        props.setErrors({ user: [], password: [] });
+        if (newLogin.message === 'NON_EXISTENT_USER_ERROR'){
+          setErrors({ user: ['● User does not exist!'], password: [] });
+          return setloading(false);
+        }
+        
+        if (newLogin.message === 'INCORRECT_PASSWORD_ERROR') {
+          setErrors({ user: [], password: ['● Incorrect password!'] });
+          return setloading(false);
+        }
+        
+        if (newLogin.message === 'LOGIN_SUCCESSFUL') {
+          
+          setErrors({ user: [], password: [] });
 
-        uploadUserService({
-          name: login.data.name,
-          lastName: login.data.lastName,
-          _id: login.data._id,
-          password: props.login.password,
-        });
+          uploadUserService({
+            name: newLogin.data.name,
+            lastName: newLogin.data.lastName,
+            _id: newLogin.data._id,
+            password: login.password,
+          });
 
-        props.setUser({
-          name: login.data.name,
-          lastName: login.data.lastName,
-          _id: login.data._id,
-        });
+          setUser({
+            name: newLogin.data.name,
+            lastName: newLogin.data.lastName,
+            _id: newLogin.data._id,
+          });
 
-        props.setCurrentPage('home');
+          setCurrentPage('home');
 
-      }
-    } catch (error) {
-      console.error(`loginService: ${error}`);
-    };
-  }
+        }
+      } catch (error) {
+        console.error(`loginService: ${error}`);
+      };
+    }
 
-  props.setloading(false);
-  return;
+    setloading(false);
+    return;
 };

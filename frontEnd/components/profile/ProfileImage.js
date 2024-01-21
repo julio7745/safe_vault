@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-import getImageProfile from '../../services/common/getImageProfile';
+import getImageProfile from '../../services/commonServices/getImageProfileService';
 
 export default ({ _id, }) => {
   

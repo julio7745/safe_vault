@@ -5,7 +5,7 @@ import { TouchableWithoutFeedback, StyleSheet, View, Image, Text} from 'react-na
 import ProfileImage from '../../components/profile/ProfileImage.js'; 
 import FormEditPassword from '../../components/profile/FormEditPassword.js';
 
-export default ({user, setCurrentPage, setloading, }) => {
+export default ({props}) => {
 
   useEffect( () => {
     
@@ -14,34 +14,39 @@ export default ({user, setCurrentPage, setloading, }) => {
   return (
     <View style={styles.containProfile}>
         <View style={styles.profile}>
+
           <View style={styles.containerProfileImage}>
-            <ProfileImage {...{ _id: user.id, }}/>
+            <ProfileImage {...{ _id: props.user.id, }}/>
             <TouchableWithoutFeedback onPress={ ()=> console.log('aqui eu vou editar a ft')}>
-              <Image source={require('../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
+              <Image source={require('../../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
             </TouchableWithoutFeedback>
           </View>
+
           <View style={styles.containerUserData}>
-          <Text>
-            <Text style={styles.strong}>User Name: </Text>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}
-          </Text>
-          <Text>
-            <Text style={styles.strong}>User Lastname: </Text>{user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}
-          </Text>
-        </View>
-        <View style={styles.containerUserData}>
-          <Text style={styles.strong}>Edit Password</Text>
-          <FormEditPassword {...{user, setCurrentPage, setloading, }}/>
-        </View>
-        <View style={styles.containerUserData}>
-          <Text style={styles.strong}>Delete my Account</Text>
-          <View style={styles.containerbtnDeleteAccount}>
-            <TouchableWithoutFeedback onPress={() => console.log('aqui eu vou apagr o usuario')}>
-              <View style={styles.btnDeleteAccount}>
-                <Image source={require('../assets/icons/common/clear.png')} style={styles.icoDeleteAccount}/>
-              </View>
-            </TouchableWithoutFeedback>
+            <Text>
+              <Text style={styles.strong}>User Name: </Text>{props.user.name.charAt(0).toUpperCase() + user.name.slice(1)}
+            </Text>
+            <Text>
+              <Text style={styles.strong}>User Lastname: </Text>{props.user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}
+            </Text>
           </View>
-        </View>
+
+          <View style={styles.containerUserData}>
+            <Text style={styles.strong}>Edit Password</Text>
+            <FormEditPassword {...{user, setCurrentPage, setloading, }}/>
+          </View>
+
+          <View style={styles.containerUserData}>
+            <Text style={styles.strong}>Delete my Account</Text>
+            <View style={styles.containerbtnDeleteAccount}>
+              <TouchableWithoutFeedback onPress={() => console.log('aqui eu vou apagr o usuario')}>
+                <View style={styles.btnDeleteAccount}>
+                  <Image source={require('../../assets/icons/common/clear.png')} style={styles.icoDeleteAccount}/>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </View>
+          
       </View>
     </View>
   );

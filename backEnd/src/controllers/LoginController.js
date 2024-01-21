@@ -14,6 +14,7 @@ module.exports.login = async (req, res) => {
     const { name, lastName, password } = req.body;
 
     const user = await User.findOne({ name, lastName });
+
     if (!user) {
       const token = jwt.sign({ message: 'NON_EXISTENT_USER_ERROR' }, process.env.SECRET);
       return res.json({ token });
@@ -33,7 +34,6 @@ module.exports.login = async (req, res) => {
         lastName: user.lastName,
       }
     }, process.env.SECRET);
-    console.log(token);
     return res.json({ token });
     
   } catch (error) {

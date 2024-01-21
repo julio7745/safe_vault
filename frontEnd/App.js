@@ -17,19 +17,24 @@ export default () => {
     lastName: '',
     _id: '',
   });
-
-  const props = {
-    currentPage, setCurrentPage,
-    loading, setloading,
-    user, setUser
-  };
   
-  useEffect(() => { loadUserService({...{props}})}, []);
+  useEffect(() => { loadUserService({...{
+    setCurrentPage,
+    setloading,
+    setUser,
+  }})}, []);
 
   switch (currentPage) {
-    case 'login': return <LoginScreen {...{props}} />
-    case 'home': return <HomeScreen {...{props}} />
-    default: return <LoginScreen {...{props}} />
+    
+    case 'login': return <LoginScreen {...{
+      setCurrentPage,
+      loading, setloading,
+      setUser
+    }}/>
+
+    case 'home': return <HomeScreen />
+
+    default: return <LoginScreen />
   }
 
 };

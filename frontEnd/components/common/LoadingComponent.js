@@ -1,9 +1,9 @@
 
 import { View, StyleSheet, Text } from 'react-native';
 
-export default ({ props }) => {
+export default ({ loading }) => {
 
-  if (props.loading) return (
+  if ( loading ) return (
     <View style={styles.loading}>
       <Text  style={styles.loadingText}>loading ...</Text>
     </View>  

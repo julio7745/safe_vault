@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { View, TextInput, StyleSheet, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
 
-import updatePassword from '../../services/profile/updatePassword';
+import updatePassword from '../../services/profileServices/updatePasswordService';
 
 export default ({user, setCurrentPage, setloading, }) => {
 

@@ -5,13 +5,22 @@ import LoginView from './LoginViews/LoginView.js'
 
 import LoadingComponent from '../components/common/LoadingComponent.js';
 
-export default ({ props }) => {
-  return (
-  <View style={styles.appContainer}>
-    <LoginView {...{props}}/>
-    <LoadingComponent {...{props}}/>
-  </View>
-  );
+export default ({
+    setCurrentPage,
+    loading, setloading,
+    setUser
+  }) => {
+    
+    return (
+    <View style={styles.appContainer}>
+      <LoginView {...{
+        setCurrentPage,
+        setloading,
+        setUser
+      }}/>
+      <LoadingComponent {...{ loading }}/>
+    </View>
+    );
 }
 
 const styles = StyleSheet.create({

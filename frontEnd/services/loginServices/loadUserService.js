@@ -2,31 +2,46 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import loginService from './loginService.js';
+
 import { propsOfLoginForm } from '../../components/login/FormLoginComponent.js'
 
-export default async ({ props }) => {
+export default async ({
+    setCurrentPage,
+    setloading,
+    setUser,
+  }) => {
 
-    props.setloading(true);
+    setloading(true);
     
     try {
         
-        let user = await AsyncStorage.getItem('user');
+      let user = await AsyncStorage.getItem('user');
 
-        if (user){
-            
-            await AsyncStorage.removeItem('user')
-            user = JSON.parse(user);
-            
-            propsOfLoginForm.setLogin({user: `${user.name||''}.${user.lastName||''}`, password: user.password||''})
-            
-            await loginService({ props: {...propsOfLoginForm} })
-        }
+      if (user){
+          
+        await AsyncStorage.removeItem('user')
+        user = JSON.parse(user);
+
+        console.log(user);
+        
+        propsOfLoginForm.setLogin({user: `${user.name||''}.${user.lastName||''}`, password: user.password||''})
+        console.log(propsOfLoginForm.login);
+        
+        await loginService({...{
+          setCurrentPage,
+          setloading,
+          setUser,
+          login: propsOfLoginForm.login,
+          errors: propsOfLoginForm.errors, setErrors: propsOfLoginForm.setErrors
+        }})
+
+      }
         
     } catch (error) {
-        console.error('Erro:', error);
+      console.error('loadUserService:', error);
     }
 
-    props.setloading(false);
+    setloading(false);
 
     return;
 }

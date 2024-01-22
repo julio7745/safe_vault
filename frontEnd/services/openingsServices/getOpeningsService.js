@@ -22,11 +22,7 @@ export default async({
       // tratamento para NON_EXISTENT_USER_ERROR 
       // tratamento para GERAL_ERROR 
 
-      if ( message === 'OPENING_GET_ALL_SUCCESSFUL' ) {
-        
-        setOpenings(data.openings);
-
-      }
+      if ( message === 'OPENING_GET_ALL_SUCCESSFUL' ) setOpenings(data.openings);
   
     } catch (error) {
       console.error(`getOpeningsService: ${error}`);

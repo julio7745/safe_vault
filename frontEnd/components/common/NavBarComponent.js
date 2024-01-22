@@ -1,8 +1,8 @@
 
 import { View, StyleSheet, Image, } from 'react-native';
 
-import NavBarButton from '../navBar/NavBarButton'
-import MenuIco from '../navBar/MenuIco'
+import NavBarButton from '../navBar/NavBarButtonComponent'
+import MenuIco from '../navBar/MenuIcoComponent'
 
 import HomeIco from '../../assets/icons/navBar/vault.png'
 import OpeningsIco from '../../assets/icons/navBar/list.png'

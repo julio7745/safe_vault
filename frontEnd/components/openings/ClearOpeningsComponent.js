@@ -2,12 +2,12 @@
 import { View, StyleSheet, Image, TouchableWithoutFeedback, } from 'react-native';
 
 
-export default ({setDeletion, }) => {
+export default ({ setDeletion }) => {
   
   return (
       <TouchableWithoutFeedback onPress={() => setDeletion('all')}>
         <View style={styles.campBtnClear}>
-            <Image source={require('../../assets/icons/common/clear.png')} style={styles.btnLogin}/>
+          <Image source={require('../../assets/icons/common/clear.png')} style={styles.btnLogin}/>
         </View>
     </TouchableWithoutFeedback>
   );

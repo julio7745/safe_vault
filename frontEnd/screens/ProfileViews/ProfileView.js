@@ -2,8 +2,8 @@
 import { useEffect } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, Text} from 'react-native';
 
-import ProfileImage from '../../components/profile/ProfileImage.js'; 
-import FormEditPassword from '../../components/profile/FormEditPassword.js';
+import ProfileImage from '../../components/profile/ProfileImageComponent.js'; 
+import FormEditPassword from '../../components/profile/FormEditPasswordComponent.js';
 
 export default ({props}) => {
 

@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-import getImageProfile from '../../services/common/getImageProfile';
+import getImageProfile from '../../services/commonServices/getImageProfileService.js';
 
-export default ({ _id }) => {
+export default ({ userOfOpening, user}) => {
   
   const [image, setImage] = useState();
 
   useEffect(() => {
     
-    getImageProfile({_id, setImage})
+    getImageProfile({_id: userOfOpening._id, setImage, user})
 
   }, []);
 

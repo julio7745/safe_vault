@@ -2,12 +2,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import jwtDecode from 'jwt-decode';
 global.Buffer = Buffer;
-
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async( {setImage, _id} ) => {
+export default async( {setImage, _id, user} ) => {
 
     
     try {
@@ -22,27 +22,34 @@ export default async( {setImage, _id} ) => {
             
             await AsyncStorage.removeItem(`ProfileImage.${_id}`);
             
-            const response = await axios.get(`${URL_API_BACKEND}/getProfileImage/${_id }`);
+            const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id }`, { data: {}, user });
+
+            const message = await jwtDecode(response.data.token).message;
+            const data = await jwtDecode(response.data.token).data;
             
-            //aqui eu preciso verificar se a imagem veio ou não
+            // tratamento para NON_EXISTENT_USER_ERROR 
+            // tratamento para GERAL_ERROR 
+            // tratamento para PROFILE_IMAGE_GET_ERROR
+
+            if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
+
+                const buffer = Buffer.from(data.userImage, 'binary');
+                const base64Image = buffer.toString('base64');
+                setImage(base64Image);
+
+                const image = {
+                    base64Image, 
+                    expired: Date.now() + 10 * 60 * 1000,
+                };
+    
+                await AsyncStorage.setItem(`ProfileImage.${_id}`, JSON.stringify(image));
+
+            }
         
-            const buffer = Buffer.from(response.data.imageBuffer, 'binary');
-            const base64Image = buffer.toString('base64');
-
-            setImage(base64Image);
-
-            const data = {
-                base64Image, 
-                expired: Date.now() + 60 * 10 * 1000,
-            };
-
-            await AsyncStorage.setItem(`ProfileImage.${_id}`, JSON.stringify(data));
-
         }
 
     } catch (error) {
         console.error(`getImageProfile: ${error}`);
-        //logout({...{setloading, setCurrentPage, }});
     }
 
     return ;

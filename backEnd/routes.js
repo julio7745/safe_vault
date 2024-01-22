@@ -17,6 +17,6 @@ const UserController = require('./src/controllers/UserController.js')
 router.post('/user/getAll', UserController.getAll);
 
 const ProfileImageController = require('./src/controllers/ProfileImageController.js')
-router.post('profileImage/get/:_id', ProfileImageController.get)
+router.post('/profileImage/get/:_id', ProfileImageController.get)
 
 module.exports = router;

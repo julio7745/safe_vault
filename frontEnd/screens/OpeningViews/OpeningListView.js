@@ -5,11 +5,9 @@ import { FlatList, StyleSheet, View, } from 'react-native';
 import getOpenings from '../../services/openingsServices/getOpeningsService'
 import getUsers from '../../services/commonServices/getUsersService'
 
-/*
-import ClearOpenings from '../../components/openings/ClearOpenings'
-import Opening from '../../components/openings/Opening'
-import ConfirmDeletion from '../../components/openings/ConfirmDeletion'
-*/
+import OpeningComponent from '../../components/openings/OpeningComponent'
+import ClearOpeningsComponent from '../../components/openings/ClearOpeningsComponent';
+import ConfirmDeletionComponent from '../../components/openings/ConfirmDeletionComponent';
 
 export default ({
   setCurrentPage,
@@ -40,32 +38,33 @@ export default ({
 
   return (
     <View style={styles.containOpening}>
-      
-    </View>
-  );
 
-  /*{
-        users && ( 
-          <FlatList
-            data={[{ empty: true }, ...openings].reverse()}
-            style={styles.listOpening}
-            contentContainerStyle={{alignItems: 'center'}}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              if (item.empty) {
-                return <View style={styles.paddingItem} />;
-              } else {
-                return <Opening {...{ opening: item, users, setloading, setDeletion, index, }} />;
-              }
-            }}
-          />
-        )
-      }
-      <ClearOpenings {...{setDeletion, }}/>
-      { deletion && <ConfirmDeletion {...{setDeletion, user, setloading, setCurrentPage, deletion }} /> }*/
+    { users.length > 0 && openings.length && ( 
+      <FlatList
+        data={[{ empty: true }, ...openings].reverse()}
+        style={styles.listOpening}
+        contentContainerStyle={{alignItems: 'center'}}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          if (item.empty) {
+            return <View style={styles.paddingItem} />;
+          } else {
+            return <OpeningComponent {...{ opening: item, users, user, setDeletion }} />;
+          }
+        }}
+      />
+    )}
+    
+    <ClearOpeningsComponent {...{ setDeletion }}/>
+    { deletion && <ConfirmDeletionComponent {...{ setDeletion, user, setloading, setCurrentPage, deletion }} /> }
+
+    </View>
+  );    
   
 };
+
+//botões e etc
 
 const styles = StyleSheet.create({
   containOpening: {

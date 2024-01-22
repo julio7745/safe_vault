@@ -2,14 +2,13 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-import logout from '../login/logout';
-
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async({user, setCurrentPage, setloading, setDeletion}) => {
 
     setloading(true)
-
+    console.log('limpou');
+    /*
     try {
 
         const response = await axios.post(`${URL_API_BACKEND}/clearOpenings`, user);
@@ -30,7 +29,7 @@ export default async({user, setCurrentPage, setloading, setDeletion}) => {
     } catch (error) {
         console.error('Erro:', error);
         //logout({...{setloading, setCurrentPage, }});
-    }
+    }*/
 
     setloading(false)
     

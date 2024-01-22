@@ -14,14 +14,24 @@ module.exports.get = async (req, res) => {
 
     const userImage = await ProfileImage.findOne({ idOfUser });
 
-    if (!userImage) return res.status(process.env.PROFILE_IMAGE_GET_ERROR);
+    if (!userImage) {
+      const token = jwt.sign({ message: 'PROFILE_IMAGE_GET_ERROR' }, process.env.SECRET);
+      return res.json({ token });
+    }
 
-    const token = jwt.sign({ userImage }, process.env.SECRET);
-    return res.status(process.env.PROFILE_IMAGE_GET_SUCCESSFUL).json({ token });
+    const token = jwt.sign({ 
+      message: 'PROFILE_IMAGE_GET_SUCCESSFUL',
+      data: {
+        userImage
+      }
+    }, process.env.SECRET);
+    console.log(openings);
+    return res.json({ token });
 
   } catch (error) {
     console.error(`ProfileImageController.get: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
 };

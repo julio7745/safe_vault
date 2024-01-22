@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View, } from 'react-native';
 
-//import getOpenings from '../../services/openingsServices/getOpeningsService'
+import getOpenings from '../../services/openingsServices/getOpeningsService'
 import getUsers from '../../services/commonServices/getUsersService'
 
 /*
@@ -19,7 +19,7 @@ export default ({
 
   const [openings, setOpenings] = useState([]);
   const [deletion, setDeletion] = useState('');
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect( () => {
     
@@ -30,7 +30,11 @@ export default ({
       setUsers 
     }})
 
-    //getOpenings({setloading, user, setOpenings, setCurrentPage });
+    getOpenings({...{
+      setloading,
+      user,
+      setOpenings 
+    }})
 
   }, []);
 

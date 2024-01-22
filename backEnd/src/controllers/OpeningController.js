@@ -12,12 +12,18 @@ module.exports.getAll = async (req, res) => {
 
     const openings = await Opening.find();
     
-    const token = jwt.sign({ openings }, process.env.SECRET);
-    return res.status( process.env.OPENING_GET_ALL_SUCCESSFUL).json({ token });
+    const token = jwt.sign({ 
+      message: 'OPENING_GET_ALL_SUCCESSFUL',
+      data: {
+        openings
+      }
+    }, process.env.SECRET);
+    return res.json({ token });
 
   } catch (error) {
     console.error(`OpeningController.getAll: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
   
 };

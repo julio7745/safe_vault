@@ -25,7 +25,7 @@ export default async({
       if ( message === 'USER_GET_ALL_SUCCESSFUL' ) setUsers(data.users);
   
     } catch (error) {
-      console.error(`getUser: ${error}`);
+      console.error(`getUsersService: ${error}`);
     }
 
     setloading(false)

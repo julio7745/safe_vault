@@ -2,33 +2,34 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-import logout from '../login/logout';
-
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({setloading, user, setOpenings, setCurrentPage, }) => {
+export default async({
+    setloading,
+    user,
+    setOpenings 
+  }) => {
 
     setloading(true)
 
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/getOpenings`, user);
-        const openings = await jwtDecode(response.data.token).openings;
-        const error = await jwtDecode(response.data.token).error;
+      const response = await axios.post(`${URL_API_BACKEND}/opening/getAll`,  { data: {}, user });
 
-        if ( error ){
+      const message = await jwtDecode(response.data.token).message;
+      const data = await jwtDecode(response.data.token).data;
 
-            logout({...{setloading, setCurrentPage, }});
+      // tratamento para NON_EXISTENT_USER_ERROR 
+      // tratamento para GERAL_ERROR 
 
-        }else{
+      if ( message === 'OPENING_GET_ALL_SUCCESSFUL' ) {
+        
+        setOpenings(data.openings);
 
-            setOpenings(openings);
-
-        }
-
+      }
+  
     } catch (error) {
-        console.log(error);
-        //logout({...{setloading, setCurrentPage, }}); 
+      console.error(`getOpeningsService: ${error}`);
     }
 
     setloading(false)

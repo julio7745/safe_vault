@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginLeft: 10,
     marginRight: 20,
+    marginBottom: 7,
   },
   btnIcon:{
     height: 50,

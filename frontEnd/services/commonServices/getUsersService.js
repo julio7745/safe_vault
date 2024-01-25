@@ -5,12 +5,12 @@ import jwtDecode from 'jwt-decode';
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async({
-    setloading,
+    setLoading,
     user,
     setUsers 
   }) => {
 
-    setloading(true)
+    setLoading(true)
 
     try {
 
@@ -28,7 +28,7 @@ export default async({
       console.error(`getUsersService: ${error}`);
     }
 
-    setloading(false)
+    setLoading(false)
         
     return ;
 }

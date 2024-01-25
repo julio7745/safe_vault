@@ -6,7 +6,7 @@ import loginService from '../../services/loginServices/loginService.js';
 
 export default ({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser
   }) => {
 
@@ -74,7 +74,7 @@ export default ({
         <TouchableWithoutFeedback 
           onPress={() => loginService({...{
             setCurrentPage,
-            setloading,
+            setLoading,
             setUser,
             login,
             errors, setErrors

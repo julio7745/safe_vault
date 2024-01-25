@@ -7,11 +7,11 @@ import { propsOfLoginForm } from '../../components/login/FormLoginComponent.js'
 
 export default async ({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser,
   }) => {
 
-    setloading(true);
+    setLoading(true);
     
     try {
         
@@ -26,7 +26,7 @@ export default async ({
         
         await loginService({...{
           setCurrentPage,
-          setloading,
+          setLoading,
           setUser,
           login: propsOfLoginForm.login,
           errors: propsOfLoginForm.errors, setErrors: propsOfLoginForm.setErrors
@@ -38,7 +38,7 @@ export default async ({
       console.error('loadUserService:', error);
     }
 
-    setloading(false);
+    setLoading(false);
 
     return;
 }

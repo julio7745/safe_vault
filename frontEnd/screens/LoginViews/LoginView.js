@@ -6,7 +6,7 @@ import FormLoginComponent from '../../components/login/FormLoginComponent.js';
 
 export default ({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser
   }) => {
     return (
@@ -15,7 +15,7 @@ export default ({
         <HeaderLoginComponent />
         <FormLoginComponent {...{
           setCurrentPage,
-          setloading,
+          setLoading,
           setUser
         }}/>
       </View>

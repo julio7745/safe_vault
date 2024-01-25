@@ -3,14 +3,14 @@ import LoginView from './LoginViews/LoginView.js'
 
 export default ({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser
   }) => {
     
     return (
       <LoginView {...{
         setCurrentPage,
-        setloading,
+        setLoading,
         setUser
       }}/>
     );

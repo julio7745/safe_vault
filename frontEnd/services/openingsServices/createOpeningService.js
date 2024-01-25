@@ -8,11 +8,11 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async({
   setCurrentPage,
-  setloading,
+  setLoading,
   user
   }) => {
 
-    setloading(true);
+    setLoading(true);
 
     try {
 
@@ -27,7 +27,7 @@ export default async({
     } catch (error) {
       console.error('createOpeningService:', error);
   }
-      setloading(false)
+      setLoading(false)
     
     return ;
 

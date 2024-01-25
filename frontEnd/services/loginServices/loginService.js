@@ -9,13 +9,13 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async ({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser,
     login,
     errors, setErrors
   }) => {
 
-    setloading(true);
+    setLoading(true);
     
     const formatedLogin = validateFormService({...{
       login,
@@ -33,12 +33,12 @@ export default async ({
         
         if (newLogin.message === 'NON_EXISTENT_USER_ERROR'){
           setErrors({ user: ['● User does not exist!'], password: [] });
-          return setloading(false);
+          return setLoading(false);
         }
         
         if (newLogin.message === 'INCORRECT_PASSWORD_ERROR') {
           setErrors({ user: [], password: ['● Incorrect password!'] });
-          return setloading(false);
+          return setLoading(false);
         }
         
         if (newLogin.message === 'LOGIN_SUCCESSFUL') {
@@ -66,6 +66,6 @@ export default async ({
       };
     }
 
-    setloading(false);
+    setLoading(false);
     return;
 };

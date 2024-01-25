@@ -3,14 +3,14 @@ import OpeningListView from './OpeningViews/OpeningListView.js';
 
 export default ({
   setCurrentPage,
-  setloading,
+  setLoading,
   user
   }) => {
 
     return(
       <OpeningListView  {...{
         setCurrentPage,
-        setloading,
+        setLoading,
         user
       }}/>
     );

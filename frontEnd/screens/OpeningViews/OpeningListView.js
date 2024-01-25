@@ -11,7 +11,7 @@ import ConfirmDeletionComponent from '../../components/openings/ConfirmDeletionC
 
 export default ({
   setCurrentPage,
-  setloading,
+  setLoading,
   user
   }) => {
 
@@ -23,13 +23,13 @@ export default ({
     
     getUsers({...{
       setCurrentPage,
-      setloading,
+      setLoading,
       user,
       setUsers 
     }})
 
     getOpenings({...{
-      setloading,
+      setLoading,
       user,
       setOpenings 
     }})
@@ -57,7 +57,7 @@ export default ({
     )}
     
     <ClearOpeningsComponent {...{ setDeletion }}/>
-    { deletion && <ConfirmDeletionComponent {...{ setDeletion, user, setloading, setCurrentPage, deletion }} /> }
+    { deletion && <ConfirmDeletionComponent {...{ setDeletion, user, setLoading, setCurrentPage, deletion }} /> }
 
     </View>
   );    

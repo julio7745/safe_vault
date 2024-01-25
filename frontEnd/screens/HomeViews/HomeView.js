@@ -6,7 +6,7 @@ import logout from '../../services/loginServices/logoutService';
 
 export default ({
   currentPage, setCurrentPage,
-  setloading,
+  setLoading,
   user, setUser
   }) => {
 
@@ -18,14 +18,14 @@ export default ({
         <Text>PAGINA ATUAL: {currentPage}</Text>
         <TouchableWithoutFeedback onPress={() => createOpening( {...{
           setCurrentPage,
-          setloading,
+          setLoading,
           user
         }} )}>
           <Text style={styles.newColeta}>NewColeta</Text>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => logout( {...{
           setCurrentPage,
-          setloading,
+          setLoading,
           setUser
         }} )}>
           <Text style={styles.logout}>Logout</Text>

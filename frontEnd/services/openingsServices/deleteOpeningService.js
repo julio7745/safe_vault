@@ -4,9 +4,9 @@ import jwtDecode from 'jwt-decode';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({user, setCurrentPage, setloading, setDeletion, openingId}) => {
+export default async({user, setCurrentPage, setLoading, setDeletion, openingId}) => {
 
-    setloading(true)
+    setLoading(true)
     console.log('apagou');
     
     /*
@@ -23,16 +23,16 @@ export default async({user, setCurrentPage, setloading, setDeletion, openingId})
 
         }else{
 
-            logout({...{setloading, setCurrentPage, }});
+            logout({...{setLoading, setCurrentPage, }});
             
         }
 
     } catch (error) {
         console.error('Erro:', error);
-        //logout({...{setloading, setCurrentPage, }});
+        //logout({...{setLoading, setCurrentPage, }});
     }*/
 
-    setloading(false)
+    setLoading(false)
     
     return ;
 }

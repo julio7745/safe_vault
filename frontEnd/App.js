@@ -1,100 +1,54 @@
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import OpeningsScreen from './screens/OpeningsScreen.js';
-import ProfileScreen from './screens/ProfileScreen.js';
-import LoginScreen from './screens/LoginScreen.js';
-import HomeScreen from './screens/HomeScreen.js';
+import NavBarComponent from './components/common/NavBarComponent';
+import LoadingComponent from './components/common/LoadingComponent';
+import HeaderComponent from './components/common/HeaderComponent';
 
-import NavBar from './components/common/NavBarComponent';
-import LoadingComponent from './components/common/LoadingComponent.js';
-import Header from './components/common/HeaderComponent';
-
-import loadUserService from './services/loginServices/loadUserService.js';
+import loadUserService from './services/loginServices/loadUserService';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import OpeningsScreen from './screens/OpeningsScreen';
 
 export default () => {
-
   const [currentPage, setCurrentPage] = useState('login');
-  const [loading, setloading] = useState(false);
-  const [user, setUser] = useState({
-    name: '',
-    lastName: '',
-    _id: '',
-  });
-  
-  useEffect(() => { loadUserService({...{
-    setCurrentPage,
-    setloading,
-    setUser,
-  }})}, []);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({ name: '', lastName: '', _id: '' });
 
-  switch (currentPage) {
-    
-    case 'login': return (
-      <View style={styles.appContainer}>
-        <LoginScreen {...{
-          setCurrentPage,
-          setloading,
-          setUser
-        }}/>
-        <LoadingComponent {...{ loading }}/>
-      </View>
-    )
+  useEffect(() => {
+    loadUserService({
+      setCurrentPage,
+      setLoading,
+      setUser,
+    });
+  }, []);
 
-    case 'home': return (
+  const renderScreen = () => {
+
+    switch (currentPage) {
+      case 'login':
+        return <LoginScreen {...{ setCurrentPage, setLoading, setUser }} />;
+      case 'home':
+        return <HomeScreen {...{ currentPage, setCurrentPage, setLoading, user, setUser }} />;
+      case 'openings':
+        return <OpeningsScreen {...{ setCurrentPage, setLoading, user }} />;
+      default:
+        return <HomeScreen {...{ currentPage, setCurrentPage, setLoading, user, setUser }} />;
+    }
+  };
+
+  const HeaderComponentVisible = () => currentPage === 'login' ? null : <HeaderComponent {...{ currentPage }} />
+  const NavBarComponentVisible = () => currentPage === 'login' ? null : <NavBarComponent {...{ currentPage, setCurrentPage }} />
+
+
+  return (
       <View style={styles.container}>
-        <Header {...{
-          currentPage
-        }}/>
-        <HomeScreen {...{
-          currentPage, setCurrentPage,
-          setloading,
-          user, setUser
-        }}/>
-        <NavBar {...{
-          currentPage, setCurrentPage
-        }}/>
-        <LoadingComponent {...{ loading }}/>
+        {HeaderComponentVisible()}
+        {renderScreen()}
+        {NavBarComponentVisible()}
+        <LoadingComponent {...{ loading }} />
       </View>
-    )
-
-    case 'openings': return (
-      <View style={styles.container}>
-        <Header {...{
-          currentPage
-        }}/>
-        <OpeningsScreen {...{
-          setCurrentPage,
-          setloading,
-          user
-        }}/>
-        <NavBar {...{
-          currentPage, setCurrentPage
-        }}/>
-        <LoadingComponent {...{ loading }}/>
-      </View>
-    )
-
-    default: return (
-      <View style={styles.container}>
-        <Header {...{
-          currentPage
-        }}/>
-        <HomeScreen {...{
-          currentPage, setCurrentPage,
-          loading, setloading,
-          user, setUser
-        }}/>
-        <NavBar {...{
-          currentPage, setCurrentPage
-        }}/>
-        <LoadingComponent {...{ loading }}/>
-      </View>
-    )
-
-  }
-
+  );
 };
 
 const styles = StyleSheet.create({

@@ -4,9 +4,9 @@ import jwtDecode from 'jwt-decode';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async({user, setCurrentPage, setloading, setDeletion}) => {
+export default async({user, setCurrentPage, setLoading, setDeletion}) => {
 
-    setloading(true)
+    setLoading(true)
 
     try {
 
@@ -31,7 +31,7 @@ export default async({user, setCurrentPage, setloading, setDeletion}) => {
         console.error(`getOpeningsService: ${error}`);
     }
 
-    setloading(false)
+    setLoading(false)
     
     return ;
 }

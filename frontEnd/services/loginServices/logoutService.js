@@ -3,11 +3,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default async({
     setCurrentPage,
-    setloading,
+    setLoading,
     setUser
   }) => {
 
-  setloading(true)
+  setLoading(true)
 
   await AsyncStorage.clear();
   setCurrentPage('login')
@@ -17,7 +17,7 @@ export default async({
     _id: '',
   })
 
-  setloading(false)
+  setLoading(false)
   
   return ;
   

@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback} from 'react-native';
 import deleteOpeningService from '../../services/openingsServices/deleteOpeningService';
 import clearOpeningsService from '../../services/openingsServices/clearOpeningsService';
 
-export default ({ setDeletion, user, setloading, setCurrentPage, deletion }) => {
+export default ({ setDeletion, user, setLoading, setCurrentPage, deletion }) => {
 
   return (
     <View style={styles.ConfirmDeletionContainer}>
@@ -19,9 +19,9 @@ export default ({ setDeletion, user, setloading, setCurrentPage, deletion }) => 
           <TouchableWithoutFeedback
             onPress={()=> {
               if (deletion === 'all') {
-                clearOpeningsService({user, setCurrentPage, setloading, setDeletion})
+                clearOpeningsService({user, setCurrentPage, setLoading, setDeletion})
               } else {
-                deleteOpeningService({user, setCurrentPage, setloading, setDeletion, openingId: deletion})
+                deleteOpeningService({user, setCurrentPage, setLoading, setDeletion, openingId: deletion})
               }
             }}>
             <Text style={styles.ConfirmDeletionBtn} >CONFIRM</Text>

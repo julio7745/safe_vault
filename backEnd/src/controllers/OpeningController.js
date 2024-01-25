@@ -54,11 +54,17 @@ module.exports.delete = async (req, res) => {
 
     const _id = req.params._id;
     const apagado = await Opening.findOneAndRemove({ _id });
-    return res.status(process.env.OPENING_DELETE_SUCCESSFUL);
+
+    const token = jwt.sign({ 
+      message: 'OPENING_DELETE_SUCCESSFUL',
+      data: {}
+    }, process.env.SECRET);
+    return res.json({ token });
     
   } catch (error) {
     console.error(`OpeningController.delete: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
 };

@@ -28,7 +28,7 @@ export default async({user, setCurrentPage, setLoading, setDeletion}) => {
         }
 
     } catch (error) {
-        console.error(`getOpeningsService: ${error}`);
+        console.error(`clearOpeningsService: ${error}`);
     }
 
     setLoading(false)

@@ -47,14 +47,11 @@ export default () => {
       user
     }}/>
 
-    default: return (
-      <View style={styles.container}>
-        <Text>{`Error 404: ${currentPage}`}</Text>
-        <NavBar {...{
-          currentPage, setCurrentPage
-        }}/>
-      </View>
-    )
+    default: return <HomeScreen {...{
+      currentPage, setCurrentPage,
+      loading, setloading,
+      user, setUser
+    }}/>
 
   }
 

@@ -39,7 +39,7 @@ export default ({
   return (
     <View style={styles.containOpening}>
 
-    { users.length > 0 && openings.length && ( 
+    { users.length > 0 && ( 
       <FlatList
         data={[{ empty: true }, ...openings].reverse()}
         style={styles.listOpening}

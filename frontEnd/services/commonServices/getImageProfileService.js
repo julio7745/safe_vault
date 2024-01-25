@@ -21,7 +21,7 @@ export default async( {setImage, _id, user} ) => {
         } else {
             
             await AsyncStorage.removeItem(`ProfileImage.${_id}`);
-            
+
             const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id }`, { data: {}, user });
 
             const message = await jwtDecode(response.data.token).message;
@@ -33,7 +33,7 @@ export default async( {setImage, _id, user} ) => {
 
             if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
 
-                const buffer = Buffer.from(data.userImage, 'binary');
+                const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
                 const base64Image = buffer.toString('base64');
                 setImage(base64Image);
 
@@ -42,7 +42,7 @@ export default async( {setImage, _id, user} ) => {
                     expired: Date.now() + 10 * 60 * 1000,
                 };
     
-                await AsyncStorage.setItem(`ProfileImage.${_id}`, JSON.stringify(image));
+                await AsyncStorage.setItem(`ProfileImage.${data.userImage.idOfUser}`, JSON.stringify(image));
 
             }
         

@@ -10,7 +10,7 @@ module.exports.get = async (req, res) => {
 
   try {
 
-    const {idOfUser} = req.params._id;
+    const idOfUser = req.params._id;
 
     const userImage = await ProfileImage.findOne({ idOfUser });
 
@@ -25,7 +25,6 @@ module.exports.get = async (req, res) => {
         userImage
       }
     }, process.env.SECRET);
-    console.log(openings);
     return res.json({ token });
 
   } catch (error) {

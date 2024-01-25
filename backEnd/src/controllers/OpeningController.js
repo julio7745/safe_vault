@@ -33,11 +33,17 @@ module.exports.clear = async (req, res) => {
   try{
 
     const apagados = await Opening.deleteMany();
-    return res.status(process.env.OPENING_CLEAR_SUCCESSFUL);
+
+    const token = jwt.sign({ 
+      message: 'OPENING_CLEAR_SUCCESSFUL',
+      data: {}
+    }, process.env.SECRET);
+    return res.json({ token });
     
   } catch (error) {
     console.error(`OpeningController.clear: ${error}`);
-    return res.status(process.env.GERAL_ERROR);
+    const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
+    return res.json({ token });
   };
 
 };

@@ -7,29 +7,29 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 export default async({user, setCurrentPage, setloading, setDeletion}) => {
 
     setloading(true)
-    console.log('limpou');
-    /*
+
     try {
 
-        const response = await axios.post(`${URL_API_BACKEND}/clearOpenings`, user);
+        const response = await axios.post(`${URL_API_BACKEND}/opening/clear`,  { data: {}, user } );
+        
         const message = await jwtDecode(response.data.token).message;
+        const data = await jwtDecode(response.data.token).data;
 
-        if ( message === 'sucess' ){
+        // tratamento para NON_EXISTENT_USER_ERROR 
+        // tratamento para GERAL_ERROR 
+
+
+        if ( message === 'OPENING_CLEAR_SUCCESSFUL' ){
 
             setDeletion('')
             setCurrentPage('home')
             setCurrentPage('openings')
 
-        }else{
-
-            logout({...{setloading, setCurrentPage, }});
-            
         }
 
     } catch (error) {
-        console.error('Erro:', error);
-        //logout({...{setloading, setCurrentPage, }});
-    }*/
+        console.error(`getOpeningsService: ${error}`);
+    }
 
     setloading(false)
     

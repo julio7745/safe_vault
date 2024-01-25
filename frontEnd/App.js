@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import OpeningsScreen from './screens/OpeningsScreen.js';
 import ProfileScreen from './screens/ProfileScreen.js';
@@ -8,6 +8,8 @@ import LoginScreen from './screens/LoginScreen.js';
 import HomeScreen from './screens/HomeScreen.js';
 
 import NavBar from './components/common/NavBarComponent';
+import LoadingComponent from './components/common/LoadingComponent.js';
+import Header from './components/common/HeaderComponent';
 
 import loadUserService from './services/loginServices/loadUserService.js';
 
@@ -29,35 +31,83 @@ export default () => {
 
   switch (currentPage) {
     
-    case 'login': return <LoginScreen {...{
-      setCurrentPage,
-      loading, setloading,
-      setUser
-    }}/>
+    case 'login': return (
+      <View style={styles.appContainer}>
+        <LoginScreen {...{
+          setCurrentPage,
+          setloading,
+          setUser
+        }}/>
+        <LoadingComponent {...{ loading }}/>
+      </View>
+    )
 
-    case 'home': return <HomeScreen {...{
-      currentPage, setCurrentPage,
-      loading, setloading,
-      user, setUser
-    }}/>
+    case 'home': return (
+      <View style={styles.container}>
+        <Header {...{
+          currentPage
+        }}/>
+        <HomeScreen {...{
+          currentPage, setCurrentPage,
+          setloading,
+          user, setUser
+        }}/>
+        <NavBar {...{
+          currentPage, setCurrentPage
+        }}/>
+        <LoadingComponent {...{ loading }}/>
+      </View>
+    )
 
-    case 'openings': return <OpeningsScreen {...{
-      currentPage, setCurrentPage,
-      loading, setloading,
-      user
-    }}/>
+    case 'openings': return (
+      <View style={styles.container}>
+        <Header {...{
+          currentPage
+        }}/>
+        <OpeningsScreen {...{
+          setCurrentPage,
+          setloading,
+          user
+        }}/>
+        <NavBar {...{
+          currentPage, setCurrentPage
+        }}/>
+        <LoadingComponent {...{ loading }}/>
+      </View>
+    )
 
-    default: return <HomeScreen {...{
-      currentPage, setCurrentPage,
-      loading, setloading,
-      user, setUser
-    }}/>
+    default: return (
+      <View style={styles.container}>
+        <Header {...{
+          currentPage
+        }}/>
+        <HomeScreen {...{
+          currentPage, setCurrentPage,
+          loading, setloading,
+          user, setUser
+        }}/>
+        <NavBar {...{
+          currentPage, setCurrentPage
+        }}/>
+        <LoadingComponent {...{ loading }}/>
+      </View>
+    )
 
   }
 
 };
 
 const styles = StyleSheet.create({
+  appContainer: {
+    height: '100%',
+    width: '100%',
+    display: "flex",
+    backgroundColor: '#1b353b',
+    paddingTop: 35,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     height: '100%',
     width: '100%',
@@ -69,4 +119,3 @@ const styles = StyleSheet.create({
     paddingTop: 35,
   }
 });
-

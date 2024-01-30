@@ -4,57 +4,43 @@ import jwtDecode from 'jwt-decode';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-import validatePassword from '../commonServices/validatePasswordService.js';
-import logout from '../loginServices/logoutService.js'
+import validatePasswordService from '../commonServices/validatePasswordService.js';
 
 export default async ({
-    currentPasswordValue,
-    newPasswordValue,
-    confirmNewPasswordValue,
-    setCurrentPasswordErrors,
-    setNewPasswordErrors,
-    setConfirmNewPasswordErrors,
+    formValue,
     user,
-    setloading,
+    setLoading,
     setCurrentPage,
-}) => {
+    formErros, setformErros,
+  }) => {
   
-    setloading(true);
+    setLoading(true);
 
     try {
 
-        const currentPasswordErros = validatePassword(currentPasswordValue)
-        const newPasswordErrors = validatePassword(newPasswordValue)
+        const currentPasswordErros = validatePasswordService(formValue.currentPassword)
+        const newPasswordErros = validatePasswordService(formValue.newPassword)
+        const confirmNewPasswordErros = formValue.newPassword === formValue.confirmNewPassword ? [] : [`● Confirmation must match the new password!`]
+
+        setformErros({
+            currentPassword: currentPasswordErros[0],
+            newPassword: newPasswordErros[0],
+            confirmNewPassword: confirmNewPasswordErros[0]
+        })
         
-        setCurrentPasswordErrors(currentPasswordErros[0])
-        setNewPasswordErrors(newPasswordErrors[0])
-        if (newPasswordValue !== confirmNewPasswordValue){
-            setConfirmNewPasswordErrors(`● Confirmation must match the new password!`)
-        }else{
-            setConfirmNewPasswordErrors(``)   
-        }
-        
-        if(
-            currentPasswordErros.length > 0 ||
-            newPasswordErrors.length > 0 ||
-            newPasswordValue !== confirmNewPasswordValue
-        ){
-
-            setloading(false)
-            return
-
-        }else{
-
-            console.log('aqui vou mudar a senha');
-            
+        if (
+            currentPasswordErros.length === 0  &&
+            newPasswordErros.length === 0  &&
+            confirmNewPasswordErros.length === 0 ) {
+            console.log('oi');
         }
 
+          
     } catch (error) {
         console.error(error);
-        //logout({...{setloading, setCurrentPage, }});
     }
     
-    setloading(false);
+    setLoading(false);
     return;
 
 };

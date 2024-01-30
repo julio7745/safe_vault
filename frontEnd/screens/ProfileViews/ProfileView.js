@@ -5,10 +5,13 @@ import { TouchableWithoutFeedback, StyleSheet, View, Image, Text} from 'react-na
 import ProfileImage from '../../components/profile/ProfileImageComponent.js'; 
 import FormEditPassword from '../../components/profile/FormEditPasswordComponent.js';
 
-export default ({props}) => {
+export default ({
+  setCurrentPage,
+  setLoading,
+  user
+}) => {
 
   useEffect( () => {
-    
   }, []);
 
   return (
@@ -16,7 +19,7 @@ export default ({props}) => {
         <View style={styles.profile}>
 
           <View style={styles.containerProfileImage}>
-            <ProfileImage {...{ _id: props.user.id, }}/>
+            <ProfileImage {...{ user }}/>
             <TouchableWithoutFeedback onPress={ ()=> console.log('aqui eu vou editar a ft')}>
               <Image source={require('../../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
             </TouchableWithoutFeedback>
@@ -24,16 +27,16 @@ export default ({props}) => {
 
           <View style={styles.containerUserData}>
             <Text>
-              <Text style={styles.strong}>User Name: </Text>{props.user.name.charAt(0).toUpperCase() + user.name.slice(1)}
+              <Text style={styles.strong}>User Name: </Text>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}
             </Text>
             <Text>
-              <Text style={styles.strong}>User Lastname: </Text>{props.user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}
+              <Text style={styles.strong}>User Lastname: </Text>{user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}
             </Text>
           </View>
 
           <View style={styles.containerUserData}>
             <Text style={styles.strong}>Edit Password</Text>
-            <FormEditPassword {...{user, setCurrentPage, setloading, }}/>
+            <FormEditPassword {...{ user, setCurrentPage, setLoading, }}/>
           </View>
 
           <View style={styles.containerUserData}>

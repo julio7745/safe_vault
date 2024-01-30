@@ -6,9 +6,11 @@ import LoadingComponent from './components/common/LoadingComponent';
 import HeaderComponent from './components/common/HeaderComponent';
 
 import loadUserService from './services/loginServices/loadUserService';
+
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import OpeningsScreen from './screens/OpeningsScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 export default () => {
   const [currentPage, setCurrentPage] = useState('login');
@@ -32,6 +34,8 @@ export default () => {
         return <HomeScreen {...{ currentPage, setCurrentPage, setLoading, user, setUser }} />;
       case 'openings':
         return <OpeningsScreen {...{ setCurrentPage, setLoading, user }} />;
+      case 'profile':
+        return <ProfileScreen {...{ setCurrentPage, setLoading, user }} />;
       default:
         return <HomeScreen {...{ currentPage, setCurrentPage, setLoading, user, setUser }} />;
     }

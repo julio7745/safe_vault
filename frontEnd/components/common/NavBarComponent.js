@@ -77,6 +77,5 @@ const styles = StyleSheet.create({
   verticalLine: {
     height: 80,
     width: 15,
-    marginBottom: 10,
   }
 });

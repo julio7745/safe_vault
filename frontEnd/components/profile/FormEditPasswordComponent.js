@@ -4,19 +4,23 @@ import { View, TextInput, StyleSheet, TouchableWithoutFeedback, Image, Keyboard,
 
 import updatePassword from '../../services/profileServices/updatePasswordService';
 
-export default ({user, setCurrentPage, setloading, }) => {
+export default ({ user, setCurrentPage, setLoading, }) => {
 
   const currentPasswordRef = useRef(null);
   const newPasswordRef = useRef(null);
   const confirmNewPasswordRef = useRef(null);
 
-  const [currentPasswordValue, setCurrentPasswordValue] = useState('123456Aa');
-  const [newPasswordValue, setNewPasswordValue] = useState('123456Aa');
-  const [confirmNewPasswordValue, setConfirmNewPasswordValue] = useState('123456Aa');
+  const [formValue, setFormValue] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  });
 
-  const [currentPasswordErrors, setCurrentPasswordErrors] = useState('');
-  const [newPasswordErrors, setNewPasswordErrors] = useState('');
-  const [confirmNewPasswordErrors, setConfirmNewPasswordErrors] = useState('');
+  const [formErros, setformErros] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  });
 
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
@@ -41,43 +45,48 @@ export default ({user, setCurrentPage, setloading, }) => {
           placeholder="Currente Password"
           autoComplete="off"
           maxLength={15}
-          value={currentPasswordValue}
-          onChangeText={(text)=>setCurrentPasswordValue(text)}
+          onChangeText={(text)=>setFormValue({
+            currentPassword: text,
+            newPassword: formValue.newPassword,
+            confirmNewPassword: formValue.confirmNewPassword
+          })}
         />
-        { currentPasswordErrors ? <Text style={styles.error}>{currentPasswordErrors}</Text> : null }
+        { formErros.currentPassword ? <Text style={styles.error}>{formErros.currentPassword}</Text> : null }
         <TextInput
           style={styles.input}
           ref={newPasswordRef}
           placeholder="New Password"
           autoComplete="off"
           maxLength={15}
-          value={newPasswordValue}
-          onChangeText={(text)=>setNewPasswordValue(text)}
+          onChangeText={(text)=>setFormValue({
+            currentPassword: formValue.currentPassword,
+            newPassword: text,
+            confirmNewPassword: formValue.confirmNewPassword
+          })}
         />
-        {newPasswordErrors ? <Text style={styles.error}>{newPasswordErrors}</Text> : null}
+        { formErros.newPassword ? <Text style={styles.error}>{formErros.newPassword}</Text> : null}
         <TextInput
           style={styles.input}
           ref={confirmNewPasswordRef}
           placeholder="Confirm New Password"
           autoComplete="off"
           maxLength={15}
-          value={confirmNewPasswordValue}
-          onChangeText={(text)=>setConfirmNewPasswordValue(text)}
+          onChangeText={(text)=>setFormValue({
+            currentPassword: formValue.currentPassword,
+            newPassword: formValue.newPassword,
+            confirmNewPassword: text
+          })}
         />
-        { confirmNewPasswordErrors ? <Text style={styles.error}>{confirmNewPasswordErrors}</Text> : null }
+        { formErros.confirmNewPassword ? <Text style={styles.error}>{formErros.confirmNewPassword}</Text> : null }
         <TouchableWithoutFeedback 
           onPress={() => {
             unselectField()
             updatePassword({
-              currentPasswordValue,
-              newPasswordValue,
-              confirmNewPasswordValue,
-              setCurrentPasswordErrors,
-              setNewPasswordErrors,
-              setConfirmNewPasswordErrors,
+              formValue,
               user,
-              setloading,
+              setLoading,
               setCurrentPage,
+              formErros, setformErros,
             })
           }}>
             <Image source={require('../../assets/icons/profile/enviarNovaSenha.png')} style={styles.submit}/>

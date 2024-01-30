@@ -4,13 +4,13 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import getImageProfile from '../../services/commonServices/getImageProfileService';
 
-export default ({ _id, }) => {
+export default ({ user }) => {
   
   const [image, setImage] = useState();
 
   useEffect(() => {
   
-    getImageProfile({_id, setImage});
+    getImageProfile( {setImage, _id: user._id, user});
 
   }, []);
 

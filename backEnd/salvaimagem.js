@@ -52,9 +52,11 @@ app.get('/', (req, res) => {
 app.post('/upload', upload.single('image'), async (req, res) => {
   const { buffer } = req.file;
 
+  console.log(buffer);
+
   try {
     const newImage = new userProfileImage({
-      idOfUser: '6547a2b0442cfbdc35c51776',
+      idOfUser: '6548e5e963d1b4c945d31e4a',
       imageBuffer: buffer,
     });
 

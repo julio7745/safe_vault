@@ -26,6 +26,8 @@ export default async( {setImage, _id, user} ) => {
 
             const message = await jwtDecode(response.data.token).message;
             const data = await jwtDecode(response.data.token).data;
+
+            console.log(data);
             
             // tratamento para NON_EXISTENT_USER_ERROR 
             // tratamento para GERAL_ERROR 
@@ -33,8 +35,7 @@ export default async( {setImage, _id, user} ) => {
 
             if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
 
-                const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
-                const base64Image = buffer.toString('base64');
+                const base64Image = data.userImage.image64.data
                 setImage(base64Image);
 
                 const image = {

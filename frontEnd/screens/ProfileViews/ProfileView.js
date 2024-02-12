@@ -13,16 +13,14 @@ export default ({
   }) => {
 
   const [editingImage, setEditingImage] = useState(false);
-
-  useEffect( () => {
-  }, []);
+  const [profileImage, setProfileImage] = useState();
 
   return (
     <View style={styles.containProfile}>
         <View style={styles.profile}>
 
           <View style={styles.containerProfileImage}>
-            <ProfileImage {...{ user }}/>
+            <ProfileImage {...{ user, profileImage, setProfileImage }}/>
             <TouchableWithoutFeedback onPress={ () => setEditingImage(true) }>
               <Image source={require('../../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
             </TouchableWithoutFeedback>
@@ -53,7 +51,7 @@ export default ({
             </View>
           </View>
 
-          <EditProfileImageComponent {...{ user, editingImage, setEditingImage }}/>
+          <EditProfileImageComponent {...{ user, editingImage, setEditingImage, setLoading, setProfileImage }}/>
           
       </View>
     </View>

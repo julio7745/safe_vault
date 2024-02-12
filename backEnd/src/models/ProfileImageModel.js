@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const ProfileImageSchema = new mongoose.Schema({
     idOfUser: String,
-    imageBuffer: Buffer,
+    image64: Buffer,
 });
 
 const ProfileImage = mongoose.model('userProfileImage', ProfileImageSchema);

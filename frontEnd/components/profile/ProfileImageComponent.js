@@ -4,23 +4,21 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import getImageProfile from '../../services/commonServices/getImageProfileService';
 
-export default ({ user }) => {
-  
-  const [image, setImage] = useState();
+export default ({ user, profileImage, setProfileImage }) => {
 
   useEffect(() => {
-  
-    getImageProfile( {setImage, _id: user._id, user});
+    
+    getImageProfile( { setImage: setProfileImage, _id: user._id, user } );
 
   }, []);
 
   return (
     <View>
-        { image && ( <Image 
-            source={{ uri: `data:image/jpeg;base64,${image}` }}
+        { profileImage && ( <Image 
+            source={{ uri: `data:image/jpg;base64,${profileImage}` }}
             style={styles.imageUser} 
         />)}
-        { !image && ( <Image 
+        { !profileImage && ( <Image 
             source={require('../../assets/icons/navBar/perfil.png')} 
             style={styles.imageUser}
         />)}

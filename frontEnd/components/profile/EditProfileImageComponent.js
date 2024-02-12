@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Image, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-export default ({ user, editingImage, setEditingImage }) => {
+import updateProfileImage from '../../services/profileServices/updateProfileImage';
+
+export default ({ user, editingImage, setEditingImage, setLoading, setProfileImage}) => {
 
   const [image, setImage] = useState();
 
@@ -32,7 +34,7 @@ export default ({ user, editingImage, setEditingImage }) => {
             <Text style={styles.Button}>Select Image</Text>
         </TouchableWithoutFeedback>
         { image && ( 
-          <TouchableWithoutFeedback onPress={pickImage}>
+          <TouchableWithoutFeedback onPress={() => updateProfileImage({ user, setEditingImage, setLoading, image })}>
               <Text style={styles.Button}>Confirm</Text>
           </TouchableWithoutFeedback>
         )}

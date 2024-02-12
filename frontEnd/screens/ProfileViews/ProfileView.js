@@ -62,7 +62,7 @@ export default ({
 };
 
 const styles = StyleSheet.create({
-    containProfile: {
+  containProfile: {
     height: '82%',
     width: '100%',
     backgroundColor: '#ffffff',

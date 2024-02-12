@@ -16,7 +16,7 @@ export default ({ user, editingImage, setEditingImage }) => {
       base64: true
     });
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImage({ uri: result.assets[0].uri, base64: result.assets[0].base64 });
     }
   };
 
@@ -25,7 +25,7 @@ export default ({ user, editingImage, setEditingImage }) => {
       <View style={styles.EditProfileImage}>
         <Text style={styles.Title} >New Profile Image</Text>
         { image && ( <Image 
-            source={{ uri: image }}
+            source={{ uri: image.uri }}
             style={styles.ImageUser} 
         />)}
         <TouchableWithoutFeedback onPress={pickImage}>

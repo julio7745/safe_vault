@@ -1,15 +1,18 @@
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, Text} from 'react-native';
 
 import ProfileImage from '../../components/profile/ProfileImageComponent.js'; 
 import FormEditPassword from '../../components/profile/FormEditPasswordComponent.js';
+import EditProfileImageComponent from '../../components/profile/EditProfileImageComponent.js';
 
 export default ({
-  setCurrentPage,
-  setLoading,
-  user
-}) => {
+    setCurrentPage,
+    setLoading,
+    user
+  }) => {
+
+  const [editingImage, setEditingImage] = useState(false);
 
   useEffect( () => {
   }, []);
@@ -20,7 +23,7 @@ export default ({
 
           <View style={styles.containerProfileImage}>
             <ProfileImage {...{ user }}/>
-            <TouchableWithoutFeedback onPress={ ()=> console.log('aqui eu vou editar a ft')}>
+            <TouchableWithoutFeedback onPress={ () => setEditingImage(true) }>
               <Image source={require('../../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
             </TouchableWithoutFeedback>
           </View>
@@ -49,6 +52,8 @@ export default ({
               </TouchableWithoutFeedback>
             </View>
           </View>
+
+          <EditProfileImageComponent {...{ user, editingImage, setEditingImage }}/>
           
       </View>
     </View>
@@ -61,7 +66,6 @@ const styles = StyleSheet.create({
     height: '82%',
     width: '100%',
     backgroundColor: '#ffffff',
-    position: 'relative',
   },
   profile: {
     height: '100%',
@@ -117,5 +121,5 @@ const styles = StyleSheet.create({
   },
   strong:{
     fontWeight: 'bold',
-  }
+  },
 });

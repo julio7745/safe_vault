@@ -58,7 +58,7 @@ export default async ({
             _id: newLogin.data._id,
           });
 
-          setCurrentPage('home');
+          setCurrentPage('profile');
 
         }
       } catch (error) {

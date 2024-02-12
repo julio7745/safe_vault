@@ -1,8 +1,6 @@
 
 export default function (password) {
 
-    console.log(password);
-
     const err = []
     if (password.length > 15 || password.length < 6) {
         err.push(`● Must be 6 to 15 characters!`);

@@ -17,7 +17,7 @@ export default ({ user, editingImage, setEditingImage, setLoading, setProfileIma
       quality: 1,
       base64: true
     });
-    if (!result.cancelled) {
+    if (!result.canceled) {
       const uriParts = result.assets[0].uri.split('.');
       const imgExtension = uriParts[uriParts.length - 1];
   
@@ -27,6 +27,7 @@ export default ({ user, editingImage, setEditingImage, setLoading, setProfileIma
         imgExtension
       });
     }
+    setLoading(false);
   };
 
   return editingImage === true ? (
@@ -37,11 +38,14 @@ export default ({ user, editingImage, setEditingImage, setLoading, setProfileIma
             source={{ uri: image.uri }}
             style={styles.ImageUser} 
         />)}
-        <TouchableWithoutFeedback onPress={pickImage}>
+        <TouchableWithoutFeedback onPress={() => {
+          setLoading(true);
+          pickImage()
+          }}>
             <Text style={styles.Button}>Select Image</Text>
         </TouchableWithoutFeedback>
         { image && ( 
-          <TouchableWithoutFeedback onPress={() => updateProfileImage({ user, setEditingImage, setLoading, image })}>
+          <TouchableWithoutFeedback onPress={() => updateProfileImage({ user, setEditingImage, setLoading, image, setProfileImage })}>
               <Text style={styles.Button}>Confirm</Text>
           </TouchableWithoutFeedback>
         )}

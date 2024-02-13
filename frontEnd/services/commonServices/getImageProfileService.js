@@ -7,7 +7,7 @@ global.Buffer = Buffer;
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default async( {setImage, _id, user} ) => {
+export default async( {setImage = null, _id, user} ) => {
 
     try {
         
@@ -15,7 +15,7 @@ export default async( {setImage, _id, user} ) => {
         
         if (valueInCache !== null && valueInCache.expired >= Date.now()) {
             
-            setImage(`data:image/${valueInCache.extension};base64,${valueInCache.base64Image}`);
+            if (setImage) setImage(`data:image/${valueInCache.extension};base64,${valueInCache.base64Image}`);
             
         } else {
             
@@ -35,7 +35,7 @@ export default async( {setImage, _id, user} ) => {
                 const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
                 const base64Image = buffer.toString('base64');
 
-                setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
+                if (setImage) setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
 
                 const image = {
                     base64Image, 

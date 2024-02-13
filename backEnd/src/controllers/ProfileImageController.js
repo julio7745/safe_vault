@@ -41,13 +41,13 @@ module.exports.update = async (req, res) => {
 
     const idOfUser = req.params._id;
     const imageBuffer = req.body.data.imageBuffer
+    const imgExtension = req.body.data.imgExtension
 
-    const newImage = { $set: { imageBuffer } };
-    const userImage = await ProfileImage.updateOne({ idOfUser, newImage });
-    
-    if (!userImage.upsertedId) {
-      return module.exports.create(req, res)
-    }
+    const updatedProfileImage = await ProfileImage.findOneAndUpdate(
+      { idOfUser },
+      { $set: { imageBuffer, idOfUser, extension: imgExtension } },
+      { upsert: true, new: true }
+    );
 
     const token = jwt.sign({ message: 'PROFILE_IMAGE_UPDATE_SUCCESSFUL' }, process.env.SECRET);
     return res.json({ token });
@@ -66,11 +66,12 @@ module.exports.create = async (req, res) => {
 
     const idOfUser = req.params._id;
     const imageBuffer = req.body.data.imageBuffer
+    const imgExtension = req.body.data.imgExtension
 
     const newImage = new ProfileImage({
       idOfUser,
       imageBuffer,
-      extension: 'png'
+      extension: imgExtension
     });
 
     await newImage.save(); 

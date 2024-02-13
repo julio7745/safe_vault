@@ -17,8 +17,15 @@ export default ({ user, editingImage, setEditingImage, setLoading, setProfileIma
       quality: 1,
       base64: true
     });
-    if (!result.canceled) {
-      setImage({ uri: result.assets[0].uri, base64: result.assets[0].base64 });
+    if (!result.cancelled) {
+      const uriParts = result.assets[0].uri.split('.');
+      const imgExtension = uriParts[uriParts.length - 1];
+  
+      setImage({
+        uri: result.assets[0].uri,
+        base64: result.assets[0].base64,
+        imgExtension
+      });
     }
   };
 

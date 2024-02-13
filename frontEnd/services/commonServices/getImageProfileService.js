@@ -9,7 +9,8 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async( {setImage, _id, user} ) => {
 
-    
+    console.log('entrou');
+
     try {
         
         const valueInCache = JSON.parse( await AsyncStorage.getItem(`ProfileImage.${_id}`) );
@@ -22,21 +23,24 @@ export default async( {setImage, _id, user} ) => {
             
             await AsyncStorage.removeItem(`ProfileImage.${_id}`);
 
+            console.log('pediu');
             const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id }`, { data: {}, user });
 
             const message = await jwtDecode(response.data.token).message;
             const data = await jwtDecode(response.data.token).data;
 
-            console.log(data);
-            
             // tratamento para NON_EXISTENT_USER_ERROR 
             // tratamento para GERAL_ERROR 
             // tratamento para PROFILE_IMAGE_GET_ERROR
 
             if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
 
-                const base64Image = data.userImage.image64.data
-                setImage(base64Image);
+                console.log(data);
+                const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
+                const base64Image = buffer.toString('base64');
+
+                console.log(base64Image);
+                setImage(`data:image/png;base64,${base64Image}`);
 
                 const image = {
                     base64Image, 

@@ -15,7 +15,7 @@ export default ({ user, profileImage, setProfileImage }) => {
   return (
     <View>
         { profileImage && ( <Image 
-            source={{ uri: `data:image/jpg;base64,${profileImage}` }}
+            source={{ uri: profileImage }}
             style={styles.imageUser} 
         />)}
         { !profileImage && ( <Image 

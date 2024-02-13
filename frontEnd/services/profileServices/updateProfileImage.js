@@ -4,8 +4,6 @@ import jwtDecode from 'jwt-decode';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-import getImageProfileService from '../commonServices/getImageProfileService';
-
 export default async ({ user, setEditingImage, setLoading, image }) => {
 
     setLoading(true)

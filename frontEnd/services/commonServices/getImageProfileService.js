@@ -23,7 +23,6 @@ export default async( {setImage, _id, user} ) => {
             
             await AsyncStorage.removeItem(`ProfileImage.${_id}`);
 
-            console.log('pediu');
             const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id }`, { data: {}, user });
 
             const message = await jwtDecode(response.data.token).message;
@@ -35,12 +34,10 @@ export default async( {setImage, _id, user} ) => {
 
             if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
 
-                console.log(data);
                 const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
                 const base64Image = buffer.toString('base64');
 
-                console.log(base64Image);
-                setImage(`data:image/png;base64,${base64Image}`);
+                setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
 
                 const image = {
                     base64Image, 

@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGO, {
 const userProfileImageSchema = new mongoose.Schema({
   idOfUser: String,
   imageBuffer: Buffer,
+  extension: String,
 });
 
 const userProfileImage = mongoose.model('userProfileImage', userProfileImageSchema);
@@ -58,6 +59,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     const newImage = new userProfileImage({
       idOfUser: '6548e5e963d1b4c945d31e4a',
       imageBuffer: buffer,
+      extension: 'png'
     });
 
     await newImage.save(); // Aguarde a conclusão do salvamento

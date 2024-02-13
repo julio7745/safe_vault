@@ -40,20 +40,18 @@ module.exports.update = async (req, res) => {
   try {
 
     const idOfUser = req.params._id;
-    const image64 = req.body.data.image64
+    const imageBuffer = req.body.data.imageBuffer
 
-    const newImage = { $set: { image64, idOfUser} };
+    const newImage = { $set: { imageBuffer } };
     const userImage = await ProfileImage.updateOne({ idOfUser, newImage });
     
     if (!userImage.upsertedId) {
       return module.exports.create(req, res)
     }
-    console.log('salvo');
 
     const token = jwt.sign({ message: 'PROFILE_IMAGE_UPDATE_SUCCESSFUL' }, process.env.SECRET);
     return res.json({ token });
   
-
   } catch (error) {
     console.error(`ProfileImageController.update: ${error}`);
     const token = jwt.sign({ message: 'GERAL_ERROR' }, process.env.SECRET);
@@ -67,11 +65,12 @@ module.exports.create = async (req, res) => {
   try {
 
     const idOfUser = req.params._id;
-    const image64 = req.body.data.image64
+    const imageBuffer = req.body.data.imageBuffer
 
     const newImage = new ProfileImage({
       idOfUser,
-      image64
+      imageBuffer,
+      extension: 'png'
     });
 
     await newImage.save(); 

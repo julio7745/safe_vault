@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 
 import validateFormService from './validateFormService.js';
 import uploadUserService from './uploadUserService.js';
+import getImageProfileService from '../commonServices/getImageProfileService.js';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
@@ -17,6 +18,8 @@ export default async ({
 
     setLoading(true);
     
+    let newUser = {_id: "", name: "", lastName: ""}
+
     const formatedLogin = validateFormService({...{
       login,
       errors, setErrors
@@ -58,7 +61,13 @@ export default async ({
             _id: newLogin.data._id,
           });
 
-          setCurrentPage('profile');
+          newUser = {
+            name: newLogin.data.name,
+            lastName: newLogin.data.lastName,
+            _id: newLogin.data._id,
+          }
+
+          setCurrentPage('home');
 
         }
       } catch (error) {
@@ -67,5 +76,8 @@ export default async ({
     }
 
     setLoading(false);
+
+    getImageProfileService({_id: newUser._id, user: newUser})
+
     return;
 };

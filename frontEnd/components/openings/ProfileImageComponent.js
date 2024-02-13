@@ -17,7 +17,7 @@ export default ({ userOfOpening, user}) => {
   return (
     <View>
         { image && ( <Image 
-            source={{ uri: `data:image/jpeg;base64,${image}` }}
+            source={{ uri: image }}
             style={styles.imageUser} 
         />)}
         { !image && ( <Image 

@@ -9,15 +9,13 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 
 export default async( {setImage, _id, user} ) => {
 
-    console.log('entrou');
-
     try {
         
         const valueInCache = JSON.parse( await AsyncStorage.getItem(`ProfileImage.${_id}`) );
         
         if (valueInCache !== null && valueInCache.expired >= Date.now()) {
             
-            setImage(valueInCache.base64Image);
+            setImage(`data:image/${valueInCache.extension};base64,${valueInCache.base64Image}`);
             
         } else {
             
@@ -41,6 +39,7 @@ export default async( {setImage, _id, user} ) => {
 
                 const image = {
                     base64Image, 
+                    extension: data.userImage.extension,
                     expired: Date.now() + 10 * 60 * 1000,
                 };
     

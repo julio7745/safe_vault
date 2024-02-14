@@ -7,53 +7,54 @@ global.Buffer = Buffer;
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
-export default ({ setImage = null, _id, user }) => {
-  AsyncStorage.getItem(`ProfileImage.${_id}`)
-    .then((valueInCache) => {
-      if (valueInCache !== null && JSON.parse(valueInCache).expired >= Date.now()) {
-        if (setImage) {
-          setImage(`data:image/${JSON.parse(valueInCache).extension};base64,${JSON.parse(valueInCache).base64Image}`);
-        }
-      } else {
-        axios.post(`${URL_API_BACKEND}/profileImage/get/${_id}`, { data: {}, user })
-          .then((response) => {
-            const decodedToken = jwtDecode(response.data.token);
-            const message = decodedToken.message;
-            const data = decodedToken.data;
+export default async( {setImage = null, _id, user} ) => {
 
-            if (message === 'PROFILE_IMAGE_GET_SUCCESSFUL') {
-              const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
-              const base64Image = buffer.toString('base64');
+  try {
 
-              if (setImage) {
-                setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
-              }
+    //console.log(setImage, _id, user);
+      
+    const valueInCache = JSON.parse( await AsyncStorage.getItem(`ProfileImage.${_id}`) );
+      
+    if (valueInCache !== null && valueInCache.expired >= Date.now()) {
+      
+      //console.log('cache');
+      if (setImage) setImage(`data:image/${valueInCache.extension};base64,${valueInCache.base64Image}`);
+        
+    } else {
+      
+      const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id }`, { data: {}, user });
+      
+      const message = await jwtDecode(response.data.token).message;
+      const data = await jwtDecode(response.data.token).data;
+      
+      // tratamento para NON_EXISTENT_USER_ERROR 
+      // tratamento para GERAL_ERROR 
+      // tratamento para PROFILE_IMAGE_GET_ERROR
+      
+      if ( message === 'PROFILE_IMAGE_GET_SUCCESSFUL' ) {
+        
+        const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
+        const base64Image = buffer.toString('base64');
+        
+        //console.log('back');
+        if (setImage) setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
+        //rconsole.log('back');
 
-              AsyncStorage.removeItem(`ProfileImage.${_id}`)
-                .then(() => {
-                  
-                  const image = {
-                    base64Image,
-                    extension: data.userImage.extension,
-                    expired: Date.now() + 10 * 60 * 1000,
-                  };
-    
-                  AsyncStorage.setItem(`ProfileImage.${data.userImage.idOfUser}`, JSON.stringify(image))
-                    .catch((error) => {
-                      console.error(`Failed to save image to AsyncStorage: ${error}`);
-                    });
-                })
-                .catch((error) => {
-                  console.error(`Failed to remove item from AsyncStorage: ${error}`);
-                });
-            }
-          })
-          .catch((error) => {
-            console.error(`Failed to fetch profile image: ${error}`);
-          });
+        const image = {
+          base64Image, 
+          extension: data.userImage.extension,
+          expired: Date.now() + 10 * 60 * 1000,
+        };
+        
+        await AsyncStorage.removeItem(`ProfileImage.${_id}`);
+        await AsyncStorage.setItem(`ProfileImage.${data.userImage.idOfUser}`, JSON.stringify(image));
+      
       }
-    })
-    .catch((error) => {
-      console.error(`Failed to get item from AsyncStorage: ${error}`);
-    });
-};
+    }
+
+  } catch (error) {
+      console.error(`getImageProfile: ${error}`);
+  }
+
+  return ;
+}

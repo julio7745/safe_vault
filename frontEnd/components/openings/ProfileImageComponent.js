@@ -2,16 +2,18 @@
 import { useState, useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-import getImageProfile from '../../services/commonServices/getImageProfileService.js';
-
-export default ({ userOfOpening, user}) => {
+export default ({ userOfOpening, setImagesLoading, imagesLoading }) => {
   
   const [image, setImage] = useState();
 
   useEffect(() => {
     
-    getImageProfile({_id: userOfOpening._id, setImage, user})
-
+    setImagesLoading(prevImagesLoading => [
+        ...prevImagesLoading, 
+        { setImage, _id: userOfOpening._id }
+      ]
+    );
+    
   }, []);
 
   return (

@@ -12,7 +12,9 @@ import ConfirmDeletionComponent from '../../components/openings/ConfirmDeletionC
 export default ({
   setCurrentPage,
   setLoading,
-  user
+  user,
+  setImagesLoading,
+  imagesLoading
   }) => {
 
   const [openings, setOpenings] = useState([]);
@@ -50,7 +52,7 @@ export default ({
           if (item.empty) {
             return <View style={styles.paddingItem} />;
           } else {
-            return <OpeningComponent {...{ opening: item, users, user, setDeletion }} />;
+            return <OpeningComponent {...{ opening: item, users, setDeletion, setImagesLoading, imagesLoading}} />;
           }
         }}
       />

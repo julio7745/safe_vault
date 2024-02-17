@@ -17,7 +17,9 @@ export default () => {
   const [currentPage, setCurrentPage] = useState('login');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({ name: '', lastName: '', _id: '' });
+
   const [imagesLoading, setImagesLoading ] = useState([])
+  const [imagesInLoading, setImagesInLoading ] = useState(false)
 
   useEffect(() => {
     loadUserService({
@@ -28,11 +30,13 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    if (imagesLoading.length > 0) loadImages();
+    if (imagesLoading.length > 0 && !imagesInLoading) loadImages();
   }, [imagesLoading]);
   
   const loadImages = async () => {
+    setImagesInLoading(true)
     await getImageProfileService({ setImage: imagesLoading[0].setImage, _id: imagesLoading[0]._id, user });
+    setImagesInLoading(false)
     setImagesLoading(prevImagesLoading => prevImagesLoading.filter((item, index) => index !== 0));
   };
 

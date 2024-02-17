@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-export default ({ userOfOpening, setImagesLoading, imagesLoading }) => {
+export default ({ userOfOpening, setImagesLoading }) => {
   
   const [image, setImage] = useState();
 

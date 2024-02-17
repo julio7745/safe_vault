@@ -77,7 +77,7 @@ export default async ({
 
     setLoading(false);
 
-    getImageProfileService({_id: newUser._id, user: newUser})
+    //getImageProfileService({_id: newUser._id, user: newUser})
 
     return;
 };

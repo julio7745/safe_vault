@@ -4,13 +4,15 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import getImageProfile from '../../services/commonServices/getImageProfileService';
 
-export default ({ user, profileImage, setProfileImage }) => {
+export default ({ user, profileImage, setProfileImage, setLoading }) => {
 
-  useEffect(() => {
-    
-    getImageProfile( { setImage: setProfileImage, _id: user._id, user } );
+  useEffect(() => { loadProfileImage() }, []);
 
-  }, []);
+  const loadProfileImage = async () => {
+    setLoading(true)
+    setProfileImage( await getImageProfile({ _id: user._id, user }) )
+    setLoading(false)
+  }
 
   return (
     <View>

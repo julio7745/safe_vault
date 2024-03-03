@@ -4,7 +4,6 @@ import jwtDecode from 'jwt-decode';
 
 import validateFormService from './validateFormService.js';
 import uploadUserService from './uploadUserService.js';
-import getImageProfileService from '../commonServices/getImageProfileService.js';
 
 import { URL_API_BACKEND } from 'react-native-dotenv';
 
@@ -76,8 +75,6 @@ export default async ({
     }
 
     setLoading(false);
-
-    //getImageProfileService({_id: newUser._id, user: newUser})
 
     return;
 };

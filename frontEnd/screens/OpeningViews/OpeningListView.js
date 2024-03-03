@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, View, } from 'react-native';
 
 import getOpenings from '../../services/openingsServices/getOpeningsService'
 import getUsers from '../../services/commonServices/getUsersService'
+import getImageProfileService from '../../services/commonServices/getImageProfileService';
 
 import OpeningComponent from '../../components/openings/OpeningComponent'
 import ClearOpeningsComponent from '../../components/openings/ClearOpeningsComponent';
@@ -12,15 +13,25 @@ import ConfirmDeletionComponent from '../../components/openings/ConfirmDeletionC
 export default ({
   setCurrentPage,
   setLoading,
-  user,
-  setImagesLoading,
-  imagesLoading
+  user
   }) => {
 
   const [openings, setOpenings] = useState([]);
   const [deletion, setDeletion] = useState('');
   const [users, setUsers] = useState([]);
 
+  const [imagesLoading, setImagesLoading ] = useState([])
+  const [imagesLoadingTrue, setImagesLoadingTrue ] = useState(false)
+  
+  const loadImages = async () => {
+    setLoading(true)
+    for (const imageData of imagesLoading) {
+      imageData.setImage(await getImageProfileService({ _id: imageData._id, user }));
+    }
+    setImagesLoading([]);
+    setLoading(false);
+  };
+  
   useEffect( () => {
     
     getUsers({...{
@@ -52,8 +63,11 @@ export default ({
           if (item.empty) {
             return <View style={styles.paddingItem} />;
           } else {
-            return <OpeningComponent {...{ opening: item, users, setDeletion, setImagesLoading, imagesLoading}} />;
+            return <OpeningComponent {...{ opening: item, users, setDeletion, setImagesLoading}} />;
           }
+        }}
+        onLayout={() => {
+          loadImages()
         }}
       />
     )}
@@ -65,8 +79,6 @@ export default ({
   );    
   
 };
-
-//botões e etc
 
 const styles = StyleSheet.create({
   containOpening: {

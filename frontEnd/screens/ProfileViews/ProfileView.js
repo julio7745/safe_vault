@@ -20,7 +20,7 @@ export default ({
         <View style={styles.profile}>
 
           <View style={styles.containerProfileImage}>
-            <ProfileImage {...{ user, profileImage, setProfileImage }}/>
+            <ProfileImage {...{ user, profileImage, setProfileImage, setLoading}}/>
             <TouchableWithoutFeedback onPress={ () => setEditingImage(true) }>
               <Image source={require('../../assets/icons/profile/editar.png')} style={styles.btnEditImageProfile}/>
             </TouchableWithoutFeedback>

@@ -6,7 +6,6 @@ import LoadingComponent from './components/common/LoadingComponent';
 import HeaderComponent from './components/common/HeaderComponent';
 
 import loadUserService from './services/loginServices/loadUserService';
-import getImageProfileService from './services/commonServices/getImageProfileService';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -17,7 +16,6 @@ export default () => {
   const [currentPage, setCurrentPage] = useState('login');
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({ name: '', lastName: '', _id: '' });
-  const [imagesLoading, setImagesLoading ] = useState([])
 
   useEffect(() => {
     loadUserService({
@@ -26,16 +24,7 @@ export default () => {
       setUser,
     });
   }, []);
-
-  useEffect(() => {
-    if (imagesLoading.length > 0) loadImages();
-  }, [imagesLoading]);
   
-  const loadImages = async () => {
-    await getImageProfileService({ setImage: imagesLoading[0].setImage, _id: imagesLoading[0]._id, user });
-    setImagesLoading(prevImagesLoading => prevImagesLoading.filter((item, index) => index !== 0));
-  };
-
   const renderScreen = () => {
 
     switch (currentPage) {
@@ -44,7 +33,7 @@ export default () => {
       case 'home':
         return <HomeScreen {...{ currentPage, setCurrentPage, setLoading, user, setUser }} />;
       case 'openings':
-        return <OpeningsScreen {...{ setCurrentPage, setLoading, user, setImagesLoading, imagesLoading }} />;
+        return <OpeningsScreen {...{ setCurrentPage, setLoading, user }} />;
       case 'profile':
         return <ProfileScreen {...{ setCurrentPage, setLoading, user }} />;
       default:
@@ -54,7 +43,6 @@ export default () => {
 
   const HeaderComponentVisible = () => currentPage === 'login' ? null : <HeaderComponent {...{ currentPage }} />
   const NavBarComponentVisible = () => currentPage === 'login' ? null : <NavBarComponent {...{ currentPage, setCurrentPage }} />
-
 
   return (
       <View style={styles.container}>

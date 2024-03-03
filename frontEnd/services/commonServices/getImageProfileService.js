@@ -10,14 +10,11 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 export default async( {setImage = null, _id, user} ) => {
 
   try {
-
-    //console.log(setImage, _id, user);
       
     const valueInCache = JSON.parse( await AsyncStorage.getItem(`ProfileImage.${_id}`) );
       
     if (valueInCache !== null && valueInCache.expired >= Date.now()) {
       
-      //console.log('cache');
       if (setImage) setImage(`data:image/${valueInCache.extension};base64,${valueInCache.base64Image}`);
         
     } else {
@@ -36,9 +33,7 @@ export default async( {setImage = null, _id, user} ) => {
         const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
         const base64Image = buffer.toString('base64');
         
-        //console.log('back');
         if (setImage) setImage(`data:image/${data.userImage.extension};base64,${base64Image}`);
-        //rconsole.log('back');
 
         const image = {
           base64Image, 

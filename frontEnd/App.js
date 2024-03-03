@@ -6,6 +6,7 @@ import LoadingComponent from './components/common/LoadingComponent';
 import HeaderComponent from './components/common/HeaderComponent';
 
 import loadUserService from './services/loginServices/loadUserService';
+import getImageProfileServiceBackground from './services/commonServices/getImageProfileServiceBackground';
 import getImageProfileService from './services/commonServices/getImageProfileService';
 
 import LoginScreen from './screens/LoginScreen';
@@ -35,7 +36,7 @@ export default () => {
   
   const loadImages = async () => {
     setImagesInLoading(true)
-    await getImageProfileService({ setImage: imagesLoading[0].setImage, _id: imagesLoading[0]._id, user });
+    getImageProfileServiceBackground({ setImage: imagesLoading[0].setImage, _id: imagesLoading[0]._id, user });
     setImagesInLoading(false)
     setImagesLoading(prevImagesLoading => prevImagesLoading.filter((item, index) => index !== 0));
   };

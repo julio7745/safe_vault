@@ -9,7 +9,6 @@ import { URL_API_BACKEND } from 'react-native-dotenv';
 const getImageProfileService = ({ setImage = null, _id, user }) => {
   return new Promise(async (resolve, reject) => {
     try {
-
       console.log('cache');
       const valueInCache = JSON.parse(await AsyncStorage.getItem(`ProfileImage.${_id}`));
 
@@ -20,17 +19,13 @@ const getImageProfileService = ({ setImage = null, _id, user }) => {
       }
 
       console.log('back');
-      const [response,] = await Promise.all([
-        axios.post(`${URL_API_BACKEND}/profileImage/get/${_id}`, { data: {}, user }),
-      ]);
+      
+      const response = await axios.post(`${URL_API_BACKEND}/profileImage/get/${_id}`, { data: {}, user });
       const message = jwtDecode(response.data.token).message;
       const data = jwtDecode(response.data.token).data;
 
       if (message === 'PROFILE_IMAGE_GET_SUCCESSFUL') {
-        
-        console.log('buffer');
         const buffer = Buffer.from(data.userImage.imageBuffer, 'binary');
-        console.log('base64Image');
         const base64Image = buffer.toString('base64');
 
         const image = {
@@ -56,4 +51,3 @@ const getImageProfileService = ({ setImage = null, _id, user }) => {
 };
 
 export default getImageProfileService;
-

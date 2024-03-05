@@ -19,7 +19,10 @@ export default async ({
 
       const currentPasswordErros = validatePasswordService(formValue.currentPassword)
       const newPasswordErros = validatePasswordService(formValue.newPassword)
-      const confirmNewPasswordErros = formValue.newPassword === formValue.confirmNewPassword ? [] : [`● Confirmation must match the new password!`]
+      const confirmNewPasswordErros = 
+        formValue.newPassword !== formValue.confirmNewPassword ? [`● Confirmation must match the new password!`] : (
+          formValue.confirmNewPassword === formValue.currentPassword ? [`● Confirmation must be different from the current password!`] : []
+        )
 
       setformErros({
           currentPassword: currentPasswordErros[0],

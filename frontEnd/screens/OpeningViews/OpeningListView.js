@@ -21,7 +21,6 @@ export default ({
   const [users, setUsers] = useState([]);
 
   const [imagesLoading, setImagesLoading ] = useState([])
-  const [imagesLoadingTrue, setImagesLoadingTrue ] = useState(false)
   
   const loadImages = async () => {
     setLoading(true)

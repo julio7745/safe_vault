@@ -20,4 +20,7 @@ const ProfileImageController = require('./src/controllers/ProfileImageController
 router.post('/profileImage/get/:_id', ProfileImageController.get)
 router.post('/profileImage/update/:_id', ProfileImageController.update)
 
+const PasswordController = require('./src/controllers/PasswordController.js')
+router.post('/password/update/:_id', PasswordController.update)
+
 module.exports = router;

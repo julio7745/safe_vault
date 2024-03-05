@@ -34,7 +34,7 @@ export default async ({ user, setEditingImage, setLoading, image, setProfileImag
       }
       
     } catch (error) {
-      console.error(`getOpeningsService: ${error}`);
+      console.error(`updateProfileImageService: ${error}`);
     }
 
     setLoading(false)

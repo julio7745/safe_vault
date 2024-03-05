@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Image, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-import updateProfileImage from '../../services/profileServices/updateProfileImage';
+import updateProfileImage from '../../services/profileServices/updateProfileImageService';
 
 export default ({ user, editingImage, setEditingImage, setLoading, setProfileImage}) => {
 

@@ -45,6 +45,7 @@ export default ({ user, setCurrentPage, setLoading, }) => {
           placeholder="Currente Password"
           autoComplete="off"
           maxLength={15}
+          value={formValue.currentPassword}
           onChangeText={(text)=>setFormValue({
             currentPassword: text,
             newPassword: formValue.newPassword,
@@ -58,6 +59,7 @@ export default ({ user, setCurrentPage, setLoading, }) => {
           placeholder="New Password"
           autoComplete="off"
           maxLength={15}
+          value={formValue.newPassword}
           onChangeText={(text)=>setFormValue({
             currentPassword: formValue.currentPassword,
             newPassword: text,
@@ -71,6 +73,7 @@ export default ({ user, setCurrentPage, setLoading, }) => {
           placeholder="Confirm New Password"
           autoComplete="off"
           maxLength={15}
+          value={formValue.confirmNewPassword}
           onChangeText={(text)=>setFormValue({
             currentPassword: formValue.currentPassword,
             newPassword: formValue.newPassword,
@@ -82,11 +85,10 @@ export default ({ user, setCurrentPage, setLoading, }) => {
           onPress={() => {
             unselectField()
             updatePassword({
-              formValue,
+              formValue, setFormValue,
               user,
               setLoading,
-              setCurrentPage,
-              formErros, setformErros,
+              setformErros,
             })
           }}>
             <Image source={require('../../assets/icons/profile/enviarNovaSenha.png')} style={styles.submit}/>

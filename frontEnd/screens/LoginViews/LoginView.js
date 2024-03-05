@@ -10,7 +10,7 @@ export default ({
     setUser
   }) => {
     return (
-      <KeyboardAvoidingView behavior="height" >
+      <KeyboardAvoidingView behavior="padding" enabled >
       <View style={styles.content}>
         <HeaderLoginComponent />
         <FormLoginComponent {...{

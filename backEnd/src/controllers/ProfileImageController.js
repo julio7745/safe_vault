@@ -45,7 +45,7 @@ module.exports.update = async (req, res) => {
 
     const updatedProfileImage = await ProfileImage.findOneAndUpdate(
       { idOfUser },
-      { $set: { imageBuffer, idOfUser, extension: imgExtension } },
+      { $set: { imageBuffer, extension: imgExtension } },
       { upsert: true, new: true }
     );
 

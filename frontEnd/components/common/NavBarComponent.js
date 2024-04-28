@@ -10,20 +10,9 @@ import UserIco from '../../assets/icons/navBar/perfil.png'
 import OpenOptionsIco from '../../assets/icons/navBar/options.png'
 import CloseOptionsIco from '../../assets/icons/navBar/close.png'
 
-const valueToHome = '23.2%'
-const valueToOpenings = '50%'
-const valueToProfile = '77.5%'
-const valueToOther = '10000%'
-
 export default ({
   currentPage, setCurrentPage
   }) => {
-
-    const leftOfhorizontalLine = 
-    currentPage === 'home' ? valueToHome :
-    currentPage === 'openings' ? valueToOpenings :
-    currentPage === 'profile' ? valueToProfile :
-    valueToOther;
 
     const OptionsIco = 
     currentPage === 'options' ? CloseOptionsIco : OpenOptionsIco;
@@ -31,13 +20,9 @@ export default ({
     return (
       <View style={styles.container}>
         <View style={styles.containerBtns}>
-          <NavBarButton {...{setCurrentPage, icon: HomeIco, page: 'home', }}/>
-          <NavBarButton {...{setCurrentPage, icon: OpeningsIco, page: 'openings', }}/>
-          <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'profile', }}/>
-          <Image
-            source={require('../../assets/icons/navBar/verticalLine.png')}
-            style={{...styles.horizontalLine, left: leftOfhorizontalLine}}
-          />
+          <NavBarButton {...{setCurrentPage, icon: HomeIco, page: 'home', currentPage }}/>
+          <NavBarButton {...{setCurrentPage, icon: OpeningsIco, page: 'openings', currentPage }}/>
+          <NavBarButton {...{setCurrentPage, icon: UserIco, page: 'profile', currentPage }}/>
         </View>
         <Image source={require('../../assets/icons/navBar/verticalLine.png')} style={styles.verticalLine}/>
         <MenuIco {...{currentPage, setCurrentPage, icon: OptionsIco }}/>
@@ -52,27 +37,18 @@ const styles = StyleSheet.create({
     width: '100%',
     display: "flex",
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#1b353b',
     overflow: 'hidden',
   },
   containerBtns: {
     height: '100%',
-    width: '75%',
+    width: 'auto',
     display: "flex",
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  horizontalLine:{
-    resizeMode: 'cover',
-    height: 70,
-    width: 70,
-    transform: [{ rotate: '90deg'}, { translateY: 36}],
-    position: 'absolute',
-    top: 25,
-    
   },
   verticalLine: {
     height: 80,

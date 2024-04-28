@@ -1,7 +1,7 @@
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -13,6 +13,8 @@ mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology:
 
 app.use(bodyParser.json({ limit: '500mb' }));
 app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
+
+app.use(cors());
 
 const IsLogged = require('./src/middlewares/IsLoggedMiddleware.js');
 app.use((req, res, next) => IsLogged(req, res, next));

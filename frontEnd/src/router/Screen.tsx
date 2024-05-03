@@ -1,10 +1,14 @@
+
 import React, { useState, createContext, useContext } from 'react';
-import { KeyboardAvoidingView, StyleSheet} from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
+import { styled } from "nativewind";
 
 import LoginScreen from '@/screens/LoginScreen'; 
 import HomeScreen from '@/screens/HomeScreen'; 
 
 import styles from '@/assets/styles/ScreenStyles';
+
+const SView = styled(KeyboardAvoidingView)
 
 export default () => {
 
@@ -22,13 +26,14 @@ export default () => {
       default:
         return <LoginScreen />;
     }
+    
   }
   
   return (
     <CurrentPageContext.Provider value={[currentPage, setCurrentPage]}>
-      <KeyboardAvoidingView behavior="padding" enabled style={styles.screen}>
+      <SView behavior="padding" enabled className={styles.screen}>
         <RenderScreen />
-      </KeyboardAvoidingView>
+      </SView>
     </CurrentPageContext.Provider>
   );
 }

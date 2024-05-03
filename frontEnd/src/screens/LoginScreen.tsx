@@ -1,20 +1,21 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import { styled } from "nativewind";
 
-import styles from '@/assets/styles/screens/LoginScreen'
+import styles from '@/assets/styles/screensStyles/LoginScreenStyles'
 
 import LoginView from '@/views/loginViews/LoginView'
-import LoginView2 from '@/views/loginViews/LoginView2'
+
+const SView = styled(View)
 
 export default () => {
 
   const RenderView = () =>  <LoginView />
 
   return (
-    <View style={styles.LoginScreen} >
+    <SView className={styles.LoginScreen} >
       <RenderView />
-    </View>
+    </SView>
   );
 }
-

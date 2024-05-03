@@ -1,12 +1,14 @@
 
 module.exports = {
-  purge: [],
-  darkMode: false,
+  content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    extend: {
+      colors: {
+        'off-white': {
+          DEFAULT: '#E3E3E3',
+        }
+      },
+    },
   },
   plugins: [],
 }

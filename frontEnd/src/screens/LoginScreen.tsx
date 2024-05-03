@@ -2,14 +2,19 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import LoginView1 from '@/views/loginViews/LoginView1'
+import styles from '@/assets/styles/screens/LoginScreen'
+
+import LoginView from '@/views/loginViews/LoginView'
 import LoginView2 from '@/views/loginViews/LoginView2'
 
-export default function Screen() {
+export default () => {
+
+  const RenderView = () =>  <LoginView />
+
   return (
-    <View>
-      <LoginView1 />
-      <LoginView2 />
+    <View style={styles.LoginScreen} >
+      <RenderView />
     </View>
   );
 }
+

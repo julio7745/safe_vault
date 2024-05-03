@@ -2,7 +2,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export default function Screen() {
+export default () => {
   return (
     <View>
       <Text>HomeView2</Text>

@@ -1,0 +1,103 @@
+@charset 'UTF-8';
+:root{
+    --cor0: #171f2c;
+        --cor1: #1c2a41;
+    --cor2: #3f5062;
+        --cor3: #848f9e;  
+    --cor4: #bb6d3c;
+        --cor5: #dfaa66;
+    --cor6: #dde7f7;
+}
+main section{
+    padding: 10px;
+    margin: 1px;
+}
+table{
+    width: calc(100% - 20px);
+    max-width: 500px;
+    border: 1px solid var(--cor0);
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-size: .9em;
+}
+table caption{
+    background-color: var(--cor2);
+    padding: 10px;
+    font-weight: bolder;
+    color: var(--cor6);
+}
+table td, table th{
+    border: 1px solid var(--cor0);
+    text-align: center;
+    height: 32px;
+    padding: 5px;
+}
+table th{
+    border: none;
+}
+table td.d{
+    width: 50px;
+}
+table td.h{
+    width: 50px;
+}
+table td.n{
+    width: 50px;
+}
+#dblimpar{
+    display: none;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0px;
+}
+#blimpar{
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+    padding: 10px;
+}
+#dlimparlog{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background-color: var(--cor2);
+    padding: 10vw;
+    box-shadow: 0px 0px 20px var(--cor6);
+}
+#dlimparlog div{
+    background-color: var(--cor3);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--cor1);
+    text-align: center;
+}
+#dlimparlog h1{
+    font-size: 1.5em;
+}
+#dlimparlog p{
+    margin: 10px auto;
+}
+#dlimparlog input{
+    text-align: center;
+    width: 40%;
+    max-width: 200px;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--cor4);
+    color: var(--cor6);
+    border: 2px solid var(--cor6);
+    cursor: pointer;
+    font-size: 1.1em;
+}
+#dlimparlog input:hover{
+    background-color: var(--cor5);
+}
+@media screen and (min-width:300px) {
+    table{
+        font-size: 1em;
+    }
+}

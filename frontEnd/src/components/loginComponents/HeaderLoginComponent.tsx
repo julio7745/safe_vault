@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { styled } from "nativewind";
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/HeaderLoginComponentStyles'
@@ -16,7 +16,7 @@ export default () => {
   return (
     <SView className={styles.header}>
       <SView className={styles.logoContainer}>      
-        <SImage source={logo} className={styles.logo} />
+        <SImage source={logo} className={styles.logo} style={{resizeMode: 'contain'}}/>
       </SView>
       <SText className={styles.title}>Safe Vault</SText>
       <SText className={styles.text}>Welcome back!</SText>

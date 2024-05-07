@@ -8,6 +8,7 @@ module.exports = {
         'lightBlue': '#bdd4da',
         'mediumBlue': '#305E69',
         'darkBlue': '#1b353b',
+        'darkBlueTransparent': '#1b353b8a',
         }
       }
   },

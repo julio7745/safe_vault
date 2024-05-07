@@ -7,6 +7,9 @@ import { CurrentPageProvider, CurrentPageContext } from '@/contexts/CurrentPageC
 
 import LoginScreen from '@/screens/LoginScreen'; 
 import HomeScreen from '@/screens/HomeScreen'; 
+import OpeningsScreen from '@/screens/OpenigScreen'
+
+import LoadingComponent from '@/components/commonComponents/LoadingComponent';
 
 import styles from '@/assets/styles/ScreenStyles';
 
@@ -17,6 +20,8 @@ const RenderScreen = () => {
       return <LoginScreen />;
     case 'home':
       return <HomeScreen />;
+    case 'openings':
+      return <OpeningsScreen />;
     default:
       return <HomeScreen />;
   }
@@ -29,6 +34,7 @@ export default () => {
     <CurrentPageProvider>
       <SView behavior="padding" enabled className={styles.screen}>
         <RenderScreen />
+        <LoadingComponent />
       </SView>
     </CurrentPageProvider>
   );

@@ -5,13 +5,13 @@ import { styled } from "nativewind";
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/HeaderLoginComponentStyles'
 
+import logo from '@/assets/imgs/logoClara1.png'
+
 const SView = styled(View)
 const SText = styled(Text)
 const SImage = styled(Image)
 
 export default () => {
-
-  const logo = require('@/assets/imgs/logoClara1.png')
 
   return (
     <SView className={styles.header}>

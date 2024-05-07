@@ -5,6 +5,11 @@ import { styled } from "nativewind";
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/FormLoginComponentStyles'
 
+import userIco from '@/assets/icons/loginIcos/user.png'
+import passwordIco from '@/assets/icons/loginIcos/password.png' 
+import handleDisplayPasswordIco from '@/assets/icons/loginIcos/handleDisplayPassword.png'
+import loginIco from '@/assets/icons/loginIcos/login.png'
+
 const SView = styled(View)
 const SText = styled(Text)
 const STextInput = styled(TextInput)
@@ -17,18 +22,13 @@ export default () => {
 
   const [displayPassword, setdisplayPassword] = useState(true);
 
-  const userIco = require('@/assets/icons/loginIcos/user.png')
-  const passwordIco = require('@/assets/icons/loginIcos/password.png') 
-  const handleDisplayPasswordIco = require('@/assets/icons/loginIcos/handleDisplayPassword.png')
-  const loginIco = require('@/assets/icons/loginIcos/login.png')
-
   return (
     <SView className={styles.loginForm}>
       <SText className={styles.titleForm}>Login</SText>
 
       <SView className={styles.field}>
         <TouchableWithoutFeedback>
-          <SImage source={userIco} className={styles.icon + ""}/>
+          <SImage source={userIco} className={styles.icon}/>
         </TouchableWithoutFeedback>
         <STextInput
           onChangeText={(Text) => setLogin({ user: Text, password: login.password})}
@@ -40,7 +40,7 @@ export default () => {
         />
       </SView>
       {
-        <SView className={styles.err}>
+        <SView>
           {errors.user ? <SText className={styles.errTxt}>{errors.user[0]}</SText> : null}
         </SView>
       }
@@ -80,15 +80,3 @@ export default () => {
   );
 
 };
-
-
-// styles.js
-import { StyleSheet } from 'react-native';
-
-export const customStyles = StyleSheet.create({
-  whiteShadow: {
-    textShadowColor: '#fff',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 10,
-  },
-});

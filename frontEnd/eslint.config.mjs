@@ -19,5 +19,17 @@ export default {
         ["@/*", "./src"]
       ]
     }
-  }
+  },
+  overrides: [
+    {
+      rules: {
+        'import/no-unresolved': context => [
+          'error',
+          {
+            ignore: ['\\.png$']
+          }
+        ]
+      },
+    },
+  ],
 };

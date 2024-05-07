@@ -2,9 +2,9 @@
 import { View } from 'react-native';
 import { styled } from "nativewind";
 
-import styles from '@/assets/styles/AppStyles';
-
 import Screen from '@/router/Screen';
+
+import styles from '@/assets/styles/AppStyles';
 
 const SView = styled(View)
 

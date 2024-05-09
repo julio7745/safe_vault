@@ -20,7 +20,7 @@ export default () => {
   if ( loading ) return (
     <SView className={styles.loading}>
       <SView className={styles.logoContainer}>
-        <SImage source={logo} className={styles.logo} style={{resizeMode: 'contain'}}/>
+        <SImage source={logo} className={styles.logo} resizeMode='contain'/>
       </SView>
       <SText className={styles.loadingText}>Loading ...</SText>
     </SView>  

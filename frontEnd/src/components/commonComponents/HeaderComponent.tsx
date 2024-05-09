@@ -22,7 +22,7 @@ export default () => {
       <SView className={styles.header}>
         <SText className={styles.headerTitle}>{currentPage}</SText>
         <SView className={styles.logoContainer}>
-          <SImage source={logo} className={styles.logo} style={{resizeMode: 'contain'}}/>
+          <SImage source={logo} className={styles.logo} resizeMode='contain'/>
         </SView>
       </SView>  
     );

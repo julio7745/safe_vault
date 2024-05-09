@@ -6,13 +6,13 @@ import { styled } from "nativewind";
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
 import NavBarButton from '../navBar/NavBarButtonComponent'
-import MenuIco from '../navBar/MenuIcoComponent'
+import MenuIcoComponent from '../navBar/MenuIcoComponent'
 
 import styles from '@/assets/styles/componentsStyles/commonComponentsStyles/NavBarComponentStyles'
 
 import HomeIco from '@/assets/icons/navBarIcos/VaultIco.png'
 import OpeningsIco from '@/assets/icons/navBarIcos/ListIco.png'
-import UserIco from '@/assets/icons/navBarIcos/ProfileIco.png'
+import UserIco from '@/assets/icons/commonIcos/ProfileIco.png'
 import OpenOptionsIco from '@/assets/icons/navBarIcos/OptionsIco.png'
 import CloseOptionsIco from '@/assets/icons/navBarIcos/CloseOptionsIco.png'
 import VerticalLineIco from '@/assets/icons/navBarIcos/VerticalLineIco.png'
@@ -31,7 +31,7 @@ export default () => {
         <NavBarButton {...{ icon: OpeningsIco, page: 'openings' }}/>
         <NavBarButton {...{ icon: UserIco, page: 'profile' }}/>
         <SImage source={VerticalLineIco} className={styles.verticalLine}/>
-        <MenuIco {...{ icon: OptionsIco }}/>
+        <MenuIcoComponent {...{ icon: OptionsIco }}/>
       </SView>
     );
   

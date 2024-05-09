@@ -18,7 +18,7 @@ export default ({ icon }) => {
   return (
     <SView className={styles.container}>
         <TouchableWithoutFeedback onPress={ ()=> setCurrentPage(page) }>
-            <SImage source={icon} className={styles.btnIcon} style={{resizeMode: 'contain'}}/>
+            <SImage source={icon} className={styles.btnIcon} resizeMode='contain'/>
         </TouchableWithoutFeedback>
     </SView>
   );

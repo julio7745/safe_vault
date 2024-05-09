@@ -21,14 +21,14 @@ export default ({ icon, page }) => {
     <SImage
       source={VerticalLineIco}
       className={styles.horizontalLine}
-      style={{resizeMode: 'contain'}}
+      resizeMode='contain'
     /> : <></>
   }
 
   return (
     <SView  className={styles.container}>
       <SViewTc onPress={ ()=> setCurrentPage(page) }>
-          <SImage source={icon} className={styles.btnIcon} style={{resizeMode: 'contain'}}/>
+          <SImage source={icon} className={styles.btnIcon} resizeMode='contain'/>
       </SViewTc>
       {renderHorizontalLine()}
     </SView>

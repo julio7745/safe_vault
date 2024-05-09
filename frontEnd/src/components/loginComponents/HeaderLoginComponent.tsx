@@ -16,7 +16,7 @@ export default () => {
   return (
     <SView className={styles.header}>
       <SView className={styles.logoContainer}>      
-        <SImage source={logo} className={styles.logo} style={{resizeMode: 'contain'}}/>
+        <SImage source={logo} className={styles.logo} resizeMode='contain'/>
       </SView>
       <SText className={styles.title}>Safe Vault</SText>
       <SText className={styles.text}>Welcome back!</SText>

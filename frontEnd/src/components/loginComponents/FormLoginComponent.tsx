@@ -73,7 +73,7 @@ export default () => {
       <SView className={styles.campBtnLogin}>
         <TouchableWithoutFeedback 
           onPress={() => console.log("login")}>
-          <SImage source={loginIco} className={styles.btnLogin} style={{resizeMode: 'contain'}}/>
+          <SImage source={loginIco} className={styles.btnLogin} resizeMode='contain'/>
         </TouchableWithoutFeedback>
       </SView>
     </SView>

@@ -7,7 +7,7 @@ export default {
   btnEditImageProfile: "w-full h-full rounded-full",
   containerUserData: " w-full border-t border-white p-3",
   containerbtnDeleteAccount: "w-full flex items-center",
-  btnDeleteAccount: "w-52 h-14 bg-red-700 mt-4 rounded-xl border border-white",
+  btnDeleteAccount: "w-52 h-12 bg-red-700 mt-4 rounded-xl border border-white",
   icoDeleteAccount: "h-full w-full",
   strong: "font-bold",
 }

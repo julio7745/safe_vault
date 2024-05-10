@@ -1,8 +1,10 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { View, TouchableWithoutFeedback, Image, Text} from 'react-native';
 import { styled } from "nativewind";
 import * as ImagePicker from 'expo-image-picker';
+
+import { LoadingContext } from '@/contexts/LoadingContext';
 
 import styles from '@/assets/styles/componentsStyles/profileComponentsStyles/EditProfileImageComponentStyles'
 
@@ -13,8 +15,11 @@ const SImage = styled(Image)
 export default ({ editingImage, setEditingImage }) => {
 
   const [image, setImage] = useState({});
+  const { setLoading } = useContext(LoadingContext); 
 
   const pickImage = async () => {
+
+    setLoading(true)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -33,6 +38,7 @@ export default ({ editingImage, setEditingImage }) => {
       });
 
     }
+    setLoading(false)
   };
 
   if (!editingImage) return <></>
@@ -41,7 +47,7 @@ export default ({ editingImage, setEditingImage }) => {
     <SView className={styles.EditProfileImageContainer}>
       <SView className={styles.EditProfileImage}>
         <SText className={styles.Title} >New Profile Image</SText>
-        { image && 
+        { image.uri && 
         <SView className={styles.ContainerImageUser}>
           <SImage 
             source={{ uri: image.uri }}
@@ -53,7 +59,7 @@ export default ({ editingImage, setEditingImage }) => {
         <TouchableWithoutFeedback onPress={ pickImage }>
             <SText className={styles.Button}>Select Image</SText>
         </TouchableWithoutFeedback>
-        { image &&
+        { image.uri &&
           <TouchableWithoutFeedback onPress={() => {} }>
               <SText className={styles.Button}>Confirm</SText>
           </TouchableWithoutFeedback>

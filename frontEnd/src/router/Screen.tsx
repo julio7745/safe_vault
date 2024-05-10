@@ -8,6 +8,7 @@ import { CurrentPageProvider, CurrentPageContext } from '@/contexts/CurrentPageC
 import LoginScreen from '@/screens/LoginScreen'; 
 import HomeScreen from '@/screens/HomeScreen'; 
 import OpeningsScreen from '@/screens/OpenigScreen'
+import ProfileScreen from '@/screens/ProfileScreen';
 
 import LoadingComponent from '@/components/commonComponents/LoadingComponent';
 
@@ -22,6 +23,8 @@ const RenderScreen = () => {
       return <HomeScreen />;
     case 'openings':
       return <OpeningsScreen />;
+    case 'profile':
+      return <ProfileScreen />;
     default:
       return <HomeScreen />;
   }

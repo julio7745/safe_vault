@@ -5,7 +5,7 @@ const CurrentPageContext = createContext({});
 
 const CurrentPageProvider = ({ children }) => {
   
-  const [currentPage, setCurrentPage] = useState('openings');
+  const [currentPage, setCurrentPage] = useState('profile');
 
   return (
     <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>

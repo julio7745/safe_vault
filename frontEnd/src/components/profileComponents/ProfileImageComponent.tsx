@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { View, Image } from 'react-native';
 import { styled } from "nativewind";
 
-import styles from "@/assets/styles/componentsStyles/openingComponentsStyles/ProfileImageComponentStyles"
+import styles from "@/assets/styles/componentsStyles/profileComponentsStyles/ProfileImageComponentStyles"
 
 import DeafultProfileImage from "@/assets/icons/commonIcos/ProfileIco.png"
 
@@ -25,3 +24,4 @@ export default () => {
 
   );
 };
+

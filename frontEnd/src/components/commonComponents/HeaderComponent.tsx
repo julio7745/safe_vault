@@ -20,7 +20,7 @@ export default () => {
 
     return (
       <SView className={styles.header}>
-        <SText className={styles.headerTitle}>{currentPage}</SText>
+        <SText className={styles.headerTitle}>{currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}</SText>
         <SView className={styles.logoContainer}>
           <SImage source={logo} className={styles.logo} resizeMode='contain'/>
         </SView>

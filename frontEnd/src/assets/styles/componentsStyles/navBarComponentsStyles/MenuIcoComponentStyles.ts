@@ -1,5 +1,5 @@
 
 export default {
-  container: "h-full mx-1",
+  container: "h-11 w-11 mx-1",
   btnIcon: "h-full -mx-5",
 }

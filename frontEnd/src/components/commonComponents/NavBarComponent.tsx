@@ -5,8 +5,8 @@ import { styled } from "nativewind";
 
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
-import NavBarButton from '../navBar/NavBarButtonComponent'
-import MenuIcoComponent from '../navBar/MenuIcoComponent'
+import NavBarButton from '../navBarComponents/NavBarButtonComponent'
+import MenuIcoComponent from '../navBarComponents/MenuIcoComponent'
 
 import styles from '@/assets/styles/componentsStyles/commonComponentsStyles/NavBarComponentStyles'
 

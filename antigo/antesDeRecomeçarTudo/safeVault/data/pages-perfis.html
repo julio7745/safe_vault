@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Vault - perfis</title>
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/safeVault/estilos/geral.css">
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/safeVault/estilos/perfis.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body onload="config()">
+    <header>
+        <section id="navegationcabecalho">
+            <div class="bnavegation" onclick="home()">
+                <span class="material-icons">west</span>
+            </div>
+            <div class="bnavegation" onclick="home()">
+                <span class="material-icons">home</span>
+            </div>
+            <div class="bnavegation" onclick="unlog()">
+                <span class="material-icons">logout</span>
+            </div>
+        </section>
+        <div class="traço"></div>
+        <div id="usercabacalho">
+            <section id="imgcabecalho">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ2G73Genq9OoVGGShZowvBWdVANx2j0d-JKYTk50&s" alt="Foto de perfil">
+            </section>
+            <section id="infcabecalho">
+                <p>
+                    <strong>Nome: </strong><span id="nome"> ... </span>
+                </p>
+                <p>
+                    <strong>Nível de Segurança: </strong><br>
+                    <span id="star"> ... </span>
+                </p>
+            </section>
+        </div>
+        <div class="traço"></div>
+        <section id="abertcabecalho">
+            <p>
+                <strong>Última abertura do cofre: </strong>
+                <div id="ultabertura"> ... </div>
+            </p>
+        </section>
+    </header>
+    <main>
+        <h1>Usuarios do cofre</h1>
+        <ul id="list"></ul>
+    </main>
+    <div id="dlogout">
+        <div>
+            <h1>Logout</h1>
+            <p>Tem certeza que deseja realizar o logout?</p>
+            <input type="button" value="Sim" onclick="logout()">
+            <input type="button" value="Não" onclick="unlog()">
+        </div>
+    </div>
+    <script>
+        function config() {
+
+            var ultabert = window.document.getElementById('ultabertura')
+            var aberturas = %geral-aberturas%
+            //var aberturas = [{"dia":"29","mes":"01","ano":"2023","hora":"11","minuto":"44","nome":"julio2","sobrenome":"carvalho1"}]
+            if(aberturas != 0)
+            {
+                ultabert.innerText = `${aberturas[0].dia}.${aberturas[0].mes}.${aberturas[0].ano} às ${aberturas[0].hora}:${aberturas[0].minuto} por ${aberturas[0].nome} ${aberturas[0].sobrenome}`
+
+            }
+
+            var nome = "%geral-nome%"
+            var sobrenome = "%geral-sobrenome%"
+            const level = "%geral-lv%"
+            //const level = "4";
+
+            window.document.getElementById('nome').innerText = `${nome} ${sobrenome}`
+            
+            const confstar = window.document.getElementById('star')
+            const confblimpar = window.document.getElementById('dblimpar');
+
+            switch (level) {
+                case "1":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span>' 
+                    break;
+                case "2":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>' 
+                    break;
+                case "3":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    break;
+                case "4":
+                    confstar.innerHTML = '<span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span><span class="material-icons">star_rate</span>'
+                    break;
+            }
+            
+            var usuarios = %perfil-users%
+            //var usuarios = [{"nome":"julio","sobrenome":"carvalho","id":"1"},{"nome":"julio2","sobrenome":"carvalho2","id":"2"}]
+
+            var list = window.document.getElementById('list');
+            var conteudo = ""
+
+            for (let pos in usuarios)
+            {
+                conteudo += `
+                <li>
+                    ${usuarios[pos].nome}.${usuarios[pos].sobrenome} 
+                    <div class="b">
+                        <span class="material-icons" onclick="chamaconfirmação(${usuarios[pos].id})">delete</span>
+                    </div>
+                    <div class="dconfirmacao">
+                        <div>
+                            <h1>Atenção</h1>
+                            <p>Tem certeza que deseja apagar o usuario ${usuarios[pos].nome} ${usuarios[pos].sobrenome}?</p>
+                            <input type="button" value="Sim" onclick="apagar(${usuarios[pos].id})">
+                            <input type="button" value="Não" onclick="chamaconfirmação(${usuarios[pos].id})">
+                        </div>
+                    </div>
+                </li>` 
+            }
+            list.innerHTML += conteudo
+
+        }
+        function home(){
+            window.location.replace("pages-home.html?id=%geral-id%")
+        }
+        function chamaconfirmação(aux){
+            var confirm = window.document.getElementsByClassName('dconfirmacao')
+            if (confirm[aux-1].style.display == 'block') {
+                confirm[aux-1].style.display = 'none'
+            } else {
+                confirm[aux-1].style.display = 'block'
+            }
+        }
+        function apagar(aux){
+            var url = `pages-perfis2.html?id=%geral-id%&apagar=${aux}`
+            window.location.replace(url);
+        }
+        function unlog(){
+            var logout = window.document.getElementById('dlogout')
+            if (logout.style.display == 'block') {
+                logout.style.display = 'none'
+            } else {
+                logout.style.display = 'block'
+            }
+        }
+        function logout() {
+            window.location.replace("/");
+        }
+    </script>
+    <footer>
+        <p><strong>Projeto Safe Vault</strong></p>
+        <p>by: Júlio Carvalho</p>
+        <div class="traço"></div>
+        <p>
+            <a href="https://www.instagram.com/julio.qrz/" target="_blank">
+                <img class="logofooter" src="https://julio7745.github.io/safe_vault/safeVault/images/ig-ico.png?raw=true" alt="intagram logo"> julio.qrz
+            </a>
+            <a href="https://twitter.com/julio7745?t=ZywMI2KeE7CJa7q110geCQ&s=08" target="_blank">
+                <img class="logofooter" src="https://julio7745.github.io/safe_vault/safeVault/images/tw-ico.png?raw=true" alt="twitter logo"> julio7745
+            </a>
+            <a href="https://www.linkedin.com/in/j%C3%BAlio-c%C3%A9sar-queiroz-carvalho" target="_blank">
+                <img class="logofooter" src="https://julio7745.github.io/safe_vault/safeVault/images/in-ico.png?raw=true" alt="linkedin logo"> Júlio César Queiroz Carvalho
+            </a>
+            <a href="https://github.com/julio7745" target="_blank">
+                <img class="logofooter" src="https://julio7745.github.io/safe_vault/safeVault/images/gh-ico.png?raw=true" alt="github logo"> julio7745
+            </a>
+        </p>
+    </footer>
+</body>
+</html>

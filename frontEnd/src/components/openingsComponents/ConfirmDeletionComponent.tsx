@@ -22,6 +22,7 @@ export default ({ deletion, setDeletion }) => {
   return (
     <SView className={styles.ConfirmDeletionContainer}>
       <SView className={styles.ConfirmDeletionDiv}>
+        <SText className={styles.Title}>Confirm?</SText>
         {
           deletion !== 'all' && 
           <SText className={styles.Text}>Are you sure you want to delete this opening forever? That's a long time!</SText>
@@ -30,16 +31,14 @@ export default ({ deletion, setDeletion }) => {
           deletion === 'all' && 
           <SText className={styles.Text}>Are you sure you want to delete all opening forever? That's a long time!</SText>
         }
-        <SView className={styles.ConfirmDeletionBtnContainer}>
           <TouchableWithoutFeedback
             onPress={confirmDeletion}>
-            <SText className={styles.ConfirmDeletionBtn}>CONFIRM</SText>
+            <SText className={styles.Button}>CONFIRM</SText>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback 
             onPress={cancelDeletion}>
-            <SText className={styles.ConfirmDeletionBtn}>CANCEL</SText>
+            <SText className={styles.Button + styles.Cancel}>CANCEL</SText>
           </TouchableWithoutFeedback>
-        </SView>
       </SView>
     </SView>
   );

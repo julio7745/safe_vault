@@ -13,7 +13,6 @@ import EditIco from "@/assets/icons/profileIcos/EditIco.png"
 import styles from "@/assets/styles/viewsStyles/profileViewsStyles/ProfileViewsStyles"
 
 const SView = styled(View)
-const SViewTc = styled(TouchableWithoutFeedback)
 const SImage = styled(Image)
 const SText = styled(Text)
 
@@ -32,9 +31,9 @@ export default () => {
           <SView className={styles.containerProfileImage}>
             <ProfileImage />
             <SView className={styles.btnEditImageProfileContainer}>
-              <SViewTc onPress={() => setEditingImage(true) }>
+              <TouchableWithoutFeedback onPress={() => setEditingImage(true) }>
                 <SImage source={EditIco} className={styles.btnEditImageProfile} resizeMode='contain'/>
-              </SViewTc>
+              </TouchableWithoutFeedback>
             </SView>
           </SView>
 
@@ -54,13 +53,13 @@ export default () => {
 
           <SView className={styles.containerUserData}>
             <SText className={styles.strong}>Delete my Account</SText>
-            <SViewTc onPress={() => {} }>
+            <TouchableWithoutFeedback onPress={() => {} }>
               <SView className={styles.containerbtnDeleteAccount}>
                 <SView className={styles.btnDeleteAccount}>
                   <SImage source={ClearIco} className={styles.icoDeleteAccount} resizeMode='contain'/>
                 </SView>
               </SView>
-            </SViewTc>
+            </TouchableWithoutFeedback>
           </SView>
 
           <EditProfileImageComponent {...props1} />

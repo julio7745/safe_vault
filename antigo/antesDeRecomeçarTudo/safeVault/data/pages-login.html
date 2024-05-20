@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Vault - Login</title>
+    <link rel="stylesheet" href="https://julio7745.github.io/safe_vault/safeVault/estilos/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <script>
+    function ok() {
+        window.document.querySelector('#esenha').style.display='none'
+        window.document.querySelector('#euser').style.display='none'
+        window.document.querySelector('#dlogin').style.display='block'
+    }
+    </script>
+</head>
+<body>
+    <main>
+        <div id="dlogin" style="display: %login-login%;">
+            <h1>Login</h1>
+            <form action="pages-login.html" method="get" autocomplete="on">
+                <input  id="ienviar" type="submit" value="" style="display: none;">
+                <label for="iuser">Usuário: </label>
+                <input type="text" name="user" id="iuser" placeholder="Nome.Sobrenome" autocomplete="username" required>
+                <label for="isenha">Senha: </label>
+                <input type="password" name="senha" id="isenha" placeholder="Senha" autocomplete="current-password" required>
+                <label for="ienviar">
+                    <div class="b">
+                        <span class="material-icons">arrow_forward</span>
+                    </div>
+                </label>
+            </form>
+        </div>
+        <div id="euser" class="erro"  style="display: %login-euser%;">
+            <h1>Login</h1>
+            <p>Usuário não cadastrado! <br> Por favor, tente novamente.</p>
+            <input type="button" value="Ok" onclick="ok()">
+        </div>
+        <div id="esenha" class="erro"  style="display:%login-esenha%;">
+            <h1>Login</h1>
+            <p>Senha incorreta! <br> Por favor, tente novamente.</p>
+            <input type="button" value="Ok" onclick="ok()">
+        </div>
+    </main>
+</body>
+</html>

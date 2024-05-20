@@ -1,13 +1,15 @@
 
 import React from 'react';
 
-import HomeView1 from '@/views/homeViews/HomeView1'
-import HomeView2 from '@/views/homeViews/HomeView2'
+import GenerateKeyView from '@/views/homeViews/GenerateKeyView'
+import InsertKeyView from '@/views/homeViews/InsertKeyView'
+import InsertFingerprintView from '@/views/homeViews/InsertFingerprintView';
+import WaitingOpeningView from '@/views/homeViews/WaitingOpeningView';
 
 import HeaderComponent from '@/components/commonComponents/HeaderComponent';
 import NavBarComponent from '@/components/commonComponents/NavBarComponent';
 
-const RenderView = () =>  <HomeView1 />
+const RenderView = () =>  <WaitingOpeningView />
 
 export default () => {
   return (

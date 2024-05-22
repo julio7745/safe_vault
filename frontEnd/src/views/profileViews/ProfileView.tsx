@@ -38,21 +38,21 @@ export default () => {
           </SView>
 
           <SView className={styles.containerUserData}>
-            <Text>
+            <SText className={styles.textBlue}>
               <SText className={styles.strong}>User Name: </SText>Júlio
-            </Text>
-            <Text>
+            </SText>
+            <SText className={styles.textBlue}>
               <SText className={styles.strong}>User Lastname: </SText>Carvalho
-            </Text>
+            </SText>
           </SView>
 
           <SView className={styles.containerUserData}>
-            <SText className={styles.strong}>Edit Password</SText>
+            <SText className={styles.textBlue + styles.strong}>Edit Password</SText>
             <FormEditPassword />
           </SView>
 
           <SView className={styles.containerUserData}>
-            <SText className={styles.strong}>Delete my Account</SText>
+            <SText className={styles.textBlue + styles.strong}>Delete my Account</SText>
             <TouchableWithoutFeedback onPress={() => {} }>
               <SView className={styles.containerbtnDeleteAccount}>
                 <SView className={styles.btnDeleteAccount}>

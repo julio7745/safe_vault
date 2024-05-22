@@ -54,8 +54,8 @@ export default () => {
         }}
       />
     
-    <ClearOpeningsComponent {...props1} />
-    <ConfirmDeletionComponent {...props1} />
+      <ClearOpeningsComponent {...props1} />
+      <ConfirmDeletionComponent {...props1} />
     </SView>
   );    
   

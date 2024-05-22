@@ -9,5 +9,6 @@ export default {
   containerbtnDeleteAccount: "w-full flex items-center",
   btnDeleteAccount: "w-52 h-12 bg-orange-400 mt-4 rounded-xl border border-white shadow-2xl shadow-black",
   icoDeleteAccount: "h-full w-full",
-  strong: "font-bold",
+  strong: " font-bold",
+  textBlue: " text-darkBlue",
 }

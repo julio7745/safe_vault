@@ -9,6 +9,7 @@ import LoginScreen from '@/screens/LoginScreen';
 import HomeScreen from '@/screens/HomeScreen'; 
 import OpeningsScreen from '@/screens/OpenigScreen'
 import ProfileScreen from '@/screens/ProfileScreen';
+import OptionsScreen from '@/screens/OptionsScreen';
 
 import LoadingComponent from '@/components/commonComponents/LoadingComponent';
 
@@ -25,6 +26,8 @@ const RenderScreen = () => {
       return <OpeningsScreen />;
     case 'profile':
       return <ProfileScreen />;
+    case 'options':
+        return <OptionsScreen />;
     default:
       return <HomeScreen />;
   }

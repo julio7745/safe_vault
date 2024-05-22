@@ -1,5 +1,5 @@
 
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { styled } from "nativewind";
 
 import DeleteOpening from './DeleteOpeningComponent'
@@ -21,17 +21,17 @@ export default ({ setDeletion, opening }) => {
       <SView className={styles.opening}>
         <ProfileImage/>
         <SView className={styles.openingTextContainer}>            
-          <Text>
+          <SText className={styles.openingText}>
             <SText className={styles.strong}>User: </SText>
             {userOfOpening.name.charAt(0).toUpperCase() + userOfOpening.name.slice(1)}.
             {userOfOpening.lastName.charAt(0).toUpperCase() + userOfOpening.lastName.slice(1)}
-          </Text>
-          <Text>
+          </SText>
+          <SText className={styles.openingText}>
             <SText className={styles.strong}>Date: </SText>
             {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
             , {opening.year} at {opening.hour > 12 ? opening.hour-12 : opening.hour}
             :{opening.minute > 9 ? opening.minute : `0${opening.minute}` } {opening.hour > 12 ? 'PM' : 'AM'}
-          </Text>
+          </SText>
         </SView>
         <DeleteOpening { ...props1 } />
       </SView>

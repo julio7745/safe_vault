@@ -31,13 +31,13 @@ export default ({ deletion, setDeletion }) => {
           deletion === 'all' && 
           <SText className={styles.Text}>Are you sure you want to delete all opening forever? That's a long time!</SText>
         }
-          <TouchableWithoutFeedback
-            onPress={confirmDeletion}>
-            <SText className={styles.Button}>CONFIRM</SText>
-          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback 
             onPress={cancelDeletion}>
-            <SText className={styles.Button + styles.Cancel}>CANCEL</SText>
+            <SText className={ styles.Button }>Cancel</SText>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={confirmDeletion}>
+            <SText className={ styles.Button + styles.Cancel}>Confirm</SText>
           </TouchableWithoutFeedback>
       </SView>
     </SView>

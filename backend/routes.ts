@@ -1,8 +1,8 @@
-
 import { Router } from 'express';
+import loginRoutes from './src/router/LoginRouter';
 
 const router = Router();
 
-router.get('/login', () => console.log(`oi`))
+router.use(loginRoutes);
 
 export default router;

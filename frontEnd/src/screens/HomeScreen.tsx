@@ -17,7 +17,7 @@ export default () => {
   const props1 = { cancelOpeningVisible, setCancelOpeningVisible }
 
   const RenderView = () =>  {
-    const currentPage:string = 'WaitingOpeningView'
+    const currentPage:string = 'GenerateKeyView'
     switch (currentPage) {
       case 'GenerateKeyView':
         return <GenerateKeyView />;

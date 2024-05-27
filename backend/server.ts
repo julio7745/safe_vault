@@ -2,28 +2,41 @@
 import express from 'express';
 const app = express();
 
-// import * as cors from 'cors';
-// app.use(cors());
-
 import dotenv from 'dotenv';
 dotenv.config();
 
+const connect = process.env.MONGO as string
+const port = process.env.PORT || 3000;
+
 import mongoose from 'mongoose';
-mongoose.connect( (process.env.MONGO) as string)
-.then(() => { app.emit('conected')})
-.catch(e => console.error(`server.js: ${e}`));
+mongoose.connect(connect)
+  .then(() => { app.emit('connected') })
+  .catch(e => {
+    console.error(`server.js: ${e}`);
+    console.error(`Error code: ${e.code}, Error name: ${e.codeName}, Error message: ${e.errmsg}`);
+  });
 
-import bodyParser from 'body-parser';
-app.use(bodyParser.json({ limit: '500mb' }));
-app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
+const sessionOptions = session({
+  secret: process.env.SECRET as string,
+  store: MongoStore.create({ mongoUrl: connect }),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 5,  // 5 minutes
+    httpOnly: true
+  }
+});
+app.use(sessionOptions);
 
-import IsLogged from './src/middlewares/IsLoggedMiddleware.ts';
-app.use((req, res, next) => IsLogged(req, res, next));
+app.use(express.urlencoded({extended: true})); 
 
-import routes from './routes.js';
+import routes from './routes';
 app.use(routes);
 
-const port = process.env.PORT || 3000;
-app.on('conected', () => { app.listen(port as number, '0.0.0.0', () => { 
-    console.log(`Host on in: ${port} `);
-})});
+app.on('connected', () => {
+  app.listen(Number(port), '0.0.0.0', () => {
+    console.log(`Host on in: ${port}`);
+  });
+});

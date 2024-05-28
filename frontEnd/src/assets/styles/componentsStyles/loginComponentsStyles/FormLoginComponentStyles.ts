@@ -1,5 +1,5 @@
 export default {
-  loginForm: "bg-mediumBlue p-5 rounded-xl w-80",
+  loginForm: "bg-mediumBlue p-5 rounded-xl w-80 mx-auto",
   titleForm: "text-2xl text-white mb-2 font-bold",
   errTxt: "text-red-500 font-semibold text-md ml-1",
   field: "flex flex-row itens-center mt-4 justify-start w-full pr-4",

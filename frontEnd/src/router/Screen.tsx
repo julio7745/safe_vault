@@ -1,5 +1,5 @@
 
-import React, { useState, createContext, useContext } from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import { styled } from "nativewind";
 
@@ -15,33 +15,62 @@ import LoadingComponent from '@/components/commonComponents/LoadingComponent';
 
 import styles from '@/assets/styles/ScreenStyles';
 
-const RenderScreen = () => {
-  const { currentPage } = useContext(CurrentPageContext);
-  switch (currentPage) {
-    case 'login':
-      return <LoginScreen />;
-    case 'home':
-      return <HomeScreen />;
-    case 'openings':
-      return <OpeningsScreen />;
-    case 'profile':
-      return <ProfileScreen />;
-    case 'options':
-        return <OptionsScreen />;
-    default:
-      return <HomeScreen />;
-  }
-}
-
 const SView = styled(KeyboardAvoidingView)
 
-export default () => {
+export default () => {  
+  
+  const RenderScreen = () => {
+    
+    const { currentPage } = useContext(CurrentPageContext);
+    switch (currentPage) {
+      case 'login':
+        return (
+          <SView behavior="padding" enabled className={styles.screen + " bg-darkBlue"} keyboardVerticalOffset={0}>
+            <LoginScreen />
+            <LoadingComponent />
+          </SView>
+        )
+      case 'home':
+        return (
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+            <HomeScreen />
+            <LoadingComponent />
+          </SView>
+        )
+      case 'openings':
+        return (
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+            <HomeScreen />
+            <LoadingComponent />
+          </SView>
+        )
+      case 'profile':
+        return (
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+            <ProfileScreen />
+            <LoadingComponent />
+          </SView>
+        )
+      case 'options':
+        return (
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+            <OptionsScreen />
+            <LoadingComponent />
+          </SView>
+        )
+      default:
+        return (
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+            <HomeScreen />
+            <LoadingComponent />
+          </SView>
+        )
+    }
+  }
+
   return (
     <CurrentPageProvider>
-      <SView behavior="padding" enabled className={styles.screen}>
-        <RenderScreen />
-        <LoadingComponent />
-      </SView>
+      <RenderScreen />
     </CurrentPageProvider>
   );
 }

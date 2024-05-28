@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { TouchableWithoutFeedback, View, Image, Text} from 'react-native';
+import { TouchableWithoutFeedback, View, Image, Text, ScrollView} from 'react-native';
 import { styled } from "nativewind";
 
 import ProfileImage from '@/components/profileComponents/ProfileImageComponent'; 
@@ -13,6 +13,7 @@ import EditIco from "@/assets/icons/profileIcos/EditIco.png"
 import styles from "@/assets/styles/viewsStyles/profileViewsStyles/ProfileViewsStyles"
 
 const SView = styled(View)
+const SScrollView = styled(ScrollView)
 const SImage = styled(Image)
 const SText = styled(Text)
 
@@ -26,6 +27,8 @@ export default () => {
 
   return (
     <SView className={styles.containProfile}>
+    
+      <SScrollView className={styles.containProfile}>
         <SView className={styles.profile}>
 
           <SView className={styles.containerProfileImage}>
@@ -62,9 +65,12 @@ export default () => {
             </TouchableWithoutFeedback>
           </SView>
 
-          <EditProfileImageComponent {...props1} />
           
       </SView>
+      </SScrollView>
+
+      <EditProfileImageComponent {...props1} />
+      
     </SView>
   );
   

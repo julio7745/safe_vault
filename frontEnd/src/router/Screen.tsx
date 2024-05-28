@@ -40,7 +40,7 @@ export default () => {
       case 'openings':
         return (
           <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
-            <HomeScreen />
+            <OpeningsScreen />
             <LoadingComponent />
           </SView>
         )

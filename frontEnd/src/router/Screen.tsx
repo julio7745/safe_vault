@@ -1,6 +1,6 @@
 
 import React, { useContext, useState, useEffect} from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, ScrollView} from 'react-native';
 import { styled } from "nativewind";
 
 import { CurrentPageProvider, CurrentPageContext } from '@/contexts/CurrentPageContext';
@@ -16,6 +16,7 @@ import LoadingComponent from '@/components/commonComponents/LoadingComponent';
 import styles from '@/assets/styles/ScreenStyles';
 
 const SView = styled(KeyboardAvoidingView)
+const SScrollView = styled(ScrollView)
 
 export default () => {  
   
@@ -26,8 +27,10 @@ export default () => {
       case 'login':
         return (
           <SView behavior="padding" enabled className={styles.screen + " bg-darkBlue"} keyboardVerticalOffset={0}>
-            <LoginScreen />
-            <LoadingComponent />
+            <SScrollView>
+              <LoginScreen />
+              <LoadingComponent />
+            </SScrollView>
           </SView>
         )
       case 'home':

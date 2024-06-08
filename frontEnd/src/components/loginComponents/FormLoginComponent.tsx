@@ -1,7 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableWithoutFeedback, Image, TextInput} from 'react-native';
 import { styled } from "nativewind";
+
+import { CurrentPageContext } from '@/contexts/CurrentPageContext';
+import { LoadingContext } from '@/contexts/LoadingContext';
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/FormLoginComponentStyles'
 
@@ -9,6 +12,8 @@ import userIco from '@/assets/icons/loginIcos/user.png'
 import passwordIco from '@/assets/icons/loginIcos/password.png' 
 import handleDisplayPasswordIco from '@/assets/icons/loginIcos/handleDisplayPassword.png'
 import loginIco from '@/assets/icons/loginIcos/login.png'
+
+import LoginService from '@/services/loginServices/LoginService';
 
 const SView = styled(View)
 const SText = styled(Text)
@@ -18,9 +23,19 @@ const SImage = styled(Image)
 export default () => {
 
   const [login, setLogin] = useState({user: 'julio.carvalho', password: '123456aA'});
-  const [errors, setErrors] = useState({user: [ 'Erro de user'], password: ['Erro de password']});
+  const [errors, setErrors] = useState({user: [], password: []});
 
   const [displayPassword, setdisplayPassword] = useState(true);
+
+  const { setCurrentPage } = useContext(CurrentPageContext);
+  const { setLoading } = useContext(LoadingContext);
+
+  const propsLoginService = {
+    setCurrentPage,
+    setLoading,
+    setErrors,
+    login
+  }
 
   return (
     <SView className={styles.loginForm}>
@@ -39,12 +54,7 @@ export default () => {
           maxLength={35}
         />
       </SView>
-      {
-        <SView>
-          {errors.user ? <SText className={styles.errTxt}>{errors.user[0]}</SText> : null}
-        </SView>
-      }
-      
+      {errors.user.length > 0 ? <SText className={styles.errTxt}>{errors.user[0]}</SText> : <></>}
       <SView className={styles.field}>
         <TouchableWithoutFeedback>
           <SImage source={passwordIco} className={styles.icon} />
@@ -62,17 +72,10 @@ export default () => {
           <SImage source={handleDisplayPasswordIco} className={styles.IconPassword}/>
         </TouchableWithoutFeedback>
       </SView>
-      <SView>
-      {
-        <SView>
-          {errors.password ? <SText className={styles.errTxt}>{errors.password[0]}</SText> : null}
-        </SView>
-      }
-        
-      </SView>
+      {errors.password.length > 0 ? <SText className={styles.errTxt}>{errors.password[0]}</SText> : <></>}
       <SView className={styles.campBtnLogin}>
         <TouchableWithoutFeedback 
-          onPress={() => console.log("login")}>
+          onPress={() => LoginService(propsLoginService)}>
           <SImage source={loginIco} className={styles.btnLogin} resizeMode='contain'/>
         </TouchableWithoutFeedback>
       </SView>

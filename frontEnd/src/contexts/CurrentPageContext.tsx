@@ -5,7 +5,7 @@ const CurrentPageContext = createContext({});
 
 const CurrentPageProvider = ({ children }) => {
   
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('login');
 
   return (
     <CurrentPageContext.Provider value={{ currentPage, setCurrentPage }}>

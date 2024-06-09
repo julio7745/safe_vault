@@ -21,7 +21,7 @@ const SScrollView = styled(ScrollView)
 export default () => {  
   
   const RenderScreen = () => {
-    
+
     const { currentPage } = useContext(CurrentPageContext);
     switch (currentPage) {
       case 'login':

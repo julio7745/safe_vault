@@ -10,12 +10,15 @@ export default async (req, res, next) => {
 
     if (req.path !== '/login') {
 
-      const token = JSON.parse(req.headers.authorization) || "";
-      
+      const stringToken = req.headers.authorization || ''
+      if (!stringToken) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
+
+      const token = JSON.parse(stringToken);
       if (!token) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
       
       jwt.verify(token, process.env.SECRET as string, (err, decoded) => {
         if (err) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
+        req._user = { name: decoded.name, lastName: decoded.lastName } 
         next();
       });
 

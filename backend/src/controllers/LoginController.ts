@@ -1,3 +1,4 @@
+
 import { Request, Response } from 'express';
 
 import LoginClass from '../class/LoginClass';
@@ -16,7 +17,7 @@ const login = async (req: Request, res: Response) => {
 
     if(login.errors.length > 0) return res.status(401).json({ errors: login.errors });
 
-    return res.status(200).json({ token: login.token });
+    return res.status(200).json({ token: login.token, user: { name: login.name, lastName: login.lastName }});
     
   } catch (error) {
     console.error(`LoginController.login: \n${error}`);
@@ -25,6 +26,8 @@ const login = async (req: Request, res: Response) => {
 
 };
 
+const verify = (req: Request, res: Response) => res.status(200).json({ message: 'login is ok' });
+
 export default {
-  login
+  login, verify
 }

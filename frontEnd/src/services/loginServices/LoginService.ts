@@ -13,8 +13,6 @@ export default async ({
 
     setLoading(true);
     
-    let newUser = {_id: "", name: "", lastName: ""}
-
     const validate = validateFormService({ login });
     if (validate.erros)  { 
       setErrors(validate.erros);
@@ -26,6 +24,10 @@ export default async ({
     .then(async response => {
       setErrors({ user: [], password: [] });
       await AsyncStorage.setItem('token', JSON.stringify( response.data.token ));
+      await AsyncStorage.setItem('user', JSON.stringify( { 
+        name: response.data.user.name, 
+        lastName: response.data.user.lastName 
+      }));
       setCurrentPage('home')
     })
     .catch(error => {

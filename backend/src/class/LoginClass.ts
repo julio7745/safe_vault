@@ -6,19 +6,19 @@ import bcryptjs from 'bcryptjs'
 import dotenv from 'dotenv';
 dotenv.config();
 
-import loginModel from '../models/LoginModel';
+import loginModel from '../models/UserModel';
 
 class LoginClass {
 
-    private name: string
-    private lastName: string
-    private password: string
-
+    name: string
+    lastName: string
     errors: string[]
     token: string
-    session: string
+    
+    private password: string
 
     constructor(
+        
         { name, lastName, password }: 
         { name: string, lastName: string, password: string }) {
 
@@ -28,12 +28,10 @@ class LoginClass {
 
         this.errors = []
         this.token = ''
-        this.session = ''
+
     };
 
     async newLogin(){
-
-        if(this.errors.length > 0) return
 
         const user = await loginModel.findOne({ name: this.name, lastName: this.lastName })
 
@@ -47,12 +45,12 @@ class LoginClass {
             name: user?.name,
             lastName: user?.lastName 
         }, process.env.SECRET as string, { 
-            expiresIn: '1m'
+            expiresIn: process.env.LOGIN_DURATION || '10m'
         });
     
         this.token = token;
 
-        return token;
+        return;
             
     }
 

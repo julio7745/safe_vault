@@ -1,6 +1,7 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TouchableWithoutFeedback, View, Image, Text, ScrollView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styled } from "nativewind";
 
 import ProfileImage from '@/components/profileComponents/ProfileImageComponent'; 
@@ -25,6 +26,23 @@ export default () => {
     editingImage, setEditingImage
   }
 
+  const [ user, setUserData ] = useState({name: '', lastName: ''});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      const user =  JSON.parse( await AsyncStorage.getItem('user') || '"name": "INTERNAL_ERROR", "lastName": "INTERNAL_ERROR"' );
+
+      console.log('====================================');
+      console.log(user);
+      console.log('====================================');
+
+      setUserData({ name: user.name, lastName: user.lastName });
+    };
+    fetchData();
+  }, []);
+  
+
   return (
     <SView className={styles.containProfile}>
     
@@ -42,10 +60,10 @@ export default () => {
 
           <SView className={styles.containerUserData}>
             <SText className={styles.textBlue}>
-              <SText className={styles.strong}>User Name: </SText>Júlio
+              <SText className={styles.strong}>User Name: </SText>{user.name.slice(0,1).toUpperCase()+user.name.slice(1)}
             </SText>
             <SText className={styles.textBlue}>
-              <SText className={styles.strong}>User Lastname: </SText>Carvalho
+              <SText className={styles.strong}>User Lastname: </SText>{user.lastName.slice(0,1).toUpperCase()+user.lastName.slice(1)}
             </SText>
           </SView>
 

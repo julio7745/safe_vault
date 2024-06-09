@@ -26,5 +26,23 @@ const post = async (path: string, body?: unknown) => {
     throw error;
   }
 }
+    
+const get = async (path: string) => {
+    
+  try {
+      
+    const token = await AsyncStorage.getItem('token') || "";
+        
+    const headers = {
+      Authorization: `${token}`,
+    };
+          
+    const response = await axios.get(`${URL_API_BACKEND}/${path}`, { headers });
+    return response;
+    
+  } catch (error) {
+    throw error;
+  }
+}
 
-export default { post }
+export default { post, get}

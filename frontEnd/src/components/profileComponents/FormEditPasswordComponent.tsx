@@ -25,9 +25,9 @@ export default () => {
   });
 
   const [formErros, setformErros] = useState({
-    currentPassword: 'AEIOUaeiou',
-    newPassword: 'AEIOUaeiou',
-    confirmNewPassword: 'AEIOUaeiou'
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
   });
 
   useEffect(() => {

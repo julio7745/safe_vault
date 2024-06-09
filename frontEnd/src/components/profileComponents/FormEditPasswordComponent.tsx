@@ -45,6 +45,10 @@ export default () => {
     Keyboard.dismiss();
   };
 
+  const submitForm = () => {
+    unselectField()
+  }
+
   return (
     <SView className={styles.EditPasswordForm}>
       <SView className={styles.form}>
@@ -79,7 +83,7 @@ export default () => {
         />
         { formErros.confirmNewPassword ? <SText className={styles.error}>{formErros.confirmNewPassword}</SText> : null }
       </SView>
-      <TouchableWithoutFeedback onPress={() => unselectField()}>
+      <TouchableWithoutFeedback onPress={submitForm}>
         <SView className={styles.containerImageSubmit}>
           <SImage source={SubmitNewPasswordIco} className={styles.submitImage} resizeMode='contain'/>
         </SView>

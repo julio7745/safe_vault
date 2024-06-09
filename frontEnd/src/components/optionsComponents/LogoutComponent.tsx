@@ -5,7 +5,7 @@ import { styled } from "nativewind";
 
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 
-import LogoutService from '@/services/commonSevices.ts/LogoutService';
+import LogoutService from '@/services/commonSevices/LogoutService';
 
 import styles from '@/assets/styles/componentsStyles/optionsComponentsStyles/LogoutComponentStyles'
 

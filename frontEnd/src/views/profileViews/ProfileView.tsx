@@ -33,10 +33,6 @@ export default () => {
       
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '"name": "INTERNAL_ERROR", "lastName": "INTERNAL_ERROR"' );
 
-      console.log('====================================');
-      console.log(user);
-      console.log('====================================');
-
       setUserData({ name: user.name, lastName: user.lastName });
     };
     fetchData();

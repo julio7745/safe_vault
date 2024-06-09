@@ -2,7 +2,7 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import httpRequestService from '../commonSevices.ts/httpRequestService';
+import httpRequestService from '../commonSevices/httpRequestService';
 
 export default async ({
     setCurrentPage,

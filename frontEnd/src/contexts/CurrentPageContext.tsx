@@ -1,24 +1,23 @@
 
-import httpRequestService from '@/services/commonSevices.ts/httpRequestService';
+import httpRequestService from '@/services/commonSevices/httpRequestService';
 import { createContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CurrentPageContext = createContext({});
 
 const CurrentPageProvider = ({ children }) => {
-  
-  const defaultPage = 'login'
 
-  const [currentPage, _setCurrentPage] = useState(defaultPage);
+  const [currentPage, _setCurrentPage] = useState('login');
 
   const setCurrentPage = async (page:string) => {
 
-    if (page === defaultPage) return _setCurrentPage(page)
+    if (page === 'login') return _setCurrentPage(page)
 
     await httpRequestService.get(`login/verify`)
     .then( () => _setCurrentPage(page))
-    .catch( (err) => { 
-      _setCurrentPage(defaultPage)
-      console.error(err);
+    .catch( () => { 
+      AsyncStorage.removeItem('token');
+      _setCurrentPage('login')
     })
   } 
 

@@ -1,10 +1,12 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TouchableWithoutFeedback, Image, TextInput} from 'react-native';
 import { styled } from "nativewind";
 
 import { CurrentPageContext } from '@/contexts/CurrentPageContext';
 import { LoadingContext } from '@/contexts/LoadingContext';
+
+import AutoLogin from '@/services/loginServices/AutoLoginService';
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/FormLoginComponentStyles'
 
@@ -36,6 +38,15 @@ export default () => {
     setErrors,
     login
   }
+
+  const propsAutoLogin = {
+    setCurrentPage,
+    setLoading,
+  }
+
+  useEffect(() => {
+    AutoLogin(propsAutoLogin);
+  }, []);
 
   return (
     <SView className={styles.loginForm}>

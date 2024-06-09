@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { View, ScrollView} from 'react-native';
 import { styled } from "nativewind";
 
@@ -12,17 +11,17 @@ const SView = styled(View)
 const SScrollView = styled(ScrollView)
 
 export default () => {
-    return (
-      <SView className={styles.containLogin}>
-        <SScrollView className={styles.containLogin}>
-        
-        <SView className={styles.loginView}>
-          <HeaderLoginComponent />
-          <FormLoginComponent />
-        </SView>
-
-        </SScrollView>
+  return (
+    <SView className={styles.containLogin}>
+      <SScrollView className={styles.containLogin}>
+      
+      <SView className={styles.loginView}>
+        <HeaderLoginComponent />
+        <FormLoginComponent />
       </SView>
-    );
+
+      </SScrollView>
+    </SView>
+  );
 };
 

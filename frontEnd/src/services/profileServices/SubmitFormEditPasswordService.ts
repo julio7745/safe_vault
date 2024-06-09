@@ -9,7 +9,7 @@
 //     setformErros,
 //   }) => {
   
-//     setLoading(true);
+
 
 //     try {
 
@@ -67,10 +67,44 @@
 //     setLoading(false);
 //     return;
 
+  // formValue.confirmNewPassword === formValue.currentPassword ? [`● Confirmation must be different from the current password!`] : 
+
 // };
 
-export default async () => {
-  
-return;
+import validatePasswordService from "../commonSevices/ValidadePasswordServices";
+
+export default async ({
+  formValue,
+  setFormValue,
+  setLoading,
+  setformErros,
+}:{
+  formValue: {
+    currentPassword: string,
+    newPassword: string,
+    confirmNewPassword: string
+  },
+  setFormValue:React.Dispatch<React.SetStateAction<unknown>>,
+  setLoading:React.Dispatch<React.SetStateAction<boolean>>,
+  setformErros:React.Dispatch<React.SetStateAction<unknown>>,
+}) => {
+
+  setLoading(true);
+
+  const currentPasswordErros = validatePasswordService(formValue.currentPassword)
+  const newPasswordErros = validatePasswordService(formValue.newPassword)
+  const confirmNewPasswordErros = formValue.newPassword !== formValue.confirmNewPassword ? [`● Confirmation must match the new password!`] : []
+  if ( formValue.newPassword === formValue.currentPassword ) newPasswordErros.push(`● New password must be different from the current password!`)
+
+  if (currentPasswordErros.length > 0 || newPasswordErros.length > 0 || confirmNewPasswordErros.length > 0) {
+    setformErros({
+      currentPassword: currentPasswordErros[0] || "",
+      newPassword: newPasswordErros[0] || "",
+      confirmNewPassword: confirmNewPasswordErros[0] || ""
+    })
+    return setLoading(false);
+  }
+
+  return setLoading(false);
 
 };

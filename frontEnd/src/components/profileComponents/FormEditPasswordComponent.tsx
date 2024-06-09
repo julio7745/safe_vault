@@ -1,7 +1,11 @@
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext} from 'react';
 import { View, TextInput, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
 import { styled } from "nativewind";
+
+import SubmitFormEditPasswordService from '@/services/profileServices/SubmitFormEditPasswordService';
+
+import { LoadingContext } from '@/contexts/LoadingContext';
 
 import SubmitNewPasswordIco from '@/assets/icons/profileIcos/SubmitNewPasswordIco.png'
 
@@ -30,6 +34,8 @@ export default () => {
     confirmNewPassword: ''
   });
 
+  const { setLoading } = useContext(LoadingContext);
+
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
@@ -45,8 +51,15 @@ export default () => {
     Keyboard.dismiss();
   };
 
+  const propsSubmitFormEditPasswordService = {
+    formValue, setFormValue,
+    setLoading,
+    setformErros,
+  }
+
   const submitForm = () => {
     unselectField()
+    SubmitFormEditPasswordService(propsSubmitFormEditPasswordService)
   }
 
   return (

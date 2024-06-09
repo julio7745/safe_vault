@@ -23,11 +23,6 @@ export default () => {
           <SText className={styles.textBtnNext}>Generate key for new opening</SText>
         </SView>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPressOut={ () => httpRequestService.get('login/oi')}>
-        <SView className={styles.campBtnNext}>
-          <SText className={styles.textBtnNext}>test get</SText>
-        </SView>
-      </TouchableWithoutFeedback>
-      </SView>
+    </SView>
   );
 }

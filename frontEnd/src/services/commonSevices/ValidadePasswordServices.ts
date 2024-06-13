@@ -1,3 +1,4 @@
+
 const validatePasswordService = (password: string) => {
 
   const err: string[] = []

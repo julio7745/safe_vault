@@ -1,11 +1,8 @@
 
-import { useContext } from 'react';
 import { View, TouchableWithoutFeedback, Text} from 'react-native';
 import { styled } from "nativewind";
 
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-
-import LogoutService from '@/services/commonSevices/LogoutService';
+import LogoutHook from '@/hooks/commonHooks/LogoutHook';
 
 import styles from '@/assets/styles/componentsStyles/optionsComponentsStyles/LogoutComponentStyles'
 
@@ -14,8 +11,8 @@ const SText = styled(Text)
 
 export default ({ logoutVisible, setLogoutVisible }) => {
 
-  const { setCurrentPage } = useContext(CurrentPageContext);  
-  
+  const logout = LogoutHook();
+
   if (!logoutVisible) return <></>
 
   return (
@@ -26,7 +23,7 @@ export default ({ logoutVisible, setLogoutVisible }) => {
         <TouchableWithoutFeedback onPress={ () => setLogoutVisible(false) }>
             <SText className={ styles.Button }>Cancel</SText>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={ () => LogoutService({setCurrentPage}) }>
+        <TouchableWithoutFeedback onPress={ logout }>
             <SText className={ styles.Button + styles.Cancel }>Confirm</SText>
         </TouchableWithoutFeedback>
       </SView>

@@ -29,9 +29,9 @@ export default () => {
   });
 
   const [formErros, setformErros] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: ''
+    currentPassword: [],
+    newPassword: [],
+    confirmNewPassword: []
   });
 
   const { setLoading } = useContext(LoadingContext);
@@ -74,7 +74,7 @@ export default () => {
           value={formValue.currentPassword}
           onChangeText={(text)=>setFormValue({ ...formValue, currentPassword: text })}
         />
-        { formErros.currentPassword ? <SText className={styles.error}>{formErros.currentPassword}</SText> : null }
+        { formErros.currentPassword[0] ? <SText className={styles.error}>{formErros.currentPassword[0]}</SText> : null }
         <STextInput
           className={styles.input}
           ref={newPasswordRef}
@@ -84,7 +84,7 @@ export default () => {
           value={formValue.newPassword}
           onChangeText={(text)=>setFormValue({ ...formValue, newPassword: text })}
         />
-        { formErros.newPassword ? <SText className={styles.error}>{formErros.newPassword}</SText> : null}
+        { formErros.newPassword[0] ? <SText className={styles.error}>{formErros.newPassword[0]}</SText> : null}
         <STextInput
           className={styles.input}
           ref={confirmNewPasswordRef}
@@ -94,7 +94,7 @@ export default () => {
           value={formValue.confirmNewPassword}
           onChangeText={(text)=>setFormValue({ ...formValue, confirmNewPassword: text })}
         />
-        { formErros.confirmNewPassword ? <SText className={styles.error}>{formErros.confirmNewPassword}</SText> : null }
+        { formErros.confirmNewPassword[0] ? <SText className={styles.error}>{formErros.confirmNewPassword[0]}</SText> : null }
       </SView>
       <TouchableWithoutFeedback onPress={submitForm}>
         <SView className={styles.containerImageSubmit}>

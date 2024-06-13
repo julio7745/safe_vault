@@ -34,32 +34,22 @@ export default async ({
     .catch(error => {
 
       if (error.response.data.errors[0] === 'INCORRECT_USER'){
-        setErrors({ user: ['● User does not exist!'], password: [] });
-        return setLoading(false);
+        return setErrors({ user: ['● User does not exist!'], password: [] });
       }
         
       if (error.response.data.errors[0] === 'INCORRECT_PASSWORD') {
-        setErrors({ user: [], password: ['● Incorrect password!'] });
-        return setLoading(false);
+        return setErrors({ user: [], password: ['● Incorrect password!'] });
       }
 
       if (error.response.data.errors[0] === 'INTERNAL_ERROR') {
-        setErrors({ user: [], password: ['● Internal Error!'] });
-        return setLoading(false);
-      }
-
-      else {
-        console.error(`LoginService: Chave desconhecida  --> ${error.response.data.errors[0]}`);
-        setErrors({ user: [], password: ['● Internal App Error!'] });
-        return setLoading(false);
+        return setErrors({ user: [], password: ['● Internal Error!'] });
       }
 
     })
     .finally(() => {
-      setLoading(false);
+      return setLoading(false);
     });
-
-    return;
+    
 };
 
 import lodash from 'lodash';

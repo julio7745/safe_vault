@@ -10,7 +10,7 @@ export default async ({
     setLoading(true);
 
     await httpRequestService.get(`login/verify`)
-    .then( () => setCurrentPage('home'))
+    .then( () => setCurrentPage('profile'))
     .catch( () => { 
       setCurrentPage('login')
     })

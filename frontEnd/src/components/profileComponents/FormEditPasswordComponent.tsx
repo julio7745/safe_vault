@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useContext} from 'react';
 import { View, TextInput, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
 import { styled } from "nativewind";
 
-import SubmitFormEditPasswordService from '@/services/profileServices/SubmitFormEditPasswordService';
+import UpdatePasswordHooks from '@/hooks/profileHooks/UpdatePasswordHooks';
 
 import { LoadingContext } from '@/contexts/LoadingContext';
 
@@ -17,6 +17,8 @@ const SText = styled(Text)
 const SImage = styled(Image)
 
 export default () => {
+
+  const { UpdatePasswordService } = UpdatePasswordHooks()
 
   const currentPasswordRef = useRef(null);
   const newPasswordRef = useRef(null);
@@ -59,7 +61,7 @@ export default () => {
 
   const submitForm = () => {
     unselectField()
-    SubmitFormEditPasswordService(propsSubmitFormEditPasswordService)
+    UpdatePasswordService(propsSubmitFormEditPasswordService)
   }
 
   return (

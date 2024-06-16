@@ -10,8 +10,6 @@ export default async (req, res, next) => {
 
     if (req.path !== '/login') {
 
-      // return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
-
       const stringToken = req.headers.authorization || ''
       if (!stringToken) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
 

@@ -2,7 +2,7 @@
 import { View, TouchableWithoutFeedback, Text} from 'react-native';
 import { styled } from "nativewind";
 
-import LogoutHook from '@/hooks/commonHooks/LogoutHook';
+import LoginHook from '@/hooks/loginHooks/LoginHook';
 
 import styles from '@/assets/styles/componentsStyles/optionsComponentsStyles/LogoutComponentStyles'
 
@@ -11,7 +11,7 @@ const SText = styled(Text)
 
 export default ({ logoutVisible, setLogoutVisible }) => {
 
-  const logout = LogoutHook();
+  const LoginServices = LoginHook()
 
   if (!logoutVisible) return <></>
 
@@ -23,7 +23,7 @@ export default ({ logoutVisible, setLogoutVisible }) => {
         <TouchableWithoutFeedback onPress={ () => setLogoutVisible(false) }>
             <SText className={ styles.Button }>Cancel</SText>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={ logout }>
+        <TouchableWithoutFeedback onPress={ LoginServices.logout }>
             <SText className={ styles.Button + styles.Cancel }>Confirm</SText>
         </TouchableWithoutFeedback>
       </SView>

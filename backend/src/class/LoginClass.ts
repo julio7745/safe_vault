@@ -33,6 +33,10 @@ class LoginClass {
 
     async newLogin(){
 
+        // ToDo
+        // preciso tratar e validar os dados antes de fazer a requsição
+        // preciso adicionar as chaves de tratamento para os erros de validação 
+
         const user = await loginModel.findOne({ name: this.name, lastName: this.lastName })
 
         if(!user) this.errors.push(process.env.INCORRECT_USER as string)

@@ -1,11 +1,16 @@
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useContext, ReactElement, Dispatch, SetStateAction } from 'react';
 
-const LoadingContext = createContext({});
+interface LoadingContextType {
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+}
 
-const LoadingProvider = ({ children }) => {
+const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
+
+const LoadingProvider = ({ children } : { children: ReactElement }) => {
   
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
@@ -15,4 +20,12 @@ const LoadingProvider = ({ children }) => {
   
 };
 
-export { LoadingProvider, LoadingContext };
+const useLoading = () => {
+  const context = useContext(LoadingContext);
+  if (context === undefined) {
+    throw new Error('useCurrentPage must be used within a CurrentPageProvider');
+  }
+  return context;
+};
+
+export { LoadingProvider, LoadingContext, useLoading};

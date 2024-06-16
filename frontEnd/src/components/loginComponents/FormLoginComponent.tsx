@@ -1,12 +1,7 @@
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableWithoutFeedback, Image, TextInput} from 'react-native';
 import { styled } from "nativewind";
-
-import { CurrentPageContext } from '@/contexts/CurrentPageContext';
-import { LoadingContext } from '@/contexts/LoadingContext';
-
-import AutoLogin from '@/services/loginServices/AutoLoginService';
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/FormLoginComponentStyles'
 
@@ -15,7 +10,7 @@ import passwordIco from '@/assets/icons/loginIcos/password.png'
 import handleDisplayPasswordIco from '@/assets/icons/loginIcos/handleDisplayPassword.png'
 import loginIco from '@/assets/icons/loginIcos/login.png'
 
-import LoginService from '@/services/loginServices/LoginService';
+import LoginHook from '@/hooks/loginHooks/LoginHook';
 
 const SView = styled(View)
 const SText = styled(Text)
@@ -24,29 +19,21 @@ const SImage = styled(Image)
 
 export default () => {
 
-  const [login, setLogin] = useState({user: 'julio.carvalho', password: '123456aA'});
-  const [errors, setErrors] = useState({user: [], password: []});
+  const [login, setLogin] = useState<{user: string, password: string}>({user: 'julio.carvalho', password: '123456aA'});
+  const [errors, setErrors] = useState<{user: string[], password: string[]}>({user: [], password: []});
 
-  const [displayPassword, setdisplayPassword] = useState(true);
-
-  const { setCurrentPage } = useContext(CurrentPageContext);
-  const { setLoading } = useContext(LoadingContext);
+  const [displayPassword, setdisplayPassword] = useState<boolean>(true);
 
   const propsLoginService = {
-    setCurrentPage,
-    setLoading,
     setErrors,
     login
   }
 
-  const propsAutoLogin = {
-    setCurrentPage,
-    setLoading,
-  }
-
   useEffect(() => {
-    AutoLogin(propsAutoLogin);
+    LoginServices.autoLogin();
   }, []);
+
+  const LoginServices = LoginHook()
 
   return (
     <SView className={styles.loginForm}>
@@ -86,7 +73,7 @@ export default () => {
       {errors.password.length > 0 ? <SText className={styles.errTxt}>{errors.password[0]}</SText> : <></>}
       <SView className={styles.campBtnLogin}>
         <TouchableWithoutFeedback 
-          onPress={() => LoginService(propsLoginService)}>
+          onPress={async () => await LoginServices.login(propsLoginService)}>
           <SImage source={loginIco} className={styles.btnLogin} resizeMode='contain'/>
         </TouchableWithoutFeedback>
       </SView>

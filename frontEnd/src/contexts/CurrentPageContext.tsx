@@ -1,24 +1,31 @@
 
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, ReactElement } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const URL_API_BACKEND = 'http://192.168.100.6:3000';
 
-const CurrentPageContext = createContext({});
+interface CurrentPageContextType {
+  currentPage: string;
+  setCurrentPage: (page: string) => Promise<void>;
+}
 
-const CurrentPageProvider = ({ children }) => {
+const CurrentPageContext = createContext<CurrentPageContextType | undefined>(undefined);
 
-  const [currentPage, _setCurrentPage] = useState('login');
+const CurrentPageProvider = ({ children } : { children: ReactElement}) => {
+
+  const [currentPage, _setCurrentPage] = useState<string>('login');
 
   const setCurrentPage = async (page: string) => {
 
     if (page === 'login') return _setCurrentPage(page);
 
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('token') || '';
     const headers = {
       Authorization: `${token}`,
     };
+
+    if (!token) return
 
     await axios.get(`${URL_API_BACKEND}/login/verify`, { headers })
     .then(() => _setCurrentPage(page))
@@ -36,6 +43,12 @@ const CurrentPageProvider = ({ children }) => {
   );
 };
 
-const useCurrentPage = () => useContext(CurrentPageContext);
+const useCurrentPage = () => {
+  const context = useContext(CurrentPageContext);
+  if (context === undefined) {
+    throw new Error('useCurrentPage must be used within a CurrentPageProvider');
+  }
+  return context;
+};
 
 export { CurrentPageProvider, useCurrentPage, CurrentPageContext };

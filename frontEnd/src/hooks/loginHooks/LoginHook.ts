@@ -37,7 +37,7 @@ export default () => {
         return
       }  
 
-      await httpRequestServices.post(`login`, {name: "julio", lastName: "carvalho", password:"123456aA"})
+      await httpRequestServices.post(`login`, {name: "julio", lastName: "carvalho", password:"123456Aa"})
       .then(async response => {
         setErrors({ user: [], password: [] });
         await AsyncStorage.setItem('token', JSON.stringify( response.data.token ));
@@ -45,11 +45,11 @@ export default () => {
           name: response.data.user.name, 
           lastName: response.data.user.lastName 
         }));
-        // ToDo
-        // setCurrentPage('home')
-        setCurrentPage('profile')
+        setCurrentPage('home')
       })
       .catch(error => {
+
+        console.log(error.response);
 
         if (error.response.data.errors[0] === 'INCORRECT_USER'){
           return setErrors({ user: ['● User does not exist!'], password: [] });

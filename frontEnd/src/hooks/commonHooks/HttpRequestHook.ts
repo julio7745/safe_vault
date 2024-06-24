@@ -1,6 +1,6 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { useCurrentPage } from '@/contexts/CurrentPageContext';
 

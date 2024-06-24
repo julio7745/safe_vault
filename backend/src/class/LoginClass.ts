@@ -10,59 +10,59 @@ import loginModel from '../models/UserModel';
 
 class LoginClass {
 
-    name: string
-    lastName: string
-    errors: string[]
-    token: string
-    
-    private password: string
+	name: string
+	lastName: string
+	
+	errors: string[]
+	token: string
+	
+	private password: string
 
-    constructor(
-        
-        { name, lastName, password }: 
-        { name: string, lastName: string, password: string }) {
+	constructor(
+			
+		{ name, lastName, password }: 
+		{ name: string, lastName: string, password: string }) {
 
-        this.name = name
-        this.lastName = lastName
-        this.password = password
+		this.name = name
+		this.lastName = lastName
+		this.password = password
 
-        this.errors = []
-        this.token = ''
+		this.errors = []
+		this.token = ''
 
-    };
+	};
 
-    async newLogin(){
+	async newLogin(){
 
-        // ToDo
-        // preciso tratar e validar os dados antes de fazer a requsição
-        // preciso adicionar as chaves de tratamento para os erros de validação 
+		// ToDo
+		// preciso tratar e validar os dados antes de fazer a requsição
 
-        const user = await loginModel.findOne({ name: this.name, lastName: this.lastName })
+		const user = await loginModel.findOne({ name: this.name, lastName: this.lastName })
 
-        if(!user) this.errors.push(process.env.INCORRECT_USER as string)
-        if(this.errors.length > 0) return
+		if(!user) this.errors.push('INCORRECT_USER')
+		if(this.errors.length > 0) return
 
-        this.validatePassword(user?.password as string)
-        if(this.errors.length > 0) return
+		this.validatePassword(user?.password as string)
+		if(this.errors.length > 0) return
 
-        const token = jwt.sign({ 
-            name: user?.name,
-            lastName: user?.lastName 
-        }, process.env.SECRET as string, { 
-            expiresIn: process.env.LOGIN_DURATION || '10m'
-        });
-    
-        this.token = token;
+		const token = jwt.sign({ 
+			name: user?.name,
+			lastName: user?.lastName 
+		}, process.env.SECRET as string, { 
+			expiresIn: process.env.LOGIN_DURATION || '10m'
+		});
 
-        return;
-            
-    }
+		this.token = token;
 
-    private validatePassword(realPassword: string){
-        if(!bcryptjs.compareSync(this.password, realPassword)) {
-            this.errors.push(process.env.INCORRECT_PASSWORD as string)
-        } 
-    }
+		return;
+					
+	}
+
+	private validatePassword(realPassword: string){
+		if(!bcryptjs.compareSync(this.password, realPassword)) {
+			this.errors.push('INCORRECT_PASSWORD')
+		} 
+	}
 
 }
 

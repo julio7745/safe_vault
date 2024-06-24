@@ -11,13 +11,13 @@ export default async (req, res, next) => {
     if (req.path !== '/login') {
 
       const stringToken = req.headers.authorization || ''
-      if (!stringToken) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
+      if (!stringToken) return res.status(401).json({ errors: ['UNAUTHORIZED'] });
 
       const token = JSON.parse(stringToken);
-      if (!token) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
+      if (!token) return res.status(401).json({ errors: ['UNAUTHORIZED'] });
       
       jwt.verify(token, process.env.SECRET as string, (err, decoded) => {
-        if (err) return res.status(401).json({ errors: [process.env.UNAUTHORIZED] });
+        if (err) return res.status(401).json({ errors: ['UNAUTHORIZED'] });
         req._user = { name: decoded.name, lastName: decoded.lastName } 
         next();
       });
@@ -28,7 +28,7 @@ export default async (req, res, next) => {
 
   } catch (error) {
     console.error(`IsLoggedMiddleware: \n${error}`);
-    return res.status(500).json({ errors: [process.env.INTERNAL_ERROR] });
+    return res.status(500).json({ errors: ['INTERNAL_ERROR'] });
   }
 
 };

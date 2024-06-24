@@ -36,8 +36,6 @@ export default () => {
     confirmNewPassword: []
   });
 
-  const { setLoading } = useContext(LoadingContext);
-
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
@@ -55,7 +53,6 @@ export default () => {
 
   const propsSubmitFormEditPasswordService = {
     formValue, setFormValue,
-    setLoading,
     setformErros,
   }
 

@@ -16,7 +16,7 @@ export default ({image}:{image:string}) => {
   return (
     <SView className={styles.containerimageUser}>
       <SImage 
-        source={{ uri: uriImage } || DeafultProfileImage} 
+        source={image? { uri: uriImage } : DeafultProfileImage} 
         className={styles.imageUser}
         resizeMode='cover'
       />

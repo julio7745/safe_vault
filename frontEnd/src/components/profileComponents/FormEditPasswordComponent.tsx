@@ -5,8 +5,6 @@ import { styled } from "nativewind";
 
 import UpdatePasswordHooks from '@/hooks/profileHooks/UpdatePasswordHooks';
 
-import { LoadingContext } from '@/contexts/LoadingContext';
-
 import SubmitNewPasswordIco from '@/assets/icons/profileIcos/SubmitNewPasswordIco.png'
 
 import styles from '@/assets/styles/componentsStyles/profileComponentsStyles/FormEditPassrordComponentStyles'
@@ -20,17 +18,27 @@ export default () => {
 
   const { UpdatePasswordService } = UpdatePasswordHooks()
 
-  const currentPasswordRef = useRef(null);
-  const newPasswordRef = useRef(null);
-  const confirmNewPasswordRef = useRef(null);
+  const currentPasswordRef = useRef<TextInput>(null);
+  const newPasswordRef = useRef<TextInput>(null);
+  const confirmNewPasswordRef = useRef<TextInput>(null);
 
-  const [formValue, setFormValue] = useState({
+  interface formValueInterface {
+    currentPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+  }
+  const [formValue, setFormValue] = useState<formValueInterface>({
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: ''
   });
 
-  const [formErros, setformErros] = useState({
+  interface formErrosInterface {
+    currentPassword: string[];
+    newPassword: string[];
+    confirmNewPassword: string[];
+  }
+  const [formErros, setformErros] = useState<formErrosInterface>({
     currentPassword: [],
     newPassword: [],
     confirmNewPassword: []
@@ -45,9 +53,9 @@ export default () => {
   }, []);
 
   const unselectField = () => {
-    currentPasswordRef.current.blur();
-    newPasswordRef.current.blur();
-    confirmNewPasswordRef.current.blur();
+    currentPasswordRef.current?.blur();
+    newPasswordRef.current?.blur();
+    confirmNewPasswordRef.current?.blur();
     Keyboard.dismiss();
   };
 

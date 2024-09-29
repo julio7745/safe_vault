@@ -20,20 +20,19 @@ const SText = styled(Text)
 
 export default () => {
 
-  const [editingImage, setEditingImage] = useState(false)
+  const [editingImage, setEditingImage] = useState<boolean>(false)
+  
+  const [ user, setUserData ] = useState<{name: string, lastName: string, profileImage: string, profileImageExtension: string}>({name: '', lastName: '', profileImage: '', profileImageExtension: ''});
 
   const props1 = {
-    editingImage, setEditingImage
+    editingImage, setEditingImage,
+    user, setUserData
   }
-
-  const [ user, setUserData ] = useState({name: '', lastName: ''});
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '"name": "INTERNAL_ERROR", "lastName": "INTERNAL_ERROR"' );
-
-      setUserData({ name: user.name, lastName: user.lastName });
+      setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''});
     };
     fetchData();
   }, []);
@@ -46,7 +45,7 @@ export default () => {
         <SView className={styles.profile}>
 
           <SView className={styles.containerProfileImage}>
-            <ProfileImage />
+            <ProfileImage {...{image: user.profileImage}}/>
             <SView className={styles.btnEditImageProfileContainer}>
               <TouchableWithoutFeedback onPress={() => setEditingImage(true) }>
                 <SImage source={EditIco} className={styles.btnEditImageProfile} resizeMode='contain'/>

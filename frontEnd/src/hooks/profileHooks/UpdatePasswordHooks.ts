@@ -1,11 +1,8 @@
 
-
 import HttpRequestHook from '../commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
 import validatePasswordService from '@/services/commonSevices/ValidadePasswordServices';
-
-validatePasswordService
 
 export default () => {
 
@@ -24,9 +21,8 @@ export default () => {
         newPassword: string,
         confirmNewPassword: string
       },
-      setFormValue: React.Dispatch<React.SetStateAction<unknown>>,
-      setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-      setformErros: React.Dispatch<React.SetStateAction<unknown>>,
+      setFormValue: React.Dispatch<React.SetStateAction<{currentPassword: string, newPassword: string, confirmNewPassword: string}>>,
+      setformErros: React.Dispatch<React.SetStateAction<{currentPassword: never[] | string[], newPassword: never[] | string[], confirmNewPassword: never[] | string[]}>>,
     }) => {
 
       setLoading(true);
@@ -127,7 +123,7 @@ export default () => {
           });
         }
 
-        if (error.response.data.errors[0] === 'INCORRECT_PASSWORD'){
+        else if (error.response.data.errors[0] === 'INCORRECT_PASSWORD'){
           return setformErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: ['● Incorrect password!']

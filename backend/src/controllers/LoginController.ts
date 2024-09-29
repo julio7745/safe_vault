@@ -21,12 +21,12 @@ const login = async (req: Request, res: Response) => {
     
   } catch (error) {
     console.error(`LoginController.login: \n${error}`);
-    return res.status(500).json({ errors: [process.env.INTERNAL_ERROR] });
+    return res.status(500).json({ errors: 'INTERNAL_ERROR'});
   }
 
 };
 
-const verify = (req: Request, res: Response) => res.status(200).json({ message: 'login is ok' });
+const verify = (req: Request, res: Response) => res.status(200).json({ message: 'LOGIN_OK' });
 
 export default {
   login, verify

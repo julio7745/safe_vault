@@ -4,6 +4,8 @@ import { View, TouchableWithoutFeedback, Image, Text} from 'react-native';
 import { styled } from "nativewind";
 import * as ImagePicker from 'expo-image-picker';
 
+import EditProfileImageHooks from '@/hooks/profileHooks/EditProfileImageHooks';
+
 import { LoadingContext } from '@/contexts/LoadingContext';
 
 import styles from '@/assets/styles/componentsStyles/profileComponentsStyles/EditProfileImageComponentStyles'
@@ -12,9 +14,16 @@ const SView = styled(View)
 const SText = styled(Text)
 const SImage = styled(Image)
 
-export default ({ editingImage, setEditingImage }) => {
+export default (
+  { editingImage, setEditingImage, user, setUserData}:
+  { 
+    editingImage: boolean,
+    setEditingImage: React.Dispatch<React.SetStateAction<boolean>>,
+    user: { name: string, lastName: string, profileImage: string, profileImageExtension: string}
+    setUserData: React.Dispatch<React.SetStateAction<{ name: string, lastName: string, profileImage: string, profileImageExtension: string}>>
+  }) => {
 
-  const [image, setImage] = useState({});
+  const [image, setImage] = useState<{ uri: string, base64: string, imgExtension: string} | {}>({});
   const { setLoading } = useContext(LoadingContext); 
 
   const pickImage = async () => {
@@ -41,6 +50,17 @@ export default ({ editingImage, setEditingImage }) => {
     setLoading(false)
   };
 
+  const { EditProfileImageService } = EditProfileImageHooks()
+
+  const propsEditProfileImageService = {
+    image,
+    setEditingImage,
+    user, setUserData
+  }
+  const submitForm = () => {
+    EditProfileImageService(propsEditProfileImageService)
+  }
+
   if (!editingImage) return <></>
 
   return (
@@ -60,7 +80,7 @@ export default ({ editingImage, setEditingImage }) => {
             <SText className={styles.Button}>Select Image</SText>
         </TouchableWithoutFeedback>
         { image.uri &&
-          <TouchableWithoutFeedback onPress={() => {} }>
+          <TouchableWithoutFeedback onPress={submitForm}>
               <SText className={styles.Button}>Confirm</SText>
           </TouchableWithoutFeedback>
         }

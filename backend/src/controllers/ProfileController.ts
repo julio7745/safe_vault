@@ -23,12 +23,12 @@ const updatePassword = async (req: Request, res: Response) => {
     return res.status(200).json({ message: 'PASSWORD_UPDATED_SUCCESS' });
     
   } catch (error) {
-    console.error(`LoginController.login: \n${error}`);
-    return res.status(500).json({ errors: [process.env.INTERNAL_ERROR] });
+    console.error(`ProfileController.updatePassword: \n${error}`);
+    return res.status(500).json({ errors: 'INTERNAL_ERROR'});
   }
 
 };
 
 export default {
-  updatePassword
+  updatePassword,
 }

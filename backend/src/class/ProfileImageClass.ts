@@ -18,9 +18,6 @@ class UserClass {
 	private newPassword: string
 	private confirmNewPassword: string
 
-	private newProfileImage: string
-	private newProfileImageExtension: string
-
 	constructor(
 
 		{ name, lastName }: 
@@ -35,9 +32,6 @@ class UserClass {
 		this.currentPassword = ''
 		this.newPassword = ''
 		this.confirmNewPassword = ''
-
-		this.newProfileImage = ''
-		this.newProfileImageExtension = ''
 			
 	};
 
@@ -126,27 +120,6 @@ class UserClass {
 		if(bcryptjs.compareSync(this.newPassword, this.realPassword)) {
 			this.errors.push('INVALID_NEW_PASSWORD')
 		}
-
-	}
-
-	async updateProfileImage(
-		{imgExtension, base64}:
-		{imgExtension: string, base64: string}
-	){
-
-		this.newProfileImage = base64
-		this.newProfileImageExtension = imgExtension
-
-		const user = await UserModel.findOne({ name: this.name, lastName: this.lastName })
-			
-		if(!user) this.errors.push('UNAUTHORIZED')
-		if(this.errors.length > 0) return
-
-		await UserModel.findOneAndUpdate(
-			{ name: this.name, lastName: this.lastName },
-			{ $set: { profileImage: this.newProfileImage, profileImageExtension: this.newProfileImageExtension } },
-			{ upsert: false, new: true }
-		);
 
 	}
 

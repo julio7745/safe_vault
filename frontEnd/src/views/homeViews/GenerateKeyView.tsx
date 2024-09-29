@@ -18,7 +18,7 @@ export default () => {
       <SView className={styles.containerIlustration}>
         <SImage source={ilustration} className={styles.ilustration} resizeMode='contain'/>
       </SView>
-      <TouchableWithoutFeedback onPressOut={() => console.log(`oi`)}>
+      <TouchableWithoutFeedback onPressOut={() => console.log(`Generate key`)}>
         <SView className={styles.campBtnNext}>
           <SText className={styles.textBtnNext}>Generate key for new opening</SText>
         </SView>

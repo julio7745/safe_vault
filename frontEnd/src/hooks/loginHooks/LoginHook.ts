@@ -37,7 +37,7 @@ export default () => {
         return
       }  
 
-      await httpRequestServices.post(`login`, {name: "julio", lastName: "carvalho", password:"123456Aa"})
+      await httpRequestServices.post(`login`, {name: validate.name, lastName: validate.lastName, password: validate.password})
       .then(async response => {
         setErrors({ user: [], password: [] });
         await AsyncStorage.setItem('token', JSON.stringify( response.data.token ));

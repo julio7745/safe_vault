@@ -27,6 +27,30 @@ const updateImage = async (req: Request, res: Response) => {
   }
 
 };
+
+const loadImage = async (req: Request, res: Response) => {
+
+  try {
+
+    const name = req.body.name || ''
+    const lastName = req.body.lastName|| ''
+
+    const user = new UserClass({name, lastName});
+
+    const img = await user.loadProfileImage();
+
+    if(user.errors.length > 0) return res.status(401).json({ errors: user.errors });
+
+    return res.status(200).json({ message: 'PROFILE_IMAGE_LOADED_SUCCESS', ...img});
+    
+  } catch (error) {
+    console.error(`ImageProfileController.updateImage: \n${error}`);
+    return res.status(500).json({ errors: 'INTERNAL_ERROR'});
+  }
+
+};
+
 export default {
-  updateImage
+  updateImage,
+  loadImage
 }

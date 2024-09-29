@@ -12,6 +12,8 @@ class UserClass {
 
 	private name: string
 	private lastName: string
+	private profileImage: string
+	private profileImageExtension: string
 
 	private realPassword: string
 	private currentPassword: string
@@ -28,6 +30,8 @@ class UserClass {
 
 		this.name = name
 		this.lastName = lastName
+		this.profileImage = ''
+		this.profileImageExtension = ''
 
 		this.errors = []
 
@@ -147,6 +151,21 @@ class UserClass {
 			{ $set: { profileImage: this.newProfileImage, profileImageExtension: this.newProfileImageExtension } },
 			{ upsert: false, new: true }
 		);
+
+	}
+
+	async loadProfileImage(){
+
+		const user = await UserModel.findOne({ name: this.name, lastName: this.lastName })
+
+		console.log(user);
+		
+			
+		if(!user) this.errors.push('UNAUTHORIZED')
+		else if(this.errors.length === 0) return {
+			profileImage: user.profileImage,
+			profileImageExtension: user.profileImageExtension
+		}
 
 	}
 

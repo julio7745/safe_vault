@@ -11,6 +11,8 @@ import EditProfileImageComponent from '@/components/profileComponents/EditProfil
 import ClearIco from "@/assets/icons/commonIcos/ClearIco.png"
 import EditIco from "@/assets/icons/profileIcos/EditIco.png"
 
+import LoadProfileImageHook from '@/hooks/commonHooks/LoadProfileImageHook';
+
 import styles from "@/assets/styles/viewsStyles/profileViewsStyles/ProfileViewsStyles"
 
 const SView = styled(View)
@@ -29,12 +31,15 @@ export default () => {
     user, setUserData
   }
 
+  const { LoadProfileImageService } = LoadProfileImageHook()
+
   useEffect(() => {
     const fetchData = async () => {
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '"name": "INTERNAL_ERROR", "lastName": "INTERNAL_ERROR"' );
-      setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''});
+      setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''})
+      LoadProfileImageService({name: user.name, lastName: user.lastName, setUserData, user })
     };
-    fetchData();
+    fetchData()   
   }, []);
   
 

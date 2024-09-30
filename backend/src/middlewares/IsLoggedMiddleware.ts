@@ -10,7 +10,8 @@ export default async (req, res, next) => {
 
     if (req.path !== '/login') {
 
-      const stringToken = req.headers.authorization || ''      
+      const stringToken = req.headers.authorization || ''     
+      
       if (!stringToken) return res.status(401).json({ errors: ['UNAUTHORIZED'] });
 
       const token = JSON.parse(stringToken);

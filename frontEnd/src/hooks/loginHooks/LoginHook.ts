@@ -49,8 +49,6 @@ export default () => {
       })
       .catch(error => {
 
-        console.log(error.response);
-
         if (error.response.data.errors[0] === 'INCORRECT_USER'){
           return setErrors({ user: ['● User does not exist!'], password: [] });
         } 

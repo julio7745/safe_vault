@@ -6,7 +6,6 @@ import { styled } from "nativewind";
 import styles from '@/assets/styles/viewsStyles/homeViewsStyles/GenerateKeyViewStyles'
 
 import ilustration from '@/assets/icons/homeIcos/GenerateKey.png'
-import httpRequestService from '@/services/commonSevices/httpRequestService';
 
 const SImage = styled(Image)
 const SView = styled(View)

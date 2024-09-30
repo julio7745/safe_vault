@@ -3,7 +3,7 @@ import { createContext, useState, useContext, ReactElement } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const URL_API_BACKEND = 'http://192.168.100.6:3000';
+const URL_API_BACKEND = 'http://192.168.100.46:3000';
 
 interface CurrentPageContextType {
   currentPage: string;
@@ -20,19 +20,21 @@ const CurrentPageProvider = ({ children } : { children: ReactElement}) => {
 
     if (page === 'login') return _setCurrentPage(page);
 
-    const token = await AsyncStorage.getItem('token') || '';
-    const headers = {
-      Authorization: `${token}`,
-    };
+    try {
 
-    if (!token) return
+      const token = await AsyncStorage.getItem('token') || '';        
+      if (!token) return
+      const headers = { 
+        Authorization: `${token}`,
+      };
 
-    await axios.get(`${URL_API_BACKEND}/login/verify`, { headers })
-    .then(() => _setCurrentPage(page))
-    .catch(() => {
+      await axios.get(`${URL_API_BACKEND}/login/verify`, { headers })
+      .then(() => _setCurrentPage(page))
+      
+    } catch (error) {
       AsyncStorage.removeItem('token');
-      _setCurrentPage('login');
-    });
+      _setCurrentPage('home');
+    }
 
   };
 

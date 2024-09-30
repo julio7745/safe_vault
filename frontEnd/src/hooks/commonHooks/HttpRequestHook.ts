@@ -6,7 +6,7 @@ import { useCurrentPage } from '@/contexts/CurrentPageContext';
 
 import LogoutService from '@/services/commonSevices/LogoutService';
 
-const URL_API_BACKEND = 'http://192.168.100.6:3000';
+const URL_API_BACKEND = 'http://192.168.100.46:3000';
 
 export default () => {
 
@@ -31,7 +31,7 @@ export default () => {
 
       } catch ( error: any ) {
 
-        if ( !error.response.data.errors || !Array.isArray( error.response.data.errors) ) { 
+        if ( !error.response.data.errors || !Array.isArray(error.response.data.errors) ) { 
           console.error(error); 
           error.response = { data: { errors: ['INTERNAL_ERROR'] } };
         }
@@ -62,7 +62,7 @@ export default () => {
 
       } catch ( error: unknown ) {
 
-        if ( !error.response.data.errors || !Array.isArray( error.response.data.errors) ) { 
+        if ( !error.response.data.errors || !Array.isArray(error.response.data.errors) ) { 
           console.error(error); 
           error.response = { data: { errors: ['INTERNAL_ERROR'] } };
         }

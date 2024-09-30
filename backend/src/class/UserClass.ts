@@ -158,9 +158,6 @@ class UserClass {
 
 		const user = await UserModel.findOne({ name: this.name, lastName: this.lastName })
 
-		console.log(user);
-		
-			
 		if(!user) this.errors.push('UNAUTHORIZED')
 		else if(this.errors.length === 0) return {
 			profileImage: user.profileImage,

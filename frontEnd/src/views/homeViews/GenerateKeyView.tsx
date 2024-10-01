@@ -3,9 +3,7 @@ import { View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styled } from "nativewind";
 import Paho from 'paho-mqtt';
-import React, { Dispatch, SetStateAction } from 'react';
-
-import LoginHook from '@/hooks/loginHooks/LoginHook';
+import React from 'react';
 
 import StateConnectionComponent from '@/components/homeComponents/StateConnectionComponent';
 
@@ -25,8 +23,6 @@ export default ({
     stateConection: string
     client: Paho.Client | null
   }) => {
-
-  const LoginServices = LoginHook()
 
   const StateConnectionProps = {
     stateConection

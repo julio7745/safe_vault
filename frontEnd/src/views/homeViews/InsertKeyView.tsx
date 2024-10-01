@@ -5,6 +5,7 @@ import Paho from 'paho-mqtt';
 import { styled } from "nativewind";
 
 import CancelOpeningComponent from '@/components/homeComponents/CancelOpeningComponent';
+import StateConnectionComponent from '@/components/homeComponents/StateConnectionComponent';
 
 import styles from '@/assets/styles/viewsStyles/homeViewsStyles/InsertKeyViewStyles'
 
@@ -28,10 +29,15 @@ export default ({
   code: string
 }) => {
   
-  const props1 = { cancelOpeningVisible, setCancelOpeningVisible }
+  const props1 = { cancelOpeningVisible, setCancelOpeningVisible, client }
+
+  const StateConnectionProps = {
+    stateConection
+  }
 
   return (
     <SView className={styles.container}>
+      <StateConnectionComponent { ...StateConnectionProps } />
       <SView className={styles.containerIlustration}>
         <SImage source={ilustration} className={styles.ilustration} resizeMode='contain'/>
       </SView>

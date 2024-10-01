@@ -17,7 +17,11 @@ export default () => {
 
   const { setLoading } = useLoading();
 
-  const [currentInternalPage, setCurrentInternalPage] = useState<string>('GenerateKeyView');
+  const [currentInternalPage, _setCurrentInternalPage] = useState<string>('GenerateKeyView');
+  const setCurrentInternalPage = (page: string) => {
+    _setCurrentInternalPage(page);
+    // TODO: verificar se esta logado
+  }
   const [code, setCode] = useState<string>('GenerateKeyView');
 
   const [client, setClient] = useState<Paho.Client | null>(null);
@@ -72,12 +76,16 @@ export default () => {
   
   const handleMessageArrived = async (message: Paho.Message) => {
     console.log('Received message:', message.payloadString);
+
+    const {name, lastName} = JSON.parse( await AsyncStorage.getItem('user') || '' );
+    const [action, userM, _code] = message.payloadString.split('_')
+
+    if (userM === `${name}.${lastName}` && action === '4') {
+      setCurrentInternalPage('GenerateKeyView')
+    }
     
     if (currentInternalPage === 'GenerateKeyView' ) {
       
-      const [action, userM, _code] = message.payloadString.split('_')
-      const {name, lastName} = JSON.parse( await AsyncStorage.getItem('user') || '' );
-
       if( action === '2' && userM === `${name}.${lastName}` ){
         setCode(_code)
         setCurrentInternalPage('InsertKeyView')

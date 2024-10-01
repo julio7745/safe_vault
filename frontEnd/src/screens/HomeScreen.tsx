@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { Text} from 'react-native';
 import Paho from 'paho-mqtt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -25,7 +26,12 @@ export default () => {
     _setCurrentInternalPage(page);
     // TODO: verificar se esta logado
   }
-  const [code, setCode] = useState<string>('GenerateKeyView');
+  const currentInternalPageRef = useRef(currentInternalPage);
+  useEffect(() => {
+    currentInternalPageRef.current = currentInternalPage;
+  }, [currentInternalPage]);
+
+  const [code, setCode] = useState<string>('');
 
   const [client, setClient] = useState<Paho.Client | null>(null);
   const [stateConection, setStateConection] = useState<string>('disconected');
@@ -92,37 +98,31 @@ export default () => {
       LoginServices.logout()
     }
 
-    switch (currentInternalPage) {
+    switch (currentInternalPageRef.current) {
       
       case 'GenerateKeyView':
         if( action === '2' && userM === `${name}.${lastName}` ){
           setCode(_code)
           setCurrentInternalPage('InsertKeyView')
-        }else if( action === '3' && userM === `${name}.${lastName}` ){
+        }else 
+        if( action === '3' && userM === `${name}.${lastName}` ){
           // TODO: criar nova tela de já existe alguem abrindo o cofre
           setCurrentInternalPage('WaitingOpeningView')
         }
         break;
 
-      case 'GenerateKeyView':
+      case 'InsertKeyView':
         if( action === '2' && userM === `${name}.${lastName}` ){
           setCode(_code)
+          setCurrentInternalPage('InsertKeyView')
+        }else
+        if( action === '6' && userM === `${name}.${lastName}` ){
+          setCurrentInternalPage('InsertFingerprintView')
         }
         break;
 
       default:
         break;
-    }
-    
-
-    if (currentInternalPage === 'GenerateKeyView' ) {
-      if( action === '2' && userM === `${name}.${lastName}` ){
-        setCode(_code)
-        setCurrentInternalPage('InsertKeyView')
-      }else if( action === '3' && userM === `${name}.${lastName}` ){
-        // TODO: criar nova tela de já existe alguem abrindo o cofre
-        setCurrentInternalPage('WaitingOpeningView')
-      }
     }
 
   }
@@ -148,6 +148,7 @@ export default () => {
   return (
     <>
       <HeaderComponent/>
+      <Text>{currentInternalPage}</Text>
       <RenderView/>
       <NavBarComponent />
     </>

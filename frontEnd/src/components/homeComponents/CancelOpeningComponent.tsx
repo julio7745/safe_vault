@@ -27,6 +27,7 @@ export default ({
       message.destinationName = 'safe_vault';
       message.qos = 1;
       client.send(message);
+      setCancelOpeningVisible(false)
     }
   }
 

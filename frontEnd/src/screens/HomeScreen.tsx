@@ -121,6 +121,12 @@ export default () => {
         }
         break;
 
+      case 'InsertFingerprintView':
+        if( action === '7' && userM === `${name}.${lastName}` ){
+          setCurrentInternalPage('WaitingOpeningView')
+        }
+        break;
+
       default:
         break;
     }
@@ -148,7 +154,6 @@ export default () => {
   return (
     <>
       <HeaderComponent/>
-      <Text>{currentInternalPage}</Text>
       <RenderView/>
       <NavBarComponent />
     </>

@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import Paho from 'paho-mqtt';
 import { styled } from "nativewind";
 
 import CancelOpeningComponent from '@/components/homeComponents/CancelOpeningComponent';
+import StateConnectionComponent from '@/components/homeComponents/StateConnectionComponent';
 
 import styles from '@/assets/styles/viewsStyles/homeViewsStyles/InsertFingerprintViewStyles'
 
@@ -13,12 +15,29 @@ const SImage = styled(Image)
 const SView = styled(View)
 const SText = styled(Text)
 
-export default ({ cancelOpeningVisible, setCancelOpeningVisible, stateConection}) => {
+export default ({ 
+  cancelOpeningVisible, 
+  setCancelOpeningVisible, 
+  stateConection,
+  client,
+}:{
+  cancelOpeningVisible: boolean, 
+  setCancelOpeningVisible: Dispatch<SetStateAction<boolean>>, 
+  stateConection: string,
+  client: Paho.Client | null,
+}) => {
   
-  const props1 = { cancelOpeningVisible, setCancelOpeningVisible }
+  const props1 = { 
+    cancelOpeningVisible, setCancelOpeningVisible, client 
+  }
+
+  const StateConnectionProps = {
+    stateConection
+  }
   
   return (
     <SView className={styles.container}>
+       <StateConnectionComponent { ...StateConnectionProps } />
       <SView className={styles.containerIlustration}>
         <SImage source={ilustration} className={styles.ilustration} resizeMode='contain'/>
       </SView>

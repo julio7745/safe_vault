@@ -12,6 +12,7 @@ import GenerateKeyView from '@/views/homeViews/GenerateKeyView'
 import InsertKeyView from '@/views/homeViews/InsertKeyView'
 import InsertFingerprintView from '@/views/homeViews/InsertFingerprintView';
 import WaitingOpeningView from '@/views/homeViews/WaitingOpeningView';
+import AwaitForOpeningView from '@/views/homeViews/AwaitForOpeningView';
 
 import HeaderComponent from '@/components/commonComponents/HeaderComponent';
 import NavBarComponent from '@/components/commonComponents/NavBarComponent';
@@ -21,7 +22,7 @@ export default () => {
 
   const { setLoading } = useLoading();
 
-  const [currentInternalPage, _setCurrentInternalPage] = useState<string>('GenerateKeyView');
+  const [currentInternalPage, _setCurrentInternalPage] = useState<string>('AwaitForOpeningView');
   const setCurrentInternalPage = (page: string) => {
     _setCurrentInternalPage(page);
     // TODO: verificar se esta logado
@@ -54,6 +55,16 @@ export default () => {
     }
   }, [client]);
 
+  const sendMessage = async () => {
+    if (client && client.isConnected()) {
+      const user = JSON.parse( await AsyncStorage.getItem('user') || '' );
+      const message = new Paho.Message(`8_${user.name}.${user.lastName}`);
+      message.destinationName = 'safe_vault';
+      message.qos = 1;
+      client.send(message);
+    }
+  }
+
   const connect = () => {
     setLoading(true);
     setStateConection('trying to connect');
@@ -78,6 +89,7 @@ export default () => {
     (client as Paho.Client).onMessageArrived = handleMessageArrived;
     setStateConection('conected')
     setLoading(false);
+    sendMessage()
   }
 
   const onFailure = (error: Paho.MQTTError) => {
@@ -91,44 +103,30 @@ export default () => {
     const {name, lastName} = JSON.parse( await AsyncStorage.getItem('user') || '' );
     const [action, userM, _code] = message.payloadString.split('_')
 
-    if (userM === `${name}.${lastName}` && action === '4') {
-      setCurrentInternalPage('GenerateKeyView')
-    }
-    if (userM === `${name}.${lastName}` && action === '5') {
-      LoginServices.logout()
-    }
-
-    switch (currentInternalPageRef.current) {
-      
-      case 'GenerateKeyView':
-        if( action === '2' && userM === `${name}.${lastName}` ){
+    if(userM === `${name}.${lastName}`){
+      switch (action) {
+        case '2':
           setCode(_code)
           setCurrentInternalPage('InsertKeyView')
-        }else 
-        if( action === '3' && userM === `${name}.${lastName}` ){
-          // TODO: criar nova tela de já existe alguem abrindo o cofre
-          setCurrentInternalPage('WaitingOpeningView')
-        }
-        break;
-
-      case 'InsertKeyView':
-        if( action === '2' && userM === `${name}.${lastName}` ){
-          setCode(_code)
-          setCurrentInternalPage('InsertKeyView')
-        }else
-        if( action === '6' && userM === `${name}.${lastName}` ){
+          break;
+        case '3':
+          setCurrentInternalPage('AwaitForOpeningView')
+          break;
+        case '4':
+          setCurrentInternalPage('GenerateKeyView')
+          break;
+        case '5':
+          LoginServices.logout()
+          break;
+        case '6':
           setCurrentInternalPage('InsertFingerprintView')
-        }
-        break;
-
-      case 'InsertFingerprintView':
-        if( action === '7' && userM === `${name}.${lastName}` ){
+          break;
+        case '7':
           setCurrentInternalPage('WaitingOpeningView')
-        }
-        break;
-
-      default:
-        break;
+          break;
+        default:
+          break;
+      }
     }
 
   }
@@ -146,8 +144,10 @@ export default () => {
         return <InsertFingerprintView { ...props1 } />;
       case 'WaitingOpeningView':
         return <WaitingOpeningView { ...props1 } />;
+      case 'AwaitForOpeningView':
+        return <AwaitForOpeningView { ...props1 } />;
       default:
-        return <GenerateKeyView { ...props1 }/>;
+        return <AwaitForOpeningView { ...props1 }/>;
     } 
   }
 

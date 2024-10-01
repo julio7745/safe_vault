@@ -72,9 +72,7 @@ export default () => {
       setLoading(true);
   
       await httpRequestServices.get(`login/verify`)
-      .then(() => setCurrentPage('profile'))
-      // ToDo
-      // .then(() => setCurrentPage('home'))
+      .then(() => setCurrentPage('home'))
       .catch(() => setCurrentPage('login'))
       .finally(() => setLoading(false));
       return;

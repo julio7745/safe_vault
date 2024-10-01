@@ -35,7 +35,7 @@ export default () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const user =  JSON.parse( await AsyncStorage.getItem('user') || '"name": "INTERNAL_ERROR", "lastName": "INTERNAL_ERROR"' );
+      const user =  JSON.parse( await AsyncStorage.getItem('user') || '' );
       setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''})
       LoadProfileImageService({name: user.name, lastName: user.lastName, setUserData, user })
     };

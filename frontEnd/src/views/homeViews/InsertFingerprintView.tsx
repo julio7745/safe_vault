@@ -13,7 +13,7 @@ const SImage = styled(Image)
 const SView = styled(View)
 const SText = styled(Text)
 
-export default ({ cancelOpeningVisible, setCancelOpeningVisible }) => {
+export default ({ cancelOpeningVisible, setCancelOpeningVisible, stateConection}) => {
   
   const props1 = { cancelOpeningVisible, setCancelOpeningVisible }
   

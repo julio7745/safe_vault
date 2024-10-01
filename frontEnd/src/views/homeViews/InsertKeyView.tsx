@@ -1,6 +1,7 @@
 
-import React from 'react';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import React, { Dispatch, SetStateAction } from 'react';
+import Paho from 'paho-mqtt';
 import { styled } from "nativewind";
 
 import CancelOpeningComponent from '@/components/homeComponents/CancelOpeningComponent';
@@ -13,7 +14,19 @@ const SImage = styled(Image)
 const SView = styled(View)
 const SText = styled(Text)
 
-export default ({ cancelOpeningVisible, setCancelOpeningVisible }) => {
+export default ({ 
+  cancelOpeningVisible, 
+  setCancelOpeningVisible, 
+  stateConection,
+  client,
+  code
+}:{
+  cancelOpeningVisible: boolean, 
+  setCancelOpeningVisible: Dispatch<SetStateAction<boolean>>, 
+  stateConection: string,
+  client: Paho.Client | null,
+  code: string
+}) => {
   
   const props1 = { cancelOpeningVisible, setCancelOpeningVisible }
 
@@ -24,7 +37,7 @@ export default ({ cancelOpeningVisible, setCancelOpeningVisible }) => {
       </SView>
       <SView className={styles.campText}>
         <SText className={styles.text}>Please enter the key on the local keyboard.</SText>
-        <SText className={styles.key}>1 2 3 4</SText>
+        <SText className={styles.key}>{code}</SText>
       </SView>
       <TouchableWithoutFeedback onPress={() => setCancelOpeningVisible(true)}>
         <SView className={styles.btnCancel}>

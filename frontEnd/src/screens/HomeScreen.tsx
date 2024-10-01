@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Text} from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
 import Paho from 'paho-mqtt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,16 +15,22 @@ import AwaitForOpeningView from '@/views/homeViews/AwaitForOpeningView';
 
 import HeaderComponent from '@/components/commonComponents/HeaderComponent';
 import NavBarComponent from '@/components/commonComponents/NavBarComponent';
-import LogoutService from '@/services/commonSevices/LogoutService';
+
+import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 export default () => {
 
   const { setLoading } = useLoading();
 
+  const httpRequestServices = HttpRequestHook()
+
   const [currentInternalPage, _setCurrentInternalPage] = useState<string>('AwaitForOpeningView');
-  const setCurrentInternalPage = (page: string) => {
-    _setCurrentInternalPage(page);
-    // TODO: verificar se esta logado
+  const setCurrentInternalPage = async (page: string) => {
+    setLoading(true)
+    await httpRequestServices.get(`login/verify`)
+    .then(() => _setCurrentInternalPage(page))
+    .catch(() => LoginServices.logout())
+    setLoading(false)
   }
   const currentInternalPageRef = useRef(currentInternalPage);
   useEffect(() => {

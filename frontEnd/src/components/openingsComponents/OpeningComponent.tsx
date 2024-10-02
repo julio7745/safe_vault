@@ -10,14 +10,31 @@ import styles from '@/assets/styles/componentsStyles/openingComponentsStyles/Ope
 const SView = styled(View)
 const SText = styled(Text)
 
-export default ({ setDeletion, opening }) => {
+interface openingInterface {
+  _id: string
+	name: string,
+	lastName: string,
+	month: string,
+	minute: number,
+	year: number,
+	hour: number,
+	day: number,
+  empty?: boolean,
+  profileImage?: string 
+  profileImageExtension?: string 
+}
+
+export default ({ setDeletion, opening }:{
+  setDeletion: React.Dispatch<React.SetStateAction<string>>,
+  opening: openingInterface
+}) => {
 
   const props1 = { setDeletion, _id: opening._id}
 
   return (
     <SView className={styles.openingContainer}>
       <SView className={styles.opening}>
-        <ProfileImage {...{image: opening.profileImage, extension: opening.profileImageExtension}}/>
+        <ProfileImage {...{image: (opening.profileImage) as string, extension: (opening.profileImageExtension) as string}}/>
         <SView className={styles.openingTextContainer}>            
           <SText className={styles.openingText}>
             <SText className={styles.strong}>User: </SText>

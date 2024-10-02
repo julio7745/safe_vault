@@ -25,9 +25,9 @@ const User = mongoose.model('User', userSchema);
 
 // Dados do usuário
 const userData = {
-  name: 'julio2',
+  name: 'julio4',
   lastName: 'carvalho',
-  password: '123456aA',
+  password: 'Aa123456',
 };
 
 // Função para criar um usuário

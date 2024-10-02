@@ -5,6 +5,7 @@ dotenv.config();
 import OpeningModel from '../models/OpeningModel';
 
 interface openingInterface {
+	_id: string
 	name: string,
 	lastName: string,
 	month: string,

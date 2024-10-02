@@ -2,12 +2,27 @@
 import { View, Text, TouchableWithoutFeedback} from 'react-native';
 import { styled } from "nativewind";
 
+import DeleteOpenigsHook from '@/hooks/openigHooks/DeleteOpenigsHook';
+
+import { CurrentPageContext } from '@/contexts/CurrentPageContext';
+
 import styles from "@/assets/styles/componentsStyles/openingComponentsStyles/ConfirmDeletionComponentSyles"
+import { useContext } from 'react';
 
 const SView = styled(View)
 const SText = styled(Text)
 
-export default ({ deletion, setDeletion }) => {
+export default ({
+  deletion,
+  setDeletion,
+  fetchData
+} : {
+  deletion: string,
+  setDeletion: React.Dispatch<React.SetStateAction<string>>,
+  fetchData: () => void,
+}) => {
+
+  const DeleteOpenigsServices = DeleteOpenigsHook()
 
   const cancelDeletion = () => {
     setDeletion('');
@@ -15,6 +30,8 @@ export default ({ deletion, setDeletion }) => {
 
   const confirmDeletion = () => {
     setDeletion('');
+    DeleteOpenigsServices.DeleteOpenig({_id: deletion})
+    .then(fetchData)
   }
 
   if (!deletion) return (<></>)

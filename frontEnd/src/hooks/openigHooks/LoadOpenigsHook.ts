@@ -7,6 +7,7 @@ import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 import { useLoading } from '@/contexts/LoadingContext';
 
 interface openingInterface {
+  _id: string
 	name: string,
 	lastName: string,
 	month: string,
@@ -38,8 +39,9 @@ export default () => {
       await httpRequestServices.get('opening/getAll')
       .then( async response => {
         setLoading(false)
-        setOpenings(response.data.list.reverse())
-        response.data.list.reverse().forEach(async (opening: openingInterface, index: number) => {
+        const openings = response.data.list.reverse()
+        setOpenings(openings)
+        openings.forEach(async (opening: openingInterface, index: number) => {
           const setImage = ({ 
             profileImage, 
             profileImageExtension

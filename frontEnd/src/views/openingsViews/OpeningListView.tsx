@@ -15,6 +15,7 @@ const SView = styled(View)
 const SFlatList = styled(FlatList)
 
 interface openingInterface {
+  _id: string
 	name: string,
 	lastName: string,
 	month: string,
@@ -30,24 +31,27 @@ interface openingInterface {
 export default () => {
 
   const [openings, setOpenings] = useState<openingInterface[]>([]);
-  const [deletion, setDeletion] = useState('');
+  const [deletion, setDeletion] = useState<string>('');
   
-  const props1 = { deletion, setDeletion }
-
   const LoadOpenigsService = LoadOpenigsHook()
+  
+  const fetchData = async () => {
+    LoadOpenigsService.LoadOpenigsService({setOpenings})
+  };
+
+  const props1 = { deletion, setDeletion, fetchData}
 
   useEffect(() => {
-    const fetchData = async () => {
-      LoadOpenigsService.LoadOpenigsService({setOpenings})
-    };
+
     fetchData() 
+
   }, [])
 
   return (
     <SView className={styles.containOpening}>
 
       <SFlatList
-        data={[...openings, { empty: true }]}
+        data={[ ...openings, { empty: true } ]}
         className={styles.listOpening}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
@@ -55,7 +59,7 @@ export default () => {
           if ((item as openingInterface).empty) {
             return <SView className={styles.paddingItem} />;
           } else {
-            return <OpeningComponent { ...{ opening: item, ...props1 }} />;
+            return <OpeningComponent { ...{ opening: item as openingInterface, ...props1 }} />;
           }
         }}
       />

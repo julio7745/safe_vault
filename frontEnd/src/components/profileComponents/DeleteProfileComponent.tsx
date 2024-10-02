@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, TouchableWithoutFeedback, Text, TextInput, Keyboard} from 'react-native';
 import { styled } from "nativewind";
 
-import DeleteProfileHooks from '@/hooks/profileHooks/DeleteProfileHooks';
+import DeleteProfileHooks from '@/hooks/profileHooks/DeleteProfileHook';
 
 import styles from '@/assets/styles/componentsStyles/profileComponentsStyles/DeleteProfileComponentStyles'
 

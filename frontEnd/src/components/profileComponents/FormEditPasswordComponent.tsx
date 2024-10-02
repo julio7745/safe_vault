@@ -3,7 +3,7 @@ import { useState, useRef, useEffect} from 'react';
 import { View, TextInput, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
 import { styled } from "nativewind";
 
-import UpdatePasswordHooks from '@/hooks/profileHooks/UpdatePasswordHooks';
+import UpdatePasswordHooks from '@/hooks/profileHooks/UpdatePasswordHook';
 
 import SubmitNewPasswordIco from '@/assets/icons/profileIcos/SubmitNewPasswordIco.png'
 

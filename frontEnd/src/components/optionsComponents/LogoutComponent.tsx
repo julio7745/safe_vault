@@ -2,7 +2,7 @@
 import { View, TouchableWithoutFeedback, Text} from 'react-native';
 import { styled } from "nativewind";
 
-import LoginHook from '@/hooks/loginHooks/LoginHook';
+import LoginHook from '@/hooks/commonHooks/LoginHook';
 
 import styles from '@/assets/styles/componentsStyles/optionsComponentsStyles/LogoutComponentStyles'
 

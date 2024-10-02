@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useLoading } from '@/contexts/LoadingContext';
 
-import LoginHook from '@/hooks/loginHooks/LoginHook';
+import LoginHook from '@/hooks/commonHooks/LoginHook';
 
 import GenerateKeyView from '@/views/homeViews/GenerateKeyView'
 import InsertKeyView from '@/views/homeViews/InsertKeyView'

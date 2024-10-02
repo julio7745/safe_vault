@@ -12,8 +12,6 @@ const SText = styled(Text)
 
 export default ({ setDeletion, opening }) => {
 
-  const userOfOpening = {name: `julio`, lastName:`carvalho` }
-
   const props1 = { setDeletion, _id: opening._id}
 
   return (
@@ -23,8 +21,8 @@ export default ({ setDeletion, opening }) => {
         <SView className={styles.openingTextContainer}>            
           <SText className={styles.openingText}>
             <SText className={styles.strong}>User: </SText>
-            {userOfOpening.name.charAt(0).toUpperCase() + userOfOpening.name.slice(1)}.
-            {userOfOpening.lastName.charAt(0).toUpperCase() + userOfOpening.lastName.slice(1)}
+            {opening.name.charAt(0).toUpperCase() + opening.name.slice(1)}.
+            {opening.lastName.charAt(0).toUpperCase() + opening.lastName.slice(1)}
           </SText>
           <SText className={styles.openingText}>
             <SText className={styles.strong}>Date: </SText>

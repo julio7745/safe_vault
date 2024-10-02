@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { styled } from "nativewind";
 
-import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
+import LoadOpenigsHook from '@/hooks/openigHooks/LoadOpenigsHook';
 
 import OpeningComponent from '@/components/openingsComponents/OpeningComponent'
 import ClearOpeningsComponent from '@/components/openingsComponents/ClearOpeningsComponent';
@@ -22,33 +22,26 @@ interface openingInterface {
 	year: number,
 	hour: number,
 	day: number,
-  empty? :boolean
+  empty?: boolean,
+  profileImage?: string 
+  profileImageExtension?: string 
 }
 
 export default () => {
 
   const [openings, setOpenings] = useState<openingInterface[]>([]);
-
   const [deletion, setDeletion] = useState('');
   
   const props1 = { deletion, setDeletion }
 
-  const HttpRequestService = HttpRequestHook()
-
-  const getCollection = async () => {
-    await HttpRequestService.get('opening/getAll')
-    .then(response => {
-      setOpenings(response.data.list)
-    })
-  }
+  const LoadOpenigsService = LoadOpenigsHook()
 
   useEffect(() => {
     const fetchData = async () => {
-      getCollection()
+      LoadOpenigsService.LoadOpenigsService({setOpenings})
     };
     fetchData() 
   }, [])
-  
 
   return (
     <SView className={styles.containOpening}>
@@ -59,7 +52,7 @@ export default () => {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
-          if (item.empty) {
+          if ((item as openingInterface).empty) {
             return <SView className={styles.paddingItem} />;
           } else {
             return <OpeningComponent { ...{ opening: item, ...props1 }} />;

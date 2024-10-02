@@ -3,7 +3,7 @@
 import React from 'react';
 
 import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
-import LoginHook from '@/hooks/loginHooks/LoginHook';
+import LoginHook from '@/hooks/commonHooks/LoginHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
 import validatePasswordService from '@/services/commonSevices/ValidadePasswordServices';
@@ -29,8 +29,7 @@ export default () => {
 
       setLoading(true);
 
-      // const currentPasswordErros: string[]  = validatePasswordService(formValue.currentPassword)
-      const currentPasswordErros: string[] = []
+      const currentPasswordErros: string[]  = validatePasswordService(formValue.currentPassword)
 
       if (currentPasswordErros.length > 0) {
         setFormErros({

@@ -10,7 +10,7 @@ import passwordIco from '@/assets/icons/loginIcos/password.png'
 import handleDisplayPasswordIco from '@/assets/icons/loginIcos/handleDisplayPassword.png'
 import loginIco from '@/assets/icons/loginIcos/login.png'
 
-import LoginHook from '@/hooks/loginHooks/LoginHook';
+import LoginHook from '@/hooks/commonHooks/LoginHook';
 
 const SView = styled(View)
 const SText = styled(Text)

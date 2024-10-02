@@ -46,11 +46,21 @@ export default () => {
 
   const { LoadProfileImageService } = LoadProfileImageHook()
 
+  const setImage = ({ 
+    profileImage, 
+    profileImageExtension
+  }:{ 
+    profileImage: string, 
+    profileImageExtension: string 
+  }) => {
+    setUserData({ name: user.name, lastName: user.lastName, profileImage: profileImage, profileImageExtension: profileImageExtension})
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '' );
       setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''})
-      LoadProfileImageService({name: user.name, lastName: user.lastName, setUserData, user })
+      LoadProfileImageService({name: user.name, lastName: user.lastName, setImage })
     };
     fetchData()   
   }, []);

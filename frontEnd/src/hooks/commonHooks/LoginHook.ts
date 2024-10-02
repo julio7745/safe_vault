@@ -2,7 +2,7 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import HttpRequestHook from '../commonHooks/HttpRequestHook';
+import HttpRequestHook from './HttpRequestHook';
 
 import ValidateLoginFormService from '@/services/loginServices/ValidateLoginFormService';
 

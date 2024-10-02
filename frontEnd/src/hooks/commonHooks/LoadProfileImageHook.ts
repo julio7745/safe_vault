@@ -12,22 +12,20 @@ export default () => {
   const LoadProfileImageHook = {
 
     LoadProfileImageService: async (
-      { name, lastName, setUserData, user}:
-      { 
+      { name, lastName, setImage } : { 
         name: string,
         lastName: string,
-        setUserData: React.Dispatch<React.SetStateAction<{ name: string, lastName: string, profileImage: string, profileImageExtension: string}>>,
-        user: { name: string, lastName: string, profileImage: string, profileImageExtension: string}
-      }) => {
+        setImage: (args: { 
+          profileImage: string, 
+          profileImageExtension: string 
+        }) => void 
+      }
+    ) => {
 
       setLoading(true);
-
       await httpRequestServices.post('imageProfile/load', {name, lastName})
       .then(async (response) => {
-        setUserData({ name, lastName, profileImage: response.data.profileImage, profileImageExtension: response.data.profileImageExtension})
-      })
-      .catch(error => {
-        
+        setImage({ profileImage: response.data.profileImage, profileImageExtension: response.data.profileImageExtension})
       })
       .finally(() => {
         setLoading(false);
@@ -39,6 +37,3 @@ export default () => {
   return LoadProfileImageHook
     
 };
-
-
-

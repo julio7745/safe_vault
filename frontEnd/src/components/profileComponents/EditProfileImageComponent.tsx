@@ -4,7 +4,7 @@ import { View, TouchableWithoutFeedback, Image, Text} from 'react-native';
 import { styled } from "nativewind";
 import * as ImagePicker from 'expo-image-picker';
 
-import EditProfileImageHooks from '@/hooks/profileHooks/EditProfileImageHooks';
+import EditProfileImageHooks from '@/hooks/profileHooks/EditProfileImageHook';
 
 import { LoadingContext } from '@/contexts/LoadingContext';
 

@@ -17,7 +17,7 @@ export default ({ setDeletion, opening }) => {
   return (
     <SView className={styles.openingContainer}>
       <SView className={styles.opening}>
-        <ProfileImage/>
+        <ProfileImage {...{image: opening.profileImage, extension: opening.profileImageExtension}}/>
         <SView className={styles.openingTextContainer}>            
           <SText className={styles.openingText}>
             <SText className={styles.strong}>User: </SText>

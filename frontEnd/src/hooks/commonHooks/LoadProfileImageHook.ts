@@ -7,7 +7,7 @@ export default () => {
 
   const LoadProfileImageHook = {
 
-    LoadProfileImageService: async (
+    Load: async (
       { name, lastName, setImage } : { 
         name: string,
         lastName: string,

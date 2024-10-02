@@ -44,7 +44,7 @@ export default () => {
     user, setUserData
   }
 
-  const { LoadProfileImageService } = LoadProfileImageHook()
+  const LoadProfileImageServices = LoadProfileImageHook()
 
   const setImage = ({ 
     profileImage, 
@@ -67,7 +67,7 @@ export default () => {
     const fetchData = async () => {
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '' );
       setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''})
-      LoadProfileImageService({name: user.name, lastName: user.lastName, setImage })
+      LoadProfileImageServices.Load({name: user.name, lastName: user.lastName, setImage })
     };
     fetchData()   
   }, []);
@@ -80,7 +80,7 @@ export default () => {
         <SView className={styles.profile}>
 
           <SView className={styles.containerProfileImage}>
-            <ProfileImage {...{image: user.profileImage}}/>
+            <ProfileImage {...{image: user.profileImage, extension: user.profileImageExtension}}/>
             <SView className={styles.btnEditImageProfileContainer}>
               <TouchableWithoutFeedback onPress={() => setEditingImage(true) }>
                 <SImage source={EditIco} className={styles.btnEditImageProfile} resizeMode='contain'/>

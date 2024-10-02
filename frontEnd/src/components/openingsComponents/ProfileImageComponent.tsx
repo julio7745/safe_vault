@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import { View, Image } from 'react-native';
 import { styled } from "nativewind";
 
@@ -10,16 +9,16 @@ import DeafultProfileImage from "@/assets/icons/commonIcos/ProfileIco.png"
 const SView = styled(View)
 const SImage = styled(Image)
 
-export default () => {
+export default ({image, extension}: {image: string, extension: string}) => {
   
-  const [image, setImage] = useState();
+  const uriImage = `data:image/${extension};base64,${image}`
 
   return (
     <SView className={styles.containerimageUser}>
       <SImage 
-        source={image || DeafultProfileImage} 
+        source={image? { uri: uriImage } : DeafultProfileImage}
         className={styles.imageUser}
-        resizeMode='contain'
+        resizeMode='cover'
       />
     </SView> 
 

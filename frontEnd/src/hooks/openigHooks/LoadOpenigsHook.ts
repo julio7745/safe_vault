@@ -40,23 +40,22 @@ export default () => {
         setLoading(false)
         setOpenings(response.data.list)
         response.data.list.forEach(async (opening: openingInterface, index: number) => {
-
-
+          const setImage = ({ 
+            profileImage, 
+            profileImageExtension
+          }:{ 
+            profileImage: string, 
+            profileImageExtension: string 
+          }) => {
+            setOpenings((prevOpenings) => {
+              const newOpenigList = [...prevOpenings]
+              newOpenigList[index].profileImage = profileImage
+              newOpenigList[index].profileImageExtension = profileImageExtension
+              return newOpenigList
+            })
+          }
+          LoadProfileImageServices.Load({name: opening.name, lastName: opening.lastName, setImage })
         })
-
-
-      //   response.data.list.forEach(async (opening: openingInterface, index: number) => {
-      //     const response = (await HttpRequestService.post('imageProfile/load', {name: opening.name, lastName: opening.lastName})).data
-      //     const profileImage: string = response.profileImage
-      //     const profileImageExtension: string = response.profileImageExtension
-      //     setOpenings((prevOpenings) => {
-      //       const newOpenigList = [...prevOpenings]
-      //       newOpenigList[index].profileImage = profileImage
-      //       newOpenigList[index].profileImageExtension = profileImageExtension
-      //       return newOpenigList
-      //     })
-      // })
-
       })
 
     },

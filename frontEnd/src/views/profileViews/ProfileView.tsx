@@ -53,7 +53,14 @@ export default () => {
     profileImage: string, 
     profileImageExtension: string 
   }) => {
-    setUserData({ name: user.name, lastName: user.lastName, profileImage: profileImage, profileImageExtension: profileImageExtension})
+    setUserData((prevUserData) => { 
+      return {
+        name: prevUserData.name,
+        lastName: prevUserData.lastName,
+        profileImage: profileImage,
+        profileImageExtension: profileImageExtension
+      }
+    })
   }
 
   useEffect(() => {

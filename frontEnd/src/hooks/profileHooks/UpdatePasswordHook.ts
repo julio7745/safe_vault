@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import HttpRequestHook from '../commonHooks/HttpRequestHook';
+import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
 import validatePasswordService from '@/services/commonSevices/ValidadePasswordServices';

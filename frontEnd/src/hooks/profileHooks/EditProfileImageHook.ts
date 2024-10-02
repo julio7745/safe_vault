@@ -1,5 +1,5 @@
 
-import HttpRequestHook from '../commonHooks/HttpRequestHook';
+import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
 

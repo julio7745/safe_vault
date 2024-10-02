@@ -1,5 +1,5 @@
 
-import validatePasswordService from "../commonSevices/ValidadePasswordServices";
+import validatePasswordService from "@/services/commonSevices/ValidadePasswordServices";
 import lodash from "lodash";
 
 export default function (

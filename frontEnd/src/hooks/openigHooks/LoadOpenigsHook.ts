@@ -1,7 +1,8 @@
 
 import React from 'react'
 
-import HttpRequestHook from '../commonHooks/HttpRequestHook';
+import LoadProfileImageHook from '@/hooks/commonHooks/LoadProfileImageHook';
+import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
 
@@ -20,6 +21,7 @@ interface openingInterface {
 
 export default () => {
 
+  const LoadProfileImageServices = LoadProfileImageHook()
   const httpRequestServices = HttpRequestHook()
 
   const { setLoading } = useLoading();
@@ -37,6 +39,12 @@ export default () => {
       .then( async response => {
         setLoading(false)
         setOpenings(response.data.list)
+        response.data.list.forEach(async (opening: openingInterface, index: number) => {
+
+
+        })
+
+
       //   response.data.list.forEach(async (opening: openingInterface, index: number) => {
       //     const response = (await HttpRequestService.post('imageProfile/load', {name: opening.name, lastName: opening.lastName})).data
       //     const profileImage: string = response.profileImage
@@ -48,6 +56,7 @@ export default () => {
       //       return newOpenigList
       //     })
       // })
+
       })
 
     },

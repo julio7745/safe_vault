@@ -58,7 +58,7 @@ class OpenigClass {
 
 	async delete({_id}:{_id:string}){
 
-		await OpeningModel.findOneAndRemove({ _id });
+		await OpeningModel.findOneAndDelete({ _id });
 
 	}
 

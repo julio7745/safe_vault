@@ -26,8 +26,10 @@ export default ({ setDeletion, opening }) => {
           </SText>
           <SText className={styles.openingText}>
             <SText className={styles.strong}>Date: </SText>
-            {opening.month.charAt(0).toUpperCase() + opening.month.slice(1)} {opening.day}
-            , {opening.year} at {opening.hour > 12 ? opening.hour-12 : opening.hour}
+            { opening.month.charAt(0).toUpperCase() + opening.month.slice(1) + " "}
+            { opening.day > 9 ? opening.day : `0${opening.day}` + ", "}
+            {opening.year  + " at "}
+            {opening.hour > 12 ? (opening.hour-12 > 9 ? opening.hour-12 : `0${opening.hour-12}`) : (opening.hour > 9 ? opening.hour : `0${opening.hour-12}`)}
             :{opening.minute > 9 ? opening.minute : `0${opening.minute}` } {opening.hour > 12 ? 'PM' : 'AM'}
           </SText>
         </SView>

@@ -17,4 +17,4 @@ const openingSchema = new Schema({
 
 const OpeningModel = mongoose.model('opening', openingSchema);
 
-module.exports = OpeningModel;
+export default OpeningModel;

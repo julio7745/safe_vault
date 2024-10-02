@@ -47,7 +47,7 @@ export default () => {
     <SView className={styles.containOpening}>
 
       <SFlatList
-        data={[{ empty: true }, ...openings].reverse()}
+        data={[...openings, { empty: true }]}
         className={styles.listOpening}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}

@@ -38,8 +38,8 @@ export default () => {
       await httpRequestServices.get('opening/getAll')
       .then( async response => {
         setLoading(false)
-        setOpenings(response.data.list)
-        response.data.list.forEach(async (opening: openingInterface, index: number) => {
+        setOpenings(response.data.list.reverse())
+        response.data.list.reverse().forEach(async (opening: openingInterface, index: number) => {
           const setImage = ({ 
             profileImage, 
             profileImageExtension

@@ -12,4 +12,7 @@ router.use(ProfileRouter);
 import ImageProfileRouter from './src/router/ImageProfileRouter';
 router.use(ImageProfileRouter);
 
+import OpenigRouter from './src/router/OpenigRouter';
+router.use(OpenigRouter);
+
 export default router;

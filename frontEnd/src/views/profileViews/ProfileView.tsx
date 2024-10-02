@@ -7,6 +7,7 @@ import { styled } from "nativewind";
 import ProfileImage from '@/components/profileComponents/ProfileImageComponent'; 
 import FormEditPassword from '@/components/profileComponents/FormEditPasswordComponent';
 import EditProfileImageComponent from '@/components/profileComponents/EditProfileImageComponent';
+import DeleteProfileComponent from '@/components/profileComponents/DeleteProfileComponent';
 
 import ClearIco from "@/assets/icons/commonIcos/ClearIco.png"
 import EditIco from "@/assets/icons/profileIcos/EditIco.png"
@@ -23,11 +24,23 @@ const SText = styled(Text)
 export default () => {
 
   const [editingImage, setEditingImage] = useState<boolean>(false)
+  const [deletingProfile, setDeletingProfile] = useState<boolean>(false)
   
-  const [ user, setUserData ] = useState<{name: string, lastName: string, profileImage: string, profileImageExtension: string}>({name: '', lastName: '', profileImage: '', profileImageExtension: ''});
+  const [ user, setUserData ] = useState<{
+    name: string,
+    lastName: string, 
+    profileImage: string, 
+    profileImageExtension: string
+  }>({
+    name: '', 
+    lastName: '',
+    profileImage: '', 
+    profileImageExtension: ''
+  });
 
   const props1 = {
     editingImage, setEditingImage,
+    deletingProfile, setDeletingProfile,
     user, setUserData
   }
 
@@ -73,11 +86,11 @@ export default () => {
           </SView>
 
           <SView className={styles.containerUserData}>
-            <SText className={styles.textBlue + styles.strong}>Delete my Account</SText>
-            <TouchableWithoutFeedback onPress={() => {} }>
-              <SView className={styles.containerbtnDeleteAccount}>
-                <SView className={styles.btnDeleteAccount}>
-                  <SImage source={ClearIco} className={styles.icoDeleteAccount} resizeMode='contain'/>
+            <SText className={styles.textBlue + styles.strong}>Delete my Profile</SText>
+            <TouchableWithoutFeedback onPress={() => setDeletingProfile(true)}>
+              <SView className={styles.containerbtnDeleteProfile}>
+                <SView className={styles.btnDeleteProfile}>
+                  <SImage source={ClearIco} className={styles.icoDeleteProfile} resizeMode='contain'/>
                 </SView>
               </SView>
             </TouchableWithoutFeedback>
@@ -88,6 +101,7 @@ export default () => {
       </SScrollView>
 
       <EditProfileImageComponent {...props1} />
+      <DeleteProfileComponent {...props1} />
       
     </SView>
   );

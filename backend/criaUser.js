@@ -13,9 +13,12 @@ const Schema = mongoose.Schema;
 
 // Definição do modelo de usuário
 const userSchema = new Schema({
-  name: { type: String, required: true },
-  lastName: { type: String, required: true },
-  password: { type: String, required: true },
+  name: {type: String, required: true},
+  lastName: {type: String, required: true},
+  password: {type: String, required: true},
+  profileImage: {type: String, required: false},
+  profileImageExtension: {type: String, required: false},
+  deleted: {type: Boolean, required: true}
 });
 
 const User = mongoose.model('User', userSchema);
@@ -38,6 +41,7 @@ const createUser = async () => {
       name: userData.name,
       lastName: userData.lastName,
       password: hashedPassword,
+      deleted: false
     });
 
     // Salva o usuário no MongoDB

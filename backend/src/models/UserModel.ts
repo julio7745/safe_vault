@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
     lastName: {type: String, required: true},
     password: {type: String, required: true},
     profileImage: {type: String, required: false},
-    profileImageExtension: {type: String, required: false}
+    profileImageExtension: {type: String, required: false},
+    deleted: {type: Boolean, required: true}
 })
 
 const UserModel = mongoose.model('User', UserSchema)

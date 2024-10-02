@@ -26,11 +26,9 @@ export default () => {
 
   const [currentInternalPage, _setCurrentInternalPage] = useState<string>('AwaitForOpeningView');
   const setCurrentInternalPage = async (page: string) => {
-    setLoading(true)
     await httpRequestServices.get(`login/verify`)
     .then(() => _setCurrentInternalPage(page))
     .catch(() => LoginServices.logout())
-    setLoading(false)
   }
   const currentInternalPageRef = useRef(currentInternalPage);
   useEffect(() => {

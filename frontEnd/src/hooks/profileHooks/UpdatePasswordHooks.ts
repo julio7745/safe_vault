@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 import HttpRequestHook from '../commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
@@ -14,7 +16,7 @@ export default () => {
 
     UpdatePasswordService: async ({
       formValue, setFormValue,
-      setformErros,
+      setFormErros,
     }:{
       formValue: {
         currentPassword: string,
@@ -22,7 +24,7 @@ export default () => {
         confirmNewPassword: string
       },
       setFormValue: React.Dispatch<React.SetStateAction<{currentPassword: string, newPassword: string, confirmNewPassword: string}>>,
-      setformErros: React.Dispatch<React.SetStateAction<{currentPassword: never[] | string[], newPassword: never[] | string[], confirmNewPassword: never[] | string[]}>>,
+      setFormErros: React.Dispatch<React.SetStateAction<{currentPassword: never[] | string[], newPassword: never[] | string[], confirmNewPassword: never[] | string[]}>>,
     }) => {
 
       setLoading(true);
@@ -33,7 +35,7 @@ export default () => {
       if ( formValue.newPassword === formValue.currentPassword ) newPasswordErros.push(`● New password must be different from the current password!`)
 
       if (currentPasswordErros.length > 0 || newPasswordErros.length > 0 || confirmNewPasswordErros.length > 0) {
-        setformErros({
+        setFormErros({
           currentPassword: currentPasswordErros || [],
           newPassword: newPasswordErros || [],
           confirmNewPassword: confirmNewPasswordErros || []
@@ -52,7 +54,7 @@ export default () => {
           newPassword: '',
           confirmNewPassword: ''
         })
-        setformErros({
+        setFormErros({
           currentPassword: [],
           newPassword: [],
           confirmNewPassword: ['● Password changed successfully!']
@@ -61,84 +63,84 @@ export default () => {
       .catch(error => {
 
         if (error.response.data.errors[0] === 'INVALID_PASSWORD_LENGHT'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: [`● Must be 6 to 15 characters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_PASSWORD_NUMBERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: [`● Need to have numbers!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_PASSWORD_CAPITAL_LETTERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: [`● Must have capital letters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_PASSWORD_LOWERCASE_LETTERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: [`● Must have lowercase letters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_NEW_PASSWORD_LENGHT'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], currentPassword: [],
             newPassword: [`● Must be 6 to 15 characters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_NEW_PASSWORD_NUMBERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], currentPassword: [],
             newPassword: [`● Need to have numbers!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_NEW_PASSWORD_CAPITAL_LETTERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], currentPassword: [],
             newPassword: [`● Must have capital letters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_NEW_PASSWORD_LOWERCASE_LETTERS'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], currentPassword: [],
             newPassword: [`● Must have lowercase letters!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INCORRECT_CONFIRM_PASSWORD'){
-          return setformErros({
+          return setFormErros({
             currentPassword: [], newPassword: [],
             confirmNewPassword: [`● Confirmation must match the new password!`]
           });
         }
 
         else if (error.response.data.errors[0] === 'INCORRECT_PASSWORD'){
-          return setformErros({
+          return setFormErros({
             confirmNewPassword: [], newPassword: [],
             currentPassword: ['● Incorrect password!']
           });
         }
 
         else if (error.response.data.errors[0] === 'INVALID_NEW_PASSWORD'){
-          return setformErros({
+          return setFormErros({
             currentPassword: [], newPassword: [],
             confirmNewPassword: [`● New password must be different from the current password!`]
           });
         }
 
         else {
-          return setformErros({
+          return setFormErros({
             currentPassword: [], newPassword: [],
             confirmNewPassword: ['● Internal Error!']
           });

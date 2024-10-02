@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect, useContext} from 'react';
+import { useState, useRef, useEffect} from 'react';
 import { View, TextInput, TouchableWithoutFeedback, Image, Keyboard, Text } from 'react-native';
 import { styled } from "nativewind";
 
@@ -38,7 +38,7 @@ export default () => {
     newPassword: string[];
     confirmNewPassword: string[];
   }
-  const [formErros, setformErros] = useState<formErrosInterface>({
+  const [formErros, setFormErros] = useState<formErrosInterface>({
     currentPassword: [],
     newPassword: [],
     confirmNewPassword: []
@@ -61,7 +61,7 @@ export default () => {
 
   const propsSubmitFormEditPasswordService = {
     formValue, setFormValue,
-    setformErros,
+    setFormErros,
   }
 
   const submitForm = () => {

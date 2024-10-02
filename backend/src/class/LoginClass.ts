@@ -37,7 +37,7 @@ class LoginClass {
 		// ToDo
 		// preciso tratar e validar os dados antes de fazer a requsição
 
-		const user = await loginModel.findOne({ name: this.name, lastName: this.lastName })
+		const user = await loginModel.findOne({ name: this.name, lastName: this.lastName, deleted: false})
 
 		if(!user) this.errors.push('INCORRECT_USER')
 		if(this.errors.length > 0) return

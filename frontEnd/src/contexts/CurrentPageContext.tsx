@@ -27,7 +27,7 @@ const CurrentPageProvider = ({ children } : { children: ReactElement}) => {
       const headers = { 
         Authorization: `${token}`,
       };
-
+      
       await axios.get(`${URL_API_BACKEND}/login/verify`, { headers })
       .then(() => _setCurrentPage(page))
       

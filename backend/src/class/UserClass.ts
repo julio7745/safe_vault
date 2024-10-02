@@ -53,7 +53,11 @@ class UserClass {
 			this.newPassword = newPassword
 			this.confirmNewPassword = confirmNewPassword
 
-			this.validatePassword()
+			this.validatePassword({
+				currentPassword: true, 
+				newPassword: true, 
+				confirmNewPassword: true
+			})
 			if(this.errors.length > 0) return
 
 			const user = await UserModel.findOne({ name: this.name, lastName: this.lastName })
@@ -77,45 +81,53 @@ class UserClass {
 
 	}
 
-	private validatePassword(){
+	private validatePassword({
+		currentPassword, 
+		newPassword, 
+		confirmNewPassword
+	}:{
+		currentPassword: boolean, 
+		newPassword: boolean, 
+		confirmNewPassword: boolean
+	}){
 
 		const regexNumbers = /[0-9]/;
 		const regexUppercase = /[A-Z]/;
 		const regexlowercase = /[a-z]/;
 
-		if (this.currentPassword.length > 15 || this.currentPassword.length < 6) {
+		if ((this.currentPassword.length > 15 || this.currentPassword.length < 6) && currentPassword){
 			this.errors.push('INVALID_PASSWORD_LENGHT');
 		}
 
-		if (!regexNumbers.test(this.currentPassword)){
+		if ((!regexNumbers.test(this.currentPassword)) && currentPassword){
 			this.errors.push('INVALID_PASSWORD_NUMBERS');
 		}
 
-		if (!regexUppercase.test(this.currentPassword)){
+		if ((!regexUppercase.test(this.currentPassword)) && currentPassword){
 			this.errors.push('INVALID_PASSWORD_CAPITAL_LETTERS');
 		}
 
-		if (!regexlowercase.test(this.currentPassword)){
+		if ((!regexlowercase.test(this.currentPassword)) && currentPassword){
 			this.errors.push('INVALID_PASSWORD_LOWERCASE_LETTERS');
 		}
 
-		if (this.newPassword.length > 15 || this.newPassword.length < 6) {
+		if ((this.newPassword.length > 15 || this.newPassword.length < 6) && newPassword){
 			this.errors.push('INVALID_NEW_PASSWORD_LENGHT');
 		}
 
-		if (!regexNumbers.test(this.newPassword)){
+		if ((!regexNumbers.test(this.newPassword)) && newPassword){
 			this.errors.push('INVALID_NEW_PASSWORD_NUMBERS');
 		}
 
-		if (!regexUppercase.test(this.newPassword)){
+		if ((!regexUppercase.test(this.newPassword)) && newPassword){
 			this.errors.push('INVALID_NEW_PASSWORD_CAPITAL_LETTERS');
 		}
 
-		if (!regexlowercase.test(this.newPassword)){
+		if ((!regexlowercase.test(this.newPassword)) && newPassword){
 			this.errors.push('INVALID_NEW_PASSWORD_LOWERCASE_LETTERS');
 		}
 
-		if (this.newPassword !== this.confirmNewPassword){
+		if ((this.newPassword !== this.confirmNewPassword) && confirmNewPassword){
 			this.errors.push('INCORRECT_CONFIRM_PASSWORD');
 		}
 
@@ -163,6 +175,37 @@ class UserClass {
 			profileImage: user.profileImage,
 			profileImageExtension: user.profileImageExtension
 		}
+
+	}
+
+	async deleteAccount({currentPassword}: 
+		{ currentPassword: string }){
+
+		this.currentPassword = currentPassword
+
+		this.validatePassword({
+			currentPassword: true, 
+			newPassword: false, 
+			confirmNewPassword: false
+		})
+
+		if (this.errors.length > 0) return
+
+		const user = await UserModel.findOne({ name: this.name, lastName: this.lastName })
+
+		if(!user) this.errors.push('UNAUTHORIZED')
+		if(this.errors.length > 0) return
+
+		this.realPassword = user?.password || ''
+
+		this.verifyPassword()
+		if(this.errors.length > 0) return
+
+		await UserModel.findOneAndUpdate(
+			{ name: this.name, lastName: this.lastName },
+			{ $set: { deleted: true } },
+			{ upsert: false, new: true }
+		);
 
 	}
 

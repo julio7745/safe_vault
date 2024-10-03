@@ -1,10 +1,11 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import LoadProfileImageHook from '@/hooks/commonHooks/LoadProfileImageHook';
 import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
+import { forEach } from 'lodash';
 
 interface openingInterface {
   _id: string
@@ -20,44 +21,62 @@ interface openingInterface {
   profileImageExtension?: string 
 }
 
+interface ProfileImages {
+  [openingId: string]: {
+    profileImage: string;
+    profileImageExtension: string;
+  };
+}
+
 export default () => {
 
   const LoadProfileImageServices = LoadProfileImageHook()
   const httpRequestServices = HttpRequestHook()
-
   const { setLoading } = useLoading();
 
   const LoadOpenigsHook = {
 
     LoadOpenigsService: async ({
       setOpenings,
+      setProfileImages
     } : {
       setOpenings: React.Dispatch<React.SetStateAction<openingInterface[]>>,
+      setProfileImages: React.Dispatch<React.SetStateAction<ProfileImages>>,
     }) => {
 
       setLoading(true);
-      await httpRequestServices.get('opening/getAll')
+
+      httpRequestServices.get('opening/getAll')
       .then( async response => {
-        setLoading(false)
+
         const openings = response.data.list.reverse()
         setOpenings(openings)
-        openings.forEach(async (opening: openingInterface, index: number) => {
-          const setImage = ({ 
-            profileImage, 
-            profileImageExtension
-          }:{ 
-            profileImage: string, 
-            profileImageExtension: string 
-          }) => {
-            setOpenings((prevOpenings) => {
-              const newOpenigList = [...prevOpenings]
-              newOpenigList[index].profileImage = profileImage
-              newOpenigList[index].profileImageExtension = profileImageExtension
-              return newOpenigList
+
+        const imageCache: { [key: string]: string } = {};
+
+        for (const opening of openings) {
+
+          const fullName = `${opening.name}_${opening.lastName}`;
+
+          if (!imageCache[fullName]) {
+
+            await LoadProfileImageServices.Load({ name: opening.name, lastName: opening.lastName })
+            .then((response) => {
+
+              imageCache[fullName] = 'ok';
+              setProfileImages(prevProfileImages => ( {
+                ...prevProfileImages,
+                [fullName]: { profileImage: response.profileImage, profileImageExtension: response.profileImageExtension },
+              }))
+
             })
+
           }
-          LoadProfileImageServices.Load({name: opening.name, lastName: opening.lastName, setImage })
-        })
+
+        }
+
+        setLoading(false)
+
       })
 
     },

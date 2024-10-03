@@ -1,4 +1,5 @@
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import HttpRequestHook from './HttpRequestHook';
 
 export default () => {
@@ -8,22 +9,28 @@ export default () => {
   const LoadProfileImageHook = {
 
     Load: async (
-      { name, lastName, setImage } : { 
+      { name, lastName } : { 
         name: string,
-        lastName: string,
-        setImage: (args: { 
-          profileImage: string, 
-          profileImageExtension: string 
-        }) => void 
+        lastName: string
       }
     ) => {
 
-      await httpRequestServices.post('imageProfile/load', {name, lastName})
-      .then(async (response) => {
-        setImage({ profileImage: response.data.profileImage, profileImageExtension: response.data.profileImageExtension})
-      })
-          
+      const valueInCache = JSON.parse(await AsyncStorage.getItem(`imageProfile/${name}.${lastName}`) || 'null');
+
+      if (valueInCache && valueInCache.expirian > Date.now()) return valueInCache
+
+      AsyncStorage.removeItem(`imageProfile/${name}.${lastName}`)
+
+      const response = await httpRequestServices.post('imageProfile/load', {name, lastName})
+      AsyncStorage.setItem(`imageProfile/${name}.${lastName}`, JSON.stringify({ 
+        profileImage: response.data.profileImage,
+        profileImageExtension: response.data.profileImageExtension,
+        expirian: Date.now() + 1000 * 60 * 5
+      }))
+      return { profileImage: response.data.profileImage, profileImageExtension: response.data.profileImageExtension}
+
     }
+
   }
 
   return LoadProfileImageHook

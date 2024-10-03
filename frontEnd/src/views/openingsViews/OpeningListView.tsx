@@ -1,6 +1,6 @@
 
-import { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { FlatList, ListRenderItem, View } from 'react-native';
 import { styled } from "nativewind";
 
 import LoadOpenigsHook from '@/hooks/openigHooks/LoadOpenigsHook';
@@ -28,15 +28,23 @@ interface openingInterface {
   profileImageExtension?: string 
 }
 
+interface ProfileImages {
+  [key: string]: {
+    profileImage: string;
+    profileImageExtension: string;
+  };
+}
+
 export default () => {
 
   const [openings, setOpenings] = useState<openingInterface[]>([]);
+  const [profileImages, setProfileImages] = useState<ProfileImages>([]);
   const [deletion, setDeletion] = useState<string>('');
   
   const LoadOpenigsService = LoadOpenigsHook()
   
   const fetchData = async () => {
-    LoadOpenigsService.LoadOpenigsService({setOpenings})
+    LoadOpenigsService.LoadOpenigsService({setOpenings, setProfileImages})
   };
 
   const props1 = { deletion, setDeletion, fetchData}
@@ -47,26 +55,29 @@ export default () => {
 
   }, [])
 
-  return (
+  const itemComponent = useCallback((item: openingInterface) => {
+    if (item.empty) {
+      return <SView className={styles.paddingItem} />;
+    } else {
+      return <OpeningComponent {...{ opening: item, profileImages, ...props1 }} />;
+    }
+  }, [profileImages, openings]);
+  
+  if (openings) return (
     <SView className={styles.containOpening}>
-
       <SFlatList
-        data={[ ...openings, { empty: true } ]}
+        data={[...openings, { empty: true }]}
         className={styles.listOpening}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => {
-          if ((item as openingInterface).empty) {
-            return <SView className={styles.paddingItem} />;
-          } else {
-            return <OpeningComponent { ...{ opening: item as openingInterface, ...props1 }} />;
-          }
-        }}
+        renderItem={({ item }) => itemComponent(item as openingInterface)}
+        removeClippedSubviews={false}
       />
-    
+  
       <ClearOpeningsComponent {...props1} />
       <ConfirmDeletionComponent {...props1} />
     </SView>
-  );    
+  )
+  else return <SView className={styles.containOpening}>Loading...</SView>
   
 };

@@ -13,6 +13,7 @@ import ClearIco from "@/assets/icons/commonIcos/ClearIco.png"
 import EditIco from "@/assets/icons/profileIcos/EditIco.png"
 
 import LoadProfileImageHook from '@/hooks/commonHooks/LoadProfileImageHook';
+import { useLoading } from '@/contexts/LoadingContext';
 
 import styles from "@/assets/styles/viewsStyles/profileViewsStyles/ProfileViewsStyles"
 
@@ -25,6 +26,8 @@ export default () => {
 
   const [editingImage, setEditingImage] = useState<boolean>(false)
   const [deletingProfile, setDeletingProfile] = useState<boolean>(false)
+
+  const { setLoading } = useLoading()
   
   const [ user, setUserData ] = useState<{
     name: string,
@@ -65,9 +68,12 @@ export default () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const user =  JSON.parse( await AsyncStorage.getItem('user') || '' );
       setUserData({ name: user.name, lastName: user.lastName, profileImage: '', profileImageExtension: ''})
-      LoadProfileImageServices.Load({name: user.name, lastName: user.lastName, setImage })
+      const image = await LoadProfileImageServices.Load({name: user.name, lastName: user.lastName })
+      setImage(image)
+      setLoading(false)
     };
     fetchData()   
   }, []);

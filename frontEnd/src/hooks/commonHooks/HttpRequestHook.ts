@@ -60,7 +60,7 @@ export default () => {
         const response = await axios.post(`${URL_API_BACKEND}/${path}`, body, { headers });
         return response;
 
-      } catch ( error: unknown ) {
+      } catch ( error: any ) {
 
         if ( !error.response.data.errors || !Array.isArray(error.response.data.errors) ) { 
           console.error(error); 

@@ -6,7 +6,7 @@ import { useCurrentPage } from '@/contexts/CurrentPageContext';
 
 import LogoutService from '@/services/commonSevices/LogoutService';
 
-const URL_API_BACKEND = 'http://192.168.100.46:3000';
+const URL_API_BACKEND = 'https://safe-vault.onrender.com';
 
 export default () => {
 

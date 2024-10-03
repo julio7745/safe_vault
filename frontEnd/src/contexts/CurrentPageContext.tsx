@@ -3,7 +3,7 @@ import { createContext, useState, useContext, ReactElement } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const URL_API_BACKEND = 'http://192.168.100.46:3000';
+const URL_API_BACKEND = 'https://safe-vault.onrender.com';
 
 interface CurrentPageContextType {
   currentPage: string;

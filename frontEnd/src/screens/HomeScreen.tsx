@@ -12,6 +12,8 @@ import InsertKeyView from '@/views/homeViews/InsertKeyView'
 import InsertFingerprintView from '@/views/homeViews/InsertFingerprintView';
 import WaitingOpeningView from '@/views/homeViews/WaitingOpeningView';
 import AwaitForOpeningView from '@/views/homeViews/AwaitForOpeningView';
+import RemoveFingerprintView from '@/views/homeViews/RemoveFingerprintView';
+import AwaitInitSensorView from '@/views/homeViews/AwaitInitSensorView';
 
 import HeaderComponent from '@/components/commonComponents/HeaderComponent';
 import NavBarComponent from '@/components/commonComponents/NavBarComponent';
@@ -45,7 +47,7 @@ export default () => {
   useEffect(() => {
     const options = {
       host: 'broker.hivemq.com',
-      port: 8000,
+      port: 8884,
       path: '/mqtt'
     };
     const mqttClient = new Paho.Client(options.host, options.port, options.path);
@@ -74,7 +76,7 @@ export default () => {
     (client as Paho.Client).onConnectionLost = onConnectionLost;
     (client as Paho.Client).connect({
       onSuccess: onConnect,
-      useSSL: false,
+      useSSL: true,
       timeout: 10000,
       onFailure: onFailure,
     });
@@ -127,6 +129,12 @@ export default () => {
         case '7':
           setCurrentInternalPage('WaitingOpeningView')
           break;
+        case '9':
+          setCurrentInternalPage('RemoveFingerprintView')
+          break;
+        case '10':
+          setCurrentInternalPage('AwaitInitSensorView')
+          break;
         default:
           break;
       }
@@ -149,6 +157,10 @@ export default () => {
         return <WaitingOpeningView { ...props1 } />;
       case 'AwaitForOpeningView':
         return <AwaitForOpeningView { ...props1 } />;
+      case 'RemoveFingerprintView':
+        return <RemoveFingerprintView { ...props1 } />;
+      case 'AwaitInitSensorView':
+        return <AwaitInitSensorView { ...props1 } />;
       default:
         return <AwaitForOpeningView { ...props1 }/>;
     } 

@@ -27,10 +27,8 @@ export default () => {
       case 'login':
         return (
           <SView behavior="padding" enabled className={styles.screen + " bg-darkBlue"} keyboardVerticalOffset={0}>
-            <SScrollView>
-              <LoginScreen />
-              <LoadingComponent />
-            </SScrollView>
+            <LoginScreen />
+            <LoadingComponent />
           </SView>
         )
       case 'home':

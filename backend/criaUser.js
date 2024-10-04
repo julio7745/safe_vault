@@ -25,7 +25,7 @@ const User = mongoose.model('User', userSchema);
 
 // Dados do usuário
 const userData = {
-  name: 'julio4',
+  name: 'julio2',
   lastName: 'carvalho',
   password: 'Aa123456',
 };

@@ -2,6 +2,7 @@
 import HttpRequestHook from '@/hooks/commonHooks/HttpRequestHook';
 
 import { useLoading } from '@/contexts/LoadingContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default () => {
 
@@ -29,9 +30,11 @@ export default () => {
       .then(() => {
         setEditingImage(false)
         setUserData({ name: user.name, lastName: user.lastName, profileImage: image.base64, profileImageExtension: image.imgExtension})
-      })
-      .catch(error => {
-  
+        AsyncStorage.setItem(`imageProfile/${user.name}.${user.lastName}`, JSON.stringify({ 
+          profileImage: image.base64,
+          profileImageExtension: image.imgExtension,
+          expirian: Date.now() + 1000 * 60 * 5
+        }))
       })
       .finally(() => {
         setLoading(false);

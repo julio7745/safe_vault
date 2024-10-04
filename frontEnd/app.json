@@ -23,6 +23,8 @@
         "foregroundImage": "./assets/icon.jpg",
         "backgroundColor": "#1b353b"
       },
+      "theme": "@style/AppTheme.NoActionBar",
+      "forceDarkAllowed": false,
       "package": "com.julio7745.SafeVault"
     },
     "extra": {

@@ -24,8 +24,6 @@ export default () => {
           Authorization: `${token}`,
         };
         
-        // ToDo
-        // Preciso criptografar na entrar e na saida, no back e no front 
         const response = await axios.get(`${URL_API_BACKEND}/${path}`, { headers });
         return response;
 
@@ -55,8 +53,6 @@ export default () => {
           Authorization: `${token}`,
         };
         
-        // ToDo
-        // Preciso criptografar na entrar e na saida, no back e no front 
         const response = await axios.post(`${URL_API_BACKEND}/${path}`, body, { headers });
         return response;
 

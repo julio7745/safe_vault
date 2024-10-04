@@ -19,7 +19,7 @@ const SImage = styled(Image)
 
 export default () => {
 
-  const [login, setLogin] = useState<{user: string, password: string}>({user: 'julio.carvalho', password: 'Aa123456'});
+  const [login, setLogin] = useState<{user: string, password: string}>({user: '', password: ''});
   const [errors, setErrors] = useState<{user: string[], password: string[]}>({user: [], password: []});
 
   const [displayPassword, setdisplayPassword] = useState<boolean>(true);

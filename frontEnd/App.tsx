@@ -1,7 +1,6 @@
 
-import { View } from 'react-native';
+import { View, Appearance  } from 'react-native';
 import { styled } from "nativewind";
-import { Appearance } from 'react-native';
 
 import { LoadingProvider } from '@/contexts/LoadingContext';
 import Screen from '@/router/Screen';
@@ -12,7 +11,7 @@ const SView = styled(View)
 
 const App = () => {
 
-Appearance.setColorScheme('light');
+  Appearance.setColorScheme('light');
 
   return (
   <LoadingProvider>

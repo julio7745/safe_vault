@@ -84,7 +84,6 @@ export default () => {
 
   const onConnectionLost = (responseObject: Paho.MQTTError) => {
     if (responseObject.errorCode !== 0) {
-      console.log('connection lost');
       setStateConection('disconected')
     }
   }
@@ -103,7 +102,6 @@ export default () => {
   }
   
   const handleMessageArrived = async (message: Paho.Message) => {
-    console.log('Received message:', message.payloadString);
 
     const {name, lastName} = JSON.parse( await AsyncStorage.getItem('user') || '' );
     const [action, userM, _code] = message.payloadString.split('_')

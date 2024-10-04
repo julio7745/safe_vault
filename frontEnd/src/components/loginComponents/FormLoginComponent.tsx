@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableWithoutFeedback, Image, TextInput} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TouchableWithoutFeedback, Image, TextInput, Keyboard} from 'react-native';
 import { styled } from "nativewind";
 
 import styles from '@/assets/styles/componentsStyles/loginComponentsStyles/FormLoginComponentStyles'
@@ -31,9 +31,28 @@ export default () => {
 
   useEffect(() => {
     LoginServices.autoLogin();
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      unselectField
+    );
+    return () => keyboardDidHideListener.remove();
   }, []);
 
+  const usernameRef = useRef<TextInput>(null);
+  const passwordRef = useRef<TextInput>(null);
+
+  const unselectField = () => {
+    usernameRef.current?.blur();
+    passwordRef.current?.blur();
+    Keyboard.dismiss();
+  };
+
   const LoginServices = LoginHook()
+
+  const submitForm = () => {
+    unselectField()
+    LoginServices.login(propsLoginService)
+  }
 
   return (
     <SView className={styles.loginForm}>
@@ -47,6 +66,7 @@ export default () => {
           onChangeText={(Text) => setLogin({ user: Text, password: login.password})}
           placeholder="Name.Lastname"
           className={styles.input}
+          ref={usernameRef}
           value={login.user}
           autoComplete="off"
           maxLength={35}
@@ -61,6 +81,7 @@ export default () => {
           onChangeText={(Text) => setLogin({ user: login.user, password: Text})}
           secureTextEntry={displayPassword}
           placeholder="Password"
+          ref={passwordRef}
           value={login.password}
           className={styles.input}
           autoComplete="off"
@@ -73,7 +94,7 @@ export default () => {
       {errors.password.length > 0 ? <SText className={styles.errTxt}>{errors.password[0]}</SText> : <></>}
       <SView className={styles.campBtnLogin}>
         <TouchableWithoutFeedback 
-          onPress={async () => await LoginServices.login(propsLoginService)}>
+          onPress={submitForm}>
           <SImage source={loginIco} className={styles.btnLogin} resizeMode='contain'/>
         </TouchableWithoutFeedback>
       </SView>

@@ -22,7 +22,7 @@ export default () => {
   const pages = [
     // { name: "new user", function: setLogoutVisible },
     { name: "logout", function: () => setLogoutVisible(true) },
-    { name: "Criar Coleta", function: () => HttpRequestService.get('opening/create') },
+    // { name: "Criar Coleta", function: () => HttpRequestService.get('opening/create') },
   ]
 
   const props1 = { logoutVisible, setLogoutVisible }

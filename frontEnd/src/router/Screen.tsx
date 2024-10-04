@@ -33,35 +33,35 @@ export default () => {
         )
       case 'home':
         return (
-          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={0}>
             <HomeScreen />
             <LoadingComponent />
           </SView>
         )
       case 'openings':
         return (
-          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={0}>
             <OpeningsScreen />
             <LoadingComponent />
           </SView>
         )
       case 'profile':
         return (
-          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={0}>
             <ProfileScreen />
             <LoadingComponent />
           </SView>
         )
       case 'options':
         return (
-          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={0}>
             <OptionsScreen />
             <LoadingComponent />
           </SView>
         )
       default:
         return (
-          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={100}>
+          <SView behavior="padding" enabled className={styles.screen} keyboardVerticalOffset={0}>
             <HomeScreen />
             <LoadingComponent />
           </SView>

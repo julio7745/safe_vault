@@ -72,30 +72,97 @@ void updateOutputs () {
   
 }
 void updateInputs() {
-   
+    // Verifica se há dados disponíveis para leitura
+    if (Serial.available()) {
+        // Cria um buffer para armazenar a linha lida
+        String input = Serial.readStringUntil('\n'); // Lê até a nova linha
+        // Localiza o sinal de igual
+        int equalsIndex = input.indexOf('=');
+        
+        // Se o sinal de igual for encontrado
+        if (equalsIndex != -1) {
+            // Divide o nome e o valor
+            String varName = input.substring(0, equalsIndex); // Nome da variável
+            String varValue = input.substring(equalsIndex + 1); // Valor
+
+            // Remove espaços em branco
+            varName.trim();
+            varValue.trim();
+
+            // Verifica e atribui o valor correspondente à variável
+            if (varName == "var74HC165Input") {
+                if (varValue == "LOW") {
+                    var74HC165Input = LOW;
+                } else if (varValue == "HIGH") {
+                    var74HC165Input = HIGH;
+                }
+            } else if (varName == "var74HC165Clock") {
+                if (varValue == "LOW") {
+                    var74HC165Clock = LOW;
+                } else if (varValue == "HIGH") {
+                    var74HC165Clock = HIGH;
+                }
+            }if (varName == "varKeyPadC1") {
+                if (varValue == "LOW") {
+                    varKeyPadC1 = LOW;
+                } else if (varValue == "HIGH") {
+                    varKeyPadC1 = HIGH;
+                }
+            } else if (varName == "varKeyPadC2") {
+                if (varValue == "LOW") {
+                    varKeyPadC2 = LOW;
+                } else if (varValue == "HIGH") {
+                    varKeyPadC2 = HIGH;
+                }
+            } else if (varName == "varKeyPadC3") {
+                if (varValue == "LOW") {
+                    varKeyPadC3 = LOW;
+                } else if (varValue == "HIGH") {
+                    varKeyPadC3 = HIGH;
+                }
+            } else if (varName == "varLedDigito1") {
+                if (varValue == "LOW") {
+                    varLedDigito1 = LOW;
+                } else if (varValue == "HIGH") {
+                    varLedDigito1 = HIGH;
+                }
+            } else if (varName == "varLedDigito2") {
+                if (varValue == "LOW") {
+                    varLedDigito2 = LOW;
+                } else if (varValue == "HIGH") {
+                    varLedDigito2 = HIGH;
+                }
+            } else
+
+             if (varName == "varLedDigito3") {
+                if (varValue == "LOW") {
+                    varLedDigito3 = LOW;
+                } else if (varValue == "HIGH") {
+                    varLedDigito3 = HIGH;
+                }
+            } else if (varName == "varLedDigito4") {
+                if (varValue == "LOW") {
+                    varLedDigito4 = LOW;
+                } else if (varValue == "HIGH") {
+                    varLedDigito4 = HIGH;
+                }
+            } else if (varName == "varLock") {
+                if (varValue == "LOW") {
+                    varLock = LOW;
+                } else if (varValue == "HIGH") {
+                    varLock = HIGH;
+                }
+            } 
+        }
+    }
 }
 
 void updateKeyPad() {
-    
+    // Função de atualização do teclado (a ser implementada)
 }
 
 void loop() {
     updateOutputs();
-//    updateInputs();
-//    updateKeyPad();
-
-    delay(1000);
-    varLedDigito3 = true;
-    updateOutputs();
-    
-    delay(1000);
-    varLedDigito3 = false;
-    varLedDigito4 = true;
-    updateOutputs();
-
-    delay(1000);
-    varLedDigito4 = false;
-    updateOutputs();
-
-    delay(1000);
+    updateInputs();
+    updateKeyPad();
 }

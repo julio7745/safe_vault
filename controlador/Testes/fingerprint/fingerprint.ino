@@ -1,7 +1,7 @@
 
 #include <Adafruit_Fingerprint.h>
 
-SoftwareSerial mySerial(13, 15);
+SoftwareSerial mySerial(D6, D7);
 
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
@@ -13,12 +13,12 @@ void setup()
 
   finger.begin(57600);
   delay(5);
-  if (finger.verifyPassword()) {
-    Serial.println("Found fingerprint sensor!");
-  } else {
-    Serial.println("Did not find fingerprint sensor :(");
-    while (1) { delay(1); }
-  }
+//  if (finger.verifyPassword()) {
+//    Serial.println("Found fingerprint sensor!");
+//  } else {
+//    Serial.println("Did not find fingerprint sensor :(");
+//    while (1) { delay(1); }
+//  }
 
   Serial.println(F("Reading sensor parameters"));
   finger.getParameters();
@@ -47,14 +47,15 @@ void loop()                     // run over and over again
   delay(50);            //don't ned to run this at full speed.
 }
 
+int cont = 0;
+int value = 0;
+
 uint8_t getFingerprintID() {
   uint8_t p = finger.getImage();
   switch (p) {
     case FINGERPRINT_OK:
-      Serial.println("Image taken");
       break;
     case FINGERPRINT_NOFINGER:
-      Serial.println("No finger detected");
       return p;
     case FINGERPRINT_PACKETRECIEVEERR:
       Serial.println("Communication error");
@@ -72,10 +73,8 @@ uint8_t getFingerprintID() {
   p = finger.image2Tz();
   switch (p) {
     case FINGERPRINT_OK:
-      Serial.println("Image converted");
       break;
     case FINGERPRINT_IMAGEMESS:
-      Serial.println("Image too messy");
       return p;
     case FINGERPRINT_PACKETRECIEVEERR:
       Serial.println("Communication error");
@@ -94,7 +93,6 @@ uint8_t getFingerprintID() {
   // OK converted!
   p = finger.fingerSearch();
   if (p == FINGERPRINT_OK) {
-    Serial.println("Found a print match!");
   } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
     Serial.println("Communication error");
     return p;
@@ -107,8 +105,12 @@ uint8_t getFingerprintID() {
   }
 
   // found a match!
-  Serial.print("Found ID #"); Serial.print(finger.fingerID);
-  Serial.print(" with confidence of "); Serial.println(finger.confidence);
+  Serial.print(" ID #"); Serial.print(finger.fingerID);
+  Serial.print(" confidence "); Serial.println(finger.confidence);
+  cont++;
+  value =+ finger.confidence;
+  Serial.print(" Média: "); Serial.println(value/cont);
+  
 
   return finger.fingerID;
 }

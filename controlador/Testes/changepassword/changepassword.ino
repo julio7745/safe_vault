@@ -1,19 +1,21 @@
 
+#include <SoftwareSerial.h>
 #include <Adafruit_Fingerprint.h>
 
-SoftwareSerial mySerial(13, 15);
+SoftwareSerial mySerial(D6,D7); // RX, TX (ESP)
 
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial, 2345);
-
-// Using sensor with password
-//Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial, 1337);
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial, 0);
+//Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial, PASSWORD);
 
 void setup()
 {
 
+  // Inicia Comunicação Serial
   Serial.begin(115200);
-  Serial.println("Adafruit fingerprint sensor, change password example");
+  Serial.println("Serial Iniciada");
 
+  Serial.println("Adafruit fingerprint sensor, change password example");
+  
   // set the data rate for the sensor serial port
   finger.begin(57600);
 

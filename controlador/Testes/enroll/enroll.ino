@@ -1,7 +1,8 @@
 
 #include <Adafruit_Fingerprint.h>
+#include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(13, 15);
+SoftwareSerial mySerial(D6, D7); // RX, TX (ESP)
 
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
@@ -20,7 +21,7 @@ void setup()
     Serial.println("Found fingerprint sensor!");
   } else {
     Serial.println("Did not find fingerprint sensor :(");
-    while (1) { delay(1); }
+    while (1) { delay(100); Serial.print("\n\nAdafruit Fingerprint sensor enrollment"); }
   }
 
   Serial.println(F("Reading sensor parameters"));
@@ -69,7 +70,6 @@ uint8_t getFingerprintEnroll() {
       Serial.println("Image taken");
       break;
     case FINGERPRINT_NOFINGER:
-      Serial.print(".");
       break;
     case FINGERPRINT_PACKETRECIEVEERR:
       Serial.println("Communication error");
@@ -121,7 +121,6 @@ uint8_t getFingerprintEnroll() {
       Serial.println("Image taken");
       break;
     case FINGERPRINT_NOFINGER:
-      Serial.print(".");
       break;
     case FINGERPRINT_PACKETRECIEVEERR:
       Serial.println("Communication error");

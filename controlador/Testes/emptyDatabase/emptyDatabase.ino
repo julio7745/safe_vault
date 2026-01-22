@@ -1,9 +1,9 @@
 
 #include <Adafruit_Fingerprint.h>
 
-SoftwareSerial mySerial(13, 15);
+SoftwareSerial mySerial(D6, D7);
 
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial, 0);
 
 void setup()
 {
@@ -20,7 +20,7 @@ void setup()
   }
 
   // set the data rate for the sensor serial port
-  finger.begin(19200);
+  finger.begin(57600);
 
   if (finger.verifyPassword()) {
     Serial.println("Found fingerprint sensor!");

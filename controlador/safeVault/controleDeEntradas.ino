@@ -11,7 +11,7 @@ bool e_controleDeEntradas_update_var = HIGH;
 bool e_controleDeEntradas_clock_var = HIGH;
 
 // Define portas
-#define i_controleDeEntradas_input_port 12   // GPIO12/D6
+#define i_controleDeEntradas_input_port 14   // GPIO14/D5
 
 // Função de inicialização
 void e_controleDeEntradas_iniciaEntradas_fnct() {

@@ -1,66 +1,63 @@
 
 //imports
 void e_controleDeSaidas_iniciaSaidas_fnct();
+char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
 void e_controleDeEntradas_iniciaEntradas_fnct();
 void e_controleDoKeyPad_atualizaKeyPad_fnct();
 void e_controleDeSaidas_updateSaidas_fnct();
 void e_controleDeEntradas_updateEntradas_fnct();
-char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
+void e_controleDoSensorBiometrico_leDigital_fnct();
 
 // Outputs
-bool LedDigito1 = LOW;
-bool LedDigito2 = HIGH;
-bool LedDigito3 = LOW;
-bool LedDigito4 = HIGH;
 bool Unlocked = LOW;
-bool SensorOn = HIGH;
 
-// INSTANCIANDO OBJETOS
-//SoftwareSerial mySerial(D7, D8); // mySerial(Tx, Rx) <-- Pinagens do Sensor;
-//Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
+// Declara variaveis de controle
+int fingerId = 0;
+int confidence = 0;
 
-//  KeyPadC1 = LOW;
-//  KeyPadC2 = LOW;
-//  KeyPadC3 = LOW;
-//  LedDigito1 = LOW;
-//  LedDigito2 = LOW;
-//  LedDigito3 = LOW;
-//  LedDigito4 = LOW;
-//  Unlocked = LOW;  
-//  SensorOn = LOW;
-
+// Loop de inicialização
 void setup() {
-  
+
+  // Inicia comunicação serial
   Serial.begin(9600);
-  delay(2000);
+  delay(100);
   Serial.println("Serial Iniciada");
 
+  // Inicia saidas e entradas
   e_controleDeSaidas_iniciaSaidas_fnct();
   e_controleDeEntradas_iniciaEntradas_fnct();
   
 }
 
-unsigned long ultimo = millis();
-
+// Loop principal
 void loop() {
 
+  // Atualiza entradas saidas e teclado
   e_controleDoKeyPad_atualizaKeyPad_fnct();
   e_controleDeSaidas_updateSaidas_fnct();
   e_controleDeEntradas_updateEntradas_fnct();
 
+  // Recebimento de teclas
   char key = e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
   Serial.print(key);
-  
-  if (millis() > ultimo + 500) {
 
-    LedDigito1 = !LedDigito1;
-    LedDigito2 = !LedDigito2;
-    LedDigito3 = !LedDigito3;
-    LedDigito4 = !LedDigito4;
-    Unlocked = !Unlocked;  
-    SensorOn = !SensorOn;
-    ultimo = millis();
-    
+   // Recebimento de digital
+  e_controleDoSensorBiometrico_leDigital_fnct();
+  if ( fingerId != 0){
+    Serial.printf("\r\nDigital Lida: %i. Confiança: %i \r\n", fingerId, confidence);
+    fingerId = 0;
+    confidence = 0;
   }
- 
+
 }
+
+
+
+
+
+
+
+// Como pegar valor digitado
+
+//imports
+//char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();

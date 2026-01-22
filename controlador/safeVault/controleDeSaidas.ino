@@ -6,17 +6,14 @@ extern bool e_controleDoKeyPad_keyPadC0_var;
 extern bool e_controleDoKeyPad_keyPadC1_var;
 extern bool e_controleDoKeyPad_keyPadC2_var;
 extern bool e_controleDeEntradas_update_var;
-extern bool LedDigito1;
-extern bool LedDigito2;
-extern bool LedDigito3;
-extern bool LedDigito4;
+extern bool i_controleDosLeds_ledStatus_var[4];
 extern bool Unlocked;
-extern bool SensorOn;
+extern bool e_controleDoSensorBiometrico_sensorOn_var;
        
 // Define portas
 #define i_controleDeSaidas_clock_port 4        // GPIO4/D2
 #define i_controleDeSaidas_update_port 5       // GPIO5/D1
-#define i_controleDeSaidas_serialInput_port 14 // GPIO14/D5
+#define i_controleDeSaidas_serialInput_port 16 // GPIO16/D0
 
 // Tempo de delay p/ atualização
 #define i_controleDeSaidas_timedelay_time 5
@@ -69,12 +66,12 @@ void e_controleDeSaidas_updateSaidas_fnct() {
     e_controleDoKeyPad_keyPadC0_var,
     e_controleDoKeyPad_keyPadC1_var,
     e_controleDoKeyPad_keyPadC2_var,
-    LedDigito1,
-    LedDigito2,
-    LedDigito3,
-    LedDigito4,
+    i_controleDosLeds_ledStatus_var[0],
+    i_controleDosLeds_ledStatus_var[1],
+    i_controleDosLeds_ledStatus_var[2],
+    i_controleDosLeds_ledStatus_var[3],
     Unlocked,
-    SensorOn,
+    e_controleDoSensorBiometrico_sensorOn_var,
     0,
     0,
     0,

@@ -1,14 +1,23 @@
 
+//imports
+void e_controleDeSaidas_iniciaSaidas_fnct();
+void e_controleDeEntradas_iniciaEntradas_fnct();
+void e_controleDoKeyPad_atualizaKeyPad_fnct();
+void e_controleDeSaidas_updateSaidas_fnct();
+void e_controleDeEntradas_updateEntradas_fnct();
+char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
+
 // Outputs
-bool KeyPadC1 = LOW;
-bool KeyPadC2 = LOW;
-bool KeyPadC3 = LOW;
 bool LedDigito1 = LOW;
-bool LedDigito2 = LOW;
+bool LedDigito2 = HIGH;
 bool LedDigito3 = LOW;
-bool LedDigito4 = LOW;
+bool LedDigito4 = HIGH;
 bool Unlocked = LOW;
-bool SensorOn = LOW;
+bool SensorOn = HIGH;
+
+// INSTANCIANDO OBJETOS
+//SoftwareSerial mySerial(D7, D8); // mySerial(Tx, Rx) <-- Pinagens do Sensor;
+//Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
 //  KeyPadC1 = LOW;
 //  KeyPadC2 = LOW;
@@ -20,12 +29,6 @@ bool SensorOn = LOW;
 //  Unlocked = LOW;  
 //  SensorOn = LOW;
 
-// Inputs
-bool KeyPadL1 = LOW;
-bool KeyPadL2 = LOW;
-bool KeyPadL3 = LOW;
-bool KeyPadL4 = LOW;
-
 void setup() {
   
   Serial.begin(9600);
@@ -33,43 +36,31 @@ void setup() {
   Serial.println("Serial Iniciada");
 
   e_controleDeSaidas_iniciaSaidas_fnct();
-  e_controleDeEntradas_iniciaEntradas_fnct;
-
+  e_controleDeEntradas_iniciaEntradas_fnct();
+  
 }
+
+unsigned long ultimo = millis();
 
 void loop() {
 
-  KeyPadC1 = LOW;
-  KeyPadC2 = LOW;
-  KeyPadC3 = LOW;
-  LedDigito1 = LOW;
-  LedDigito2 = LOW;
-  LedDigito3 = LOW;
-  LedDigito4 = LOW;
-  Unlocked = LOW;  
-  SensorOn = LOW;
+  e_controleDoKeyPad_atualizaKeyPad_fnct();
   e_controleDeSaidas_updateSaidas_fnct();
-  delay(1000);
+  e_controleDeEntradas_updateEntradas_fnct();
 
-  KeyPadC1 = HIGH;
-  KeyPadC2 = HIGH;
-  KeyPadC3 = HIGH;
-  LedDigito1 = HIGH;
-  LedDigito2 = HIGH;
-  LedDigito3 = HIGH;
-  LedDigito4 = HIGH;
-  Unlocked = HIGH;  
-  SensorOn = HIGH;
-  e_controleDeSaidas_updateSaidas_fnct();
-  delay(1000);
+  char key = e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
+  Serial.print(key);
   
+  if (millis() > ultimo + 500) {
 
-//  e_controleDeEntradas_updateEntradas_fnct();
-//  Serial.printf("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
-//  Serial.printf("L1: %d\r\n", KeyPadL1);
-//  Serial.printf("L2: %d\r\n", KeyPadL2);
-//  Serial.printf("L3: %d\r\n", KeyPadL3);
-//  Serial.printf("L4: %d\r\n", KeyPadL4);
-//  delay(150);
+    LedDigito1 = !LedDigito1;
+    LedDigito2 = !LedDigito2;
+    LedDigito3 = !LedDigito3;
+    LedDigito4 = !LedDigito4;
+    Unlocked = !Unlocked;  
+    SensorOn = !SensorOn;
+    ultimo = millis();
+    
+  }
  
 }

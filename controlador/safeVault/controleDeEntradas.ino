@@ -1,4 +1,11 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+//imports
+void e_controleDeSaidas_updateSaidas_fnct();
+extern bool e_controleDoKeyPad_keyPadL0_var;
+extern bool e_controleDoKeyPad_keyPadL1_var;
+extern bool e_controleDoKeyPad_keyPadL2_var;
+extern bool e_controleDoKeyPad_keyPadL3_var;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 // Declara variaveis de controle
 bool e_controleDeEntradas_update_var = HIGH;
 bool e_controleDeEntradas_clock_var = HIGH;
@@ -49,7 +56,12 @@ void i_controleDeEntradas_clock_fnct() {
 void e_controleDeEntradas_updateEntradas_fnct() {
 
   // Vetor com as variaveis de entrada
-  bool* entradas[4] = { &KeyPadL1, &KeyPadL2, &KeyPadL3, &KeyPadL4 };
+  bool* entradas[4] = {
+    &e_controleDoKeyPad_keyPadL0_var,
+    &e_controleDoKeyPad_keyPadL1_var,
+    &e_controleDoKeyPad_keyPadL2_var,
+    &e_controleDoKeyPad_keyPadL3_var
+  };
 
   // Atualiza valores no CI
   i_controleDeEntradas_update_fnct();

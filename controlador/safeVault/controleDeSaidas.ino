@@ -1,4 +1,18 @@
 
+//imports
+extern bool e_controleDeEntradas_update_var;
+extern bool e_controleDeEntradas_clock_var;
+extern bool e_controleDoKeyPad_keyPadC0_var;
+extern bool e_controleDoKeyPad_keyPadC1_var;
+extern bool e_controleDoKeyPad_keyPadC2_var;
+extern bool e_controleDeEntradas_update_var;
+extern bool LedDigito1;
+extern bool LedDigito2;
+extern bool LedDigito3;
+extern bool LedDigito4;
+extern bool Unlocked;
+extern bool SensorOn;
+       
 // Define portas
 #define i_controleDeSaidas_clock_port 4        // GPIO4/D2
 #define i_controleDeSaidas_update_port 5       // GPIO5/D1
@@ -52,9 +66,9 @@ void e_controleDeSaidas_updateSaidas_fnct() {
   bool saidas[16]= {
     e_controleDeEntradas_update_var,
     e_controleDeEntradas_clock_var,
-    KeyPadC1,
-    KeyPadC2,
-    KeyPadC3,
+    e_controleDoKeyPad_keyPadC0_var,
+    e_controleDoKeyPad_keyPadC1_var,
+    e_controleDoKeyPad_keyPadC2_var,
     LedDigito1,
     LedDigito2,
     LedDigito3,

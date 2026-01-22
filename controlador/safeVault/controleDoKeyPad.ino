@@ -2,6 +2,8 @@
 // Define valores constantes
 #define expirationTime 500
 #define minimumPressureTime 100
+#define minimumpressureTimeToRepeat 1300
+#define timeToRepeat 200
 
 //Imports
 void e_controleDeSaidas_updateSaidas_fnct();
@@ -24,8 +26,8 @@ class i_controleDoKeyPad_botao_class {
   // Privados
   private:
     // Valores armazenados
-    bool value = LOW, lastValue = LOW;
-    unsigned long lastTime = 0;
+    bool value = LOW;
+    unsigned long lastStartClick = 0, lastClik = 0;
 
   // Publicos 
   public:
@@ -34,11 +36,18 @@ class i_controleDoKeyPad_botao_class {
 
     bool newClick () {
 
-      if ( lastTime == 0){
-        lastTime = millis();
+      if ( lastStartClick == 0){
+        lastStartClick = millis();
       }
       
-      if ( (lastTime + minimumPressureTime < millis()) && value == LOW ){
+      if ( (lastStartClick + minimumPressureTime < millis()) && value == LOW ){
+        lastClik = millis();
+        value = HIGH;
+        return HIGH;
+      } 
+
+      if ( (lastStartClick + minimumPressureTime < millis()) && millis() > lastClik + timeToRepeat && millis() > lastStartClick + minimumpressureTimeToRepeat ){
+        lastClik = millis();
         value = HIGH;
         return HIGH;
       } 
@@ -48,7 +57,7 @@ class i_controleDoKeyPad_botao_class {
 
     void releaseClick () {
 
-      lastTime = 0;
+      lastStartClick = 0;
       value = LOW;
       
     }
@@ -83,7 +92,7 @@ class i_controleDoKeyPad_pressed_class {
   // Privados
   private:
     // Valores armazenados
-    unsigned long lastTime = 0;
+    unsigned long lastStartClick = 0;
     char tecla = '\0';
 
   // Publicos 
@@ -91,19 +100,19 @@ class i_controleDoKeyPad_pressed_class {
     // Constructor: mesmo nome da classe
     i_controleDoKeyPad_pressed_class() {}
     
-    unsigned long getLastTime () {
-      return lastTime;
+    unsigned long getlastStartClick () {
+      return lastStartClick;
     }
     char getTecla () {
       return tecla;
     }
     
     void resetPressed () {
-       lastTime = 0, tecla = '\0';
+       lastStartClick = 0, tecla = '\0';
     }
 
     void newPressed (const char key) {
-      lastTime = millis();
+      lastStartClick = millis();
       tecla = key;
     }
   
@@ -133,11 +142,11 @@ class i_controleDoKeyPad_keyPad_class {
 
     char getPressed () {
       
-      if ( pressed[0].getLastTime() == 0 ) {
+      if ( pressed[0].getlastStartClick() == 0 ) {
         return '\0';
       }
       
-      if ( ( pressed[0].getLastTime() + expirationTime ) < millis() ){
+      if ( ( pressed[0].getlastStartClick() + expirationTime ) < millis() ){
         removePrimeiroPressed();
         return getPressed();
       }
@@ -167,7 +176,7 @@ class i_controleDoKeyPad_keyPad_class {
       for (int contl = 0; contl < 4; contl++) {
         if (*statusLinhas[contl] == HIGH) { // Se a linha física está ativa
           int cont = 0;
-          while (cont < 5 && pressed[cont].getLastTime() != 0) cont++;
+          while (cont < 5 && pressed[cont].getlastStartClick() != 0) cont++;
           if (cont < 5) {
             if (linhas[contl].newClick(col)) {
                pressed[cont].newPressed(mapaTeclas[contl][col]);

@@ -56,7 +56,7 @@ class UserClass {
 			this.verifyPassword()
 			if(this.errors.length > 0) return
 
-			const saltRounds = parseInt(process.env.SALT || '2');
+			const saltRounds = parseInt( process.env.SALT || '2');
 			const hashedNewPassword = await bcryptjs.hash(newPassword, saltRounds);
 
 			await UserModel.findOneAndUpdate(

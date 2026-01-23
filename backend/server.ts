@@ -10,7 +10,7 @@ import cors from 'cors';
 app.use(cors());
 
 const connect = process.env.MONGO as string
-const port = process.env.PORT || 3000;
+const port =  Number(process.env.PORT) || 3000;
 
 import mongoose from 'mongoose';
 mongoose.connect(connect)

@@ -27,27 +27,3 @@ void e_controleDosLeds_tooggleAll_fnct () {
       i_controleDosLeds_ledStatus_var[led] = !i_controleDosLeds_ledStatus_var[led];
   }
 }
-
-// Declara variaveis de controle
-//unsigned long i_controleDosLeds_timesLast_var[4] = { 0, 0, 0, 0 };
-//unsigned int i_controleDosLeds_ledDigitoPiscandoVelocidade_var[4] = { 0, 0, 0, 0 };
-//
-//// Função de piscar todos
-//void e_controleDosLeds_piscaAll_fnct (int velocidade) {
-//  
-//  for (int cont = 0; cont < 4; cont ++){
-//     i_e_controleDosLeds_pisca_fnct(cont, velocidade);
-//  }
-//  // Preciso bolar uma forma de desligar quando a função parar de ser chamada e o led estiver aceso
-//  
-//}
-//void i_e_controleDosLeds_pisca_fnct (int led, int velocidade ) {
-//
-//  if (( i_controleDosLeds_timesLast_var[led]==0 ) || ( millis() > (i_controleDosLeds_timesLast_var[led]+velocidade) ) ) {
-//    
-//    i_controleDosLeds_timesLast_var[led] = millis();
-//    i_controleDosLeds_ledStatus_var[led] = !i_controleDosLeds_ledStatus_var[led];
-//    
-//  }
-//  
-//}

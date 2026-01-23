@@ -14,6 +14,7 @@ class UserClass {
 	private lastName: string
 	private profileImage: string
 	private profileImageExtension: string
+	private fingerId: number
 
 	private realPassword: string
 	private currentPassword: string
@@ -32,6 +33,7 @@ class UserClass {
 		this.lastName = lastName
 		this.profileImage = ''
 		this.profileImageExtension = ''
+		this.fingerId = 0
 
 		this.errors = []
 

@@ -4,10 +4,7 @@ const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv').config()
 
 // Configuração da conexão com o MongoDB
-mongoose.connect(process.env.MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO);
 
 const Schema = mongoose.Schema;
 
@@ -18,6 +15,7 @@ const userSchema = new Schema({
   password: {type: String, required: true},
   profileImage: {type: String, required: false},
   profileImageExtension: {type: String, required: false},
+  fingerId: {type: Number, required: true},
   deleted: {type: Boolean, required: true}
 });
 
@@ -25,24 +23,24 @@ const User = mongoose.model('User', userSchema);
 
 // Dados do usuário
 const userData = {
-  name: 'julio3',
-  lastName: 'carvalho',
-  password: 'Aa123456',
+  name: process.env.NEWUSERNAME,
+  lastName: process.env.NEWUSERLASTNAME,
+  password: process.env.NEWUSERPASSWORD,
+  fingerId: Number(process.env.NEWUSERFINGERID),
+  deleted: false,
 };
 
 // Função para criar um usuário
 const createUser = async () => {
   try {
+  
+  
     // Hash da senha usando bcrypt com um fator de hash de 10
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 
     // Criação do usuário com a senha hashada
-    const newUser = new User({
-      name: userData.name,
-      lastName: userData.lastName,
-      password: hashedPassword,
-      deleted: false
-    });
+    userData.password = hashedPassword;
+    const newUser = new User(userData);
 
     // Salva o usuário no MongoDB
     await newUser.save();

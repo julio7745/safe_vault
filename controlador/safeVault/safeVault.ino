@@ -1,11 +1,12 @@
 
+
 //imports
 void e_controleDeSaidas_iniciaSaidas_fnct();
-char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
 void e_controleDeEntradas_iniciaEntradas_fnct();
 void e_controleDoKeyPad_atualizaKeyPad_fnct();
 void e_controleDeSaidas_updateSaidas_fnct();
 void e_controleDeEntradas_updateEntradas_fnct();
+char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
 void e_controleDoSensorBiometrico_leDigital_fnct();
 
 // Outputs
@@ -41,7 +42,7 @@ void loop() {
   char key = e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
   Serial.print(key);
 
-   // Recebimento de digital
+  // Recebimento de digital
   e_controleDoSensorBiometrico_leDigital_fnct();
   if ( fingerId != 0){
     Serial.printf("\r\nDigital Lida: %i. Confiança: %i \r\n", fingerId, confidence);
@@ -50,14 +51,3 @@ void loop() {
   }
 
 }
-
-
-
-
-
-
-
-// Como pegar valor digitado
-
-//imports
-//char e_controleDoKeyPad_retornaTeclaPrecionada_fnct();

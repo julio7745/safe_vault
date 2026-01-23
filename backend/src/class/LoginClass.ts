@@ -39,10 +39,6 @@ class LoginClass {
 
 		const user = await loginModel.findOne({ name: this.name, lastName: this.lastName, deleted: false})
 
-		// TODO: REMOVER
-		console.log({name: this.name, lastName: this.lastName, deleted: false});
-        console.log(user);
-
 		if(!user) this.errors.push('INCORRECT_USER')
 		if(this.errors.length > 0) return
 

@@ -10,6 +10,9 @@ export default async (req, res, next) => {
 
     if (req.path !== '/login') {
 
+      // TODO: REMOVER
+      console.log(`entrei mi`);
+
       const stringToken = req.headers.authorization || ''     
       
       if (!stringToken) return res.status(401).json({ errors: ['UNAUTHORIZED'] });

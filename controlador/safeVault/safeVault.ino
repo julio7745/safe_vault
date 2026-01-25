@@ -49,11 +49,11 @@ void loop() {
   Serial.print(key);
 
   // Recebimento de digital
-  e_controleDoSensorBiometrico_leDigital_fnct();
-  if ( fingerId != 0) {
-    Serial.printf("\r\nDigital Lida: %i. Confiança: %i \r\n", fingerId, confidence);
-    fingerId = 0;
-    confidence = 0;
-  }
+//  e_controleDoSensorBiometrico_leDigital_fnct();
+//  if ( fingerId != 0) {
+//    Serial.printf("\r\nDigital Lida: %i. Confiança: %i \r\n", fingerId, confidence);
+//    fingerId = 0;
+//    confidence = 0;
+//  }
 
 }

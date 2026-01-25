@@ -21,7 +21,7 @@ int confidence = 0;
 void setup() {
 
   // Inicia comunicação serial
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(100);
   Serial.println("Serial Iniciada");
 

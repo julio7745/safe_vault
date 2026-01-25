@@ -7,7 +7,7 @@ void e_controleDeArquivos_writeFile_fnct(String fileName, String newText) {
 
   // Inicia sistema de Arquivos
   if (!LittleFS.begin()) {
-    Serial.printf("\r\ncontroleDeArquivos - e_controleDeArquivos_reescreveArquivo_fnct:\r\n");
+    Serial.printf("\r\ne_controleDeArquivos_reescreveArquivo_fnct:\r\n");
     Serial.printf("Error mounting the LittleFS \r\n");
     return;
   }
@@ -39,7 +39,7 @@ String e_controleDeArquivos_readFile_fnct(String fileName) {
 
   // Inicia sistema de Arquivos
   if (!LittleFS.begin()) {
-    Serial.printf("\r\ncontroleDeArquivos - e_controleDeArquivos_reescreveArquivo_fnct:\r\n");
+    Serial.printf("\r\ne_controleDeArquivos_reescreveArquivo_fnct:\r\n");
     Serial.printf("Error mounting the LittleFS \r\n");
     return "";
   }
@@ -76,7 +76,7 @@ void e_controleDeArquivos_appendFile_fnct(String fileName, String newText) {
 
   // Inicia sistema de Arquivos
   if (!LittleFS.begin()) {
-    Serial.printf("\r\ncontroleDeArquivos - e_controleDeArquivos_reescreveArquivo_fnct:\r\n");
+    Serial.printf("\r\ne_controleDeArquivos_reescreveArquivo_fnct:\r\n");
     Serial.printf("Error mounting the LittleFS \r\n");
     return;
   }

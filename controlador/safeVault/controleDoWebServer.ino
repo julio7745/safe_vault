@@ -155,8 +155,6 @@ void i_controleDoWebServer_wificonfigupdateComand_fnct() {
 // Função de inicialização
 void e_controleDoWebServer_startWebServer_fnct() {
 
-  Serial.println("WEB ON");
-
   if (i_controleDoWebServer_serverStatus_var == HIGH) return;
   i_controleDoWebServer_serverStatus_var = HIGH;
 
@@ -199,7 +197,6 @@ void e_controleDoWebServer_updateWebServer_fnct() {
 }
 
 void e_controleDoWebServer_stopWebServer_fnct() {
-  Serial.println("WEB OFF");
   i_controleDoWebServer_serverStatus_var = LOW;
   i_controleDoWebServer_webServer_obj.stop();
 }

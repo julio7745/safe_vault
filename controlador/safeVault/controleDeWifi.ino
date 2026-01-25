@@ -40,8 +40,6 @@ unsigned long i_controleDeWifi_offServerTime_var = 0;
 
 void e_controleDeWifi_wifiConnect_fnct() {
 
-  // TODO: o que acontece se desligar dps de conectado
-
   if (e_controleDeWifi_conectionStatus_var == success) {
 
     // Se ja desligou tudo, retorna
@@ -72,7 +70,6 @@ void e_controleDeWifi_wifiConnect_fnct() {
     i_controleDeWifi_timeStartConectionClient_var = millis();
 
     // Tenta se conectar
-    Serial.println("WIFI iniciado");
     WiFi.begin(e_controleDeWifi_ssidClient_var.c_str(), e_controleDeWifi_passwordClient_var.c_str());
  
   }
@@ -83,15 +80,9 @@ void e_controleDeWifi_wifiConnect_fnct() {
   bool deuTimeout = (tempoPassado > i_controleDeWifi_timeToFail_var) && i_controleDeWifi_timeStartConectionClient_var != 0;
 
   if (!conectou && !deuTimeout) return;
-  Serial.print("TEMPO: ");
-  Serial.println(millis() > i_controleDeWifi_timeStartConectionClient_var + 10000);
-  Serial.print("CONEXAO: ");
-  Serial.println(WiFi.status() == WL_CONNECTED);
   
   // Se conectou
   if ( conectou ) {
-
-    Serial.println("Sucesso");
 
     // Seta desligamento dos Servidores
     i_controleDeWifi_offServerTime_var = millis();
@@ -100,8 +91,6 @@ void e_controleDeWifi_wifiConnect_fnct() {
     e_controleDeWifi_conectionStatus_var = success;
 
   } else {
-
-    Serial.println("Erro");
     
     // Seta Status como erro
     e_controleDeWifi_conectionStatus_var = failure;
@@ -143,8 +132,6 @@ void i_controleDeWifi_startAcessPoint_fnct() {
 // Função de inicialização do WIFI
 void e_controleDeWifi_startWifi_fnct() {
 
-  Serial.println("WIFI START");
-
   // Le dados da conexão
   String data = e_controleDeArquivos_readFile_fnct("wificonfig.txt");
   int indiceQuebra = data.indexOf('\n');
@@ -156,14 +143,9 @@ void e_controleDeWifi_startWifi_fnct() {
     e_controleDeWifi_ssidClient_var.trim();
     e_controleDeWifi_passwordClient_var.trim();
   }
-  
-  Serial.println(e_controleDeWifi_ssidClient_var);
-  Serial.println(e_controleDeWifi_passwordClient_var);
 
   // Se não tiver dados
   if ( e_controleDeWifi_ssidClient_var == "" ) {
-
-    Serial.println("SERVERS ON");
 
     // Inicia servidores
     i_controleDeWifi_startAcessPoint_fnct();

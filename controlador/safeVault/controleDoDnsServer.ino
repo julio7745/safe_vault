@@ -18,7 +18,6 @@ void e_controleDoDnsServer_startDnsServer_fnct() {
   if (i_controleDoDnsServer_serverStatus_var == HIGH) return;
   i_controleDoDnsServer_serverStatus_var = HIGH;
 
-  Serial.println("DNS ON");
   // Iniciamos o servidor DNS
   i_controleDoDnsServer_dnsServer_obj.start(
     53,
@@ -39,7 +38,6 @@ void e_controleDoDnsServer_updateDnsServer_fnct() {
 // Função de start do ponto de acesso
 void e_controleDoDnsServer_stopDnsServer_fnct() {
 
-  Serial.println("DNS OFF");
   i_controleDoDnsServer_serverStatus_var = LOW;
   i_controleDoDnsServer_dnsServer_obj.stop();
 

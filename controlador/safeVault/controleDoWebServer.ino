@@ -132,8 +132,8 @@ void i_controleDoWebServer_wificonfigupdateComand_fnct() {
       case connecting:
       state = "connecting";
       break;
-    case sucess:
-      state = "sucess";
+    case success:
+      state = "success";
       break;
     case failure:
       state = "failure";
@@ -195,12 +195,10 @@ void e_controleDoWebServer_startWebServer_fnct() {
 
 void e_controleDoWebServer_updateWebServer_fnct() {
     if (i_controleDoWebServer_serverStatus_var == LOW) return;
-    Serial.print(".");
     i_controleDoWebServer_webServer_obj.handleClient();
 }
 
 void e_controleDoWebServer_stopWebServer_fnct() {
-
   Serial.println("WEB OFF");
   i_controleDoWebServer_serverStatus_var = LOW;
   i_controleDoWebServer_webServer_obj.stop();

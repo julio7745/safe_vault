@@ -25,23 +25,24 @@ String e_controleDeWifi_ssidClient_var = "";
 String e_controleDeWifi_passwordClient_var = "";
 
 // Define auxiliares
-#define inHost 0
-#define notStarted 1
-#define connecting 2
-#define sucess 3
-#define failure 4
+#define notStarted 0
+#define connecting 1
+#define success 2
+#define failure 3
 
 #define i_controleDeWifi_timeToFail_var 30000
 #define i_controleDeWifi_delayToOffServer_var 20000
 
 // Declara variaveis de controle
 unsigned long i_controleDeWifi_timeStartConectionClient_var = 0;
-int e_controleDeWifi_conectionStatus_var = inHost;
+int e_controleDeWifi_conectionStatus_var = notStarted;
 unsigned long i_controleDeWifi_offServerTime_var = 0;
 
 void e_controleDeWifi_wifiConnect_fnct() {
 
-  if (e_controleDeWifi_conectionStatus_var == sucess) {
+  // TODO: o que acontece se desligar dps de conectado
+
+  if (e_controleDeWifi_conectionStatus_var == success) {
 
     // Se ja desligou tudo, retorna
     if (WiFi.getMode() == WIFI_STA) return;
@@ -53,28 +54,33 @@ void e_controleDeWifi_wifiConnect_fnct() {
         e_controleDoDnsServer_stopDnsServer_fnct();
         WiFi.mode(WIFI_STA);
     }
+    
     return;
   }
+
+  if (e_controleDeWifi_ssidClient_var == "") return;
 
   if(e_controleDeWifi_conectionStatus_var == notStarted){
 
     // Configura WIFI como cliente mantendo o modo de ponto de acesso ativo
     WiFi.mode(WIFI_AP_STA);
-    
-    // Tenta se conectar
-    Serial.println("WIFI iniciado");
-    WiFi.begin(e_controleDeWifi_ssidClient_var.c_str(), e_controleDeWifi_passwordClient_var.c_str());
 
     // Seta Status como conectando
     e_controleDeWifi_conectionStatus_var = connecting;
+
+     // Configura WIFI como cliente mantendo o modo de ponto de acesso ativo
     i_controleDeWifi_timeStartConectionClient_var = millis();
-    
+
+    // Tenta se conectar
+    Serial.println("WIFI iniciado");
+    WiFi.begin(e_controleDeWifi_ssidClient_var.c_str(), e_controleDeWifi_passwordClient_var.c_str());
+ 
   }
 
   // trava de segurança para o tempo de tentativa
   unsigned long tempoPassado = millis() - i_controleDeWifi_timeStartConectionClient_var;
   bool conectou = (WiFi.status() == WL_CONNECTED);
-  bool deuTimeout = (tempoPassado > i_controleDeWifi_timeToFail_var);
+  bool deuTimeout = (tempoPassado > i_controleDeWifi_timeToFail_var) && i_controleDeWifi_timeStartConectionClient_var != 0;
 
   if (!conectou && !deuTimeout) return;
   Serial.print("TEMPO: ");
@@ -82,13 +88,6 @@ void e_controleDeWifi_wifiConnect_fnct() {
   Serial.print("CONEXAO: ");
   Serial.println(WiFi.status() == WL_CONNECTED);
   
-  // Se n tiver passado o tempo de tentativa, retorna
-  if ( 
-    ( !( millis() > i_controleDeWifi_timeStartConectionClient_var + i_controleDeWifi_timeToFail_var) && !( WiFi.status() == WL_CONNECTED ) ) ||
-    i_controleDeWifi_timeStartConectionClient_var == 0
-  ) return;
-  
-
   // Se conectou
   if ( conectou ) {
 
@@ -98,7 +97,7 @@ void e_controleDeWifi_wifiConnect_fnct() {
     i_controleDeWifi_offServerTime_var = millis();
 
     // Seta Status como sucesso
-    e_controleDeWifi_conectionStatus_var = sucess;
+    e_controleDeWifi_conectionStatus_var = success;
 
   } else {
 
@@ -110,7 +109,7 @@ void e_controleDeWifi_wifiConnect_fnct() {
     // Limpa dados de conexão
     e_controleDeArquivos_writeFile_fnct("wificonfig.txt", "");
 
-    // Limpa tentaiva de conexào
+    // Limpa tentativa de conexão
     i_controleDeWifi_timeStartConectionClient_var = 0;
 
     // Tenta denovo
@@ -157,14 +156,14 @@ void e_controleDeWifi_startWifi_fnct() {
     e_controleDeWifi_ssidClient_var.trim();
     e_controleDeWifi_passwordClient_var.trim();
   }
-
-  if ( e_controleDeWifi_ssidClient_var != "" ) e_controleDeWifi_conectionStatus_var = notStarted;
-
+  
   Serial.println(e_controleDeWifi_ssidClient_var);
   Serial.println(e_controleDeWifi_passwordClient_var);
 
   // Se não tiver dados
-  if ( e_controleDeWifi_conectionStatus_var == inHost || e_controleDeWifi_conectionStatus_var == failure ) {
+  if ( e_controleDeWifi_ssidClient_var == "" ) {
+
+    Serial.println("SERVERS ON");
 
     // Inicia servidores
     i_controleDeWifi_startAcessPoint_fnct();
@@ -182,9 +181,24 @@ void e_controleDeWifi_startWifi_fnct() {
 
 void e_controleDeWifi_updateWifi_fnct() {
 
-    e_controleDoWebServer_updateWebServer_fnct();
-    e_controleDoDnsServer_updateDnsServer_fnct();
+  e_controleDoWebServer_updateWebServer_fnct();
+  e_controleDoDnsServer_updateDnsServer_fnct();
+  e_controleDeWifi_wifiConnect_fnct();
+
+  if( WiFi.getMode() == WIFI_STA && WiFi.status() != WL_CONNECTED ){
     
-    e_controleDeWifi_wifiConnect_fnct();
+    // Seta Status como sem tentativa
+    e_controleDeWifi_conectionStatus_var = notStarted;
+
+    // Limpa dados de conexão
+    e_controleDeArquivos_writeFile_fnct("wificonfig.txt", "");
+
+    // Limpa tentativa de conexão
+    i_controleDeWifi_timeStartConectionClient_var = 0;
+
+    // Tenta denovo
+    e_controleDeWifi_startWifi_fnct();
+    
+  }
   
 }

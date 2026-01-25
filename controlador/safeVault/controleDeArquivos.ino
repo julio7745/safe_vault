@@ -67,7 +67,7 @@ String e_controleDeArquivos_readFile_fnct(String fileName) {
   file.close();
 
   LittleFS.end();
-  return "";
+  return text;
 
 }
 

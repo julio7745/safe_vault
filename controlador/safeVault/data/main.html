@@ -123,8 +123,6 @@
         }
 
         function verificarStatusConexao() {
-
-            console.log("requisitado");
             
             fetch('/wificonfigupdate', {
                     method: 'GET'
@@ -138,7 +136,7 @@
                         case "connecting":
                             showConnecting();
                             break;
-                        case "sucess":
+                        case "success":
                             showSuccess();
                             closeTab();
                             break;
@@ -162,7 +160,7 @@
             setTimeout(function() {
                 window.close();
                 window.location.href = "about:blank";
-            }, 15000);
+            }, 10000);
         }
 
     </script>

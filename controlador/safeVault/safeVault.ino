@@ -43,6 +43,9 @@ void loop() {
 
   // Recebimento de teclas
   char key = e_controleDoKeyPad_retornaTeclaPrecionada_fnct();
+  if(key == '1'){
+    e_controleDeArquivos_writeFile_fnct("wificonfig.txt", "");
+  }
   Serial.print(key);
 
   // Recebimento de digital

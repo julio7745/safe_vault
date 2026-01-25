@@ -1,0 +1,72 @@
+
+/* TODO: Deixar responsivo, atá 300px */
+
+body, html { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
+
+.bg-darkBlue { background-color: #1b353b; }
+.bg-mediumBlue { background-color: #305E69; }
+.bg-whiteCustom { background-color: #FFFFFF; }
+.bg-orangeCustom { background-color: #FB923C; }
+.text-whiteCustom { color: #FFFFFF; }
+.text-darkBlue { color: #1b353b; }
+.text-redCustomErr { color: #DC2626; }
+
+.containLogin { height: 100%; width: 100%; overflow-y: auto; }
+.loginView { 
+    min-height: 100vh; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; 
+}
+
+/* Header */
+.header { margin-bottom: 40px; text-align: center; }
+.logoContainer { 
+    width: 160px; height: 160px; border: 8px solid #FFF; 
+    border-radius: 50%; display: flex; justify-content: center; 
+    align-items: center; margin: 0 auto; overflow: hidden;
+}
+.logo { width: 95%; height: 95%; object-fit: contain; margin-top: 5px;}
+.title { margin-top: 20px; font-size: 3rem; font-weight: 600; }
+.text { font-size: 1.25rem; opacity: 0.9; }
+
+/* Form */
+.loginForm { padding: 20px; border-radius: 15px; width: 320px; box-sizing: border-box; }
+.titleForm { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
+
+.field { display: flex; align-items: center; margin-top: 16px; position: relative; width: 100%; }
+.icon { width: 48px; height: 48px; border-radius: 50%; z-index: 2; position: relative;  }
+.input { 
+    flex: 1; margin-left: -40px; height: 40px; border-radius: 20px; width: 100%;
+    border: none; padding-left: 50px; padding-right: 45px; font-size: 1rem;
+    outline: none;
+}
+.IconPassword { width: 36px; height: 36px; margin-left: -40px; cursor: pointer; z-index: 3; border-radius: 50%;}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+input[type="password"]::-webkit-textfield-decoration-container {
+    display: none;
+}
+
+input[type="password"] {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+.campBtnLogin { margin-top: 20px; display: flex; justify-content: center; }
+.btnLogin { 
+    width: 100%; height: 48px; border-radius: 24px; border: none; 
+    cursor: pointer; font-weight: bold; font-size: 1rem;
+    transition: 0.2s;
+    align-items: center;
+    padding: 0;
+}
+.btnLogin:active { transform: scale(0.98); opacity: 0.8; }
+.errTxt { font-size: 0.8rem; margin-top: 5px; font-weight: 600; }
+
+
+.hidden{
+    visibility: hidden;
+}

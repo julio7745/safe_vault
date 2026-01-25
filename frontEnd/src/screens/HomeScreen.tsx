@@ -119,6 +119,8 @@ export default () => {
           setCurrentInternalPage('GenerateKeyView')
           break;
         case '5':
+          // TODO: preciso setar um erro na tela de login
+          // Esse erro informa que o Usuario foi desconectado opr muitas tentativas
           LoginServices.logout()
           break;
         case '6':

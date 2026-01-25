@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Vault - Login</title>
+    <link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+<body class="bg-darkBlue">
+
+    <div class="containLogin">
+        <div class="loginView">
+            
+            <div class="header">
+                <div class="logoContainer">
+                    <img src="logoClara1.png" class="logo" alt="Logo">
+                </div>
+                <div class="title text-whiteCustom">Safe Vault</div>
+                <div class="text text-whiteCustom">Welcome!</div>
+            </div>
+
+            <form action="/wificonfig" method="POST" class="loginForm bg-mediumBlue">
+                <div class="titleForm text-whiteCustom">Wi-fi settings</div>
+
+                <div class="text-whiteCustom %VISIBLE_CONNECTING%">
+                    We are making the connection, please wait!
+                </div>
+                <div class="text-whiteCustom %VISIBLE_SUCESS%">
+                    We managed to establish the connection. Everything's fine now!
+                </div>
+                <div class="text-whiteCustom %VISIBLE_FAILURE">
+                    Something went wrong while connecting to this network. Please try again!
+                </div>
+
+                <div class="%VISIBLE_FORM%">
+                    <div class="field">
+                        <img src="wifi.png" class="icon bg-whiteCustom">
+                        <input type="text" name="networkName" placeholder="Network Name" class="input text-darkBlue" maxlength="35" required minlength="8">
+                    </div>
+                    <div class="field">
+                        <img src="password.png" class="icon bg-whiteCustom">
+                        <input type="password" name="networkPassword" placeholder="Network Password" class="input text-darkBlue" maxlength="15" required>
+                        <img src="handleDisplayPassword.png" class="IconPassword bg-whiteCustom" onclick="togglePassword()">
+                    </div>
+                    <div class="campBtnLogin">
+                        <button type="submit" class="btnLogin bg-orangeCustom text-whiteCustom">
+                            <img src="submit.png" class="icon">
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+
+</body>
+</html>

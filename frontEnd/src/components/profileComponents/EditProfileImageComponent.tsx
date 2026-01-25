@@ -63,6 +63,13 @@ export default (
 
   if (!editingImage) return <></>
 
+  // TODO: Preciso tratar o tamanho da imagem
+  // TODO: preciso tratar erros
+  // TODO: preciso colocar a açãode atualizar o profile image em try catch
+  // TODO: Preciso verificar todas as requisiçoes, para se gerar um erro desconhecido,
+  // qual o tratamento esta recebendo no front end
+  // TODO: preciso verificar todas as requisições se estão em try catch 
+
   return (
     <SView className={styles.EditProfileImageContainer}>
       <SView className={styles.EditProfileImage}>

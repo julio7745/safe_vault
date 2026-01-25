@@ -30,7 +30,7 @@ String e_controleDeWifi_passwordClient_var = "";
 #define success 2
 #define failure 3
 
-#define i_controleDeWifi_timeToFail_var 30000
+#define i_controleDeWifi_timeToFail_var 20000
 #define i_controleDeWifi_delayToOffServer_var 20000
 
 // Declara variaveis de controle

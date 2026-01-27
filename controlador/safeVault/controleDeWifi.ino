@@ -38,6 +38,10 @@ unsigned long i_controleDeWifi_timeStartConectionClient_var = 0;
 int e_controleDeWifi_conectionStatus_var = notStarted;
 unsigned long i_controleDeWifi_offServerTime_var = 0;
 
+// Armazenar redes proximas
+int e_controleDeWifi_numberWifiNetworks_var = 0;
+String e_controleDeWifi_wifiNetworks_var[100];
+
 void e_controleDeWifi_wifiConnect_fnct() {
 
   if (e_controleDeWifi_conectionStatus_var == success) {
@@ -181,6 +185,22 @@ void e_controleDeWifi_updateWifi_fnct() {
     // Tenta denovo
     e_controleDeWifi_startWifi_fnct();
     
+  }
+  
+}
+
+// Função que atualiza array com redes disponiveis
+void e_controleDeWifi_scanRedesWiFi_fnct() {
+
+  // PEga o numero de redes disponiveis
+  int n = WiFi.scanNetworks();
+
+  e_controleDeWifi_numberWifiNetworks_var = n;
+
+  if (n != 0) {
+    for (int i = 0; i < n; i++) {
+        e_controleDeWifi_wifiNetworks_var[i] = WiFi.SSID(i);
+    }
   }
   
 }

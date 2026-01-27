@@ -5,6 +5,8 @@
 
 //imports
 String e_controleDeArquivos_readFile_fnct(String path);
+void e_controleDeWifi_scanRedesWiFi_fnct();
+extern int e_controleDeWifi_numberWifiNetworks_var;
 void e_controleDeArquivos_writeFile_fnct(String path, String content);
 extern int e_controleDeWifi_conectionStatus_var;
 void e_controleDeWifi_wifiConnect_fnct();
@@ -21,6 +23,18 @@ void i_controleDoWebServer_homeView_fnct() {
 
   // Abrimos o arquivo que contem o formulário
   String file = e_controleDeArquivos_readFile_fnct("/main.html");
+
+  e_controleDeWifi_scanRedesWiFi_fnct();
+
+  String networkOptions = "";
+
+  networkOptions = "<option value=\"\" selected disabled hidden> Wi-fi network</option>";
+  for (int i = 0; i < e_controleDeWifi_numberWifiNetworks_var; i++) {
+    const String rede = e_controleDeWifi_wifiNetworks_var[i];
+    networkOptions += "<option value= \"" + rede + "\">" + rede + "</option>\n";
+  }
+
+  file.replace("%WIFINETWORKS%", networkOptions);
 
   // Enviamos o arquivo
   i_controleDoWebServer_webServer_obj.send(
@@ -94,6 +108,21 @@ void i_controleDoWebServer_handleDisplayPasswordAsset_fnct() {
   
 }
 
+
+// Declara função para caminho "/refreshNetworks.png"
+void i_controleDoWebServer_refreshNetworksAsset_fnct() {
+
+  // Abrimos o arquivo que contem o formulário
+  String file = e_controleDeArquivos_readFile_fnct("/refreshNetworks.png");
+
+  // Enviamos o arquivo
+  i_controleDoWebServer_webServer_obj.send(
+    200, "image/png",
+    file
+  );
+  
+}
+
 // Declara função para caminho "/submit.svg"
 void i_controleDoWebServer_submitAsset_fnct() {
 
@@ -106,7 +135,7 @@ void i_controleDoWebServer_submitAsset_fnct() {
 }
 
 // Declara função para caminho "/wificonfig"
-void i_controleDoWebServer_wificonfigComand_fnct() {
+void i_controleDoWebServer_wificonfigCommand_fnct() {
 
   // Enviamos a resposta com o tipo correto
   i_controleDoWebServer_webServer_obj.send(
@@ -124,7 +153,7 @@ void i_controleDoWebServer_wificonfigComand_fnct() {
 }
 
 // Declara função para caminho "/wificonfigupdate"
-void i_controleDoWebServer_wificonfigupdateComand_fnct() {
+void i_controleDoWebServer_wificonfigupdateCommand_fnct() {
 
   String state = "";
 
@@ -152,6 +181,28 @@ void i_controleDoWebServer_wificonfigupdateComand_fnct() {
 
 }
 
+// Declara função para caminho "/wifinetworkupdate"
+void i_controleDoWebServer_wifinetworkupdateCommand_fnct() {
+
+  e_controleDeWifi_scanRedesWiFi_fnct();
+
+  String networkOptions = "";
+
+  networkOptions = "<option value=\"\" selected disabled hidden> Wi-fi network</option>";
+  for (int i = 0; i < e_controleDeWifi_numberWifiNetworks_var; i++) {
+    const String rede = e_controleDeWifi_wifiNetworks_var[i];
+    networkOptions += "<option value= \"" + rede + "\">" + rede + "</option>\n";
+  }
+     
+  // Enviamos a resposta com o tipo correto
+  i_controleDoWebServer_webServer_obj.send(
+    200, 
+    "text/plain", 
+    networkOptions
+  );
+
+}
+
 // Função de inicialização
 void e_controleDoWebServer_startWebServer_fnct() {
 
@@ -167,9 +218,12 @@ void e_controleDoWebServer_startWebServer_fnct() {
   i_controleDoWebServer_webServer_obj.on( "/wifi.svg", i_controleDoWebServer_wifiAsset_fnct);
   i_controleDoWebServer_webServer_obj.on( "/handleDisplayPassword.png", i_controleDoWebServer_handleDisplayPasswordAsset_fnct);
   i_controleDoWebServer_webServer_obj.on( "/submit.svg", i_controleDoWebServer_submitAsset_fnct);
+  i_controleDoWebServer_webServer_obj.on( "/refreshNetworks.png", i_controleDoWebServer_refreshNetworksAsset_fnct);
   
-  i_controleDoWebServer_webServer_obj.on( "/wificonfig", i_controleDoWebServer_wificonfigComand_fnct);
-  i_controleDoWebServer_webServer_obj.on( "/wificonfigupdate", i_controleDoWebServer_wificonfigupdateComand_fnct);
+  
+  i_controleDoWebServer_webServer_obj.on( "/wificonfig", i_controleDoWebServer_wificonfigCommand_fnct);
+  i_controleDoWebServer_webServer_obj.on( "/wificonfigupdate", i_controleDoWebServer_wificonfigupdateCommand_fnct);
+  i_controleDoWebServer_webServer_obj.on( "/wifinetworkupdate", i_controleDoWebServer_wifinetworkupdateCommand_fnct);
 
   // Ao capturar erro 404 (NotFound):
   //  - Configuramos a propriedade "Location" do cabeçalho;

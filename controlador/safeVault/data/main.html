@@ -35,7 +35,10 @@
                 <div id="formDiv">
                     <div class="field">
                         <img src="wifi.svg" class="icon bg-whiteCustom">
-                        <input type="text" name="networkName" placeholder="Network Name" class="input text-darkBlue" maxlength="35" required >
+                        <select  name="networkName" class="input text-darkBlue inputSelect" required placeholder="Wi-fi network" >
+                            %WIFINETWORKS%
+                        </select>
+                        <img name="updateNetwoksBtn" src="refreshNetworks.png" class="IconPassword bg-whiteCustom" onclick="updateNetwoks()">
                     </div>
                     <!-- TODO: vetorizar todas as imagens  -->
                     <div class="field">
@@ -56,6 +59,34 @@
     </div>
 
     <script>
+
+        const selectInput = document.getElementsByName('networkName')[0];
+        const updateNetwoksBtn = document.getElementsByName('updateNetwoksBtn')[0];
+
+        let blockUpdate = 0;
+
+        function updateNetwoks() {
+            if (blockUpdate === 1) return;
+            fetch('/wifinetworkupdate', {
+                    method: 'GET'
+                })
+                .then(response => response.text())
+                .then(options => {
+                    selectInput.remove(selectInput.options.length);
+                    selectInput.innerHTML = options
+                })
+                .catch(error => {
+                    showFailure();
+                    console.error('Erro na conexão:', error);
+                });
+            updateNetwoksBtn.classList.add("dim");
+            blockUpdate = 1;
+            setTimeout(function() {
+                updateNetwoksBtn.classList.remove("dim");
+                blockUpdate = 0;
+            }, 10000);
+
+        }
 
         function togglePassword() {
             const input = document.getElementsByName('networkPassword');
@@ -129,8 +160,6 @@
                 })
                 .then(response => response.text())
                 .then(status => {
-
-                    console.log(status);
                     
                     switch (status) {
                         case "connecting":

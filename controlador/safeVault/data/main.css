@@ -1,5 +1,6 @@
 
-/* TODO: Deixar responsivo, atá 300px */
+/* TODO: Deixar responsivo, até 300px */
+/* TODO: Controlar cores em modo noturno */
 
 body, html { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
 
@@ -45,7 +46,15 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
     display: none;
 }
-
+.inputSelect {
+    padding-left: 45px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.inputSelect:has(option[value=""]:checked) { 
+  color: #757575;
+}
 input[type="password"]::-webkit-textfield-decoration-container {
     display: none;
 }
@@ -68,4 +77,8 @@ input[type="password"] {
 
 .hidden{
     display: none;
+}
+.dim {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

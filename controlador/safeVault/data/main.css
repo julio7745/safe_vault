@@ -47,7 +47,6 @@ input[type="password"]::-ms-clear {
     display: none;
 }
 .inputSelect {
-    padding-left: 45px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
